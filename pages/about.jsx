@@ -21,7 +21,7 @@ const About = () => {
   return (
     <ContentContainer>
       <div className={classes.header}>
-        <Text fontSize="x-large">ABOUT GOJISHO</Text>
+        <Text fontSize="x-large">ABOUT GOJISHO 語辞書</Text>
       </div>
       <div>
         Making Japanese learning accessible, easier and fun for everyone
@@ -72,8 +72,8 @@ const About = () => {
         <Text fontSize="xs">
           Our resources are all free for you to use. If you wish to support us
           and the growth of this community, you may Buy Me A Coffee or simply
-          just share our website on social media and with your fellow Japanese
-          learning friends to grow our community
+          share our website on social media and with your fellow Japanese
+          learning friends
         </Text>
       </div>
     </ContentContainer>
