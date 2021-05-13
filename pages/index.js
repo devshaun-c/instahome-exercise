@@ -1,16 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import {
-  extendTheme,
-  ChakraProvider,
-  Container,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import Sidebar from "../components/Sidebar";
 
 const useStyles = createUseStyles({
   main: {

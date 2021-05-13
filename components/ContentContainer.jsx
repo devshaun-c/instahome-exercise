@@ -6,7 +6,7 @@ const useStyles = createUseStyles({
     width: "90%",
     maxWidth: "1200px",
     margin: "32px auto",
-    padding: "32px 16px 0 16px",
+    padding: "32px 16px",
     "@media screen and (max-width: 800px)": {
       margin: "32px 0",
       width: "100%",

@@ -6,6 +6,7 @@
 - xlsx
 - chakra UI
 - react-icons
+- next-images
 
 ## To maintain styling of useStyles during page refresh
 
@@ -14,8 +15,9 @@
 
 ## TO DO
 
-- [ ] About page
-  - [ ] Styling and images
+- [x] About page
+  - [x] Styling and images
+- [x] Added Buy Me A Coffee
 - [ ] Vocabulary page
   - [ ] Allow users to submit words that they can't find
   - [ ] Irregular words

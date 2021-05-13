@@ -1,80 +1,170 @@
 import React, { useState } from "react";
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Text,
-} from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import ContentContainer from "../components/ContentContainer";
+import imgHero1 from "../public/static/images/online-friends.svg";
+import imgHero2 from "../public/static/images/diary-writing.svg";
 
 const useStyles = createUseStyles({
-  header: {},
+  contentWrapper: {
+    display: "flex",
+    "@media screen and (max-width: 800px)": {
+      padding: "0 16px",
+    },
+  },
+  header: {
+    paddingBottom: "32px",
+    width: "50%",
+    "@media screen and (max-width: 800px)": {
+      width: "100%",
+    },
+  },
+  topicWrapper: {
+    marginBottom: "32px",
+    maxWidth: "50%",
+    "@media screen and (max-width: 800px)": {
+      width: "100%",
+      maxWidth: "100%",
+    },
+  },
+  topicHeader: {},
+  topicText: {
+    marginTop: "8px",
+    marginLeft: "16px",
+    "@media screen and (max-width: 800px)": {
+      marginTop: "4px",
+      marginLeft: "0",
+    },
+  },
+  heroImage: {
+    position: "fixed",
+    right: "10%",
+    top: "0",
+    width: "450px",
+    padding: "32px",
+    "@media screen and (max-width: 1400px)": {
+      right: "32px",
+      width: "350px",
+      padding: "0",
+    },
+    "@media screen and (max-width: 800px)": {
+      display: "none",
+    },
+  },
 });
 
 const About = () => {
   const classes = useStyles();
   return (
     <ContentContainer>
-      <div className={classes.header}>
-        <Text fontSize="x-large">ABOUT GOJISHO 語辞書</Text>
-      </div>
-      <div>
-        Making Japanese learning accessible, easier and fun for everyone
-      </div>
+      <div className={classes.contentWrapper}>
+        <div>
+          <div className={classes.header}>
+            <Text fontSize="x-large" fontWeight="bold">
+              ABOUT GOJISHO 語辞書
+            </Text>
+            <Text fontSize="sm">
+              making Japanese learning accessible, easier and fun for everyone
+            </Text>
+          </div>
 
-      <div>
-        <Text fontSize="md">Who is this for</Text>
-        <Text fontSize="xs">
-          If you aren't surrounded in a Japanese speaking environment
-        </Text>
-        <Text fontSize="xs">
-          If you are looking for resources to help with your Japanese studies
-        </Text>
-        <Text fontSize="xs">
-          If you are looking for Japanese-speaking friends
-        </Text>
-        <Text fontSize="xs">
-          If you simply want to practice your Japanese with others and have fun
-        </Text>
-      </div>
-      <div>
-        <Text fontSize="md">Our aim</Text>
-        <Text fontSize="xs">
-          To create a community of Japanese learners from everywhere and to
-          simply make learning Japanese more fun.
-        </Text>
-      </div>
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">What is our goal</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              To create a community of Japanese learners from everywhere and to
+              simply make learning Japanese more fun.
+            </Text>
+          </div>
 
-      <div>
-        <Text fontSize="md">What we offer?</Text>
-        <Text fontSize="xs">
-          We strive to introduce more Japanese learning resources to help
-          improve your Japanese vocabulary, kanji recognition and familiarity
-          with how daily conversations in Japanese is like.
-        </Text>
-        <Text fontSize="xs">
-          A place for you to practice your Japanese through our daily community
-          games where you can also interact with other students
-        </Text>
-        <Text fontSize="xs">
-          Our ever-growing community-driven repository of Japanese words and
-          sentences will also ensure that everyone can participate and
-          contribute to grow with us
-        </Text>
-      </div>
-      <div>
-        <Text fontSize="md">Support us</Text>
-        <Text fontSize="xs">
-          Our resources are all free for you to use. If you wish to support us
-          and the growth of this community, you may Buy Me A Coffee or simply
-          share our website on social media and with your fellow Japanese
-          learning friends
-        </Text>
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">Who is this for</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              If you are learning Japanese
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              If you are looking to meet Japanese-speaking friends
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              If you are looking for resources to help with your Japanese
+              studies
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              If you simply want to practice your Japanese with others and have
+              fun
+            </Text>
+          </div>
+
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">What we offer</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              We strive to introduce more Japanese learning tools and resources
+              to help with your studies and learn more about the Japanese
+              culture.
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              You can practice your Japanese through our weekly community
+              activities and also interact with other students of different
+              levels
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              Explore our ever-growing community-driven library of everyday
+              Japanese words and conversations
+            </Text>
+          </div>
+
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">How you can contribute</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              We rely on contribution from everyone to grow and improve our
+              content. You can help us help you by simply participating in our
+              community activities, provide content feedback or simply tell your
+              fellow Japanese learning friends about us
+            </Text>
+          </div>
+
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">Support Us</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              Our resources are all free for you to use. But if you wish to
+              support us and the growth of this community, you may{" "}
+              <a
+                style={{ textDecoration: "underline" }}
+                href="https://www.buymeacoffee.com/gojisho"
+                target="_blank"
+              >
+                Buy Me A Sushi
+              </a>
+            </Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              We love sushi
+            </Text>
+          </div>
+
+          <div className={classes.topicWrapper}>
+            <Text fontSize="md">Contact Us</Text>
+            <Text fontSize="xs" className={classes.topicText}>
+              If you're interested in our organization, feel free to reach out
+              to us at{" "}
+              <span style={{ textDecoration: "underline" }}>
+                contact.gojisho@gmail.com
+              </span>
+            </Text>
+          </div>
+
+          <div className={classes.topicWrapper}>
+            <Text fontSize="xs" className={classes.topicText}>
+              illustrations from{" "}
+              <a target="_blank" href="https://storyset.com/">
+                Storyset.com
+              </a>
+            </Text>
+          </div>
+        </div>
+        <div className={classes.heroImage}>
+          <img src={imgHero1} />
+          <img src={imgHero2} />
+        </div>
       </div>
     </ContentContainer>
   );

@@ -139,7 +139,7 @@ const searchParameterOptions = [
   },
 ];
 
-const WordDictionary = (props) => {
+const Vocabulary = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [words, setWords] = useState([]);
@@ -431,4 +431,4 @@ export async function getServerSideProps(_context) {
   return { props: { words: JSON.stringify(words) } };
 }
 
-export default WordDictionary;
+export default Vocabulary;

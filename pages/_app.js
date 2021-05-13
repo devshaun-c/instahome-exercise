@@ -25,9 +25,9 @@ const theme = extendTheme({
     highlight: "",
   },
   fonts: {
-    body: "system-ui, sans-serif",
-    heading: "Georgia, serif",
-    mono: "Menlo, monospace",
+    body: "Comfortaa, system-ui, sans-serif",
+    heading: "Comfortaa,Georgia, serif",
+    mono: "Comfortaa, Menlo, monospace",
   },
   components: {
     Button: {

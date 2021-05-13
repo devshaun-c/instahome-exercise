@@ -11,7 +11,8 @@ import {
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { VscWholeWord } from "react-icons/vsc";
-import { BsBook, BsListUl, BsPeople } from "react-icons/bs";
+import { BsBook, BsListUl, BsPen, BsPeople } from "react-icons/bs";
+import BuyMeCoffee from "./BuyMeCoffee";
 
 const useStyles = createUseStyles({
   container: {
@@ -99,7 +100,7 @@ const Sidebar = () => {
             <AccordionPanel padding="0 0 0 72px">
               <Box display="flex" flexDir="column">
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/vocabulary">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">Verbs </Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -110,7 +111,7 @@ const Sidebar = () => {
                 </Box>
 
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/vocabulary">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">Nouns</Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -121,7 +122,7 @@ const Sidebar = () => {
                 </Box>
 
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/vocabulary">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">Adjectives </Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -161,7 +162,7 @@ const Sidebar = () => {
             <AccordionPanel padding="0 0 0 72px">
               <Box display="flex" flexDir="column">
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/study/topic">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">by Topics </Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -172,7 +173,7 @@ const Sidebar = () => {
                 </Box>
 
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/study/story">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">by Stories</Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -183,7 +184,7 @@ const Sidebar = () => {
                 </Box>
 
                 <Box margin="4px 0">
-                  <Link href="/word-dictionary">
+                  <Link href="/study/quiz">
                     <Box display="flex" alignItems="center" cursor="pointer">
                       <Text fontSize="sm">by Quiz </Text>
                       <Text fontSize="xx-small" ml="12px">
@@ -209,7 +210,7 @@ const Sidebar = () => {
                   justifyContent="space-between"
                   padding="0 32px"
                 >
-                  <Link href="/excelreader" className={classes.linkStyle}>
+                  <Link href="/community" className={classes.linkStyle}>
                     <Box display="flex" alignItems="center">
                       <BsPeople />
                       <Text fontSize="sm" ml="16px">
@@ -235,11 +236,37 @@ const Sidebar = () => {
                   justifyContent="space-between"
                   padding="0 32px"
                 >
-                  <Link href="/excelreader" className={classes.linkStyle}>
+                  <Link href="/resources" className={classes.linkStyle}>
                     <Box display="flex" alignItems="center">
                       <BsListUl />
                       <Text fontSize="sm" ml="16px">
                         Resources
+                      </Text>
+                    </Box>
+                  </Link>
+                </Box>
+              </AccordionButton>
+            </h2>
+          </AccordionItem>
+
+          <AccordionItem border="none" padding="4px 0">
+            <h2>
+              <AccordionButton
+                _expanded={{}}
+                _focus={{ outline: "0" }}
+                padding="4px 0"
+              >
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="space-between"
+                  padding="0 32px"
+                >
+                  <Link href="/excelreader" className={classes.linkStyle}>
+                    <Box display="flex" alignItems="center">
+                      <BsPen />
+                      <Text fontSize="sm" ml="16px">
+                        Pen pals
                       </Text>
                     </Box>
                   </Link>
@@ -269,6 +296,8 @@ const Sidebar = () => {
             </h2>
           </AccordionItem>
         </Accordion>
+
+        <BuyMeCoffee />
       </div>
     </div>
   );
