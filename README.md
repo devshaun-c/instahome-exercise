@@ -18,6 +18,7 @@
 - [x] About page
   - [x] Styling and images
 - [x] Added Buy Me A Coffee
+- [ ] GOJISHO title font and Logo
 - [ ] Vocabulary page
   - [ ] Allow users to submit words that they can't find
   - [ ] Irregular words

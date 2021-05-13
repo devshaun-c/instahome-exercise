@@ -29,7 +29,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="link to favicon"></link>
+          <link rel=" icon" href="/static/images/sushi.svg"></link>
           <link href="link to font" rel="stylesheet"></link>
           <link rel="preconnect" href="https://fonts.gstatic.com"></link>
           <link
