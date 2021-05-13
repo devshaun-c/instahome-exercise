@@ -6,6 +6,7 @@ import { createUseStyles } from "react-jss";
 import ContentContainer from "../components/ContentContainer";
 import imgHero1 from "../public/static/images/online-friends.svg";
 import imgHero2 from "../public/static/images/diary-writing.svg";
+import Layout from "../components/Layout";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -58,7 +59,7 @@ const useStyles = createUseStyles({
 const About = () => {
   const classes = useStyles();
   return (
-    <div>
+    <Layout>
       <Head>
         <title>
           About - GOJISHO | How we help you learn and improve your Japanese
@@ -110,8 +111,7 @@ const About = () => {
               <Text fontSize="md">What we offer</Text>
               <Text fontSize="xs" className={classes.topicText}>
                 We strive to introduce more Japanese learning tools and
-                resources to help with your studies and learn more about the
-                Japanese culture.
+                resources to help with your studies
               </Text>
               <Text fontSize="xs" className={classes.topicText}>
                 You can practice your Japanese through our weekly community
@@ -178,7 +178,7 @@ const About = () => {
           </div>
         </div>
       </ContentContainer>
-    </div>
+    </Layout>
   );
 };
 

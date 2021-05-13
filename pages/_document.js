@@ -30,7 +30,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel=" icon" href="/static/images/sushi.svg"></link>
-          <link href="link to font" rel="stylesheet"></link>
+          {/* <link href="link to font" rel="stylesheet"></link> */}
           <link rel="preconnect" href="https://fonts.gstatic.com"></link>
           <link
             href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"

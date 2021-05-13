@@ -11,7 +11,14 @@ import {
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { VscWholeWord } from "react-icons/vsc";
-import { BsBook, BsListUl, BsPen, BsPeople } from "react-icons/bs";
+import {
+  BsBook,
+  BsListUl,
+  BsPen,
+  BsPeople,
+  BsQuestionCircle,
+} from "react-icons/bs";
+import { FaBook, FaBookOpen } from "react-icons/fa";
 import BuyMeCoffee from "./BuyMeCoffee";
 
 const useStyles = createUseStyles({
@@ -34,12 +41,13 @@ const useStyles = createUseStyles({
   },
   titleWrap: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     height: "20%",
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: "24px",
+    marginBottom: "32px",
   },
   linkStyle: {
     margin: "8px 0",
@@ -53,7 +61,10 @@ const Sidebar = () => {
   return (
     <div className={classes.container}>
       <div className={classes.titleWrap}>
-        <Text>GOJISHO</Text>
+        <FaBookOpen fontSize="42px" />
+        <Text fontSize="xs" mt="8px">
+          GOJISHO
+        </Text>
       </div>
       <div className={classes.linkWrap}>
         <Accordion allowToggle>
@@ -64,11 +75,21 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Link href="/about" className={classes.linkStyle}>
-                  <Box padding="0 32px" w="100%" display="flex">
-                    <Text fontSize="sm">About</Text>
-                  </Box>
-                </Link>
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="space-between"
+                  padding="0 32px"
+                >
+                  <Link href="/about" className={classes.linkStyle}>
+                    <Box display="flex" alignItems="center">
+                      <BsQuestionCircle />
+                      <Text fontSize="sm" ml="16px">
+                        About
+                      </Text>
+                    </Box>
+                  </Link>
+                </Box>
               </AccordionButton>
             </h2>
           </AccordionItem>

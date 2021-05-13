@@ -29,6 +29,7 @@ import {
   convertToPlain,
   convertToTa,
 } from "../utils/conjugation";
+import { wordType } from "../constants/wordType";
 
 const useStyles = createUseStyles({
   header: {
@@ -253,7 +254,7 @@ const Vocabulary = (props) => {
             handleSelect={handleSearchType}
             options={searchParameterOptions}
             defaultSearch={searchParameters.ro}
-            placeholder="Search a verb"
+            placeholder="Search a word"
             value={searchValue}
           />
           {filtered.length ? (
@@ -280,7 +281,7 @@ const Vocabulary = (props) => {
                                     fontSize="sm"
                                     className={classes.verbWrapper}
                                   >
-                                    {word.verb}
+                                    {word.word}
                                   </Text>
                                   <Text fontSize="sm">
                                     {word.hiragana || "-"}
@@ -297,7 +298,7 @@ const Vocabulary = (props) => {
                                 fontSize="xs"
                                 className={classes.verbGroupTextWrapper}
                               >
-                                {`Group ${word.group || "-"}`}
+                                {word.type}
                               </Text>
                             </Box>
                             <AccordionIcon color="primary" />
@@ -320,48 +321,58 @@ const Vocabulary = (props) => {
                                   </Td>
                                   <Td padding="4px 16px">{word.romaji}</Td>
                                 </Tr>
-                                <Tr>
-                                  <Td padding="4px 16px">
-                                    <Text fontSize="xs">Plain</Text>
-                                    <Text className={classes.tinyDescription}>
-                                      じしょ
-                                    </Text>
-                                  </Td>
-                                  <Td padding="4px 16px">
-                                    {convertToPlain(word)}
-                                  </Td>
-                                </Tr>
-                                <Tr>
-                                  <Td padding="4px 16px">
-                                    <Text fontSize="xs">TA / TE</Text>
-                                    <Text className={classes.tinyDescription}>
-                                      た / て
-                                    </Text>
-                                  </Td>
-                                  <Td padding="4px 16px">
-                                    {convertToTa(word)}
-                                  </Td>
-                                </Tr>
-                                <Tr>
-                                  <Td padding="4px 16px">
-                                    <Text fontSize="xs">Negative</Text>
-                                    <Text className={classes.tinyDescription}>
-                                      ない
-                                    </Text>
-                                  </Td>
-                                  <Td padding="4px 16px">
-                                    {convertToNai(word)}
-                                  </Td>
-                                </Tr>
-                                <Tr>
-                                  <Td padding="4px 16px">
-                                    <Text fontSize="xs">Lesson</Text>
-                                    <Text className={classes.tinyDescription}>
-                                      じゅぎょう
-                                    </Text>
-                                  </Td>
-                                  <Td padding="0 16px">{word.lesson}</Td>
-                                </Tr>
+                                {word.type === wordType.verb && (
+                                  <>
+                                    <Tr>
+                                      <Td padding="4px 16px">
+                                        <Text fontSize="xs">Plain</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        >
+                                          じしょ
+                                        </Text>
+                                      </Td>
+                                      <Td padding="4px 16px">
+                                        {convertToPlain(word)}
+                                      </Td>
+                                    </Tr>
+                                    <Tr>
+                                      <Td padding="4px 16px">
+                                        <Text fontSize="xs">TA / TE</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        >
+                                          た / て
+                                        </Text>
+                                      </Td>
+                                      <Td padding="4px 16px">
+                                        {convertToTa(word)}
+                                      </Td>
+                                    </Tr>
+                                    <Tr>
+                                      <Td padding="4px 16px">
+                                        <Text fontSize="xs">Negative</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        >
+                                          ない
+                                        </Text>
+                                      </Td>
+                                      <Td padding="4px 16px">
+                                        {convertToNai(word)}
+                                      </Td>
+                                    </Tr>
+                                    <Tr>
+                                      <Td padding="4px 16px">
+                                        <Text fontSize="xs">Verb Group</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        ></Text>
+                                      </Td>
+                                      <Td padding="4px 16px">{word.group}</Td>
+                                    </Tr>
+                                  </>
+                                )}
                               </Tbody>
                             </Table>
 
@@ -440,7 +451,7 @@ const Vocabulary = (props) => {
 };
 
 export async function getServerSideProps(_context) {
-  const words = await GetSnapshotFromFirebase("verbs");
+  const words = await GetSnapshotFromFirebase("words");
   //   const data = quiz.map((singleQuiz: any) => {
   //     return {
   //       ...singleQuiz,

@@ -22,4 +22,5 @@
 - [ ] Vocabulary page
   - [ ] Allow users to submit words that they can't find
   - [ ] Irregular words
-  - [ ] Search all
+  - [ ] Combine categories to one
+  - [ ] Add filter

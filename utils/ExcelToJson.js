@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 
-export const ExcelToJson = (file, handleResult) => {
+export const ExcelToJson = (file, handleResult, tab = 0) => {
   const promise = new Promise((resolve, reject) => {
     var f = file;
     // var name = f.name;
@@ -12,7 +12,7 @@ export const ExcelToJson = (file, handleResult) => {
       const bstr = e.target.result;
       const wb = XLSX.read(bstr, { type: "buffer" });
       /* Get first worksheet */
-      const wsname = wb.SheetNames[0];
+      const wsname = wb.SheetNames[tab];
       const ws = wb.Sheets[wsname];
       /* Convert array of arrays */
       const data = XLSX.utils.sheet_to_json(ws);
