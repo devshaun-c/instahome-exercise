@@ -145,9 +145,9 @@ const Sidebar = () => {
                 <Box margin="4px 0">
                   <Link href="/vocabulary">
                     <Box display="flex" alignItems="center" cursor="pointer">
-                      <Text fontSize="sm">Adjectives </Text>
+                      <Text fontSize="sm">Phrases </Text>
                       <Text fontSize="xx-small" ml="12px">
-                        けいようし
+                        フレーズ
                       </Text>
                     </Box>
                   </Link>

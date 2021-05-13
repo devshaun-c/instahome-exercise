@@ -18,9 +18,12 @@
 - [x] About page
   - [x] Styling and images
 - [x] Added Buy Me A Coffee
-- [ ] GOJISHO title font and Logo
+- [ ] Logo
 - [ ] Vocabulary page
+  - [ ] Instead of showing table, do something like Google search
+    - [ ] Show newly added words instead
   - [ ] Allow users to submit words that they can't find
   - [ ] Irregular words
   - [ ] Combine categories to one
-  - [ ] Add filter
+  - [ ] Add "all" to select filter, set that as default search
+- [ ] Landing page shows updates on words, features, newcomers etc

@@ -173,7 +173,7 @@ const About = () => {
             </div>
           </div>
           <div className={classes.heroImage}>
-            <img src={imgHero1} />
+            {/* <img src={imgHero1} /> */}
             <img src={imgHero2} />
           </div>
         </div>
