@@ -14,6 +14,7 @@ import {
   Text,
   Button,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import SearchBox from "../components/SearchBox";
 import { createUseStyles } from "react-jss";
@@ -150,6 +151,7 @@ const Vocabulary = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [arrayLength, setArrayLength] = useState(20);
+  const [noResults, setNoResults] = useState(false);
 
   useEffect(async () => {
     const results = JSON.parse(props.words);
@@ -165,6 +167,8 @@ const Vocabulary = (props) => {
 
   useEffect(() => {
     if (searchValue) {
+      setIsLoading(true);
+      setNoResults(false);
       const timeoutId = setTimeout(() => {
         var filteredWords = [];
         const exactMatch = words.filter((word) => {
@@ -182,13 +186,21 @@ const Vocabulary = (props) => {
         } else {
           filteredWords = [...filter];
         }
+        if (filteredWords.length) {
+          setNoResults(false);
+        } else {
+          setNoResults(true);
+        }
         setFiltered(filteredWords);
+        setIsLoading(false);
       }, 1000);
       return () => clearTimeout(timeoutId);
     } else {
-      setFiltered(words.slice(0, arrayLength));
+      setNoResults(false);
+      setIsLoading(false);
+      setFiltered([]);
     }
-  }, [searchValue, words, arrayLength]);
+  }, [searchValue, arrayLength]);
 
   const handleSearchType = (e) => {
     const { name, value } = e.target;
@@ -257,171 +269,203 @@ const Vocabulary = (props) => {
             placeholder="Search a word"
             value={searchValue}
           />
-          {filtered.length ? (
-            <Box display="flex" flexDir="column" alignItems="center">
-              <Accordion allowToggle w="100%">
-                {filtered.map((word, index) => {
-                  if (word.hiragana) {
-                    return (
-                      <AccordionItem key={word.id} borderColor="primaryLight">
-                        <h2>
-                          <AccordionButton
-                            userSelect="text"
-                            _expanded={{ bg: "primaryLight" }}
-                            _focus={{ outline: "0" }}
-                            _hover={{ bg: "primaryLight" }}
+          {isLoading ? (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="primary"
+              size="md"
+            />
+          ) : (
+            <>
+              {filtered.length > 0 && (
+                <Box display="flex" flexDir="column" alignItems="center">
+                  <Accordion allowToggle w="100%">
+                    {filtered.map((word, index) => {
+                      if (word.hiragana) {
+                        return (
+                          <AccordionItem
+                            key={word.id}
+                            borderColor="primaryLight"
                           >
-                            <Box className={classes.accordionButtonContent}>
-                              <Box display="flex">
-                                <Text className={classes.kanjiWrapper}>
-                                  {word.kanji || "-"}
-                                </Text>
-                                <Box className={classes.hiraganaTextWrapper}>
+                            <h2>
+                              <AccordionButton
+                                userSelect="text"
+                                _expanded={{ bg: "primaryLight" }}
+                                _focus={{ outline: "0" }}
+                                _hover={{ bg: "primaryLight" }}
+                              >
+                                <Box className={classes.accordionButtonContent}>
+                                  <Box display="flex">
+                                    <Text className={classes.kanjiWrapper}>
+                                      {word.kanji || "-"}
+                                    </Text>
+                                    <Box
+                                      className={classes.hiraganaTextWrapper}
+                                    >
+                                      <Text
+                                        fontSize="sm"
+                                        className={classes.verbWrapper}
+                                      >
+                                        {word.word}
+                                      </Text>
+                                      <Text fontSize="sm">
+                                        {word.hiragana || "-"}
+                                      </Text>
+                                    </Box>
+                                  </Box>
                                   <Text
                                     fontSize="sm"
-                                    className={classes.verbWrapper}
+                                    className={classes.englishTextWrapper}
                                   >
-                                    {word.word}
+                                    {word.englishTranslate}
                                   </Text>
-                                  <Text fontSize="sm">
-                                    {word.hiragana || "-"}
-                                  </Text>
-                                </Box>
-                              </Box>
-                              <Text
-                                fontSize="sm"
-                                className={classes.englishTextWrapper}
-                              >
-                                {word.englishTranslate}
-                              </Text>
-                              <Text
-                                fontSize="xs"
-                                className={classes.verbGroupTextWrapper}
-                              >
-                                {word.type}
-                              </Text>
-                            </Box>
-                            <AccordionIcon color="primary" />
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel padding="0 0 32px 0">
-                          <div className={classes.tableWrapper}>
-                            <Table variant="unstyled" size="sm">
-                              <colgroup>
-                                <col className={classes.firstCol} />
-                                <col className={classes.secondCol} />
-                              </colgroup>
-                              <Tbody>
-                                <Tr>
-                                  <Td padding="4px 16px">
-                                    <Text fontSize="xs">Romaji</Text>
-                                    <Text className={classes.tinyDescription}>
-                                      ローマ字
-                                    </Text>
-                                  </Td>
-                                  <Td padding="4px 16px">{word.romaji}</Td>
-                                </Tr>
-                                {word.type === wordType.verb && (
-                                  <>
-                                    <Tr>
-                                      <Td padding="4px 16px">
-                                        <Text fontSize="xs">Plain</Text>
-                                        <Text
-                                          className={classes.tinyDescription}
-                                        >
-                                          じしょ
-                                        </Text>
-                                      </Td>
-                                      <Td padding="4px 16px">
-                                        {convertToPlain(word)}
-                                      </Td>
-                                    </Tr>
-                                    <Tr>
-                                      <Td padding="4px 16px">
-                                        <Text fontSize="xs">TA / TE</Text>
-                                        <Text
-                                          className={classes.tinyDescription}
-                                        >
-                                          た / て
-                                        </Text>
-                                      </Td>
-                                      <Td padding="4px 16px">
-                                        {convertToTa(word)}
-                                      </Td>
-                                    </Tr>
-                                    <Tr>
-                                      <Td padding="4px 16px">
-                                        <Text fontSize="xs">Negative</Text>
-                                        <Text
-                                          className={classes.tinyDescription}
-                                        >
-                                          ない
-                                        </Text>
-                                      </Td>
-                                      <Td padding="4px 16px">
-                                        {convertToNai(word)}
-                                      </Td>
-                                    </Tr>
-                                    <Tr>
-                                      <Td padding="4px 16px">
-                                        <Text fontSize="xs">Verb Group</Text>
-                                        <Text
-                                          className={classes.tinyDescription}
-                                        ></Text>
-                                      </Td>
-                                      <Td padding="4px 16px">{word.group}</Td>
-                                    </Tr>
-                                  </>
-                                )}
-                              </Tbody>
-                            </Table>
-
-                            <Text
-                              fontSize="xs"
-                              color="teal"
-                              style={{ margin: "16px 20px 4px 20px" }}
-                            >
-                              Here's some common phrases
-                            </Text>
-
-                            <div
-                              style={{
-                                padding: "16px 20px ",
-                                margin: "0 20px 16px 20px",
-                                border: "1px solid teal",
-                                borderRadius: "8px",
-                              }}
-                            >
-                              <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                              >
-                                <Box display="flex" flexDirection="column">
-                                  <Text fontSize="xs" color="grey">
-                                    ここ の いざかや の やきたて の ほっけ
-                                    は、み が ほくほく で とても おいしい。
-                                  </Text>
-                                  <Text fontSize="xs" color="blackAlpha.500">
-                                    Translation of generated text from above
+                                  <Text
+                                    fontSize="xs"
+                                    className={classes.verbGroupTextWrapper}
+                                  >
+                                    {word.type}
                                   </Text>
                                 </Box>
-                                <Button
-                                  size="xs"
-                                  style={{ marginLeft: "16px" }}
+                                <AccordionIcon color="primary" />
+                              </AccordionButton>
+                            </h2>
+                            <AccordionPanel padding="0 0 32px 0">
+                              <div className={classes.tableWrapper}>
+                                <Table variant="unstyled" size="sm">
+                                  <colgroup>
+                                    <col className={classes.firstCol} />
+                                    <col className={classes.secondCol} />
+                                  </colgroup>
+                                  <Tbody>
+                                    <Tr>
+                                      <Td padding="4px 16px">
+                                        <Text fontSize="xs">Romaji</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        >
+                                          ローマ字
+                                        </Text>
+                                      </Td>
+                                      <Td padding="4px 16px">{word.romaji}</Td>
+                                    </Tr>
+                                    {word.type === wordType.verb && (
+                                      <>
+                                        <Tr>
+                                          <Td padding="4px 16px">
+                                            <Text fontSize="xs">Plain</Text>
+                                            <Text
+                                              className={
+                                                classes.tinyDescription
+                                              }
+                                            >
+                                              じしょ
+                                            </Text>
+                                          </Td>
+                                          <Td padding="4px 16px">
+                                            {convertToPlain(word)}
+                                          </Td>
+                                        </Tr>
+                                        <Tr>
+                                          <Td padding="4px 16px">
+                                            <Text fontSize="xs">TA / TE</Text>
+                                            <Text
+                                              className={
+                                                classes.tinyDescription
+                                              }
+                                            >
+                                              た / て
+                                            </Text>
+                                          </Td>
+                                          <Td padding="4px 16px">
+                                            {convertToTa(word)}
+                                          </Td>
+                                        </Tr>
+                                        <Tr>
+                                          <Td padding="4px 16px">
+                                            <Text fontSize="xs">Negative</Text>
+                                            <Text
+                                              className={
+                                                classes.tinyDescription
+                                              }
+                                            >
+                                              ない
+                                            </Text>
+                                          </Td>
+                                          <Td padding="4px 16px">
+                                            {convertToNai(word)}
+                                          </Td>
+                                        </Tr>
+                                        <Tr>
+                                          <Td padding="4px 16px">
+                                            <Text fontSize="xs">
+                                              Verb Group
+                                            </Text>
+                                            <Text
+                                              className={
+                                                classes.tinyDescription
+                                              }
+                                            ></Text>
+                                          </Td>
+                                          <Td padding="4px 16px">
+                                            {word.group}
+                                          </Td>
+                                        </Tr>
+                                      </>
+                                    )}
+                                  </Tbody>
+                                </Table>
+
+                                <Text
+                                  fontSize="xs"
+                                  color="teal"
+                                  style={{ margin: "16px 20px 4px 20px" }}
                                 >
-                                  <RepeatIcon />
-                                </Button>
-                              </Box>
-                            </div>
-                          </div>
-                        </AccordionPanel>
-                      </AccordionItem>
-                    );
-                  }
-                })}
-              </Accordion>
-              <Button
+                                  Here's some common phrases
+                                </Text>
+
+                                <div
+                                  style={{
+                                    padding: "16px 20px ",
+                                    margin: "0 20px 16px 20px",
+                                    border: "1px solid teal",
+                                    borderRadius: "8px",
+                                  }}
+                                >
+                                  <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                  >
+                                    <Box display="flex" flexDirection="column">
+                                      <Text fontSize="xs" color="grey">
+                                        ここ の いざかや の やきたて の ほっけ
+                                        は、み が ほくほく で とても おいしい。
+                                      </Text>
+                                      <Text
+                                        fontSize="xs"
+                                        color="blackAlpha.500"
+                                      >
+                                        Translation of generated text from above
+                                      </Text>
+                                    </Box>
+                                    <Button
+                                      size="xs"
+                                      style={{ marginLeft: "16px" }}
+                                    >
+                                      <RepeatIcon />
+                                    </Button>
+                                  </Box>
+                                </div>
+                              </div>
+                            </AccordionPanel>
+                          </AccordionItem>
+                        );
+                      }
+                    })}
+                  </Accordion>
+                  {/* <Button
                 size="xs"
                 marginTop="16px"
                 fontWeight="normal"
@@ -431,9 +475,12 @@ const Vocabulary = (props) => {
                 onClick={() => setArrayLength((prevState) => prevState + 20)}
               >
                 load more
-              </Button>
-            </Box>
-          ) : (
+              </Button> */}
+                </Box>
+              )}
+            </>
+          )}
+          {noResults && (
             <Box>
               <Text fontSize="xs" color="grey">
                 No search results found.
@@ -450,7 +497,7 @@ const Vocabulary = (props) => {
   );
 };
 
-export async function getServerSideProps(_context) {
+export async function getStaticProps(_context) {
   const words = await GetSnapshotFromFirebase("words");
   //   const data = quiz.map((singleQuiz: any) => {
   //     return {
