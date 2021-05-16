@@ -17,6 +17,7 @@ import {
   BsPen,
   BsPeople,
   BsQuestionCircle,
+  BsUpload,
 } from "react-icons/bs";
 import { FaBook, FaBookOpen } from "react-icons/fa";
 import BuyMeCoffee from "./BuyMeCoffee";
@@ -108,52 +109,17 @@ const Sidebar = () => {
                   alignItems="center"
                   padding="0 32px"
                 >
-                  <Box display="flex" alignItems="center">
-                    <VscWholeWord />
-                    <Text fontSize="sm" ml="16px">
-                      Vocabulary
-                    </Text>
-                  </Box>
-                  <AccordionIcon />
+                  <Link href="/vocabulary" className={classes.linkStyle}>
+                    <Box display="flex" alignItems="center">
+                      <VscWholeWord />
+                      <Text fontSize="sm" ml="16px">
+                        Vocabulary
+                      </Text>
+                    </Box>
+                  </Link>
                 </Box>
               </AccordionButton>
             </h2>
-            <AccordionPanel padding="0 0 0 72px">
-              <Box display="flex" flexDir="column">
-                <Box margin="4px 0">
-                  <Link href="/vocabulary">
-                    <Box display="flex" alignItems="center" cursor="pointer">
-                      <Text fontSize="sm">Verbs </Text>
-                      <Text fontSize="xx-small" ml="12px">
-                        どうし
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-
-                <Box margin="4px 0">
-                  <Link href="/vocabulary">
-                    <Box display="flex" alignItems="center" cursor="pointer">
-                      <Text fontSize="sm">Nouns</Text>
-                      <Text fontSize="xx-small" ml="12px">
-                        めいし
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-
-                <Box margin="4px 0">
-                  <Link href="/vocabulary">
-                    <Box display="flex" alignItems="center" cursor="pointer">
-                      <Text fontSize="sm">Phrases </Text>
-                      <Text fontSize="xx-small" ml="12px">
-                        フレーズ
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-              </Box>
-            </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem border="none" padding="4px 0">
@@ -218,7 +184,7 @@ const Sidebar = () => {
             </AccordionPanel>
           </AccordionItem>
 
-          <AccordionItem border="none" padding="4px 0">
+          {/* <AccordionItem border="none" padding="4px 0">
             <h2>
               <AccordionButton
                 _expanded={{}}
@@ -242,9 +208,9 @@ const Sidebar = () => {
                 </Box>
               </AccordionButton>
             </h2>
-          </AccordionItem>
+          </AccordionItem> */}
 
-          <AccordionItem border="none" padding="4px 0">
+          {/* <AccordionItem border="none" padding="4px 0">
             <h2>
               <AccordionButton
                 _expanded={{}}
@@ -268,9 +234,9 @@ const Sidebar = () => {
                 </Box>
               </AccordionButton>
             </h2>
-          </AccordionItem>
+          </AccordionItem> */}
 
-          <AccordionItem border="none" padding="4px 0">
+          {/* <AccordionItem border="none" padding="4px 0">
             <h2>
               <AccordionButton
                 _expanded={{}}
@@ -294,7 +260,7 @@ const Sidebar = () => {
                 </Box>
               </AccordionButton>
             </h2>
-          </AccordionItem>
+          </AccordionItem> */}
 
           <AccordionItem border="none" padding="4px 0">
             <h2>
@@ -310,7 +276,12 @@ const Sidebar = () => {
                   padding="0 32px"
                 >
                   <Link href="/excelreader" className={classes.linkStyle}>
-                    <Text fontSize="sm">Upload new words</Text>
+                    <Box display="flex" alignItems="center">
+                      <BsUpload />
+                      <Text fontSize="sm" ml="16px">
+                        Upload words
+                      </Text>
+                    </Box>
                   </Link>
                 </Box>
               </AccordionButton>

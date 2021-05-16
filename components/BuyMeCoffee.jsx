@@ -11,12 +11,12 @@ const useStyles = createUseStyles({
     position: "fixed",
     left: "32px",
     bottom: "32px",
-    padding: "4px 16px",
+    padding: "4px",
     borderRadius: "8px",
     background: "",
   },
   imgWrapper: {
-    width: "40px",
+    width: "20px",
     marginRight: "8px",
   },
 });
@@ -24,20 +24,21 @@ const useStyles = createUseStyles({
 const BuyMeCoffee = () => {
   const classes = useStyles();
   return (
-    <Box className={classes.contentWrapper} bg="whiteAlpha.800">
+    <Box className={classes.contentWrapper} bg="white">
       <a
         target="_blank"
         href="https://www.buymeacoffee.com/gojisho"
         rel="noopener noreferrer"
       >
-        <Box display="flex" alignItems="center">
+        <img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" />
+        {/* <Box display="flex" alignItems="center">
           <div className={classes.imgWrapper}>
-            <img src={sushi} />
+            <img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" />
           </div>
           <Text fontSize="xs" color="black">
-            Buy me a sushi?
+            Buy me a Coffee
           </Text>
-        </Box>
+        </Box> */}
       </a>
     </Box>
   );

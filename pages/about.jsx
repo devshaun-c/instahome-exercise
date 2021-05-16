@@ -108,7 +108,7 @@ const About = () => {
             </div>
 
             <div className={classes.topicWrapper}>
-              <Text fontSize="md">What we offer</Text>
+              <Text fontSize="md">How we can help</Text>
               <Text fontSize="xs" className={classes.topicText}>
                 We strive to introduce more Japanese learning tools and
                 resources to help with your studies
@@ -144,11 +144,8 @@ const About = () => {
                   href="https://www.buymeacoffee.com/gojisho"
                   target="_blank"
                 >
-                  Buy Me A Sushi
+                  Buy Me A Coffee
                 </a>
-              </Text>
-              <Text fontSize="xs" className={classes.topicText}>
-                We love sushi
               </Text>
             </div>
 

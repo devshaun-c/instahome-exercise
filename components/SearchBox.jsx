@@ -16,7 +16,7 @@ const useStyles = createUseStyles({
     width: "100%",
     display: "flex",
     marginBottom: "16px",
-    maxWidth: "600px",
+    // maxWidth: "600px",
     "@media screen and (max-width: 1000px)": {
       padding: "0 16px",
     },

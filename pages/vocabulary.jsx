@@ -15,6 +15,8 @@ import {
   Button,
   Select,
   Spinner,
+  Input,
+  useDisclosure,
 } from "@chakra-ui/react";
 import SearchBox from "../components/SearchBox";
 import { createUseStyles } from "react-jss";
@@ -31,6 +33,9 @@ import {
   convertToTa,
 } from "../utils/conjugation";
 import { wordType } from "../constants/wordType";
+import typewriter from "../public/static/images/Typewriter-bro.svg";
+import TextButton from "../components/TextButton";
+import OverlayModal from "../components/OverlayModal";
 
 const useStyles = createUseStyles({
   header: {
@@ -125,6 +130,10 @@ const useStyles = createUseStyles({
     fontSize: "10px",
     color: "grey",
   },
+  imgWrapper: {
+    padding: "32px",
+    maxWidth: "500px",
+  },
 });
 
 const searchParameterOptions = [
@@ -152,10 +161,12 @@ const Vocabulary = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [arrayLength, setArrayLength] = useState(20);
   const [noResults, setNoResults] = useState(false);
+  const [filterBy, setFilterBy] = useState("all");
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(async () => {
     const results = JSON.parse(props.words);
-    if (results.length) {
+    if (results && results.length) {
       setWords(results);
     }
   }, []);
@@ -166,17 +177,24 @@ const Vocabulary = (props) => {
   };
 
   useEffect(() => {
+    var filteredWords = [...words];
+
+    if (filterBy != "all") {
+      filteredWords = filteredWords.filter((word) => {
+        return word.type.toLowerCase() == filterBy;
+      });
+    }
+
     if (searchValue) {
       setIsLoading(true);
       setNoResults(false);
       const timeoutId = setTimeout(() => {
-        var filteredWords = [];
-        const exactMatch = words.filter((word) => {
+        const exactMatch = filteredWords.filter((word) => {
           if (word[searchType]) {
             return word[searchType].toLowerCase() === searchValue;
           }
         });
-        const filter = words.filter((word) => {
+        const filter = filteredWords.filter((word) => {
           if (word[searchType]) {
             return word[searchType].toLowerCase().includes(searchValue);
           }
@@ -200,7 +218,7 @@ const Vocabulary = (props) => {
       setIsLoading(false);
       setFiltered([]);
     }
-  }, [searchValue, arrayLength]);
+  }, [searchValue, arrayLength, filterBy]);
 
   const handleSearchType = (e) => {
     const { name, value } = e.target;
@@ -209,12 +227,15 @@ const Vocabulary = (props) => {
     setFiltered(words);
   };
 
+  const handleFilter = (e) => {
+    setFilterBy(e.target.value);
+  };
+
   return (
     <div>
       <Head>
         <title>
-          Vocabulary - GOJISHO | Search for translation and conjugations of
-          Japanese words
+          Vocabulary - GOJISHO | Japanese word translation and verb conjugation
         </title>
         <meta
           name="description"
@@ -226,9 +247,9 @@ const Vocabulary = (props) => {
           <Box display="flex" justifyContent="space-between">
             <Box>
               <Text as="h1" className={classes.headerTitle}>
-                VERBS
+                VOCAB LIBRARY
               </Text>
-              <Text color="grey">[ 動詞 ] どうし</Text>
+              <Text color="grey">[ 語彙 ] ごい</Text>
             </Box>
             <Box>
               <Select
@@ -240,35 +261,63 @@ const Vocabulary = (props) => {
                 focusBorderColor="none"
                 borderRadius="8px"
                 cursor="pointer"
+                onChange={handleFilter}
               >
-                <option style={{ color: "black" }} value="verb">
-                  verbs
+                <option style={{ color: "black" }} value="all">
+                  all
                 </option>
-                <option style={{ color: "black" }} value="noun">
-                  nouns
+                <option style={{ color: "black" }} value={wordType.verb}>
+                  verb
                 </option>
-                <option style={{ color: "black" }} value="adj">
-                  adjectives
+                <option style={{ color: "black" }} value={wordType.noun}>
+                  noun
+                </option>
+                <option style={{ color: "black" }} value={wordType.adjective}>
+                  adjective
+                </option>
+                <option style={{ color: "black" }} value={wordType.adverb}>
+                  adverb
                 </option>
               </Select>
             </Box>
           </Box>
           <Box marginTop="16px">
-            <Text fontSize="sm">
-              List of commonly used verbs and its translation, conjugations and
-              sample sentences
+            <Text fontSize="xs">
+              A place to search for Japanese words. You may also filter the
+              words by nouns, verbs etc.
             </Text>
           </Box>
         </div>
         <Box className={classes.accordionTableWrapper}>
-          <SearchBox
-            handleChange={handleSearch}
-            handleSelect={handleSearchType}
-            options={searchParameterOptions}
-            defaultSearch={searchParameters.ro}
-            placeholder="Search a word"
-            value={searchValue}
-          />
+          <Box
+            display="flex"
+            flexDir="column"
+            width="100%"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <SearchBox
+              handleChange={handleSearch}
+              handleSelect={handleSearchType}
+              options={searchParameterOptions}
+              defaultSearch={searchParameters.ro}
+              placeholder="Search a word"
+              value={searchValue}
+            />
+            {searchValue == "" && (
+              <Box
+                display="flex"
+                flexDir="column"
+                alignItems="center"
+                className={classes.imgWrapper}
+              >
+                <img src={typewriter} />
+                <Text fontSize="sm" textAlign="center">
+                  Type something in the search box to find a word
+                </Text>
+              </Box>
+            )}
+          </Box>
           {isLoading ? (
             <Spinner
               thickness="4px"
@@ -483,15 +532,23 @@ const Vocabulary = (props) => {
           {noResults && (
             <Box>
               <Text fontSize="xs" color="grey">
-                No search results found.
+                No search results found in our library
               </Text>
-              <Text fontSize="xs" color="grey">
-                Please check if search filter is set correctly.
-              </Text>
+              <Box display="flex">
+                <Text fontSize="xs" color="grey">
+                  Help us by submitting a new word request
+                </Text>
+                <TextButton
+                  text="here"
+                  color="primary"
+                  onClick={() => setModalOpen(!modalOpen)}
+                />
+              </Box>
             </Box>
           )}
         </Box>
-        <BackToTop show={true} />
+        <OverlayModal isOpen={modalOpen} handleToggle={setModalOpen} />
+        <BackToTop show={filtered.length > 5} />
       </ContentContainer>
     </div>
   );

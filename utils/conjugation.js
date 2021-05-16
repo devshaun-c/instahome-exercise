@@ -1,44 +1,46 @@
 export const convertToTa = (wordObj) => {
-  const { hiragana, group, irreg } = wordObj;
+  const { hiragana, group, word } = wordObj;
+
+  if (word.includes("来")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "きた";
+  }
+  if (word.includes("行")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "った";
+  }
+  if (word === "します") {
+    return "した";
+  }
+
   if (hiragana) {
-    var newWord = hiragana;
     const verbGroup = group.toString();
+    const identifierIndex = hiragana.indexOf("ます") - 1;
+    const identifier = hiragana[identifierIndex];
 
     switch (verbGroup) {
       case "1":
-        const identifierIndex = newWord.indexOf("ます") - 1;
-        const identifier = newWord[identifierIndex];
         if (identifierIndex === 0) {
-          newWord = newWord.substring(0, identifierIndex + 1) + "た";
-          return newWord;
+          return hiragana.substring(0, identifierIndex + 1) + "た";
         } else {
           if (identifier == "り" || identifier == "い" || identifier == "ち") {
-            newWord = newWord.substring(0, identifierIndex) + "った";
+            return hiragana.substring(0, identifierIndex) + "った";
           } else if (identifier == "み" || identifier == "び") {
-            newWord = newWord.substring(0, identifierIndex) + "んだ";
+            return hiragana.substring(0, identifierIndex) + "んだ";
           } else if (identifier == "き") {
-            if (irreg) {
-              newWord = newWord.substring(0, identifierIndex) + "った";
-            } else {
-              newWord = newWord.substring(0, identifierIndex) + "いた";
-            }
+            return hiragana.substring(0, identifierIndex) + "いた";
           } else if (identifier == "ぎ") {
-            newWord = newWord.substring(0, identifierIndex) + "いだ";
+            return hiragana.substring(0, identifierIndex) + "いだ";
           } else if (identifier == "し") {
-            newWord = newWord.substring(0, identifierIndex) + "した";
+            return hiragana.substring(0, identifierIndex) + "した";
           }
         }
-        return newWord;
-
       case "2":
-        const masuIndex = newWord.indexOf("ます");
-        newWord = newWord.substring(0, masuIndex) + "た";
-        return newWord;
-
+        const masuIndex = hiragana.indexOf("ます");
+        return hiragana.substring(0, masuIndex) + "た";
       case "3":
-        const shiIndex = newWord.indexOf("し");
-        newWord = newWord.substring(0, shiIndex + 1) + "た";
-        return newWord;
+        const shiIndex = hiragana.indexOf("し");
+        return hiragana.substring(0, shiIndex + 1) + "た";
 
       default:
         break;
@@ -47,63 +49,68 @@ export const convertToTa = (wordObj) => {
 };
 
 export const convertToPlain = (wordObj) => {
-  const { hiragana, group, irreg } = wordObj;
+  const { hiragana, group, word } = wordObj;
+
+  if (word.includes("来")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "くる";
+  }
+  if (word.includes("行")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "く";
+  }
+  if (word === "します") {
+    return "する";
+  }
+
   if (hiragana) {
-    var newWord = hiragana;
     const verbGroup = group.toString();
+    const identifierIndex = hiragana.indexOf("ます");
+    const identifier = hiragana[identifierIndex - 1];
 
     switch (verbGroup) {
       case "1":
-        const identifierIndex = newWord.indexOf("ます") - 1;
-        const identifier = newWord[identifierIndex];
-
         if (identifierIndex === 0) {
-          newWord = newWord.substring(0, identifierIndex + 1) + "る";
-          return newWord;
+          return hiragana.substring(0, identifierIndex + 1) + "る";
         } else {
           if (identifier == "い") {
-            newWord = newWord.substring(0, identifierIndex) + "う";
+            return hiragana.substring(0, identifierIndex) + "う";
           }
 
           if (identifier == "き") {
-            newWord = newWord.substring(0, identifierIndex) + "く";
+            return hiragana.substring(0, identifierIndex) + "く";
           }
 
           if (identifier == "ぎ") {
-            newWord = newWord.substring(0, identifierIndex) + "ぐ";
+            return hiragana.substring(0, identifierIndex) + "ぐ";
           }
 
           if (identifier == "し") {
-            newWord = newWord.substring(0, identifierIndex) + "す";
+            return hiragana.substring(0, identifierIndex) + "す";
           }
 
           if (identifier == "ち") {
-            newWord = newWord.substring(0, identifierIndex) + "つ";
+            return hiragana.substring(0, identifierIndex) + "つ";
           }
 
           if (identifier == "び") {
-            newWord = newWord.substring(0, identifierIndex) + "ぶ";
+            return hiragana.substring(0, identifierIndex) + "ぶ";
           }
 
           if (identifier == "み") {
-            newWord = newWord.substring(0, identifierIndex) + "む";
+            return hiragana.substring(0, identifierIndex) + "む";
           }
 
           if (identifier == "り") {
-            newWord = newWord.substring(0, identifierIndex) + "る";
+            return hiragana.substring(0, identifierIndex) + "る";
           }
         }
-
-        return newWord;
-
       case "2":
-        const masuIndex = newWord.indexOf("ます");
-        newWord = newWord.substring(0, masuIndex) + "る";
-        return newWord;
+        const masuIndex = hiragana.indexOf("ます");
+        return hiragana.substring(0, masuIndex) + "る";
       case "3":
-        const shiIndex = newWord.indexOf("し");
-        newWord = newWord.substring(0, shiIndex) + "する";
-        return newWord;
+        const shiIndex = hiragana.indexOf("し");
+        return hiragana.substring(0, shiIndex) + "する";
 
       default:
         break;
@@ -112,66 +119,72 @@ export const convertToPlain = (wordObj) => {
 };
 
 export const convertToNai = (wordObj) => {
-  const { hiragana, group, irreg } = wordObj;
+  const { hiragana, group, word } = wordObj;
+
+  if (word.includes("来")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "こない";
+  }
+  if (word.includes("行")) {
+    const irregIndex = hiragana.indexOf("ます") - 1;
+    return hiragana.substring(0, irregIndex) + "かない";
+  }
+  if (word === "します") {
+    return "しない";
+  }
+
   if (hiragana) {
-    var newWord = hiragana;
     const verbGroup = group.toString();
 
     switch (verbGroup) {
       case "1":
-        const identifierIndex = newWord.indexOf("ます") - 1;
-        const identifier = newWord[identifierIndex];
-
+        const identifierIndex = hiragana.indexOf("ます") - 1;
+        const identifier = hiragana[identifierIndex];
         if (identifierIndex === 0) {
-          newWord = newWord.substring(0, identifierIndex) + "ない";
-          return newWord;
+          return hiragana.substring(0, identifierIndex) + "ない";
         } else {
           if (identifier == "い") {
-            newWord = newWord.substring(0, identifierIndex) + "わない";
+            return hiragana.substring(0, identifierIndex) + "わない";
           }
 
           if (identifier == "き") {
-            newWord = newWord.substring(0, identifierIndex) + "かない";
+            return hiragana.substring(0, identifierIndex) + "かない";
           }
 
           if (identifier == "ぎ") {
-            newWord = newWord.substring(0, identifierIndex) + "がない";
+            return hiragana.substring(0, identifierIndex) + "がない";
           }
 
           if (identifier == "し") {
-            newWord = newWord.substring(0, identifierIndex) + "さない";
+            return hiragana.substring(0, identifierIndex) + "さない";
           }
 
           if (identifier == "ち") {
-            newWord = newWord.substring(0, identifierIndex) + "たない";
+            return hiragana.substring(0, identifierIndex) + "たない";
           }
 
           if (identifier == "び") {
-            newWord = newWord.substring(0, identifierIndex) + "ばない";
+            return hiragana.substring(0, identifierIndex) + "ばない";
           }
 
           if (identifier == "み") {
-            newWord = newWord.substring(0, identifierIndex) + "まない";
+            return hiragana.substring(0, identifierIndex) + "まない";
           }
 
           if (identifier == "り") {
-            newWord = newWord.substring(0, identifierIndex) + "らない";
+            return hiragana.substring(0, identifierIndex) + "らない";
           }
         }
 
-        return newWord;
-
       case "2":
-        const masuIndex = newWord.indexOf("ます");
-        newWord = newWord.substring(0, masuIndex) + "ない";
-        return newWord;
+        const masuIndex = hiragana.indexOf("ます");
+        return hiragana.substring(0, masuIndex) + "ない";
       case "3":
-        const shiIndex = newWord.indexOf("し");
-        newWord = newWord.substring(0, shiIndex + 1) + "ない";
-        return newWord;
+        const shiIndex = hiragana.indexOf("し");
+        return hiragana.substring(0, shiIndex + 1) + "ない";
 
       default:
-        break;
+        return "";
     }
   }
 };
