@@ -24,8 +24,15 @@
   - [x] Irregular words
   - [x] Combine categories to one
   - [x] Add "all" to select filter, set that as default search
+- [x] Filter by first two character for hiragana and romaji
 - [ ] Index.JS Landing page
-  - [ ] shows updates on words, features, newcomers etc
   - [ ] show number of words in the current library
-  - [ ] show number of new word request made
-- [ ]
+  - [ ] shows updates on weekly words, features, newcomers etc
+- [ ] Quiz page
+  - [ ] Test vocabulary (show hiragana toggle)
+  - [ ] Filter by word level
+- [ ] By Topics
+  - [ ] Create template
+- [ ] By Stories
+  - [ ] Youtube learning page
+  - [ ] Create template

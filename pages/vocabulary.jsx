@@ -23,7 +23,6 @@ import { createUseStyles } from "react-jss";
 import { RepeatIcon } from "@chakra-ui/icons";
 import BackToTop from "../components/BackToTop";
 import { useTheme } from "@emotion/react";
-
 import { GetSnapshotFromFirebase } from "../lib/firebase";
 import ContentContainer from "../components/ContentContainer";
 import { searchParameters } from "../constants/dropdowns";
@@ -188,15 +187,40 @@ const Vocabulary = (props) => {
     if (searchValue) {
       setIsLoading(true);
       setNoResults(false);
+
       const timeoutId = setTimeout(() => {
+        if (
+          searchType === searchParameters.romaji ||
+          searchType === searchParameters.hi
+        ) {
+          const firstTwoCharacters = searchValue.substring(0, 2);
+          const filterFirstTwoCharacters = filteredWords.filter((word) => {
+            if (word[searchType]) {
+              return (
+                word[searchType].toLowerCase().substring(0, 2) ===
+                firstTwoCharacters
+              );
+            }
+          });
+
+          if (filterFirstTwoCharacters.length > 0) {
+            filteredWords = filterFirstTwoCharacters;
+          }
+        }
+
         const exactMatch = filteredWords.filter((word) => {
           if (word[searchType]) {
-            return word[searchType].toLowerCase() === searchValue;
+            return (
+              word[searchType].toLowerCase().replace(/ /g, "") === searchValue
+            );
           }
         });
         const filter = filteredWords.filter((word) => {
           if (word[searchType]) {
-            return word[searchType].toLowerCase().includes(searchValue);
+            return word[searchType]
+              .toLowerCase()
+              .replace(/ /g, "")
+              .includes(searchValue);
           }
         });
         if (exactMatch.length) {
@@ -224,7 +248,6 @@ const Vocabulary = (props) => {
     const { name, value } = e.target;
     setSearchType(value);
     setSearchValue("");
-    setFiltered(words);
   };
 
   const handleFilter = (e) => {
@@ -283,8 +306,7 @@ const Vocabulary = (props) => {
           </Box>
           <Box marginTop="16px">
             <Text fontSize="xs">
-              A place to search for Japanese words. You may also filter the
-              words by nouns, verbs etc.
+              Simply search for Japanese words in our ever-growing library.
             </Text>
           </Box>
         </div>
