@@ -190,7 +190,7 @@ const Vocabulary = (props) => {
 
       const timeoutId = setTimeout(() => {
         if (
-          searchType === searchParameters.romaji ||
+          searchType === searchParameters.ro ||
           searchType === searchParameters.hi
         ) {
           const firstTwoCharacters = searchValue.substring(0, 2);
