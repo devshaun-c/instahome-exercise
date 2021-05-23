@@ -181,7 +181,9 @@ const Vocabulary = (props) => {
 
     if (filterBy != "all") {
       filteredWords = filteredWords.filter((word) => {
-        return word.type.toLowerCase() == filterBy;
+        if (word.type) {
+          return word.type.toLowerCase() == filterBy;
+        }
       });
     }
 

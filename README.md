@@ -33,6 +33,10 @@
 
 - [x] Convert hiragana to romaji function
 - [x] show number of words in the current library
+- [x] Added explanation field
+- [x] show romaji instead of hiragana
+- [x] show romaji for all conjugations
+- [x] fixed bug where word type is not defined
 
 > Done
 
