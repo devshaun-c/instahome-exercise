@@ -35,6 +35,7 @@ import { wordType } from "../constants/wordType";
 import typewriter from "../public/static/images/Typewriter-bro.svg";
 import TextButton from "../components/TextButton";
 import OverlayModal from "../components/OverlayModal";
+import { ConvertToRomaji } from "../utils/hiraganaToRomaji";
 
 const useStyles = createUseStyles({
   header: {
@@ -308,6 +309,7 @@ const Vocabulary = (props) => {
             <Text fontSize="xs">
               Simply search for Japanese words in our ever-growing library.
             </Text>
+            <Text fontSize="xs">{`Current word count : ${words.length} words`}</Text>
           </Box>
         </div>
         <Box className={classes.accordionTableWrapper}>
@@ -347,11 +349,22 @@ const Vocabulary = (props) => {
               emptyColor="gray.200"
               color="primary"
               size="md"
+              ml="16px"
             />
           ) : (
             <>
               {filtered.length > 0 && (
-                <Box display="flex" flexDir="column" alignItems="center">
+                <Box
+                  display="flex"
+                  flexDir="column"
+                  alignItems="center"
+                  ml="16px"
+                >
+                  <Text
+                    fontSize="xs"
+                    width="100%"
+                    mb="4px"
+                  >{`${filtered.length} word(s) found`}</Text>
                   <Accordion allowToggle w="100%">
                     {filtered.map((word, index) => {
                       if (word.hiragana) {
@@ -379,10 +392,10 @@ const Vocabulary = (props) => {
                                         fontSize="sm"
                                         className={classes.verbWrapper}
                                       >
-                                        {word.word}
+                                        {word.romaji}
                                       </Text>
                                       <Text fontSize="sm">
-                                        {word.hiragana || "-"}
+                                        {word.word || word.hiragana}
                                       </Text>
                                     </Box>
                                   </Box>
@@ -410,21 +423,27 @@ const Vocabulary = (props) => {
                                     <col className={classes.secondCol} />
                                   </colgroup>
                                   <Tbody>
-                                    <Tr>
-                                      <Td padding="4px 16px">
-                                        <Text fontSize="xs">Romaji</Text>
-                                        <Text
-                                          className={classes.tinyDescription}
-                                        >
-                                          ローマ字
-                                        </Text>
-                                      </Td>
-                                      <Td padding="4px 16px">{word.romaji}</Td>
-                                    </Tr>
+                                    {word.explanation && (
+                                      <Tr>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">Explanation</Text>
+                                          <Text
+                                            className={classes.tinyDescription}
+                                          >
+                                            じしょ
+                                          </Text>
+                                        </Td>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">
+                                            {word.explanation}
+                                          </Text>
+                                        </Td>
+                                      </Tr>
+                                    )}
                                     {word.type === wordType.verb && (
                                       <>
                                         <Tr>
-                                          <Td padding="4px 16px">
+                                          <Td padding="8px 16px">
                                             <Text fontSize="xs">Plain</Text>
                                             <Text
                                               className={
@@ -434,12 +453,19 @@ const Vocabulary = (props) => {
                                               じしょ
                                             </Text>
                                           </Td>
-                                          <Td padding="4px 16px">
-                                            {convertToPlain(word)}
+                                          <Td padding="8px 16px">
+                                            <Text fontSize="xs">
+                                              {convertToPlain(word)}
+                                            </Text>
+                                            <Text fontSize="xs">
+                                              {ConvertToRomaji(
+                                                convertToPlain(word)
+                                              )}
+                                            </Text>
                                           </Td>
                                         </Tr>
                                         <Tr>
-                                          <Td padding="4px 16px">
+                                          <Td padding="8px 16px">
                                             <Text fontSize="xs">TA / TE</Text>
                                             <Text
                                               className={
@@ -449,12 +475,19 @@ const Vocabulary = (props) => {
                                               た / て
                                             </Text>
                                           </Td>
-                                          <Td padding="4px 16px">
-                                            {convertToTa(word)}
+                                          <Td padding="8px 16px">
+                                            <Text fontSize="xs">
+                                              {convertToTa(word)}
+                                            </Text>
+                                            <Text fontSize="xs">
+                                              {ConvertToRomaji(
+                                                convertToTa(word)
+                                              )}
+                                            </Text>
                                           </Td>
                                         </Tr>
                                         <Tr>
-                                          <Td padding="4px 16px">
+                                          <Td padding="8px 16px">
                                             <Text fontSize="xs">Negative</Text>
                                             <Text
                                               className={
@@ -464,12 +497,19 @@ const Vocabulary = (props) => {
                                               ない
                                             </Text>
                                           </Td>
-                                          <Td padding="4px 16px">
-                                            {convertToNai(word)}
+                                          <Td padding="8px 16px">
+                                            <Text fontSize="xs">
+                                              {convertToNai(word)}
+                                            </Text>
+                                            <Text fontSize="xs">
+                                              {ConvertToRomaji(
+                                                convertToNai(word)
+                                              )}
+                                            </Text>
                                           </Td>
                                         </Tr>
                                         <Tr>
-                                          <Td padding="4px 16px">
+                                          <Td padding="8px 16px">
                                             <Text fontSize="xs">
                                               Verb Group
                                             </Text>
@@ -479,8 +519,10 @@ const Vocabulary = (props) => {
                                               }
                                             ></Text>
                                           </Td>
-                                          <Td padding="4px 16px">
-                                            {word.group}
+                                          <Td padding="8px 16px">
+                                            <Text fontSize="xs">
+                                              {word.group}
+                                            </Text>
                                           </Td>
                                         </Tr>
                                       </>
@@ -536,17 +578,24 @@ const Vocabulary = (props) => {
                       }
                     })}
                   </Accordion>
-                  {/* <Button
-                size="xs"
-                marginTop="16px"
-                fontWeight="normal"
-                variant="outline"
-                _focus={{ outline: "0" }}
-                _hover={{ bg: "white" }}
-                onClick={() => setArrayLength((prevState) => prevState + 20)}
-              >
-                load more
-              </Button> */}
+                  <Box display="inline-block" width="100%" mt="48px" ml="16px">
+                    <Text
+                      fontSize="xs"
+                      color="grey"
+                      display="inline-block"
+                      mr="4px"
+                    >
+                      Not the word you're looking for?
+                    </Text>
+                    <Text fontSize="xs" color="grey" display="inline-block">
+                      Submit a word request
+                    </Text>
+                    <TextButton
+                      text="here"
+                      color="primary"
+                      onClick={() => setModalOpen(!modalOpen)}
+                    />
+                  </Box>
                 </Box>
               )}
             </>

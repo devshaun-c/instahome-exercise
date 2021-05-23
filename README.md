@@ -15,6 +15,27 @@
 
 ## TO DO
 
+> Pending
+
+- [ ] Allow edit word from client side (if mistake found)
+- [ ] Index.JS Landing page
+  - [ ] shows updates on weekly words, features, newcomers etc
+- [ ] Quiz page
+  - [ ] Test vocabulary (show hiragana toggle)
+  - [ ] Filter by word level
+- [ ] By Topics
+  - [ ] Create template
+- [ ] By Stories
+  - [ ] Youtube learning page
+  - [ ] Create template
+
+> 23/5/2021
+
+- [x] Convert hiragana to romaji function
+- [x] show number of words in the current library
+
+> Done
+
 - [x] About page
   - [x] Styling and images
 - [x] Added Buy Me A Coffee
@@ -25,14 +46,3 @@
   - [x] Combine categories to one
   - [x] Add "all" to select filter, set that as default search
 - [x] Filter by first two character for hiragana and romaji
-- [ ] Index.JS Landing page
-  - [ ] show number of words in the current library
-  - [ ] shows updates on weekly words, features, newcomers etc
-- [ ] Quiz page
-  - [ ] Test vocabulary (show hiragana toggle)
-  - [ ] Filter by word level
-- [ ] By Topics
-  - [ ] Create template
-- [ ] By Stories
-  - [ ] Youtube learning page
-  - [ ] Create template
