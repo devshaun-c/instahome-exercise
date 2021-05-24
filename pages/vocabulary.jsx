@@ -357,16 +357,12 @@ const Vocabulary = (props) => {
           ) : (
             <>
               {filtered.length > 0 && (
-                <Box
-                  display="flex"
-                  flexDir="column"
-                  alignItems="center"
-                  ml="16px"
-                >
+                <Box display="flex" flexDir="column" alignItems="center">
                   <Text
                     fontSize="xs"
                     width="100%"
                     mb="4px"
+                    padding="0 16px"
                   >{`${filtered.length} word(s) found`}</Text>
                   <Accordion allowToggle w="100%">
                     {filtered.map((word, index) => {
@@ -581,12 +577,6 @@ const Vocabulary = (props) => {
                                         color="blackAlpha.500"
                                       ></Text>
                                     </Box>
-                                    {/* <Button
-                                      size="xs"
-                                      style={{ marginLeft: "16px" }}
-                                    >
-                                      <RepeatIcon />
-                                    </Button> */}
                                   </Box>
                                 </div>
                               </div>
@@ -596,7 +586,12 @@ const Vocabulary = (props) => {
                       }
                     })}
                   </Accordion>
-                  <Box display="inline-block" width="100%" mt="48px" ml="16px">
+                  <Box
+                    display="inline-block"
+                    width="100%"
+                    mt="48px"
+                    padding="0 16px"
+                  >
                     <Text
                       fontSize="xs"
                       color="grey"
