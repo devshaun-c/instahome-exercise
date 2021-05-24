@@ -15,12 +15,11 @@ import {
   Button,
   Select,
   Spinner,
-  Input,
-  useDisclosure,
+  IconButton,
+  Tooltip,
 } from "@chakra-ui/react";
 import SearchBox from "../components/SearchBox";
 import { createUseStyles } from "react-jss";
-import { RepeatIcon } from "@chakra-ui/icons";
 import BackToTop from "../components/BackToTop";
 import { useTheme } from "@emotion/react";
 import { GetSnapshotFromFirebase } from "../lib/firebase";
@@ -36,6 +35,7 @@ import typewriter from "../public/static/images/Typewriter-bro.svg";
 import TextButton from "../components/TextButton";
 import OverlayModal from "../components/OverlayModal";
 import { ConvertToRomaji } from "../utils/hiraganaToRomaji";
+import { MdReport } from "react-icons/md";
 
 const useStyles = createUseStyles({
   header: {
@@ -118,6 +118,7 @@ const useStyles = createUseStyles({
     },
   },
   tableWrapper: {
+    position: "relative",
     border: "1px solid #ececff",
     borderTop: "none",
     borderRadius: "0 0 8px 8px",
@@ -419,6 +420,24 @@ const Vocabulary = (props) => {
                             </h2>
                             <AccordionPanel padding="0 0 32px 0">
                               <div className={classes.tableWrapper}>
+                                <Box position="absolute" right="8px" top="8px">
+                                  <Tooltip
+                                    label="report error"
+                                    fontSize="xs"
+                                    hasArrow
+                                    bg="red.600"
+                                  >
+                                    <Button
+                                      variant="unstyled"
+                                      color="red.600"
+                                      size="sm"
+                                      leftIcon={<MdReport fontSize="24px" />}
+                                      display="flex"
+                                      alignItems="center"
+                                      _focus={{ outline: "0" }}
+                                    ></Button>
+                                  </Tooltip>
+                                </Box>
                                 <Table variant="unstyled" size="sm">
                                   <colgroup>
                                     <col className={classes.firstCol} />
@@ -537,7 +556,7 @@ const Vocabulary = (props) => {
                                   color="teal"
                                   style={{ margin: "16px 20px 4px 20px" }}
                                 >
-                                  Here's some common phrases
+                                  Sample sentences
                                 </Text>
 
                                 <div
@@ -555,22 +574,19 @@ const Vocabulary = (props) => {
                                   >
                                     <Box display="flex" flexDirection="column">
                                       <Text fontSize="xs" color="grey">
-                                        ここ の いざかや の やきたて の ほっけ
-                                        は、み が ほくほく で とても おいしい。
+                                        Coming soon..
                                       </Text>
                                       <Text
                                         fontSize="xs"
                                         color="blackAlpha.500"
-                                      >
-                                        Translation of generated text from above
-                                      </Text>
+                                      ></Text>
                                     </Box>
-                                    <Button
+                                    {/* <Button
                                       size="xs"
                                       style={{ marginLeft: "16px" }}
                                     >
                                       <RepeatIcon />
-                                    </Button>
+                                    </Button> */}
                                   </Box>
                                 </div>
                               </div>

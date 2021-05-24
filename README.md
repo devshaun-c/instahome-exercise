@@ -18,6 +18,7 @@
 > Pending
 
 - [ ] Allow edit word from client side (if mistake found)
+  - [ ] Reusable modal (one for New word, one for Error)
 - [ ] Index.JS Landing page
   - [ ] shows updates on weekly words, features, newcomers etc
 - [ ] Quiz page
