@@ -646,8 +646,7 @@ export async function getStaticProps(_context) {
   //       user: users.find((user) => user.id === singleQuiz.userId),
   //     };
   //   });
-  return { props: { words: JSON.stringify(words) },
-  revalidate: 10, 
+  return { props: { words: JSON.stringify(words) }, revalidate: 10 };
 }
 
 export default Vocabulary;
