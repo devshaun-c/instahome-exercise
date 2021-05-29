@@ -19,6 +19,11 @@
 
 - [ ] Allow edit word from client side (if mistake found)
   - [ ] Reusable modal (one for New word, one for Error)
+- [ ] Add mobile nav bar
+- [ ] Activities
+  - [ ] Chunk game to create longer sentences from one simple phrase.
+    - [ ] Users can add in their own sentence
+  - [ ] Provide a simple structured conversation topics to practice
 - [ ] Index.JS Landing page
   - [ ] shows updates on weekly words, features, newcomers etc
 - [ ] Quiz page
