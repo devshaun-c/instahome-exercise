@@ -17,9 +17,18 @@
 
 > Pending
 
-- [ ] Allow edit word from client side (if mistake found)
+- [ ] If user search for a "masu" form, convert it to plain form and send to API
+  - [ ] convert to use API information
+  - [ ] Sort by Levels
+  - [ ] Conjugation doesn't look at Verb Group rather character before "masu"
+  - [ ] Still continue to show different forms.
+- [ ] Allow word report from client side (if mistake found)
   - [ ] Reusable modal (one for New word, one for Error)
 - [ ] Add mobile nav bar
+- [ ] Diary page
+  - [ ] Allow users to write a simple daily diary
+  - [ ] If set to public, users can let others check their writings
+  - [ ] Quick word search within the same page for fast typing
 - [ ] Activities
   - [ ] Chunk game to create longer sentences from one simple phrase.
     - [ ] Users can add in their own sentence

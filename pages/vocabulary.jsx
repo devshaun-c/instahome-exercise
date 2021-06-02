@@ -37,6 +37,8 @@ import OverlayModal from "../components/OverlayModal";
 import { ConvertToRomaji } from "../utils/hiraganaToRomaji";
 import { MdReport } from "react-icons/md";
 
+const axios = require("axios");
+
 const useStyles = createUseStyles({
   header: {
     paddingBottom: "32px",
@@ -177,8 +179,26 @@ const Vocabulary = (props) => {
     setSearchValue(target.value);
   };
 
+  const getData = async (searchValue) => {
+    var filteredData = [];
+    if (searchValue) {
+      try {
+        const response = await axios.get(`/api/search/${searchValue}`);
+        const wordObj = response.data.data;
+        if (wordObj.length) {
+          filteredData = wordObj.filter((obj) => obj.jlpt.length > 0);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    return filteredData;
+  };
+
   useEffect(() => {
-    var filteredWords = [...words];
+    // var filteredWords = [...words];
+    var filteredWords = [];
 
     if (filterBy != "all") {
       filteredWords = filteredWords.filter((word) => {
@@ -192,50 +212,53 @@ const Vocabulary = (props) => {
       setIsLoading(true);
       setNoResults(false);
 
-      const timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(async () => {
         if (
           searchType === searchParameters.ro ||
           searchType === searchParameters.hi
         ) {
-          const firstTwoCharacters = searchValue.substring(0, 2);
-          const filterFirstTwoCharacters = filteredWords.filter((word) => {
-            if (word[searchType]) {
-              return (
-                word[searchType].toLowerCase().substring(0, 2) ===
-                firstTwoCharacters
-              );
-            }
-          });
+          const data = await getData(searchValue);
+          console.log(data);
+          filteredWords = [...data];
+          //   const firstTwoCharacters = searchValue.substring(0, 2);
+          //   const filterFirstTwoCharacters = filteredWords.filter((word) => {
+          //     if (word[searchType]) {
+          //       return (
+          //         word[searchType].toLowerCase().substring(0, 2) ===
+          //         firstTwoCharacters
+          //       );
+          //     }
+          //   });
 
-          if (filterFirstTwoCharacters.length > 0) {
-            filteredWords = filterFirstTwoCharacters;
-          }
-        }
+          //   if (filterFirstTwoCharacters.length > 0) {
+          //     filteredWords = filterFirstTwoCharacters;
+          //   }
+          // }
 
-        const exactMatch = filteredWords.filter((word) => {
-          if (word[searchType]) {
-            return (
-              word[searchType].toLowerCase().replace(/ /g, "") === searchValue
-            );
-          }
-        });
-        const filter = filteredWords.filter((word) => {
-          if (word[searchType]) {
-            return word[searchType]
-              .toLowerCase()
-              .replace(/ /g, "")
-              .includes(searchValue);
-          }
-        });
-        if (exactMatch.length) {
-          filteredWords = [...exactMatch];
-        } else {
-          filteredWords = [...filter];
-        }
-        if (filteredWords.length) {
-          setNoResults(false);
-        } else {
-          setNoResults(true);
+          // const exactMatch = filteredWords.filter((word) => {
+          //   if (word[searchType]) {
+          //     return (
+          //       word[searchType].toLowerCase().replace(/ /g, "") === searchValue
+          //     );
+          //   }
+          // });
+          // const filter = filteredWords.filter((word) => {
+          //   if (word[searchType]) {
+          //     return word[searchType]
+          //       .toLowerCase()
+          //       .replace(/ /g, "")
+          //       .includes(searchValue);
+          //   }
+          // });
+          // if (exactMatch.length) {
+          //   filteredWords = [...exactMatch];
+          // } else {
+          //   filteredWords = [...filter];
+          // }
+          // if (filteredWords.length) {
+          //   setNoResults(false);
+          // } else {
+          //   setNoResults(true);
         }
         setFiltered(filteredWords);
         setIsLoading(false);
@@ -274,7 +297,7 @@ const Vocabulary = (props) => {
           <Box display="flex" justifyContent="space-between">
             <Box>
               <Text as="h1" className={classes.headerTitle}>
-                VOCAB LIBRARY
+                WORD SEARCH LIBRARY
               </Text>
               <Text color="grey">[ 語彙 ] ごい</Text>
             </Box>
@@ -310,9 +333,12 @@ const Vocabulary = (props) => {
           </Box>
           <Box marginTop="16px">
             <Text fontSize="xs">
-              Simply search for Japanese words in our ever-growing library.
+              This word database is provided by Jisho.org
             </Text>
-            <Text fontSize="xs">{`Current word count : ${words.length} words`}</Text>
+            <Text fontSize="xs">
+              Note that conjugation of verbs are done programmatically by our
+              platform. If there's any mistakes, kindly report it to us.
+            </Text>
           </Box>
         </div>
         <Box className={classes.accordionTableWrapper}>
@@ -366,12 +392,9 @@ const Vocabulary = (props) => {
                   >{`${filtered.length} word(s) found`}</Text>
                   <Accordion allowToggle w="100%">
                     {filtered.map((word, index) => {
-                      if (word.hiragana) {
+                      if (word.slug) {
                         return (
-                          <AccordionItem
-                            key={word.id}
-                            borderColor="primaryLight"
-                          >
+                          <AccordionItem key={index} borderColor="primaryLight">
                             <h2>
                               <AccordionButton
                                 userSelect="text"
@@ -382,7 +405,7 @@ const Vocabulary = (props) => {
                                 <Box className={classes.accordionButtonContent}>
                                   <Box display="flex">
                                     <Text className={classes.kanjiWrapper}>
-                                      {word.kanji || "-"}
+                                      {word.slug || "-"}
                                     </Text>
                                     <Box
                                       className={classes.hiraganaTextWrapper}
