@@ -27,15 +27,25 @@ class MyDocument extends Document {
   }
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <link rel=" icon" href="/static/images/sushi.svg"></link>
-          {/* <link href="link to font" rel="stylesheet"></link> */}
           <link rel="preconnect" href="https://fonts.gstatic.com"></link>
           <link
             href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"
             rel="stylesheet"
           ></link>
+          <meta content="" name="google-site-verification" />
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=[Tracking ID]"
+          />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `[google analytics tracking code here]`,
+            }}
+          />
         </Head>
         <body>
           <Main />

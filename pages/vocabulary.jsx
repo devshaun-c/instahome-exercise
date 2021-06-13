@@ -23,7 +23,7 @@ import { createUseStyles } from "react-jss";
 import BackToTop from "../components/BackToTop";
 import { useTheme } from "@emotion/react";
 import { GetSnapshotFromFirebase } from "../lib/firebase";
-import ContentContainer from "../components/ContentContainer";
+import Container from "../components/Container";
 import { searchParameters } from "../constants/dropdowns";
 import {
   convertToNai,
@@ -36,6 +36,14 @@ import TextButton from "../components/TextButton";
 import OverlayModal from "../components/OverlayModal";
 import { ConvertToRomaji } from "../utils/hiraganaToRomaji";
 import { MdReport } from "react-icons/md";
+
+// var express = require("express");
+// var app = express();
+
+// respond with "hello world" when a GET request is made to the homepage
+// app.get("/api/vocabfinder", function (req, res) {
+//   res.send("hello world");
+// });
 
 const useStyles = createUseStyles({
   header: {
@@ -152,6 +160,8 @@ const searchParameterOptions = [
   },
 ];
 
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 const Vocabulary = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -164,6 +174,44 @@ const Vocabulary = (props) => {
   const [noResults, setNoResults] = useState(false);
   const [filterBy, setFilterBy] = useState("all");
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchData, setSearchData] = useState(false);
+
+  // const getWord = async (word) => {
+  //   const { data, error } = await useSWR(`/api/vocab/${word}`, fetcher);
+
+  //   if (data) {
+  //     const filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
+  //     console.log(filteredData);
+  //   }
+  // };
+
+  // const WordText = () => {
+  //   var filteredData = [];
+  //   if (searchValue) {
+  //     const { data, error } = useSWR(
+  //       searchData ? `/api/vocab/${searchValue}` : null,
+  //       fetcher
+  //     );
+  //     if (data) {
+  //       filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
+  //     }
+  //   }
+  //   return (
+  //     <>
+  //       {filteredData.map((word, index) => {
+  //         return (
+  //           <div key={index}>
+  //             <Text>{word.slug}</Text>
+  //             <Text>{word.japanese[0].reading}</Text>
+  //             <Text>{word.jlpt[0]}</Text>
+  //             <Text>{word.senses[0].english_definitions}</Text>
+  //             <Text>{word.senses[0].parts_of_speech[0]}</Text>
+  //           </div>
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // };
 
   useEffect(async () => {
     const results = JSON.parse(props.words);
@@ -175,6 +223,17 @@ const Vocabulary = (props) => {
   const handleSearch = (e) => {
     let target = e.target;
     setSearchValue(target.value);
+  };
+
+  const getData = async (searchValue) => {
+    // var filteredData = [];
+    // const response = await fetch(`/api/vocab/${searchValue}`);
+    // const json = await response.json();
+    // console.log(json);
+    // // if (data.json()) {
+    // //   filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
+    // // }
+    // return filteredData;
   };
 
   useEffect(() => {
@@ -197,6 +256,8 @@ const Vocabulary = (props) => {
           searchType === searchParameters.ro ||
           searchType === searchParameters.hi
         ) {
+          // setSearchData(true);
+          // getData(searchValue);
           const firstTwoCharacters = searchValue.substring(0, 2);
           const filterFirstTwoCharacters = filteredWords.filter((word) => {
             if (word[searchType]) {
@@ -206,12 +267,10 @@ const Vocabulary = (props) => {
               );
             }
           });
-
           if (filterFirstTwoCharacters.length > 0) {
             filteredWords = filterFirstTwoCharacters;
           }
         }
-
         const exactMatch = filteredWords.filter((word) => {
           if (word[searchType]) {
             return (
@@ -237,9 +296,10 @@ const Vocabulary = (props) => {
         } else {
           setNoResults(true);
         }
+
         setFiltered(filteredWords);
         setIsLoading(false);
-      }, 1000);
+      }, 2000);
       return () => clearTimeout(timeoutId);
     } else {
       setNoResults(false);
@@ -259,191 +319,197 @@ const Vocabulary = (props) => {
   };
 
   return (
-    <div>
-      <Head>
-        <title>
-          Vocabulary - GOJISHO | Japanese word translation and verb conjugation
-        </title>
-        <meta
-          name="description"
-          content="meet japanese speaking friends and learn and improve your japanese vocabulary together"
-        />
-      </Head>
-      <ContentContainer>
-        <div className={classes.header}>
-          <Box display="flex" justifyContent="space-between">
-            <Box>
-              <Text as="h1" className={classes.headerTitle}>
-                VOCAB LIBRARY
-              </Text>
-              <Text color="grey">[ 語彙 ] ごい</Text>
-            </Box>
-            <Box>
-              <Select
-                size="sm"
-                variant="outline"
-                color="white"
-                bg="primary"
-                borderColor="primary"
-                focusBorderColor="none"
-                borderRadius="8px"
-                cursor="pointer"
-                onChange={handleFilter}
-              >
-                <option style={{ color: "black" }} value="all">
-                  all
-                </option>
-                <option style={{ color: "black" }} value={wordType.verb}>
-                  verb
-                </option>
-                <option style={{ color: "black" }} value={wordType.noun}>
-                  noun
-                </option>
-                <option style={{ color: "black" }} value={wordType.adjective}>
-                  adjective
-                </option>
-                <option style={{ color: "black" }} value={wordType.adverb}>
-                  adverb
-                </option>
-              </Select>
-            </Box>
-          </Box>
-          <Box marginTop="16px">
-            <Text fontSize="xs">
-              Simply search for Japanese words in our ever-growing library.
+    <Container
+      title=" Vocabulary - GOJISHO | Japanese word translation and verb conjugation"
+      description="meet japanese speaking friends and learn and improve your japanese vocabulary together"
+    >
+      <div className={classes.header}>
+        <Box display="flex" justifyContent="space-between">
+          <div>
+            <Text as="h1" className={classes.headerTitle}>
+              VOCAB LIBRARY
             </Text>
-            <Text fontSize="xs">{`Current word count : ${words.length} words`}</Text>
-          </Box>
-        </div>
-        <Box className={classes.accordionTableWrapper}>
-          <Box
-            display="flex"
-            flexDir="column"
-            width="100%"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <SearchBox
-              handleChange={handleSearch}
-              handleSelect={handleSearchType}
-              options={searchParameterOptions}
-              defaultSearch={searchParameters.ro}
-              placeholder="Search a word"
-              value={searchValue}
-            />
-            {searchValue == "" && (
-              <Box
-                display="flex"
-                flexDir="column"
-                alignItems="center"
-                className={classes.imgWrapper}
-              >
-                <img src={typewriter} />
-                <Text fontSize="sm" textAlign="center">
-                  Type something in the search box to find a word
-                </Text>
-              </Box>
-            )}
-          </Box>
-          {isLoading ? (
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="primary"
-              size="md"
-              ml="16px"
-            />
-          ) : (
-            <>
-              {filtered.length > 0 && (
-                <Box display="flex" flexDir="column" alignItems="center">
-                  <Text
-                    fontSize="xs"
-                    width="100%"
-                    mb="4px"
-                    padding="0 16px"
-                  >{`${filtered.length} word(s) found`}</Text>
-                  <Accordion allowToggle w="100%">
-                    {filtered.map((word, index) => {
-                      if (word.hiragana) {
-                        return (
-                          <AccordionItem
-                            key={word.id}
-                            borderColor="primaryLight"
-                          >
-                            <h2>
-                              <AccordionButton
-                                userSelect="text"
-                                _expanded={{ bg: "primaryLight" }}
-                                _focus={{ outline: "0" }}
-                                _hover={{ bg: "primaryLight" }}
-                              >
-                                <Box className={classes.accordionButtonContent}>
-                                  <Box display="flex">
-                                    <Text className={classes.kanjiWrapper}>
-                                      {word.kanji || "-"}
-                                    </Text>
-                                    <Box
-                                      className={classes.hiraganaTextWrapper}
+            <Text color="grey">[ 語彙 ] ごい</Text>
+          </div>
+          <div>
+            <Select
+              size="sm"
+              variant="outline"
+              color="white"
+              bg="primary"
+              borderColor="primary"
+              focusBorderColor="none"
+              borderRadius="8px"
+              cursor="pointer"
+              onChange={handleFilter}
+            >
+              <option style={{ color: "black" }} value="all">
+                all
+              </option>
+              <option style={{ color: "black" }} value={wordType.verb}>
+                verb
+              </option>
+              <option style={{ color: "black" }} value={wordType.noun}>
+                noun
+              </option>
+              <option style={{ color: "black" }} value={wordType.adjective}>
+                adjective
+              </option>
+              <option style={{ color: "black" }} value={wordType.adverb}>
+                adverb
+              </option>
+            </Select>
+          </div>
+        </Box>
+        <Box marginTop="16px">
+          <Text fontSize="xs">
+            Simply search for Japanese words in our ever-growing library.
+          </Text>
+          <Text fontSize="xs">{`Current word count : ${words.length} words`}</Text>
+        </Box>
+      </div>
+      <div className={classes.accordionTableWrapper}>
+        <Box
+          display="flex"
+          flexDir="column"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <SearchBox
+            handleChange={handleSearch}
+            handleSelect={handleSearchType}
+            options={searchParameterOptions}
+            defaultSearch={searchParameters.ro}
+            placeholder="Search a word"
+            value={searchValue}
+          />
+          {searchValue == "" && (
+            <Box
+              display="flex"
+              flexDir="column"
+              alignItems="center"
+              className={classes.imgWrapper}
+            >
+              <img src={typewriter} />
+              <Text fontSize="sm" textAlign="center">
+                Type something in the search box to find a word
+              </Text>
+            </Box>
+          )}
+        </Box>
+        {isLoading ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="primary"
+            size="md"
+            ml="16px"
+          />
+        ) : (
+          <>
+            {filtered.length > 0 && (
+              <Box display="flex" flexDir="column" alignItems="center">
+                <Text
+                  fontSize="xs"
+                  width="100%"
+                  mb="4px"
+                  padding="0 16px"
+                >{`${filtered.length} word(s) found`}</Text>
+                <Accordion allowToggle w="100%">
+                  {filtered.map((word, index) => {
+                    if (word.hiragana) {
+                      return (
+                        <AccordionItem key={word.id} borderColor="primaryLight">
+                          <h2>
+                            <AccordionButton
+                              userSelect="text"
+                              _expanded={{ bg: "primaryLight" }}
+                              _focus={{ outline: "0" }}
+                              _hover={{ bg: "primaryLight" }}
+                            >
+                              <Box className={classes.accordionButtonContent}>
+                                <Box display="flex">
+                                  <Text className={classes.kanjiWrapper}>
+                                    {word.kanji || "-"}
+                                  </Text>
+                                  <Box className={classes.hiraganaTextWrapper}>
+                                    <Text
+                                      fontSize="sm"
+                                      className={classes.verbWrapper}
                                     >
-                                      <Text
-                                        fontSize="sm"
-                                        className={classes.verbWrapper}
-                                      >
-                                        {word.romaji}
-                                      </Text>
-                                      <Text fontSize="sm">
-                                        {word.word || word.hiragana}
-                                      </Text>
-                                    </Box>
+                                      {word.romaji}
+                                    </Text>
+                                    <Text fontSize="sm">
+                                      {word.word || word.hiragana}
+                                    </Text>
                                   </Box>
-                                  <Text
-                                    fontSize="sm"
-                                    className={classes.englishTextWrapper}
-                                  >
-                                    {word.englishTranslate}
-                                  </Text>
-                                  <Text
-                                    fontSize="xs"
-                                    className={classes.verbGroupTextWrapper}
-                                  >
-                                    {word.type}
-                                  </Text>
                                 </Box>
-                                <AccordionIcon color="primary" />
-                              </AccordionButton>
-                            </h2>
-                            <AccordionPanel padding="0 0 32px 0">
-                              <div className={classes.tableWrapper}>
-                                <Box position="absolute" right="8px" top="8px">
-                                  <Tooltip
-                                    label="report error"
-                                    fontSize="xs"
-                                    hasArrow
-                                    bg="red.600"
-                                  >
-                                    <Button
-                                      variant="unstyled"
-                                      color="red.600"
-                                      size="sm"
-                                      leftIcon={<MdReport fontSize="24px" />}
-                                      display="flex"
-                                      alignItems="center"
-                                      _focus={{ outline: "0" }}
-                                    ></Button>
-                                  </Tooltip>
-                                </Box>
-                                <Table variant="unstyled" size="sm">
-                                  <colgroup>
-                                    <col className={classes.firstCol} />
-                                    <col className={classes.secondCol} />
-                                  </colgroup>
-                                  <Tbody>
-                                    {word.explanation && (
+                                <Text
+                                  fontSize="sm"
+                                  className={classes.englishTextWrapper}
+                                >
+                                  {word.englishTranslate}
+                                </Text>
+                                <Text
+                                  fontSize="xs"
+                                  className={classes.verbGroupTextWrapper}
+                                >
+                                  {word.type}
+                                </Text>
+                              </Box>
+                              <AccordionIcon color="primary" />
+                            </AccordionButton>
+                          </h2>
+                          <AccordionPanel padding="0 0 32px 0">
+                            <div className={classes.tableWrapper}>
+                              <Box position="absolute" right="8px" top="8px">
+                                <Tooltip
+                                  label="report error"
+                                  fontSize="xs"
+                                  hasArrow
+                                  bg="red.600"
+                                >
+                                  <Button
+                                    variant="unstyled"
+                                    color="red.600"
+                                    size="sm"
+                                    leftIcon={<MdReport fontSize="24px" />}
+                                    display="flex"
+                                    alignItems="center"
+                                    _focus={{ outline: "0" }}
+                                  ></Button>
+                                </Tooltip>
+                              </Box>
+                              <Table variant="unstyled" size="sm">
+                                <colgroup>
+                                  <col className={classes.firstCol} />
+                                  <col className={classes.secondCol} />
+                                </colgroup>
+                                <Tbody>
+                                  {word.explanation && (
+                                    <Tr>
+                                      <Td padding="8px 16px">
+                                        <Text fontSize="xs">Explanation</Text>
+                                        <Text
+                                          className={classes.tinyDescription}
+                                        >
+                                          じしょ
+                                        </Text>
+                                      </Td>
+                                      <Td padding="8px 16px">
+                                        <Text fontSize="xs">
+                                          {word.explanation}
+                                        </Text>
+                                      </Td>
+                                    </Tr>
+                                  )}
+                                  {word.type === wordType.verb && (
+                                    <>
                                       <Tr>
                                         <Td padding="8px 16px">
-                                          <Text fontSize="xs">Explanation</Text>
+                                          <Text fontSize="xs">Plain</Text>
                                           <Text
                                             className={classes.tinyDescription}
                                           >
@@ -452,189 +518,158 @@ const Vocabulary = (props) => {
                                         </Td>
                                         <Td padding="8px 16px">
                                           <Text fontSize="xs">
-                                            {word.explanation}
+                                            {convertToPlain(word)}
+                                          </Text>
+                                          <Text fontSize="xs">
+                                            {ConvertToRomaji(
+                                              convertToPlain(word)
+                                            )}
                                           </Text>
                                         </Td>
                                       </Tr>
-                                    )}
-                                    {word.type === wordType.verb && (
-                                      <>
-                                        <Tr>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">Plain</Text>
-                                            <Text
-                                              className={
-                                                classes.tinyDescription
-                                              }
-                                            >
-                                              じしょ
-                                            </Text>
-                                          </Td>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">
-                                              {convertToPlain(word)}
-                                            </Text>
-                                            <Text fontSize="xs">
-                                              {ConvertToRomaji(
-                                                convertToPlain(word)
-                                              )}
-                                            </Text>
-                                          </Td>
-                                        </Tr>
-                                        <Tr>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">TA / TE</Text>
-                                            <Text
-                                              className={
-                                                classes.tinyDescription
-                                              }
-                                            >
-                                              た / て
-                                            </Text>
-                                          </Td>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">
-                                              {convertToTa(word)}
-                                            </Text>
-                                            <Text fontSize="xs">
-                                              {ConvertToRomaji(
-                                                convertToTa(word)
-                                              )}
-                                            </Text>
-                                          </Td>
-                                        </Tr>
-                                        <Tr>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">Negative</Text>
-                                            <Text
-                                              className={
-                                                classes.tinyDescription
-                                              }
-                                            >
-                                              ない
-                                            </Text>
-                                          </Td>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">
-                                              {convertToNai(word)}
-                                            </Text>
-                                            <Text fontSize="xs">
-                                              {ConvertToRomaji(
-                                                convertToNai(word)
-                                              )}
-                                            </Text>
-                                          </Td>
-                                        </Tr>
-                                        <Tr>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">
-                                              Verb Group
-                                            </Text>
-                                            <Text
-                                              className={
-                                                classes.tinyDescription
-                                              }
-                                            ></Text>
-                                          </Td>
-                                          <Td padding="8px 16px">
-                                            <Text fontSize="xs">
-                                              {word.group}
-                                            </Text>
-                                          </Td>
-                                        </Tr>
-                                      </>
-                                    )}
-                                  </Tbody>
-                                </Table>
+                                      <Tr>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">TA / TE</Text>
+                                          <Text
+                                            className={classes.tinyDescription}
+                                          >
+                                            た / て
+                                          </Text>
+                                        </Td>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">
+                                            {convertToTa(word)}
+                                          </Text>
+                                          <Text fontSize="xs">
+                                            {ConvertToRomaji(convertToTa(word))}
+                                          </Text>
+                                        </Td>
+                                      </Tr>
+                                      <Tr>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">Negative</Text>
+                                          <Text
+                                            className={classes.tinyDescription}
+                                          >
+                                            ない
+                                          </Text>
+                                        </Td>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">
+                                            {convertToNai(word)}
+                                          </Text>
+                                          <Text fontSize="xs">
+                                            {ConvertToRomaji(
+                                              convertToNai(word)
+                                            )}
+                                          </Text>
+                                        </Td>
+                                      </Tr>
+                                      <Tr>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">Verb Group</Text>
+                                          <Text
+                                            className={classes.tinyDescription}
+                                          ></Text>
+                                        </Td>
+                                        <Td padding="8px 16px">
+                                          <Text fontSize="xs">
+                                            {word.group}
+                                          </Text>
+                                        </Td>
+                                      </Tr>
+                                    </>
+                                  )}
+                                </Tbody>
+                              </Table>
 
-                                <Text
-                                  fontSize="xs"
-                                  color="teal"
-                                  style={{ margin: "16px 20px 4px 20px" }}
-                                >
-                                  Sample sentences
-                                </Text>
+                              <Text
+                                fontSize="xs"
+                                color="teal"
+                                style={{ margin: "16px 20px 4px 20px" }}
+                              >
+                                Sample sentences
+                              </Text>
 
-                                <div
-                                  style={{
-                                    padding: "16px 20px ",
-                                    margin: "0 20px 16px 20px",
-                                    border: "1px solid teal",
-                                    borderRadius: "8px",
-                                  }}
+                              <div
+                                style={{
+                                  padding: "16px 20px ",
+                                  margin: "0 20px 16px 20px",
+                                  border: "1px solid teal",
+                                  borderRadius: "8px",
+                                }}
+                              >
+                                <Box
+                                  display="flex"
+                                  alignItems="center"
+                                  justifyContent="space-between"
                                 >
-                                  <Box
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                  >
-                                    <Box display="flex" flexDirection="column">
-                                      <Text fontSize="xs" color="grey">
-                                        Coming soon..
-                                      </Text>
-                                      <Text
-                                        fontSize="xs"
-                                        color="blackAlpha.500"
-                                      ></Text>
-                                    </Box>
+                                  <Box display="flex" flexDirection="column">
+                                    <Text fontSize="xs" color="grey">
+                                      Coming soon..
+                                    </Text>
+                                    <Text
+                                      fontSize="xs"
+                                      color="blackAlpha.500"
+                                    ></Text>
                                   </Box>
-                                </div>
+                                </Box>
                               </div>
-                            </AccordionPanel>
-                          </AccordionItem>
-                        );
-                      }
-                    })}
-                  </Accordion>
-                  <Box
+                            </div>
+                          </AccordionPanel>
+                        </AccordionItem>
+                      );
+                    }
+                  })}
+                </Accordion>
+                <Box
+                  display="inline-block"
+                  width="100%"
+                  mt="48px"
+                  padding="0 16px"
+                >
+                  <Text
+                    fontSize="xs"
+                    color="grey"
                     display="inline-block"
-                    width="100%"
-                    mt="48px"
-                    padding="0 16px"
+                    mr="4px"
                   >
-                    <Text
-                      fontSize="xs"
-                      color="grey"
-                      display="inline-block"
-                      mr="4px"
-                    >
-                      Not the word you're looking for?
-                    </Text>
-                    <Text fontSize="xs" color="grey" display="inline-block">
-                      Submit a word request
-                    </Text>
-                    <TextButton
-                      text="here"
-                      color="primary"
-                      onClick={() => setModalOpen(!modalOpen)}
-                    />
-                  </Box>
+                    Not the word you're looking for?
+                  </Text>
+                  <Text fontSize="xs" color="grey" display="inline-block">
+                    Submit a word request
+                  </Text>
+                  <TextButton
+                    text="here"
+                    color="primary"
+                    onClick={() => setModalOpen(!modalOpen)}
+                  />
                 </Box>
-              )}
-            </>
-          )}
-          {noResults && (
-            <Box>
-              <Text fontSize="xs" color="grey">
-                No search results found in our library
-              </Text>
-              <Box display="flex">
-                <Text fontSize="xs" color="grey">
-                  Help us by submitting a new word request
-                </Text>
-                <TextButton
-                  text="here"
-                  color="primary"
-                  onClick={() => setModalOpen(!modalOpen)}
-                />
               </Box>
+            )}
+          </>
+        )}
+        {noResults && (
+          <div>
+            <Text fontSize="xs" color="grey">
+              No search results found in our library
+            </Text>
+            <Box display="flex">
+              <Text fontSize="xs" color="grey">
+                Help us by submitting a new word request
+              </Text>
+              <TextButton
+                text="here"
+                color="primary"
+                onClick={() => setModalOpen(!modalOpen)}
+              />
             </Box>
-          )}
-        </Box>
-        <OverlayModal isOpen={modalOpen} handleToggle={setModalOpen} />
-        <BackToTop show={filtered.length > 5} />
-      </ContentContainer>
-    </div>
+          </div>
+        )}
+      </div>
+      <OverlayModal isOpen={modalOpen} handleToggle={setModalOpen} />
+      <BackToTop show={filtered.length > 5} />
+    </Container>
   );
 };
 
@@ -646,7 +681,7 @@ export async function getStaticProps(_context) {
   //       user: users.find((user) => user.id === singleQuiz.userId),
   //     };
   //   });
-  return { props: { words: JSON.stringify(words) }, revalidate: 10 };
+  return { props: { words: JSON.stringify(words) }, revalidate: 60 };
 }
 
 export default Vocabulary;

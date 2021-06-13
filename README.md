@@ -7,6 +7,8 @@
 - chakra UI
 - react-icons
 - next-images
+- next-SEO
+- Google Analytics at \_document.js
 
 ## To maintain styling of useStyles during page refresh
 
@@ -17,8 +19,8 @@
 
 > Pending
 
-- [ ] Allow edit word from client side (if mistake found)
-  - [ ] Reusable modal (one for New word, one for Error)
+- [ ] Style word search container
+- [ ] Add favorite words
 - [ ] Add mobile nav bar
 - [ ] Activities
   - [ ] Chunk game to create longer sentences from one simple phrase.
@@ -29,11 +31,22 @@
 - [ ] Quiz page
   - [ ] Test vocabulary (show hiragana toggle)
   - [ ] Filter by word level
+- [ ] Add a diary blog feature
+  - [ ] Users can create an account and start writing their daily activities in japanese
+  - [ ] People can help correct sentences if they make it public
 - [ ] By Topics
   - [ ] Create template
 - [ ] By Stories
   - [ ] Youtube learning page
   - [ ] Create template
+
+> 13/6/2021
+
+- [x] Added wordsearch function using Jisho.org API
+
+> 29/5/2021
+
+- [x] Revalidate Word database from getStaticProps
 
 > 23/5/2021
 

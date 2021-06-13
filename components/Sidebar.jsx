@@ -17,6 +17,7 @@ import {
   BsPen,
   BsPeople,
   BsQuestionCircle,
+  BsSearch,
   BsUpload,
 } from "react-icons/bs";
 import { FaBook, FaBookOpen } from "react-icons/fa";
@@ -261,6 +262,32 @@ const Sidebar = () => {
               </AccordionButton>
             </h2>
           </AccordionItem> */}
+
+          <AccordionItem border="none" padding="4px 0">
+            <h2>
+              <AccordionButton
+                _expanded={{}}
+                _focus={{ outline: "0" }}
+                padding="4px 0"
+              >
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="space-between"
+                  padding="0 32px"
+                >
+                  <Link href="/wordsearch" className={classes.linkStyle}>
+                    <Box display="flex" alignItems="center">
+                      <BsSearch />
+                      <Text fontSize="sm" ml="16px">
+                        Word Search
+                      </Text>
+                    </Box>
+                  </Link>
+                </Box>
+              </AccordionButton>
+            </h2>
+          </AccordionItem>
 
           <AccordionItem border="none" padding="4px 0">
             <h2>

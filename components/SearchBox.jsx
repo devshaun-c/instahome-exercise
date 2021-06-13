@@ -7,7 +7,7 @@ import {
   InputRightElement,
   Select,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 
 import { createUseStyles } from "react-jss";
 

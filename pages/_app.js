@@ -1,7 +1,9 @@
 import "../styles/globals.css";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, CSSReset, extendTheme } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import { createUseStyles } from "react-jss";
+import SEO from "../next-seo.config";
+import { DefaultSeo } from "next-seo";
 
 const useStyles = createUseStyles({
   main: {
@@ -61,12 +63,14 @@ function MyApp({ Component, pageProps }) {
   const classes = useStyles();
   return (
     <ChakraProvider theme={theme}>
+      <DefaultSeo {...SEO} />
       <div className={classes.main}>
         <Sidebar />
         <div className={classes.content}>
           <Component {...pageProps} />
         </div>
       </div>
+      <CSSReset />
     </ChakraProvider>
   );
 }

@@ -1,11 +1,11 @@
 import { Box, Text } from "@chakra-ui/layout";
 import Link from "next/link";
-import ContentContainer from "../components/ContentContainer";
+import Container from "../components/Container";
 import imgHero from "../public/static/images/404-image.svg";
 
 export default function FourOhFour() {
   return (
-    <ContentContainer>
+    <Container>
       <Box
         display="flex"
         flexDir="column"
@@ -21,6 +21,6 @@ export default function FourOhFour() {
           But no worries! Subscribe to us and we will keep you updated
         </Text>
       </Box>
-    </ContentContainer>
+    </Container>
   );
 }
