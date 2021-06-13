@@ -237,7 +237,8 @@ const Vocabulary = (props) => {
   };
 
   useEffect(() => {
-    var filteredWords = [...words];
+    // var filteredWords = [...words];
+    var filteredWords = [];
 
     if (filterBy != "all") {
       filteredWords = filteredWords.filter((word) => {
@@ -251,7 +252,7 @@ const Vocabulary = (props) => {
       setIsLoading(true);
       setNoResults(false);
 
-      const timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(async () => {
         if (
           searchType === searchParameters.ro ||
           searchType === searchParameters.hi

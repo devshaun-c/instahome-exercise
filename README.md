@@ -22,6 +22,10 @@
 - [ ] Style word search container
 - [ ] Add favorite words
 - [ ] Add mobile nav bar
+- [ ] Diary page
+  - [ ] Allow users to write a simple daily diary
+  - [ ] If set to public, users can let others check their writings
+  - [ ] Quick word search within the same page for fast typing
 - [ ] Activities
   - [ ] Chunk game to create longer sentences from one simple phrase.
     - [ ] Users can add in their own sentence
