@@ -37,14 +37,6 @@ import OverlayModal from "../components/OverlayModal";
 import { ConvertToRomaji } from "../utils/hiraganaToRomaji";
 import { MdReport } from "react-icons/md";
 
-// var express = require("express");
-// var app = express();
-
-// respond with "hello world" when a GET request is made to the homepage
-// app.get("/api/vocabfinder", function (req, res) {
-//   res.send("hello world");
-// });
-
 const useStyles = createUseStyles({
   header: {
     paddingBottom: "32px",
@@ -160,8 +152,6 @@ const searchParameterOptions = [
   },
 ];
 
-// const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 const Vocabulary = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -174,44 +164,6 @@ const Vocabulary = (props) => {
   const [noResults, setNoResults] = useState(false);
   const [filterBy, setFilterBy] = useState("all");
   const [modalOpen, setModalOpen] = useState(false);
-  const [searchData, setSearchData] = useState(false);
-
-  // const getWord = async (word) => {
-  //   const { data, error } = await useSWR(`/api/vocab/${word}`, fetcher);
-
-  //   if (data) {
-  //     const filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
-  //     console.log(filteredData);
-  //   }
-  // };
-
-  // const WordText = () => {
-  //   var filteredData = [];
-  //   if (searchValue) {
-  //     const { data, error } = useSWR(
-  //       searchData ? `/api/vocab/${searchValue}` : null,
-  //       fetcher
-  //     );
-  //     if (data) {
-  //       filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
-  //     }
-  //   }
-  //   return (
-  //     <>
-  //       {filteredData.map((word, index) => {
-  //         return (
-  //           <div key={index}>
-  //             <Text>{word.slug}</Text>
-  //             <Text>{word.japanese[0].reading}</Text>
-  //             <Text>{word.jlpt[0]}</Text>
-  //             <Text>{word.senses[0].english_definitions}</Text>
-  //             <Text>{word.senses[0].parts_of_speech[0]}</Text>
-  //           </div>
-  //         );
-  //       })}
-  //     </>
-  //   );
-  // };
 
   useEffect(async () => {
     const results = JSON.parse(props.words);
@@ -225,20 +177,8 @@ const Vocabulary = (props) => {
     setSearchValue(target.value);
   };
 
-  const getData = async (searchValue) => {
-    // var filteredData = [];
-    // const response = await fetch(`/api/vocab/${searchValue}`);
-    // const json = await response.json();
-    // console.log(json);
-    // // if (data.json()) {
-    // //   filteredData = data.data.filter((obj) => obj.jlpt.length > 0);
-    // // }
-    // return filteredData;
-  };
-
   useEffect(() => {
-    // var filteredWords = [...words];
-    var filteredWords = [];
+    var filteredWords = [...words];
 
     if (filterBy != "all") {
       filteredWords = filteredWords.filter((word) => {
