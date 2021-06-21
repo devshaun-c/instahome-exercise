@@ -9,6 +9,9 @@
 - next-images
 - next-SEO
 - Google Analytics at \_document.js
+- react-audio-player
+- file-loader url-loader --> To handle mp3 files
+- next-compose-plugins --> for multiple plugins in next.config.js
 
 ## To maintain styling of useStyles during page refresh
 
@@ -19,7 +22,6 @@
 
 > Pending
 
-- [ ] Style word search container
 - [ ] Add favorite words
 - [ ] Add mobile nav bar
 - [ ] Diary page
@@ -43,6 +45,10 @@
 - [ ] By Stories
   - [ ] Youtube learning page
   - [ ] Create template
+
+> 21/6/2021
+
+- [x] Word search UI and sorting
 
 > 13/6/2021
 

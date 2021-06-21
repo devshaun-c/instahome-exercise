@@ -38,34 +38,36 @@ const SearchBox = (props) => {
     size,
     handleSelect,
     defaultSearch,
-    options,
+    options = [],
     placeholder,
   } = props;
   return (
     <div className={classes.root}>
-      <FormControl className={classes.selectStyle}>
-        <Select
-          size={size || "sm"}
-          variant="filled"
-          color="primary"
-          bg="primaryLight"
-          borderColor="primaryMedium"
-          border="1px"
-          cursor="pointer"
-          _focus={{ outline: "0", bg: "primaryLight", color: "black" }}
-          _hover={{ outline: "0", bg: "primaryLight" }}
-          fontSize="xs"
-          onChange={handleSelect}
-          defaultValue={defaultSearch}
-          borderRadius="8px 0 0 8px"
-        >
-          {options.map((option) => (
-            <option value={option.value} key={option.value}>
-              {option.title}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
+      {options.length > 0 && (
+        <FormControl className={classes.selectStyle}>
+          <Select
+            size={size || "sm"}
+            variant="filled"
+            color="primary"
+            bg="primaryLight"
+            borderColor="primaryMedium"
+            border="1px"
+            cursor="pointer"
+            _focus={{ outline: "0", bg: "primaryLight", color: "black" }}
+            _hover={{ outline: "0", bg: "primaryLight" }}
+            fontSize="xs"
+            onChange={handleSelect}
+            defaultValue={defaultSearch}
+            borderRadius="8px 0 0 8px"
+          >
+            {options.map((option) => (
+              <option value={option.value} key={option.value}>
+                {option.title}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+      )}
       <InputGroup size={size || "sm"} className={classes.input}>
         <InputLeftElement
           pointerEvents="none"
@@ -78,7 +80,7 @@ const SearchBox = (props) => {
           onChange={handleChange}
           borderColor="primaryMedium"
           color="black"
-          borderRadius="0 8px 8px 0"
+          borderRadius={options.length ? "0 8px 8px 0" : "8px"}
           _focus={{ borderColor: "primary" }}
           _hover={{ borderColor: "primary" }}
         />
