@@ -123,7 +123,8 @@ const Vocabulary = (props) => {
       const json = await response.json();
       if (json && json.data.length) {
         filteredData = json.data.filter((obj) => obj.jlpt.length > 0);
-      } else {
+      }
+      if (!filteredData.length) {
         setNoResults(true);
       }
       setFiltered(filteredData);
