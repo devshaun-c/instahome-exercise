@@ -17,6 +17,9 @@ const useStyles = createUseStyles({
   imgWrapper: {
     padding: "32px",
     maxWidth: "500px",
+    "@media screen and (max-width: 800px)": {
+      maxWidth: "250px",
+    },
   },
   wordWrap: {
     flex: "1",

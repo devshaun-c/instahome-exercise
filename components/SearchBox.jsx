@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   FormControl,
   Input,
   InputGroup,
@@ -55,7 +56,7 @@ const SearchBox = (props) => {
             cursor="pointer"
             _focus={{ outline: "0", bg: "primaryLight", color: "black" }}
             _hover={{ outline: "0", bg: "primaryLight" }}
-            fontSize="xs"
+            fontSize={["md", "sm"]}
             onChange={handleSelect}
             defaultValue={defaultSearch}
             borderRadius="8px 0 0 8px"
@@ -74,7 +75,7 @@ const SearchBox = (props) => {
           children={<SearchIcon color="primaryMedium" />}
         />
         <Input
-          fontSize="xs"
+          fontSize={["sm", "xs"]}
           placeholder={placeholder}
           value={value}
           onChange={handleChange}

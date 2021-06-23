@@ -22,6 +22,9 @@
 
 > Pending
 
+- [ ] Added responsive font size
+  - [x] Done for PageHeader and Searchbox Input
+  - [ ] Find a way to do it globally
 - [ ] Add favorite words
 - [ ] Add mobile nav bar
 - [ ] Diary page

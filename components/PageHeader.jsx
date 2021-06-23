@@ -32,7 +32,7 @@ const PageHeader = (props) => {
         </div>
       </Box>
       <Box marginTop="16px">
-        <Text fontSize="xs">{description}</Text>
+        <Text fontSize={["sm", "xs"]}>{description}</Text>
       </Box>
     </div>
   );
