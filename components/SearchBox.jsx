@@ -84,6 +84,8 @@ const SearchBox = (props) => {
         </InputRightElement>
         <Input
           // fontSize={["md", "sm"]}
+          type="text"
+          title="search"
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
