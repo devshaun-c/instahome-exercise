@@ -23,7 +23,7 @@
 > Pending
 
 - [ ] Added responsive font size
-  - [x] Done for PageHeader and Searchbox Input
+  - [x] Done for PageHeader and Searchbox Input ("md" is needed to avoid zoom in for inputs)
   - [ ] Find a way to do it globally
 - [ ] Add favorite words
 - [ ] Add mobile nav bar

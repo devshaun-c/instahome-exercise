@@ -68,20 +68,22 @@ const Vocabulary = (props) => {
             <Box key={index}>
               <Box className={classes.wordWrap}>
                 <Text className={classes.kanjiText}>{word.slug}</Text>
-                <Text fontSize="md" className={classes.hiraganaText}>
+                <Text fontSize={["lg", "md"]} className={classes.hiraganaText}>
                   {word.japanese[0].reading}
                 </Text>
                 {/* <Text fontSize="sm">{word.jlpt[0]}</Text> */}
                 {word.senses.map((sense, index) => (
                   <Box key={index} mt="16px">
-                    <Text fontSize="xx-small">
+                    <Text fontSize={["xs", "x-small"]}>
                       {convertArrayToCommaString(sense.parts_of_speech)}
                     </Text>
                     <Box display="flex">
-                      <Text fontSize="sm" mr="8px" color="GrayText">{`${
-                        index + 1
-                      }.`}</Text>
-                      <Text fontSize="sm">
+                      <Text
+                        fontSize={["md", "sm"]}
+                        mr="8px"
+                        color="GrayText"
+                      >{`${index + 1}.`}</Text>
+                      <Text fontSize={["md", "sm"]}>
                         {convertArrayToSemiColonString(
                           sense.english_definitions
                         )}
