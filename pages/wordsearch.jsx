@@ -29,7 +29,7 @@ const useStyles = createUseStyles({
     borderTop: (props) => `1px solid ${props.colors.primaryLight}`,
     padding: "16px 0",
     "@media screen and (max-width: 800px)": {
-      padding: "8px 16px",
+      padding: "16px",
     },
   },
   kanjiText: {
@@ -43,7 +43,7 @@ const Vocabulary = (props) => {
   const classes = useStyles(theme);
   const [filtered, setFiltered] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMessage, setErorMessage] = useState("");
@@ -102,8 +102,20 @@ const Vocabulary = (props) => {
   useEffect(async () => {}, []);
 
   const handleSearch = (e) => {
-    const { value, name } = e.target;
-    setSearchValue(value);
+    e.preventDefault();
+    if (searchValue) {
+      setIsLoading(true);
+      setNoResults(false);
+
+      const timeoutId = setTimeout(() => {
+        getData(searchValue);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setNoResults(false);
+      setIsLoading(false);
+      setFiltered([]);
+    }
   };
 
   const getData = async (searchValue) => {
@@ -113,26 +125,27 @@ const Vocabulary = (props) => {
       const json = await response.json();
       if (json && json.data.length) {
         filteredData = json.data.filter((obj) => obj.jlpt.length > 0);
+      } else {
+        setNoResults(true);
       }
       setFiltered(filteredData);
       setIsLoading(false);
     } catch {
       (err) => {
         setIsLoading(false);
-        setErrorMessage("Too many results found");
+        console.log(err);
       };
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSearchValue(value);
+  };
+
   useEffect(() => {
     if (searchValue) {
-      setIsLoading(true);
       setNoResults(false);
-
-      const timeoutId = setTimeout(() => {
-        getData(searchValue);
-      }, 1000);
-      return () => clearTimeout(timeoutId);
     } else {
       setNoResults(false);
       setIsLoading(false);
@@ -150,22 +163,16 @@ const Vocabulary = (props) => {
         subtitle="[ 語彙 ] ごい"
         description="Simply search for Japanese words in our ever-growing library."
       />
-      <div>
-        <Box
-          display="flex"
-          flexDir="column"
-          width="100%"
-          alignItems="center"
-          justifyContent="center"
-        >
+      <form onSubmit={handleSearch}>
+        <Box display="flex" flexDir="column" alignItems="center">
           <SearchBox
-            handleChange={handleSearch}
+            handleChange={handleInputChange}
             options={[]}
             defaultSearch={searchParameters.ro}
             placeholder="Search a word"
             value={searchValue}
           />
-          {searchValue == "" && (
+          {!isLoading && filtered.length == 0 && !noResults && (
             <Box
               display="flex"
               flexDir="column"
@@ -194,23 +201,18 @@ const Vocabulary = (props) => {
           </>
         )}
         {noResults && (
-          <div>
+          <Box p="16px">
             <Text fontSize="xs" color="grey">
-              No search results found in our library
+              No search results found
             </Text>
             <Box display="flex">
               <Text fontSize="xs" color="grey">
-                Help us by submitting a new word request
+                Please check for mispellings and try again.
               </Text>
-              <TextButton
-                text="here"
-                color="primary"
-                onClick={() => setModalOpen(!modalOpen)}
-              />
             </Box>
-          </div>
+          </Box>
         )}
-      </div>
+      </form>
       <OverlayModal isOpen={modalOpen} handleToggle={setModalOpen} />
       <BackToTop show={filtered.length > 5} />
     </Container>
