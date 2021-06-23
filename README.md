@@ -24,6 +24,7 @@
 
 - [ ] Added responsive font size
   - [x] Done for PageHeader and Searchbox Input ("md" is needed to avoid zoom in for inputs)
+  - [x] use a form to enable a enter function to start search
   - [ ] Find a way to do it globally
 - [ ] Add favorite words
 - [ ] Add mobile nav bar

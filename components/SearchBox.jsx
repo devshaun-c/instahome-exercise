@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  IconButton,
   InputRightElement,
   Select,
 } from "@chakra-ui/react";
@@ -70,10 +71,17 @@ const SearchBox = (props) => {
         </FormControl>
       )}
       <InputGroup size={size || "md"} className={classes.input}>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="primaryMedium" />}
-        />
+        <InputRightElement
+        // pointerEvents="none"
+        >
+          <IconButton
+            type="submit"
+            variant="unstyled"
+            _focus={{ outline: "0" }}
+          >
+            <SearchIcon color="primaryMedium" />
+          </IconButton>
+        </InputRightElement>
         <Input
           // fontSize={["md", "sm"]}
           placeholder={placeholder}
