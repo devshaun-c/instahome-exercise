@@ -43,7 +43,7 @@ const Vocabulary = (props) => {
   const classes = useStyles(theme);
   const [filtered, setFiltered] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMessage, setErorMessage] = useState("");
@@ -161,13 +161,16 @@ const Vocabulary = (props) => {
         subtitle="[ 語彙 ] ごい"
         description="Simply search for Japanese words in our ever-growing library."
       />
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="primary"
+        size="md"
+        ml="16px"
+      />
 
-      <form action onSubmit={() => alert("HI")}>
-        <input type="text" id="name" title="Search" />
-        <button type="submit">submit</button>
-      </form>
-
-      <form action onSubmit={handleSearch}>
+      <form action="/wordsearch" onSubmit={handleSearch}>
         <Box display="flex" flexDir="column" alignItems="center">
           <SearchBox
             handleChange={handleInputChange}
