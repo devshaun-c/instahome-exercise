@@ -161,16 +161,8 @@ const Vocabulary = (props) => {
         subtitle="[ 語彙 ] ごい"
         description="Simply search for Japanese words in our ever-growing library."
       />
-      <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="primary"
-        size="md"
-        ml="16px"
-      />
 
-      <form action="/wordsearch" onSubmit={handleSearch}>
+      <form action={`/wordsearch/`} onSubmit={handleSearch}>
         <Box display="flex" flexDir="column" alignItems="center">
           <SearchBox
             handleChange={handleInputChange}
@@ -203,9 +195,7 @@ const Vocabulary = (props) => {
             ml="16px"
           />
         ) : (
-          <>
-            <WordText />
-          </>
+          <WordText />
         )}
         {noResults && (
           <Box p="16px">
