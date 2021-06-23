@@ -69,13 +69,13 @@ const SearchBox = (props) => {
           </Select>
         </FormControl>
       )}
-      <InputGroup size={size || "sm"} className={classes.input}>
+      <InputGroup size={size || "md"} className={classes.input}>
         <InputLeftElement
           pointerEvents="none"
           children={<SearchIcon color="primaryMedium" />}
         />
         <Input
-          fontSize={["sm", "xs"]}
+          // fontSize={["md", "sm"]}
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
