@@ -106,7 +106,7 @@ const Vocabulary = (props) => {
       setNoResults(false);
 
       const timeoutId = setTimeout(() => {
-        getData(searchValue);
+        getData(searchValue.toLowerCase());
       }, 1000);
       return () => clearTimeout(timeoutId);
     } else {
@@ -158,8 +158,8 @@ const Vocabulary = (props) => {
     >
       <PageHeader
         title="WORD SEARCH"
-        subtitle="[ 語彙 ] ごい"
-        description="Simply search for Japanese words in our ever-growing library."
+        subtitle="[単語検索] たんごけんさく"
+        description="Simply search for Japanese-English translations"
       />
 
       <form onSubmit={handleSearch}>
@@ -168,7 +168,7 @@ const Vocabulary = (props) => {
             handleChange={handleInputChange}
             options={[]}
             defaultSearch={searchParameters.ro}
-            placeholder="Search a word"
+            placeholder="English, Hiragana, Romaji, Kanji"
             value={searchValue}
           />
           {!isLoading && filtered.length == 0 && !noResults && (
