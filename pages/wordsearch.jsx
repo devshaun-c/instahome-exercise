@@ -163,6 +163,12 @@ const Vocabulary = (props) => {
         subtitle="[ 語彙 ] ごい"
         description="Simply search for Japanese words in our ever-growing library."
       />
+
+      <form onSubmit={() => alert("Clicked")}>
+        <input style={{ border: "1px solid black" }} />
+        <button type="submit">Enter</button>
+      </form>
+
       <form onSubmit={handleSearch}>
         <Box display="flex" flexDir="column" alignItems="center">
           <SearchBox
