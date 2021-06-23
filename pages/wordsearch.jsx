@@ -162,7 +162,7 @@ const Vocabulary = (props) => {
         description="Simply search for Japanese words in our ever-growing library."
       />
 
-      <form action={`/wordsearch/`} onSubmit={handleSearch}>
+      <form onSubmit={handleSearch}>
         <Box display="flex" flexDir="column" alignItems="center">
           <SearchBox
             handleChange={handleInputChange}
