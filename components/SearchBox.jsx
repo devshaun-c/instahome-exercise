@@ -1,13 +1,12 @@
 import React from "react";
 import {
-  Box,
   FormControl,
   Input,
   InputGroup,
-  InputLeftElement,
   IconButton,
   InputRightElement,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -42,6 +41,7 @@ const SearchBox = (props) => {
     defaultSearch,
     options = [],
     placeholder,
+    isLoading = false,
   } = props;
   return (
     <div className={classes.root}>
@@ -71,16 +71,23 @@ const SearchBox = (props) => {
         </FormControl>
       )}
       <InputGroup size={size || "md"} className={classes.input}>
-        <InputRightElement
-        // pointerEvents="none"
-        >
-          <IconButton
-            type="submit"
-            variant="unstyled"
-            _focus={{ outline: "0" }}
-          >
-            <SearchIcon color="primaryMedium" />
-          </IconButton>
+        <InputRightElement>
+          {isLoading ? (
+            <Spinner
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="primary"
+              size="sm"
+            />
+          ) : (
+            <IconButton
+              type="submit"
+              variant="unstyled"
+              _focus={{ outline: "0" }}
+            >
+              <SearchIcon color="primaryMedium" />
+            </IconButton>
+          )}
         </InputRightElement>
         <Input
           type="text"

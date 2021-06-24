@@ -278,7 +278,7 @@ const Sidebar = () => {
                   justifyContent="space-between"
                   padding="0 32px"
                 >
-                  <Link href="/wordsearch" className={classes.linkStyle}>
+                  <Link href="/search" className={classes.linkStyle}>
                     <Box display="flex" alignItems="center">
                       <BsSearch />
                       <Text fontSize="sm" ml="16px">

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import { Box, Text, Spinner, IconButton, Tooltip } from "@chakra-ui/react";
-import SearchBox from "../components/SearchBox";
-import { createUseStyles } from "react-jss";
-import BackToTop from "../components/BackToTop";
-import { useTheme } from "@emotion/react";
-import Container from "../components/Container";
-import { searchParameters } from "../constants/dropdowns";
-import typewriter from "../public/static/images/Typewriter-bro.svg";
-import TextButton from "../components/TextButton";
-import OverlayModal from "../components/OverlayModal";
+const JishoApi = require("unofficial-jisho-api");
 
-import PageHeader from "../components/PageHeader";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { Box, Text, Tooltip } from "@chakra-ui/react";
+import SearchBox from "../../components/SearchBox";
+import { createUseStyles } from "react-jss";
+import BackToTop from "../../components/BackToTop";
+import { useTheme } from "@emotion/react";
+import Container from "../../components/Container";
+import { searchParameters } from "../../constants/dropdowns";
+import OverlayModal from "../../components/OverlayModal";
+
+import PageHeader from "../../components/PageHeader";
 
 const useStyles = createUseStyles({
   imgWrapper: {
@@ -40,17 +41,16 @@ const useStyles = createUseStyles({
 
 const WordSearch = (props) => {
   const theme = useTheme();
+  const router = useRouter();
   const classes = useStyles(theme);
   const [filtered, setFiltered] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [errorMessage, setErorMessage] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const WordText = () => {
-    var filteredData = [...filtered];
-
+  const WordText = ({ words }) => {
     const convertArrayToSemiColonString = (array) => {
       var wordString = array.join("; ");
       return wordString;
@@ -63,7 +63,7 @@ const WordSearch = (props) => {
 
     return (
       <>
-        {filteredData.map((word, index) => {
+        {words.map((word, index) => {
           return (
             <Box key={index}>
               <Box className={classes.wordWrap}>
@@ -99,58 +99,35 @@ const WordSearch = (props) => {
     );
   };
 
-  const handleSearch = (e) => {
+  useEffect(async () => {
+    if (props.words) {
+      setFiltered(props.words);
+    }
+  }, [isRefreshing]);
+
+  useEffect(() => {
+    setSearchValue(router.query.word);
+    setIsRefreshing(false);
+  }, [props.words]);
+
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (searchValue) {
-      setIsLoading(true);
-      setNoResults(false);
-
-      const timeoutId = setTimeout(() => {
-        getData(searchValue.toLowerCase());
-      }, 1000);
-      return () => clearTimeout(timeoutId);
+      refreshData();
+      setIsRefreshing(true);
     } else {
-      setNoResults(false);
-      setIsLoading(false);
       setFiltered([]);
     }
   };
 
-  const getData = async (searchValue) => {
-    var filteredData = [];
-    try {
-      const response = await fetch(`/api/vocab/${searchValue}`);
-      const json = await response.json();
-      if (json && json.data.length) {
-        filteredData = json.data.filter((obj) => obj.jlpt.length > 0);
-      }
-      if (!filteredData.length) {
-        setNoResults(true);
-      }
-      setFiltered(filteredData);
-      setIsLoading(false);
-    } catch {
-      (err) => {
-        setIsLoading(false);
-        console.log(err);
-      };
-    }
+  const refreshData = () => {
+    router.replace(`/search/${searchValue}`);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSearchValue(value);
   };
-
-  useEffect(() => {
-    if (searchValue) {
-      setNoResults(false);
-    } else {
-      setNoResults(false);
-      setIsLoading(false);
-      setFiltered([]);
-    }
-  }, [searchValue]);
 
   return (
     <Container
@@ -171,33 +148,11 @@ const WordSearch = (props) => {
             defaultSearch={searchParameters.ro}
             placeholder="English, Hiragana, Romaji, Kanji"
             value={searchValue}
+            isLoading={isRefreshing}
           />
-          {!isLoading && filtered.length == 0 && !noResults && (
-            <Box
-              display="flex"
-              flexDir="column"
-              alignItems="center"
-              className={classes.imgWrapper}
-            >
-              <img src={typewriter} />
-              <Text fontSize="sm" textAlign="center">
-                Type something in the search box to find a word
-              </Text>
-            </Box>
-          )}
         </Box>
-        {isLoading ? (
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="primary"
-            size="md"
-            ml="16px"
-          />
-        ) : (
-          <WordText />
-        )}
+        <WordText words={filtered} />
+
         {noResults && (
           <Box p="16px">
             <Text fontSize="xs" color="grey">
@@ -215,6 +170,19 @@ const WordSearch = (props) => {
       <BackToTop show={filtered.length > 5} />
     </Container>
   );
+};
+
+export const getServerSideProps = async (context) => {
+  const jisho = new JishoApi();
+  const { word } = context.query;
+  const response = await jisho.searchForPhrase(word);
+
+  var filteredData = [];
+  if (response.data && response.data.length) {
+    filteredData = response.data.filter((obj) => obj.jlpt.length > 0);
+  }
+
+  return { props: { words: filteredData } };
 };
 
 export default WordSearch;
