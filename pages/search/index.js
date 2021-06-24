@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Box, Text, Spinner, IconButton, Tooltip } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import SearchBox from "../../components/SearchBox";
 import { createUseStyles } from "react-jss";
-import BackToTop from "../../components/BackToTop";
 import { useTheme } from "@emotion/react";
 import Container from "../../components/Container";
 import { searchParameters } from "../../constants/dropdowns";

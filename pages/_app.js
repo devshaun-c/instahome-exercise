@@ -13,6 +13,7 @@ const useStyles = createUseStyles({
     marginLeft: "300px",
     width: "100%",
     "@media screen and (max-width: 1000px)": {
+      marginTop: "60px",
       marginLeft: "0",
     },
   },

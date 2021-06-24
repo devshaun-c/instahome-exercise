@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import {
   Accordion,
   AccordionButton,
@@ -6,6 +7,8 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
+  IconButton,
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
@@ -13,24 +16,52 @@ import { createUseStyles } from "react-jss";
 import { VscWholeWord } from "react-icons/vsc";
 import {
   BsBook,
-  BsListUl,
-  BsPen,
-  BsPeople,
+  BsList,
   BsQuestionCircle,
   BsSearch,
-  BsSoundwave,
   BsUpload,
   BsVolumeUp,
 } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa";
 import BuyMeCoffee from "./BuyMeCoffee";
+import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({
-  container: {
-    width: "300px",
-    height: "100%",
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    zIndex: "1000",
+  },
+  mobileNav: {
+    display: "none",
+    padding: "16px",
     position: "fixed",
     left: "0",
+    height: "80px",
+    width: "100%",
+    color: "white",
+    backgroundColor: (props) => `${props.colors.primary}`,
+
+    "@media screen and (max-width: 1000px)": {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  },
+  mobileLinks: {
+    backgroundColor: "rgba(255,255,255,0.5)",
+    position: "fixed",
+    top: "80px",
+    left: "0",
+    width: "100%",
+    height: "100%",
+  },
+  container: {
+    position: "fixed",
+    left: "0",
+    width: "300px",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "#D22326",
     color: "white",
     "@media screen and (max-width: 1000px)": {
@@ -39,9 +70,21 @@ const useStyles = createUseStyles({
       padding: "0",
     },
   },
-  linkWrap: {
+  menuLinks: {
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    alignItems: "center",
+    "@media screen and (max-width: 1000px)": {
+      backgroundColor: (props) => `${props.colors.primary}`,
+      position: "fixed",
+      right: "0",
+      top: "80px",
+      width: "60%",
+      maxWidth: "400px",
+      height: "100%",
+      padding: "16px 0",
+    },
   },
   titleWrap: {
     display: "flex",
@@ -56,22 +99,26 @@ const useStyles = createUseStyles({
   linkStyle: {
     margin: "8px 0",
     width: "100%",
-    fontSize: "12px",
+    fontSize: "18px",
+    height: "20px",
   },
 });
 
 const Sidebar = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.container}>
-      <div className={classes.titleWrap}>
-        <FaBookOpen fontSize="42px" />
-        <Text fontSize="xs" mt="8px">
-          GOJISHO
-        </Text>
-      </div>
-      <div className={classes.linkWrap}>
-        <Accordion allowToggle>
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleNav = (url) => {
+    setIsOpen(false);
+    router.push(url);
+  };
+
+  const MenuLinks = () => {
+    return (
+      <div className={classes.menuLinks}>
+        <Accordion allowToggle w="100%">
           <AccordionItem border="none" padding="4px 0">
             <h2>
               <AccordionButton
@@ -79,20 +126,17 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/about" className={classes.linkStyle}>
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    as="button"
+                    onClick={() => handleNav("/about")}
+                    className={classes.linkStyle}
+                  >
                     <Box display="flex" alignItems="center">
                       <BsQuestionCircle />
-                      <Text fontSize="sm" ml="16px">
-                        About
-                      </Text>
+                      <Text ml="16px">About</Text>
                     </Box>
-                  </Link>
+                  </Box>
                 </Box>
               </AccordionButton>
             </h2>
@@ -105,21 +149,17 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box
-                  w="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  padding="0 32px"
-                >
-                  <Link href="/vocabulary" className={classes.linkStyle}>
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    as="button"
+                    onClick={() => handleNav("/vocabulary")}
+                    className={classes.linkStyle}
+                  >
                     <Box display="flex" alignItems="center">
                       <VscWholeWord />
-                      <Text fontSize="sm" ml="16px">
-                        Vocabulary
-                      </Text>
+                      <Text ml="16px">Vocabulary</Text>
                     </Box>
-                  </Link>
+                  </Box>
                 </Box>
               </AccordionButton>
             </h2>
@@ -133,17 +173,16 @@ const Sidebar = () => {
                 padding="4px 0"
               >
                 <Box
-                  width="100%"
+                  as="button"
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
                   padding="0 32px"
+                  className={classes.linkStyle}
                 >
                   <Box display="flex" alignItems="center">
                     <BsBook />
-                    <Text fontSize="sm" ml="16px">
-                      Study
-                    </Text>
+                    <Text ml="16px">Study</Text>
                   </Box>
                   <AccordionIcon />
                 </Box>
@@ -187,84 +226,6 @@ const Sidebar = () => {
             </AccordionPanel>
           </AccordionItem>
 
-          {/* <AccordionItem border="none" padding="4px 0">
-            <h2>
-              <AccordionButton
-                _expanded={{}}
-                _focus={{ outline: "0" }}
-                padding="4px 0"
-              >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/community" className={classes.linkStyle}>
-                    <Box display="flex" alignItems="center">
-                      <BsPeople />
-                      <Text fontSize="sm" ml="16px">
-                        Community
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-              </AccordionButton>
-            </h2>
-          </AccordionItem> */}
-
-          {/* <AccordionItem border="none" padding="4px 0">
-            <h2>
-              <AccordionButton
-                _expanded={{}}
-                _focus={{ outline: "0" }}
-                padding="4px 0"
-              >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/resources" className={classes.linkStyle}>
-                    <Box display="flex" alignItems="center">
-                      <BsListUl />
-                      <Text fontSize="sm" ml="16px">
-                        Resources
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-              </AccordionButton>
-            </h2>
-          </AccordionItem> */}
-
-          {/* <AccordionItem border="none" padding="4px 0">
-            <h2>
-              <AccordionButton
-                _expanded={{}}
-                _focus={{ outline: "0" }}
-                padding="4px 0"
-              >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/excelreader" className={classes.linkStyle}>
-                    <Box display="flex" alignItems="center">
-                      <BsPen />
-                      <Text fontSize="sm" ml="16px">
-                        Pen pals
-                      </Text>
-                    </Box>
-                  </Link>
-                </Box>
-              </AccordionButton>
-            </h2>
-          </AccordionItem> */}
-
           <AccordionItem border="none" padding="4px 0">
             <h2>
               <AccordionButton
@@ -272,20 +233,17 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/search" className={classes.linkStyle}>
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    as="button"
+                    onClick={() => handleNav("/search")}
+                    className={classes.linkStyle}
+                  >
                     <Box display="flex" alignItems="center">
                       <BsSearch />
-                      <Text fontSize="sm" ml="16px">
-                        Word Search
-                      </Text>
+                      <Text ml="16px">Word Search</Text>
                     </Box>
-                  </Link>
+                  </Box>
                 </Box>
               </AccordionButton>
             </h2>
@@ -298,46 +256,17 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/audiolibrary" className={classes.linkStyle}>
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    as="button"
+                    onClick={() => handleNav("/audiolibrary")}
+                    className={classes.linkStyle}
+                  >
                     <Box display="flex" alignItems="center">
                       <BsVolumeUp />
-                      <Text fontSize="sm" ml="16px">
-                        Audio Library
-                      </Text>
+                      <Text ml="16px">Audio Library</Text>
                     </Box>
-                  </Link>
-                </Box>
-              </AccordionButton>
-            </h2>
-          </AccordionItem>
-
-          <AccordionItem border="none" padding="4px 0">
-            <h2>
-              <AccordionButton
-                _expanded={{}}
-                _focus={{ outline: "0" }}
-                padding="4px 0"
-              >
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  padding="0 32px"
-                >
-                  <Link href="/excelreader" className={classes.linkStyle}>
-                    <Box display="flex" alignItems="center">
-                      <BsUpload />
-                      <Text fontSize="sm" ml="16px">
-                        Upload words
-                      </Text>
-                    </Box>
-                  </Link>
+                  </Box>
                 </Box>
               </AccordionButton>
             </h2>
@@ -345,6 +274,45 @@ const Sidebar = () => {
         </Accordion>
 
         <BuyMeCoffee />
+      </div>
+    );
+  };
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.mobileNav}>
+        <Box display="flex" alignItems="center">
+          <FaBookOpen fontSize="24px" />
+          <Text fontSize="sm" fontWeight="bold" ml="12px">
+            GOJISHO
+          </Text>
+        </Box>
+        <IconButton onClick={() => setIsOpen(!isOpen)}>
+          <BsList fontSize="32px" />
+        </IconButton>
+
+        {isOpen && (
+          <div className={classes.mobileLinks}>
+            <Box
+              w="40%"
+              h="100%"
+              cursor="pointer"
+              onClick={() => setIsOpen(false)}
+            />
+            <MenuLinks />
+          </div>
+        )}
+      </div>
+
+      <div className={classes.container}>
+        <div className={classes.titleWrap}>
+          <FaBookOpen fontSize="42px" />
+          <Text fontSize="xs" mt="8px">
+            GOJISHO
+          </Text>
+        </div>
+
+        <MenuLinks />
       </div>
     </div>
   );

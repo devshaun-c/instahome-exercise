@@ -50,6 +50,10 @@
   - [ ] Youtube learning page
   - [ ] Create template
 
+> 24/6/2021
+
+- [x] Mobile nav bar
+
 > 21/6/2021
 
 - [x] Word search UI and sorting

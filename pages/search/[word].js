@@ -11,7 +11,6 @@ import { useTheme } from "@emotion/react";
 import Container from "../../components/Container";
 import { searchParameters } from "../../constants/dropdowns";
 import OverlayModal from "../../components/OverlayModal";
-
 import PageHeader from "../../components/PageHeader";
 
 const useStyles = createUseStyles({
@@ -43,14 +42,13 @@ const WordSearch = (props) => {
   const theme = useTheme();
   const router = useRouter();
   const classes = useStyles(theme);
-  const [filtered, setFiltered] = useState([]);
+  const [words, setWords] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const WordText = ({ words }) => {
+  const WordText = () => {
     const convertArrayToSemiColonString = (array) => {
       var wordString = array.join("; ");
       return wordString;
@@ -101,27 +99,26 @@ const WordSearch = (props) => {
 
   useEffect(async () => {
     if (props.words) {
-      setFiltered(props.words);
+      setWords(props.words);
+      setNoResults(false);
+    } else {
+      setNoResults(true);
     }
-  }, [isRefreshing]);
+  }, [isLoading]);
 
   useEffect(() => {
     setSearchValue(router.query.word);
-    setIsRefreshing(false);
+    setIsLoading(false);
   }, [props.words]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchValue) {
-      refreshData();
-      setIsRefreshing(true);
+      router.replace(`/search/${searchValue}`);
+      setIsLoading(true);
     } else {
       setFiltered([]);
     }
-  };
-
-  const refreshData = () => {
-    router.replace(`/search/${searchValue}`);
   };
 
   const handleInputChange = (e) => {
@@ -148,10 +145,10 @@ const WordSearch = (props) => {
             defaultSearch={searchParameters.ro}
             placeholder="English, Hiragana, Romaji, Kanji"
             value={searchValue}
-            isLoading={isRefreshing}
+            isLoading={isLoading}
           />
         </Box>
-        <WordText words={filtered} />
+        <WordText />
 
         {noResults && (
           <Box p="16px">
@@ -167,7 +164,7 @@ const WordSearch = (props) => {
         )}
       </form>
       <OverlayModal isOpen={modalOpen} handleToggle={setModalOpen} />
-      <BackToTop show={filtered.length > 5} />
+      <BackToTop show={words.length > 5} />
     </Container>
   );
 };
@@ -175,7 +172,7 @@ const WordSearch = (props) => {
 export const getServerSideProps = async (context) => {
   const jisho = new JishoApi();
   const { word } = context.query;
-  const response = await jisho.searchForPhrase(word);
+  const response = await jisho.searchForPhrase(word.toLowerCase());
 
   var filteredData = [];
   if (response.data && response.data.length) {
