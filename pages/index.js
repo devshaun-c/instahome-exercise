@@ -22,7 +22,8 @@ import {
   BsQuestionCircle,
   BsSearch,
   BsUpload,
-  BsVolumeUp,BsPencil
+  BsVolumeUp,
+  BsPencil,
 } from "react-icons/bs";
 
 const useStyles = createUseStyles({
@@ -77,12 +78,9 @@ const Home = () => {
     return (
       <Button
         h="100px"
-        bg={
-          selected ? theme.colors.primaryLight
-            : "white"
-        }
+        bg={selected ? theme.colors.primaryLight : "white"}
         w="100%"
-        maxWidth= {["100%","80%"]}
+        maxWidth={["100%", "80%"]}
         color={selected ? "white" : "black"}
         whiteSpace="normal"
         onClick={onClick}
@@ -91,13 +89,29 @@ const Home = () => {
         border="2px solid black"
         borderRadius="10px"
         mb={4}
-        _hover={{backgroundColor: theme.colors.primaryLight, boxShadow:`5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`, color:'black'}}        
-        _selected={{backgroundColor: theme.colors.primaryLight, boxShadow:`5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`, color:'black'}}
+        _hover={{
+          backgroundColor: theme.colors.primaryLight,
+          boxShadow: `5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`,
+          color: "black",
+        }}
+        _selected={{
+          backgroundColor: theme.colors.primaryLight,
+          boxShadow: `5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`,
+          color: "black",
+        }}
       >
-      <Box display="flex" flexDir="column" w={["100%","70%"]} pl="32px" alignItems="start" >
-       <Text textAlign="left">{text} </Text>
-       <Text fontSize="16px" mt="8px" color="grey">{subtext}</Text>
-      </Box>
+        <Box
+          display="flex"
+          flexDir="column"
+          w={["100%", "70%"]}
+          pl="32px"
+          alignItems="start"
+        >
+          <Text textAlign="left">{text} </Text>
+          <Text fontSize="16px" mt="8px" color="grey" textAlign="left">
+            {subtext}
+          </Text>
+        </Box>
       </Button>
     );
   };
@@ -116,7 +130,7 @@ const Home = () => {
             fontSize="sm"
             textAlign="center"
             margin="auto"
-            mt="16px"
+            mt={["md", "sm"]}
             width="90%"
           >
             Making Japanese learning accessible, easier and fun for everyone
@@ -126,7 +140,7 @@ const Home = () => {
           </div>
         </div>
 
-          <CartoonButton
+        <CartoonButton
           text="Word search"
           subtext="Translations and Conjugations"
           onClick={() => router.push("/search")}
@@ -154,7 +168,6 @@ const Home = () => {
           icon={<BsPencil fontSize="42px" />}
         />
 
- 
         <div className={classes.topicWrapper}>
           <Text fontSize="lg">Support Us</Text>
           <Text fontSize={["md", "sm"]} className={classes.topicText}>

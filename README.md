@@ -52,6 +52,7 @@
 
 > 25/6/2021
 
+- [x] Updated landing page UI
 - [x] Replace index page with About page
 
 > 24/6/2021
