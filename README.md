@@ -50,6 +50,10 @@
   - [ ] Youtube learning page
   - [ ] Create template
 
+> 25/6/2021
+
+- [x] Replace index page with About page
+
 > 24/6/2021
 
 - [x] Mobile nav bar

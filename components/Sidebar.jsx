@@ -27,7 +27,7 @@ import BuyMeCoffee from "./BuyMeCoffee";
 import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({
-  root: {
+  navbar: {
     display: "flex",
     flexDirection: "column",
     zIndex: "1000",
@@ -128,8 +128,7 @@ const Sidebar = () => {
               >
                 <Box width="100%" padding="0 32px">
                   <Box
-                    as="button"
-                    onClick={() => handleNav("/about")}
+                    onClick={() => handleNav("/")}
                     className={classes.linkStyle}
                   >
                     <Box display="flex" alignItems="center">
@@ -151,7 +150,6 @@ const Sidebar = () => {
               >
                 <Box width="100%" padding="0 32px">
                   <Box
-                    as="button"
                     onClick={() => handleNav("/vocabulary")}
                     className={classes.linkStyle}
                   >
@@ -173,7 +171,6 @@ const Sidebar = () => {
                 padding="4px 0"
               >
                 <Box
-                  as="button"
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
@@ -235,7 +232,6 @@ const Sidebar = () => {
               >
                 <Box width="100%" padding="0 32px">
                   <Box
-                    as="button"
                     onClick={() => handleNav("/search")}
                     className={classes.linkStyle}
                   >
@@ -258,7 +254,6 @@ const Sidebar = () => {
               >
                 <Box width="100%" padding="0 32px">
                   <Box
-                    as="button"
                     onClick={() => handleNav("/audiolibrary")}
                     className={classes.linkStyle}
                   >
@@ -279,7 +274,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.navbar}>
       <div className={classes.mobileNav}>
         <Box display="flex" alignItems="center">
           <FaBookOpen fontSize="24px" />
