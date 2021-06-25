@@ -13,9 +13,17 @@ import Container from "../components/Container";
 import imgHero1 from "../public/static/images/online-friends.svg";
 import imgHero2 from "../public/static/images/diary-writing.svg";
 import Layout from "../components/Layout";
-import { BsSearch } from "react-icons/bs";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
+import { VscWholeWord } from "react-icons/vsc";
+import {
+  BsBook,
+  BsList,
+  BsQuestionCircle,
+  BsSearch,
+  BsUpload,
+  BsVolumeUp,BsPencil
+} from "react-icons/bs";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -23,7 +31,7 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     alignItems: "center",
     "@media screen and (max-width: 800px)": {
-      padding: "0 16px",
+      padding: "0 32px",
     },
   },
   header: {
@@ -33,7 +41,7 @@ const useStyles = createUseStyles({
     },
   },
   topicWrapper: {
-    marginBottom: "32px",
+    margin: "32px 0",
     width: "100%",
     maxWidth: "80%",
     "@media screen and (max-width: 800px)": {
@@ -63,6 +71,37 @@ const Home = () => {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
+
+  const CartoonButton = (props) => {
+    const { selected, text, subtext, icon, onClick } = props;
+    return (
+      <Button
+        h="100px"
+        bg={
+          selected ? theme.colors.primaryLight
+            : "white"
+        }
+        w="100%"
+        maxWidth= {["100%","80%"]}
+        color={selected ? "white" : "black"}
+        whiteSpace="normal"
+        onClick={onClick}
+        leftIcon={icon}
+        boxShadow={`5px 5px ${theme.colors.primaryLight}, 5px 5px 0px 2px black`}
+        border="2px solid black"
+        borderRadius="10px"
+        mb={4}
+        _hover={{backgroundColor: theme.colors.primaryLight, boxShadow:`5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`, color:'black'}}        
+        _selected={{backgroundColor: theme.colors.primaryLight, boxShadow:`5px 5px ${theme.colors.primaryMedium}, 5px 5px 0px 2px black`, color:'black'}}
+      >
+      <Box display="flex" flexDir="column" w={["100%","70%"]} pl="32px" alignItems="start" >
+       <Text textAlign="left">{text} </Text>
+       <Text fontSize="16px" mt="8px" color="grey">{subtext}</Text>
+      </Box>
+      </Button>
+    );
+  };
+
   return (
     <Container
       title="About - GOJISHO | Resources and community for learning Japanese"
@@ -71,7 +110,7 @@ const Home = () => {
       <div className={classes.contentWrapper}>
         <div className={classes.header}>
           <Text fontSize="x-large" fontWeight="bold" textAlign="center">
-            Learn, Listen, Speak & Practice <u>Japanese</u>
+            Resources to help you in learning <u>Japanese</u>
           </Text>
           <Text
             fontSize="sm"
@@ -87,68 +126,35 @@ const Home = () => {
           </div>
         </div>
 
-        <div className={classes.topicWrapper}>
-          <Text fontSize="lg">What is our goal</Text>
-          <Text fontSize={["md", "sm"]} className={classes.topicText}>
-            To create a community of Japanese learners from everywhere.
-          </Text>
-        </div>
+          <CartoonButton
+          text="Word search"
+          subtext="Translations and Conjugations"
+          onClick={() => router.push("/search")}
+          icon={<VscWholeWord fontSize="42px" />}
+        />
 
-        <div className={classes.topicWrapper}>
-          <Text fontSize="lg">Tools and Features</Text>
-          <Text fontSize={["md", "sm"]} className={classes.topicText}>
-            We strive to introduce more Japanese learning tools and resources to
-            help with your studies
-          </Text>
-        </div>
+        <CartoonButton
+          text="Textbook Audio clips"
+          subtext="Practice your listening skills"
+          onClick={() => router.push("/audiolibrary")}
+          icon={<BsVolumeUp fontSize="42px" />}
+        />
 
-        <SimpleGrid columns={[2, 2, 2, 4]} spacing="20px" m="16px 0 32px 0">
-          <Box mb={2}>
-            <Button
-              bg={theme.colors.primaryMedium}
-              w="200px"
-              h="200px"
-              whiteSpace="normal"
-              onClick={() => router.push("/search")}
-            >
-              Translations and Conjugations
-            </Button>
-          </Box>
-          <Box mb={2}>
-            <Button
-              bg={theme.colors.primary}
-              w="200px"
-              h="200px"
-              whiteSpace="normal"
-              onClick={() => router.push("/audiolibrary")}
-            >
-              Japanese Textbook Audio clips
-            </Button>
-          </Box>
-          <Box mb={2}>
-            <Button
-              bg={theme.colors.primaryMedium}
-              w="200px"
-              h="200px"
-              whiteSpace="normal"
-              onClick={() => router.push("/stories")}
-            >
-              Japanese Stories for all levels
-            </Button>
-          </Box>
-          <Box mb={2}>
-            <Button
-              bg={theme.colors.primary}
-              w="200px"
-              h="200px"
-              whiteSpace="normal"
-              onClick={() => router.push("/diary")}
-            >
-              Start a daily diary
-            </Button>
-          </Box>
-        </SimpleGrid>
+        <CartoonButton
+          text="Stories for all levels"
+          subtext="Practice your listening skills"
+          onClick={() => router.push("/stories")}
+          icon={<BsBook fontSize="42px" />}
+        />
 
+        <CartoonButton
+          text="Start a learning diary"
+          subtext="Practice writing new sentences"
+          onClick={() => router.push("/diary")}
+          icon={<BsPencil fontSize="42px" />}
+        />
+
+ 
         <div className={classes.topicWrapper}>
           <Text fontSize="lg">Support Us</Text>
           <Text fontSize={["md", "sm"]} className={classes.topicText}>
