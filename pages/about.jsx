@@ -52,7 +52,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const Home = () => {
+const About = () => {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
@@ -193,4 +193,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default About;

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 const JishoApi = require("unofficial-jisho-api");
-
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { Box, Text, Tooltip } from "@chakra-ui/react";
 import SearchBox from "../../components/SearchBox";
@@ -129,12 +127,12 @@ const WordSearch = (props) => {
   return (
     <Container
       title=" Word Search - GOJISHO | Japanese word search for translations and verb conjugation"
-      description="meet japanese speaking friends and learn and improve your japanese vocabulary together"
+      description="Search for Japanese word meanings, conjugations and example sentence"
     >
       <PageHeader
         title="WORD SEARCH"
         subtitle="[単語検索] たんごけんさく"
-        description="Simply search for Japanese-English translations"
+        description="Search for Japanese-English translations"
       />
 
       <form onSubmit={handleSearch}>
@@ -173,10 +171,9 @@ export const getServerSideProps = async (context) => {
   const jisho = new JishoApi();
   const { word } = context.query;
   const response = await jisho.searchForPhrase(word.toLowerCase());
-
   var filteredData = [];
   if (response.data && response.data.length) {
-    filteredData = response.data.filter((obj) => obj.jlpt.length > 0);
+    filteredData = response.data.filter((obj) => obj.attribution.jmdict);
   }
 
   return { props: { words: filteredData } };

@@ -37,6 +37,7 @@ const Container = (props) => {
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
+        <link rel="shortcut icon" href="/static/images/sushi.svg" />
         <meta content={meta.description} name="description" />
         <meta property="og:url" content={`${meta.webUrl}${router.asPath}`} />
         <meta property="og:type" content={meta.type} />

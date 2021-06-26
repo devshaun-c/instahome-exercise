@@ -155,7 +155,7 @@ const Sidebar = () => {
                   >
                     <Box display="flex" alignItems="center">
                       <VscWholeWord />
-                      <Text ml="16px">Vocabulary</Text>
+                      <Text ml="16px">Word Book</Text>
                     </Box>
                   </Box>
                 </Box>

@@ -27,7 +27,7 @@
   - [x] use a form to enable a enter function to start search
   - [ ] Find a way to do it globally
 - [ ] Add favorite words
-- [ ] Add mobile nav bar
+- [ ] Audio library
 - [ ] Diary page
   - [ ] Allow users to write a simple daily diary
   - [ ] If set to public, users can let others check their writings
@@ -49,6 +49,11 @@
 - [ ] By Stories
   - [ ] Youtube learning page
   - [ ] Create template
+
+> 26/6/2021
+
+- [x] Fixed word search filter to include words without jlpt tags
+- [x] Added Favicon
 
 > 25/6/2021
 

@@ -48,7 +48,7 @@ const SearchBox = (props) => {
       {options.length > 0 && (
         <FormControl className={classes.selectStyle}>
           <Select
-            size={size || "sm"}
+            size={size || "md"}
             variant="filled"
             color="primary"
             bg="primaryLight"
