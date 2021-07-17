@@ -7,14 +7,9 @@ const useStyles = createUseStyles({
   container: {},
   main: {
     width: "90%",
+    margin: "auto",
     maxWidth: "1200px",
-    margin: "32px auto",
-    padding: "32px 16px",
-    "@media screen and (max-width: 800px)": {
-      margin: "32px 0",
-      width: "100%",
-      padding: "32px 0",
-    },
+    "@media screen and (max-width: 800px)": {},
   },
 });
 
@@ -24,9 +19,9 @@ const Container = (props) => {
   const classes = useStyles();
 
   const meta = {
-    title: "Gojisho - All things Japanese",
-    webUrl: "https://gojisho.com",
-    description: `Japanese learning resources`,
+    title: "Website - Site short description",
+    webUrl: "https://sitename.com",
+    description: `site description`,
     image: "",
     type: "website",
     ...customMeta,

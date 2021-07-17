@@ -1,5 +1,5 @@
 {
-  "name": "gojisho",
+  "name": "nextjs-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -21,13 +21,10 @@
     "next-images": "^1.7.0",
     "next-seo": "^4.24.0",
     "react": "17.0.2",
-    "react-audio-player": "^0.17.0",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-jss": "^10.6.0",
-    "swr": "^0.5.6",
-    "unofficial-jisho-api": "^2.1.0",
-    "xlsx": "^0.16.9"
+    "swr": "^0.5.6"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0",

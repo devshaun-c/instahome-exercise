@@ -1,5 +1,5 @@
-export const searchParameters = {
-  en: "englishTranslate",
-  ro: "romaji",
-  hi: "hiragana",
+export const languageDropdown = {
+  en: "english",
+  cn: "chinese",
+  my: "malay",
 };

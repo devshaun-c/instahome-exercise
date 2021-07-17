@@ -14,31 +14,86 @@ import {
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { VscWholeWord } from "react-icons/vsc";
-import { BsBook, BsQuestionCircle, BsSearch, BsVolumeUp } from "react-icons/bs";
+import {
+  BsBook,
+  BsList,
+  BsQuestionCircle,
+  BsSearch,
+  BsVolumeUp,
+} from "react-icons/bs";
+import { FaBookOpen } from "react-icons/fa";
 import BuyMeCoffee from "./BuyMeCoffee";
 import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({
-  sidebar: {
+  navbar: {
     display: "flex",
     flexDirection: "column",
     zIndex: "1000",
-    paddingRight: "64px",
+  },
+  mobileNav: {
+    display: "none",
+    padding: "16px",
+    position: "fixed",
+    left: "0",
+    height: "80px",
+    width: "100%",
+    color: "white",
+    backgroundColor: (props) => `${props.colors.primary}`,
+
+    "@media screen and (max-width: 1000px)": {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  },
+  mobileLinks: {
+    backgroundColor: "rgba(255,255,255,0.5)",
+    position: "fixed",
+    top: "80px",
+    left: "0",
+    width: "100%",
+    height: "100%",
   },
   container: {
-    width: "250px",
+    position: "fixed",
+    left: "0",
+    width: "300px",
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "white",
-    color: "black",
-    "@media screen and (max-width: 1000px)": {},
+    backgroundColor: "#D22326",
+    color: "white",
+    "@media screen and (max-width: 1000px)": {
+      display: "none",
+      width: "0",
+      padding: "0",
+    },
   },
   menuLinks: {
     display: "flex",
     flexDirection: "column",
     height: "100%",
     alignItems: "center",
+    "@media screen and (max-width: 1000px)": {
+      backgroundColor: (props) => `${props.colors.primary}`,
+      position: "fixed",
+      right: "0",
+      top: "80px",
+      width: "60%",
+      maxWidth: "400px",
+      height: "100%",
+      padding: "16px 0",
+    },
+  },
+  titleWrap: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "20%",
+    textAlign: "center",
+    fontWeight: "bold",
+    marginBottom: "32px",
   },
   linkStyle: {
     margin: "8px 0",
@@ -48,7 +103,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const Sidebar = () => {
+const VerticalNavBar = () => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const router = useRouter();
@@ -70,7 +125,7 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box width="100%">
+                <Box width="100%" padding="0 32px">
                   <Box
                     onClick={() => handleNav("/")}
                     className={classes.linkStyle}
@@ -92,7 +147,7 @@ const Sidebar = () => {
                 _focus={{ outline: "0" }}
                 padding="4px 0"
               >
-                <Box width="100%">
+                <Box width="100%" padding="0 32px">
                   <Box
                     onClick={() => handleNav("/vocabulary")}
                     className={classes.linkStyle}
@@ -118,6 +173,7 @@ const Sidebar = () => {
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
+                  padding="0 32px"
                   className={classes.linkStyle}
                 >
                   <Box display="flex" alignItems="center">
@@ -128,7 +184,7 @@ const Sidebar = () => {
                 </Box>
               </AccordionButton>
             </h2>
-            <AccordionPanel padding="0 0 0 32px">
+            <AccordionPanel padding="0 0 0 72px">
               <Box display="flex" flexDir="column">
                 <Box margin="4px 0">
                   <Link href="/study/topic">
@@ -165,21 +221,95 @@ const Sidebar = () => {
               </Box>
             </AccordionPanel>
           </AccordionItem>
+
+          <AccordionItem border="none" padding="4px 0">
+            <h2>
+              <AccordionButton
+                _expanded={{}}
+                _focus={{ outline: "0" }}
+                padding="4px 0"
+              >
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    onClick={() => handleNav("/search")}
+                    className={classes.linkStyle}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <BsSearch />
+                      <Text ml="16px">Word Search</Text>
+                    </Box>
+                  </Box>
+                </Box>
+              </AccordionButton>
+            </h2>
+          </AccordionItem>
+
+          <AccordionItem border="none" padding="4px 0">
+            <h2>
+              <AccordionButton
+                _expanded={{}}
+                _focus={{ outline: "0" }}
+                padding="4px 0"
+              >
+                <Box width="100%" padding="0 32px">
+                  <Box
+                    onClick={() => handleNav("/audiolibrary")}
+                    className={classes.linkStyle}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <BsVolumeUp />
+                      <Text ml="16px">Audio Library</Text>
+                    </Box>
+                  </Box>
+                </Box>
+              </AccordionButton>
+            </h2>
+          </AccordionItem>
         </Accordion>
+
+        <BuyMeCoffee />
       </div>
     );
   };
 
   return (
-    <div className={classes.sidebar}>
+    <div className={classes.navbar}>
+      <div className={classes.mobileNav}>
+        <Box display="flex" alignItems="center">
+          <FaBookOpen fontSize="24px" />
+          <Text fontSize="sm" fontWeight="bold" ml="12px">
+            GOJISHO
+          </Text>
+        </Box>
+        <IconButton onClick={() => setIsOpen(!isOpen)}>
+          <BsList fontSize="32px" />
+        </IconButton>
+
+        {isOpen && (
+          <div className={classes.mobileLinks}>
+            <Box
+              w="40%"
+              h="100%"
+              cursor="pointer"
+              onClick={() => setIsOpen(false)}
+            />
+            <MenuLinks />
+          </div>
+        )}
+      </div>
+
       <div className={classes.container}>
-        <Text fontWeight="bold" fontSize={["sm", "md"]}>
-          Sidebar header
-        </Text>
+        <div className={classes.titleWrap}>
+          <FaBookOpen fontSize="42px" />
+          <Text fontSize="xs" mt="8px">
+            GOJISHO
+          </Text>
+        </div>
+
         <MenuLinks />
       </div>
     </div>
   );
 };
 
-export default Sidebar;
+export default VerticalNavBar;

@@ -4,13 +4,16 @@ import Sidebar from "../components/Sidebar";
 import { createUseStyles } from "react-jss";
 import SEO from "../next-seo.config";
 import { DefaultSeo } from "next-seo";
+import Navbar from "../components/Navbar";
+import AlwaysOnTop from "../components/AlwaysOnTop";
 
 const useStyles = createUseStyles({
   main: {
     display: "flex",
+    flexDirection: "column",
   },
   content: {
-    marginLeft: "300px",
+    marginTop: "100px",
     width: "100%",
     "@media screen and (max-width: 1000px)": {
       marginTop: "60px",
@@ -66,10 +69,11 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <DefaultSeo {...SEO} />
       <div className={classes.main}>
-        <Sidebar />
+        <Navbar />
         <div className={classes.content}>
           <Component {...pageProps} />
         </div>
+        <AlwaysOnTop text="Hello" />
       </div>
       <CSSReset />
     </ChakraProvider>

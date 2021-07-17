@@ -15,15 +15,11 @@ const useStyles = createUseStyles({
   },
 });
 
-const BuyMeCoffee = () => {
+const BuyMeCoffee = (url) => {
   const classes = useStyles();
   return (
     <Box className={classes.contentWrapper}>
-      <a
-        target="_blank"
-        href="https://www.buymeacoffee.com/gojisho"
-        rel="noopener noreferrer"
-      >
+      <a target="_blank" href={url} rel="noopener noreferrer">
         <img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" />
       </a>
     </Box>
