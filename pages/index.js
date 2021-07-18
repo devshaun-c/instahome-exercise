@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { useRouter } from "next/router";
-import Container from "../components/Container";
+import Container from "../components/Page/Container";
 
 const useStyles = createUseStyles({
   contentWrapper: {

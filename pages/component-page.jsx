@@ -13,9 +13,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Container from "../components/Container";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
+import Container from "../components/Page/Container";
+import Section from "../components/Page/Section";
 import Sidebar from "../components/Navigations/Sidebar";
 import AvatarCard from "../components/Cards/AvatarCard";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
@@ -23,13 +24,13 @@ import img from "../public/static/images/newsletter-bg.jpg";
 import HorizontalImageCard from "../components/Cards/HorizontalImageCard";
 import StandardButton from "../components/Buttons/StandardButton";
 import ResponsiveCarousel from "../components/Grouping/ResponsiveCarousel";
-import Section from "../components/Grouping/Section";
-import SearchBox from "../components/SearchBox";
+import SearchBox from "../components/Controls/SearchBox";
 import StandardInput from "../components/Controls/StandardInput";
 import { CheckIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import EditableInputBox from "../components/Controls/EditableInputBox";
-import BackToTop from "../components/Navigations/BackToTop";
+import BackToTop from "../components/Page/BackToTop";
 import SlickCarousel from "../components/Grouping/SlickCarousel";
+import { BADGES } from "../constants/badges";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -54,15 +55,15 @@ const DemoPage = () => {
             <AvatarCard
               title="Tanaka Satomi"
               subtitle="UI/UX designer"
-              badgeObj={{ color: "green", text: "new" }}
+              badgeType={BADGES.popular}
               avatar={img}
             />
             <HorizontalImageCard
               width="800px"
               title="Tanaka Satomi"
               subtitle="UI/UX designer"
-              badgeObj={{ color: "green", text: "new" }}
-              image={img}
+              badgeType={BADGES.new}
+              // image={img}
             >
               <Text fontSize="xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -79,6 +80,7 @@ const DemoPage = () => {
               width="300px"
               image={img}
               action={() => alert("CLICKED")}
+              badgeType={BADGES.popular}
             >
               <Text fontSize="xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

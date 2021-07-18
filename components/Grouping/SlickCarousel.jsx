@@ -27,6 +27,7 @@ const useStyles = createUseStyles({
     "& .slick-prev, .slick-next": {
       zIndex: "10",
     },
+
     "& .slick-prev:before, .slick-next:before": {
       width: "40px",
       height: "40px",
@@ -36,25 +37,31 @@ const useStyles = createUseStyles({
       opacity: "1",
       content: ">",
     },
+    "& .slick-disabled.slick-prev:before": {
+      background: "transparent !important",
+      color: "transparent !important",
+    },
+    "& .slick-disabled.slick-next:before": {
+      background: "transparent !important",
+      color: "transparent !important",
+    },
   },
 });
 
 const SlickCarousel = () => {
   const classes = useStyles();
   var settings = {
-    // className: "slider variable-width",
     dots: true,
-    infinite: true,
+    infinite: false,
     arrows: true,
     dots: true,
     speed: 500,
-    // slidesToShow: 4,
     slidesToScroll: 1,
     variableWidth: true,
-    // autoplay: false,
-    // autoplaySpeed: 2000,
+    // autoplay: true,
+    // autoplaySpeed: 4000,
     // pauseOnHover: true,
-    // swipeToSlide: true,
+    swipeToSlide: true,
     // cssEase: "linear",
     // responsive: [
     //   {
@@ -114,7 +121,7 @@ const SlickCarousel = () => {
         <VerticalImageCard
           title="Tanaka Satomi "
           subtitle="UI/UX designer"
-          badgeObj={{ color: "purple", text: "new" }}
+          badgeType="new"
           width="300px"
           action={() => alert("CLICKED")}
         >
@@ -128,7 +135,7 @@ const SlickCarousel = () => {
         <VerticalImageCard
           title="Tanaka Satomi "
           subtitle="UI/UX designer"
-          badgeObj={{ color: "purple", text: "new" }}
+          badgeType="popular"
           width="300px"
           action={() => alert("CLICKED")}
         >
@@ -142,7 +149,7 @@ const SlickCarousel = () => {
         <VerticalImageCard
           title="Tanaka Satomi "
           subtitle="UI/UX designer"
-          badgeObj={{ color: "purple", text: "new" }}
+          badgeType="featured"
           width="300px"
           action={() => alert("CLICKED")}
         >

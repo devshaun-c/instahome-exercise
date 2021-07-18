@@ -3,6 +3,8 @@ import { Avatar, Badge, Box, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import Image from "next/image";
+import placeholderImg from "../../public/static/images/placeholder.png";
+import { BADGES } from "../../constants/badges";
 
 const useStyles = createUseStyles({
   card: {
@@ -22,12 +24,30 @@ const HorizontalImageCard = ({
   image,
   bg,
   alt,
-  badgeObj,
+  badgeType,
   children,
   action,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
+
+  var badgeObj = null;
+  switch (badgeType) {
+    case BADGES.new:
+      badgeObj = { color: "green", text: "new" };
+      break;
+
+    case BADGES.popular:
+      badgeObj = { color: "purple", text: "Popular" };
+      break;
+
+    case BADGES.featured:
+      badgeObj = { color: "red", text: "Featured" };
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <Box
@@ -39,7 +59,7 @@ const HorizontalImageCard = ({
     >
       <Box w="100%" borderRadius="8px" overflow="hidden">
         <Image
-          src={image}
+          src={image || placeholderImg}
           alt={alt}
           width="100%"
           height="100%"
@@ -52,7 +72,7 @@ const HorizontalImageCard = ({
         <Text fontWeight="bold">
           {title}
           {badgeObj && (
-            <Badge ml="4" colorScheme={badgeObj.color}>
+            <Badge ml="4" colorScheme={badgeObj.color} fontSize="0.6em">
               {badgeObj.text}
             </Badge>
           )}

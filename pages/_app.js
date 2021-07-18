@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 import SEO from "../next-seo.config";
 import { DefaultSeo } from "next-seo";
 import Navbar from "../components/Navigations/Navbar";
-import AlwaysOnTop from "../components/AlwaysOnTop";
+import AlwaysOnTop from "../components/Page/AlwaysOnTop";
 
 const useStyles = createUseStyles({
   main: {

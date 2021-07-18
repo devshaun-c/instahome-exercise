@@ -4,7 +4,7 @@ import { Menu, MenuButton } from "@chakra-ui/react";
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import Container from "../../components/Container";
+import Container from "../../components/Page/Container";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({

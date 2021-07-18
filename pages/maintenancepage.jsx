@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
-import Link from "next/link";
 import { createUseStyles } from "react-jss";
-import Container from "../components/Container";
+import Container from "../components/Page/Container";
 
 const useStyles = createUseStyles({
   contentWrapper: {

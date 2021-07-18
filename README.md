@@ -30,7 +30,12 @@
 - [x] Section
 - [x] Container
 - [x] Inputs
-- [ ] Select
-- [ ] Radio buttons
+- [ ] Icon card
+- [ ] Popup Modal
+- [ ] Plans
+- [ ] Social media button group
+- [ ] SectionText (Header, subHeader, children text, CTA)
+- [ ] Accordion
+- [ ] Footer
 
 > Pending

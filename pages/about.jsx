@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Container from "../components/Container";
+import Container from "../components/Page/Container";
 import imgHero2 from "../public/static/images/404-image.svg";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
-import Section from "../components/Grouping/Section";
+import Section from "../components/Page/Section";
 
 const useStyles = createUseStyles({
   contentWrapper: {

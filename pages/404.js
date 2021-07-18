@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/layout";
 import Link from "next/link";
-import Container from "../components/Container";
+import Container from "../components/Page/Container";
 import imgHero from "../public/static/images/404-image.svg";
 
 export default function FourOhFour() {
