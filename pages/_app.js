@@ -1,10 +1,9 @@
 import "../styles/globals.css";
 import { ChakraProvider, CSSReset, extendTheme } from "@chakra-ui/react";
-import Sidebar from "../components/Sidebar";
 import { createUseStyles } from "react-jss";
 import SEO from "../next-seo.config";
 import { DefaultSeo } from "next-seo";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navigations/Navbar";
 import AlwaysOnTop from "../components/AlwaysOnTop";
 
 const useStyles = createUseStyles({
@@ -13,12 +12,9 @@ const useStyles = createUseStyles({
     flexDirection: "column",
   },
   content: {
-    marginTop: "100px",
+    marginTop: "64px",
     width: "100%",
-    "@media screen and (max-width: 1000px)": {
-      marginTop: "60px",
-      marginLeft: "0",
-    },
+    "@media screen and (max-width: 1000px)": {},
   },
 });
 
@@ -39,25 +35,29 @@ const theme = extendTheme({
     Button: {
       baseStyle: {
         // ...define your base styles
-        background: "primary",
-        color: "white",
+        // background: "primary",
+        // color: "white",
       },
       variants: {
         // Make a variant, we'll call it `base` here and leave it empty
-        base: {},
+        base: {
+          // background: "primary",
+          // color: "white",
+        },
         secondary: {
-          //...define other variants
+          // background: "secondary",
+          // color: "white",
         },
         outline: {
-          background: "white",
-          borderColor: "primary",
-          color: "primary",
-          focus: "none",
+          // background: "white",
+          // borderColor: "primary",
+          // color: "primary",
+          // focus: "none",
         },
       },
       defaultProps: {
         // Then here we set the base variant as the default
-        variant: "base",
+        // variant: "base",
       },
     },
   },
@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }) {
         <div className={classes.content}>
           <Component {...pageProps} />
         </div>
-        <AlwaysOnTop text="Hello" />
+        <AlwaysOnTop text="Hello" left="5%" />
       </div>
       <CSSReset />
     </ChakraProvider>

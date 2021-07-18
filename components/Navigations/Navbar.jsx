@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-} from "@chakra-ui/react";
+import { Menu, MenuButton } from "@chakra-ui/react";
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import Container from "../components/Container";
-import { BsList } from "react-icons/bs";
+import Container from "../../components/Container";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
   navbar: {
@@ -67,36 +58,30 @@ const Navbar = () => {
           </div>
           <div className={classes.menuLinks}>
             <Menu>
-              {({ isOpen }) => (
-                <>
-                  <MenuButton
-                    isActive={isOpen}
-                    mr="24px"
-                    fontSize={["md", "sm"]}
-                    onClick={() => handleNav("/about")}
-                  >
-                    About
-                  </MenuButton>
-                  <MenuButton
-                    isActive={isOpen}
-                    mr="24px"
-                    fontSize={["md", "sm"]}
-                    onClick={() => handleNav("/first-page")}
-                  >
-                    Demo page
-                  </MenuButton>
-                  {/* <MenuList>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/about")}
+              >
+                About
+              </MenuButton>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/component-page")}
+              >
+                Components
+              </MenuButton>
+              {/* <MenuList>
                     <MenuItem>Download</MenuItem>
                     <MenuItem onClick={() => alert("Kagebunshin")}>
                       Create a Copy
                     </MenuItem>
                   </MenuList> */}
-                </>
-              )}
             </Menu>
           </div>
           <div className={classes.mobileLinks}>
-            <BsList />
+            <HamburgerIcon />
           </div>
         </div>
       </Container>

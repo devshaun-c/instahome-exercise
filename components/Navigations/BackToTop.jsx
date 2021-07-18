@@ -1,9 +1,11 @@
 import { Button } from "@chakra-ui/button";
 import { ChevronUpIcon } from "@chakra-ui/icons";
+import { useTheme } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-const BackToTop = ({ show }) => {
+const BackToTop = ({ show, right, left }) => {
   const [visible, setVisible] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     setVisible(show);
@@ -20,12 +22,14 @@ const BackToTop = ({ show }) => {
           onClick={toTop}
           position="fixed"
           bottom="8%"
-          right="5%"
+          right={right}
+          left={left}
           borderRadius="8px"
           width="40px"
           height="40px"
           outline="none"
           color="white"
+          bg={theme.colors.primary}
           _hover={{ bg: "" }}
           _focus={{ outline: "0" }}
         >

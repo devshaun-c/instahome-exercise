@@ -7,6 +7,7 @@ import {
   InputRightElement,
   Select,
   Spinner,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -54,6 +55,7 @@ const SearchBox = (props) => {
             bg="primaryLight"
             borderColor="primaryMedium"
             border="1px"
+            borderRight="none"
             cursor="pointer"
             _focus={{ outline: "0", bg: "primaryLight", color: "black" }}
             _hover={{ outline: "0", bg: "primaryLight" }}
@@ -71,7 +73,7 @@ const SearchBox = (props) => {
         </FormControl>
       )}
       <InputGroup size={size || "md"} className={classes.input}>
-        <InputRightElement>
+        <InputLeftElement>
           {isLoading ? (
             <Spinner
               speed="0.65s"
@@ -88,11 +90,12 @@ const SearchBox = (props) => {
               <SearchIcon color="primaryMedium" />
             </IconButton>
           )}
-        </InputRightElement>
+        </InputLeftElement>
         <Input
           type="text"
           placeholder={placeholder}
           value={value}
+          disabled={isLoading}
           onChange={handleChange}
           borderColor="primaryMedium"
           color="black"

@@ -22,7 +22,7 @@ import {
   BsVolumeUp,
 } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa";
-import BuyMeCoffee from "./BuyMeCoffee";
+import BuyMeCoffee from "../BuyMeCoffee";
 import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({

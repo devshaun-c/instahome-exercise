@@ -6,6 +6,8 @@
 - express
 - chakra UI
 - react-icons
+- react-responsive-carousel
+- react-slick (react-slick and slick-carousel styles)
 - next-images
 - next-SEO
 - Google Analytics at \_document.js
@@ -18,5 +20,17 @@
 - add \_document.js into Pages
 
 ## TO DO
+
+- [x] Navbar
+- [x] Cards
+- [x] AlwaysOnTop
+- [x] Buttons
+- [x] Image Carousel
+- [x] Card Carousel
+- [x] Section
+- [x] Container
+- [x] Inputs
+- [ ] Select
+- [ ] Radio buttons
 
 > Pending

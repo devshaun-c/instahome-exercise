@@ -5,6 +5,7 @@ import Container from "../components/Container";
 import imgHero2 from "../public/static/images/404-image.svg";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
+import Section from "../components/Grouping/Section";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -67,51 +68,53 @@ const About = () => {
   ];
 
   return (
-    <Container
-      title="About - WEBSITE |SITE DESCRIPTION"
-      description="meta description"
-    >
-      <div className={classes.contentWrapper}>
-        <div className={classes.header}>
-          <Text fontSize="x-large" fontWeight="bold" textAlign="center">
-            About Us
-          </Text>
-          <Text
-            fontSize="sm"
-            textAlign="center"
-            margin="auto"
-            mt={["md", "sm"]}
-            width="90%"
-          >
-            Subtitle
-          </Text>
-          <div className={classes.heroImage}>
-            <img src={imgHero2} />
-          </div>
-        </div>
-
-        {topics.map((topic, index) => (
-          <div key={index} className={classes.topicWrapper}>
-            <Text fontSize="lg">{topic.header}</Text>
-            <Text fontSize={["md", "sm"]} className={classes.topicText}>
-              {topic.description}
+    <Section>
+      <Container
+        title="About - WEBSITE |SITE DESCRIPTION"
+        description="meta description"
+      >
+        <div className={classes.contentWrapper}>
+          <div className={classes.header}>
+            <Text fontSize="x-large" fontWeight="bold" textAlign="center">
+              About Us
             </Text>
-            {topic.children}
+            <Text
+              fontSize="sm"
+              textAlign="center"
+              margin="auto"
+              mt={["md", "sm"]}
+              width="90%"
+            >
+              Subtitle
+            </Text>
+            <div className={classes.heroImage}>
+              <img src={imgHero2} />
+            </div>
           </div>
-        ))}
 
-        <Box mt="64px">
-          <Text fontSize="xs" className={classes.topicText}>
-            illustrations from{" "}
-            <u>
-              <a target="_blank" href="https://storyset.com/">
-                Storyset.com
-              </a>
-            </u>
-          </Text>
-        </Box>
-      </div>
-    </Container>
+          {topics.map((topic, index) => (
+            <div key={index} className={classes.topicWrapper}>
+              <Text fontSize="lg">{topic.header}</Text>
+              <Text fontSize={["md", "sm"]} className={classes.topicText}>
+                {topic.description}
+              </Text>
+              {topic.children}
+            </div>
+          ))}
+
+          <Box mt="64px">
+            <Text fontSize="xs" className={classes.topicText}>
+              illustrations from{" "}
+              <u>
+                <a target="_blank" href="https://storyset.com/">
+                  Storyset.com
+                </a>
+              </u>
+            </Text>
+          </Box>
+        </div>
+      </Container>
+    </Section>
   );
 };
 

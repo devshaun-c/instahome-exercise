@@ -41,11 +41,11 @@ class MyDocument extends Document {
             src="https://www.googletagmanager.com/gtag/js?id=[Tracking ID]"
           />
 
-          <script
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `[google analytics tracking code here]`,
             }}
-          />
+          /> */}
         </Head>
         <body>
           <Main />

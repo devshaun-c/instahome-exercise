@@ -1,8 +1,7 @@
 import { Button } from "@chakra-ui/button";
-import { ChevronUpIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 
-const AlwaysOnTop = ({ text, handleClick, ...others }) => {
+const AlwaysOnTop = ({ text, handleClick, right, left, ...others }) => {
   const [visible, setVisible] = useState(true);
 
   return (
@@ -12,7 +11,8 @@ const AlwaysOnTop = ({ text, handleClick, ...others }) => {
           onClick={() => alert("HI")}
           position="fixed"
           bottom="5%"
-          right="5%"
+          right={right}
+          left={left}
           height="auto"
           borderRadius="8px"
           fontSize="16px"
