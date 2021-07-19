@@ -1,14 +1,14 @@
-const title = "gojisho";
-const description = "gojisho";
+const title = "Webpage Name";
+const description = "template description";
 
 const SEO = {
   title,
   description,
-  canonical: "https://gojisho.com",
+  canonical: "https://xxxxxxx.com",
   openGraph: {
     type: "website",
     locale: "en_IE",
-    url: "https://gojisho.com",
+    url: "https://xxxxxx.com",
     title,
     description,
     images: [
@@ -21,8 +21,8 @@ const SEO = {
     ],
   },
   twitter: {
-    handle: "@gojisho",
-    site: "@gojisho",
+    handle: "@xxxxxx",
+    site: "@xxxxxx",
     cardType: "summary_large_image",
   },
 };

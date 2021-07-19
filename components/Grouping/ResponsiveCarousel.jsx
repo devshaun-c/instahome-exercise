@@ -8,7 +8,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
   carousel: {
-    margin: "24px 0",
+    padding: "16px 0",
   },
   arrowStyles: {
     position: "absolute",
@@ -26,14 +26,14 @@ const useStyles = createUseStyles({
 });
 
 const carouselDefaultConfiguration = {
-  autoPlay: true,
+  autoPlay: false,
   interval: "3000",
   infiniteLoop: true,
   showArrows: true,
   showStatus: false,
   showThumbs: false,
   showIndicators: true,
-  stopOnHover: true,
+  stopOnHover: false,
   width: "100%",
 };
 

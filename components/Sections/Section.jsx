@@ -19,8 +19,9 @@ const Section = ({ children, ...props }) => {
       className={classes.section}
       bgColor={props.bgColor}
       backgroundImage={props.bgImg}
+      {...props}
     >
-      <Box>{children}</Box>
+      {children}
     </Box>
   );
 };

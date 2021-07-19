@@ -16,7 +16,7 @@ import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
 import Container from "../components/Page/Container";
-import Section from "../components/Page/Section";
+import Section from "../components/Sections/Section";
 import Sidebar from "../components/Navigations/Sidebar";
 import AvatarCard from "../components/Cards/AvatarCard";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
@@ -197,7 +197,68 @@ const DemoPage = () => {
             Card Carousel
           </Heading>
           <Box>
-            <SlickCarousel />
+            <SlickCarousel>
+              <Box pr="16px">
+                <VerticalImageCard
+                  title="Tanaka Satomi "
+                  subtitle="UI/UX designer"
+                  badgeObj={{ color: "purple", text: "new" }}
+                  width="300px"
+                  action={() => alert("CLICKED")}
+                >
+                  <Text fontSize="xs">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus congue bibendum ante, sed imperdiet eros fermentum
+                    in.
+                  </Text>
+                </VerticalImageCard>
+              </Box>
+              <Box pr="16px">
+                <VerticalImageCard
+                  title="Tanaka Satomi "
+                  subtitle="UI/UX designer"
+                  badgeObj={{ color: "purple", text: "new" }}
+                  width="300px"
+                  action={() => alert("CLICKED")}
+                >
+                  <Text fontSize="xs">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus congue bibendum ante, sed imperdiet eros fermentum
+                    in.
+                  </Text>
+                </VerticalImageCard>
+              </Box>
+              <Box pr="16px">
+                <VerticalImageCard
+                  title="Tanaka Satomi "
+                  subtitle="UI/UX designer"
+                  badgeType="new"
+                  width="300px"
+                  action={() => alert("CLICKED")}
+                >
+                  <Text fontSize="xs">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus congue bibendum ante, sed imperdiet eros fermentum
+                    in.
+                  </Text>
+                </VerticalImageCard>
+              </Box>
+              <Box pr="16px">
+                <VerticalImageCard
+                  title="Tanaka Satomi "
+                  subtitle="UI/UX designer"
+                  badgeType="popular"
+                  width="300px"
+                  action={() => alert("CLICKED")}
+                >
+                  <Text fontSize="xs">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus congue bibendum ante, sed imperdiet eros fermentum
+                    in.
+                  </Text>
+                </VerticalImageCard>
+              </Box>
+            </SlickCarousel>
           </Box>
         </Container>
       </Section>

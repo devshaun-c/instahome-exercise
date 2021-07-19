@@ -72,6 +72,13 @@ const Navbar = () => {
               >
                 Components
               </MenuButton>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/sections-page")}
+              >
+                Sections
+              </MenuButton>
               {/* <MenuList>
                     <MenuItem>Download</MenuItem>
                     <MenuItem onClick={() => alert("Kagebunshin")}>

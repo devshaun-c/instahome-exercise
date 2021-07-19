@@ -12,7 +12,7 @@ const useStyles = createUseStyles({
     // padding: "16px",
   },
   sliderStyle: {
-    "& .slider-track": { display: "flex" },
+    "& .slick-track": { padding: "16px" },
     "& .slick-arrow": {},
     "& .button": {
       backgroundColor: "#00558B",
@@ -48,15 +48,16 @@ const useStyles = createUseStyles({
   },
 });
 
-const SlickCarousel = () => {
+const SlickCarousel = (props) => {
+  const { dots = true, infinite = false, arrows = true, children } = props;
   const classes = useStyles();
   var settings = {
-    dots: true,
-    infinite: false,
-    arrows: true,
-    dots: true,
+    dots: dots,
+    infinite: infinite,
+    arrows: arrows,
     speed: 500,
     slidesToScroll: 1,
+    // slidesToShow: 3,
     variableWidth: true,
     // autoplay: true,
     // autoplaySpeed: 4000,
@@ -89,76 +90,7 @@ const SlickCarousel = () => {
 
   return (
     <Slider {...settings} className={classes.sliderStyle}>
-      <Box p="8px">
-        <VerticalImageCard
-          title="Tanaka Satomi "
-          subtitle="UI/UX designer"
-          badgeObj={{ color: "purple", text: "new" }}
-          width="300px"
-          action={() => alert("CLICKED")}
-        >
-          <Text fontSize="xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            congue bibendum ante, sed imperdiet eros fermentum in.
-          </Text>
-        </VerticalImageCard>
-      </Box>
-      <Box p="8px">
-        <VerticalImageCard
-          title="Tanaka Satomi "
-          subtitle="UI/UX designer"
-          badgeObj={{ color: "purple", text: "new" }}
-          width="300px"
-          action={() => alert("CLICKED")}
-        >
-          <Text fontSize="xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            congue bibendum ante, sed imperdiet eros fermentum in.
-          </Text>
-        </VerticalImageCard>
-      </Box>
-      <Box p="8px">
-        <VerticalImageCard
-          title="Tanaka Satomi "
-          subtitle="UI/UX designer"
-          badgeType="new"
-          width="300px"
-          action={() => alert("CLICKED")}
-        >
-          <Text fontSize="xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            congue bibendum ante, sed imperdiet eros fermentum in.
-          </Text>
-        </VerticalImageCard>
-      </Box>
-      <Box p="8px">
-        <VerticalImageCard
-          title="Tanaka Satomi "
-          subtitle="UI/UX designer"
-          badgeType="popular"
-          width="300px"
-          action={() => alert("CLICKED")}
-        >
-          <Text fontSize="xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            congue bibendum ante, sed imperdiet eros fermentum in.
-          </Text>
-        </VerticalImageCard>
-      </Box>
-      <Box p="8px">
-        <VerticalImageCard
-          title="Tanaka Satomi "
-          subtitle="UI/UX designer"
-          badgeType="featured"
-          width="300px"
-          action={() => alert("CLICKED")}
-        >
-          <Text fontSize="xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            congue bibendum ante, sed imperdiet eros fermentum in.
-          </Text>
-        </VerticalImageCard>
-      </Box>
+      {children}
     </Slider>
   );
 };

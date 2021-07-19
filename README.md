@@ -30,12 +30,24 @@
 - [x] Section
 - [x] Container
 - [x] Inputs
+- [ ] Sections
+  - [x] Hero
+  - [x] Focus (image and text) - Left or Right
+  - [x] CardCarousel
+  - [x] ImageCarousel
+  - [ ] Partners
+  - [ ] Newsletter
+  - [ ] Plans
+  - [ ] How-it-works
+  - [ ] Topics
+  - [ ] FAQ (with accordion)
+  - [ ] Footer
+- [ ] Tab box
 - [ ] Icon card
 - [ ] Popup Modal
-- [ ] Plans
 - [ ] Social media button group
-- [ ] SectionText (Header, subHeader, children text, CTA)
+- [ ] React-select
+- [ ] React-airbnb (date picker)
 - [ ] Accordion
-- [ ] Footer
 
 > Pending
