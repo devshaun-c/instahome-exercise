@@ -35,9 +35,10 @@
   - [x] Focus (image and text) - Left or Right
   - [x] CardCarousel
   - [x] ImageCarousel
-  - [ ] Partners
-  - [ ] Newsletter
-  - [ ] Plans
+  - [x] Headliner (For newsletter, key message)
+  - [x] Stack Group (Features)
+  - [x] Stack Group (Partners)
+  - [x] Plans
   - [ ] How-it-works
   - [ ] Topics
   - [ ] FAQ (with accordion)

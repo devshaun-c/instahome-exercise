@@ -1,9 +1,10 @@
-import React from "react";
-import { Avatar, Badge, Box, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Text, Badge } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import { useTheme } from "@emotion/react";
-import Image from "next/image";
+import Section from "../Sections/Section";
 import placeholderImg from "../../public/static/images/placeholder.png";
+import Image from "next/image";
+import { useTheme } from "@emotion/react";
 import { BADGES } from "../../constants/badges";
 
 const useStyles = createUseStyles({
@@ -17,18 +18,21 @@ const useStyles = createUseStyles({
   },
 });
 
-const VerticalImageCard = ({
-  width,
-  title,
-  bg,
-  subtitle,
-  image,
-  badgeType,
-  children,
-  action,
-}) => {
-  const classes = useStyles();
+const TestCard = (props) => {
   const theme = useTheme();
+  const classes = useStyles(props);
+  const {
+    width,
+    title,
+    height = "500px",
+    bg,
+    subtitle,
+    image,
+    badgeType,
+    children,
+    action,
+    alt,
+  } = props;
 
   var badgeObj = null;
   switch (badgeType) {
@@ -51,18 +55,23 @@ const VerticalImageCard = ({
 
   return (
     <Box
+      h={height}
       className={classes.card}
       bg={bg || "white"}
       maxWidth={width}
       onClick={action}
       cursor={action ? "pointer" : "default"}
     >
-      <Box w="100%" h="200px" overflow="hidden" borderRadius="8px 8px 0 0">
+      <Box
+        minH="200px"
+        overflow="hidden"
+        borderRadius="8px 8px 0 0"
+        position="relative"
+      >
         <Image
           src={image || placeholderImg}
-          height="100%"
-          width="100%"
-          layout="responsive"
+          alt={alt}
+          layout="fill"
           objectFit="cover"
           placeholder="blur"
         />
@@ -83,4 +92,4 @@ const VerticalImageCard = ({
   );
 };
 
-export default VerticalImageCard;
+export default TestCard;

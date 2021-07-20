@@ -44,23 +44,21 @@ const CardCarouselSection = (props) => {
       h={height}
       position="relative"
     >
-      <Container>
-        {tag && (
-          <Text
-            fontSize="xx-small"
-            bg={`${theme.colors.primaryLight}`}
-            className={classes.tag}
-          >
-            {tag}
-          </Text>
-        )}
-        <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
-          {header}
-        </Heading>
-        <Box mt="40px" mb="24px">
-          <SlickCarousel dots={false}>{children}</SlickCarousel>
-        </Box>
-      </Container>
+      {tag && (
+        <Text
+          fontSize="xx-small"
+          bg={`${theme.colors.primaryLight}`}
+          className={classes.tag}
+        >
+          {tag}
+        </Text>
+      )}
+      <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
+        {header}
+      </Heading>
+      <Box mt="40px" mb="24px">
+        <SlickCarousel dots={false}>{children}</SlickCarousel>
+      </Box>
     </Section>
   );
 };

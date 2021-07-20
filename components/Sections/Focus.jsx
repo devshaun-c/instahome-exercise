@@ -54,81 +54,82 @@ const Focus = (props) => {
       h={height}
       position="relative"
     >
-      <Container>
-        <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
-          {imageSide === "right" && (
-            <GridItem colSpan={6} className={classes.gridItem}>
-              <Box>
-                {tag && (
-                  <Text
-                    fontSize="xx-small"
-                    bg={`${theme.colors.primaryLight}`}
-                    className={classes.tag}
-                  >
-                    {tag}
-                  </Text>
-                )}
-                <Heading
-                  fontSize="x-large"
-                  fontWeight="bold"
-                  maxW="380px"
-                  lineHeight="1.3"
-                >
-                  {header}
-                </Heading>
-                <Text fontSize="xs" mt={4} mb={6}>
-                  {description}
-                </Text>
-                {children}
-              </Box>
-            </GridItem>
-          )}
-
+      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
+        {imageSide === "right" && (
           <GridItem colSpan={6} className={classes.gridItem}>
-            {hasImage && (
-              <Box overflow="hidden" borderRadius="8px" position="relative">
-                <Image
-                  src={image || placeholderImg}
-                  alt={alt}
-                  width={680}
-                  height={600}
-                  layout="responsive"
-                  objectFit="cover"
-                  placeholder="blur"
-                />
-              </Box>
-            )}
-          </GridItem>
-
-          {imageSide === "left" && (
-            <GridItem colSpan={6} className={classes.gridItem}>
-              <Box>
-                {tag && (
-                  <Text
-                    fontSize="xx-small"
-                    bg={`${theme.colors.primaryLight}`}
-                    className={classes.tag}
-                  >
-                    {tag}
-                  </Text>
-                )}
-                <Heading
-                  fontSize="x-large"
-                  fontWeight="bold"
-                  maxW="380px"
-                  lineHeight="1.3"
+            <Box>
+              {tag && (
+                <Text
+                  fontSize="xx-small"
+                  bg={`${theme.colors.primaryLight}`}
+                  className={classes.tag}
                 >
-                  {header}
-                </Heading>
-                <Text fontSize="xs" mt={4} mb={6}>
-                  {description}
+                  {tag}
                 </Text>
-                {children}
-              </Box>
-            </GridItem>
+              )}
+              <Heading
+                fontSize="x-large"
+                fontWeight="bold"
+                maxW="380px"
+                lineHeight="1.3"
+              >
+                {header}
+              </Heading>
+              <Text fontSize="xs" mt={4} mb={6}>
+                {description}
+              </Text>
+              {children}
+            </Box>
+          </GridItem>
+        )}
+
+        <GridItem colSpan={6} className={classes.gridItem}>
+          {hasImage && (
+            <Box
+              height="80%"
+              overflow="hidden"
+              borderRadius="8px"
+              position="relative"
+            >
+              <Image
+                src={image || placeholderImg}
+                alt={alt}
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+              />
+            </Box>
           )}
-        </Grid>
-      </Container>
+        </GridItem>
+
+        {imageSide === "left" && (
+          <GridItem colSpan={6} className={classes.gridItem}>
+            <Box>
+              {tag && (
+                <Text
+                  fontSize="xx-small"
+                  bg={`${theme.colors.primaryLight}`}
+                  className={classes.tag}
+                >
+                  {tag}
+                </Text>
+              )}
+              <Heading
+                fontSize="x-large"
+                fontWeight="bold"
+                maxW="380px"
+                lineHeight="1.3"
+              >
+                {header}
+              </Heading>
+              <Text fontSize="xs" mt={4} mb={6}>
+                {description}
+              </Text>
+              {children}
+            </Box>
+          </GridItem>
+        )}
+      </Grid>
     </Section>
   );
 };

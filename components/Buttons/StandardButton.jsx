@@ -19,6 +19,7 @@ const StandardButton = (props) => {
     leftIcon,
     rightIcon,
     size = "md",
+    ...others
   } = props;
 
   const classes = useStyles();
@@ -33,6 +34,7 @@ const StandardButton = (props) => {
       colorScheme={colorScheme}
       variant={variant}
       onClick={onClick}
+      {...others}
       // _hover={{
       //   filter: variant == "outline" ? "none" : "brightness(90%)",
       //   _disabled: { bg: "default" },

@@ -57,58 +57,59 @@ const Hero = (props) => {
       h={height}
       position="relative"
     >
-      <Container>
-        <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
-          <GridItem colSpan={6} className={classes.gridItem}>
-            <Box>
-              {tag && (
-                <Text
-                  fontSize="xx-small"
-                  bg={`${theme.colors.primaryLight}`}
-                  className={classes.tag}
-                >
-                  {tag}
-                </Text>
-              )}
-              <Heading>{header}</Heading>
-              <Text fontSize="sm" mt={10} mb={6}>
-                {description}
+      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
+        <GridItem colSpan={6} className={classes.gridItem}>
+          <Box>
+            {tag && (
+              <Text
+                fontSize="xx-small"
+                bg={`${theme.colors.primaryLight}`}
+                className={classes.tag}
+              >
+                {tag}
               </Text>
-              <ButtonGroup>
-                <StandardButton
-                  colorScheme="teal"
-                  text={primaryButtonText}
-                  onClick={callToAction}
-                />
-                {secondaryButtonText && (
-                  <StandardButton
-                    variant="ghost"
-                    colorScheme="teal"
-                    text={secondaryButtonText}
-                    onClick={secondaryAction}
-                  />
-                )}
-              </ButtonGroup>
-            </Box>
-          </GridItem>
-
-          <GridItem colSpan={6} className={classes.gridItem}>
-            {hasImage && (
-              <Box overflow="hidden" borderRadius="8px" position="relative">
-                <Image
-                  src={heroImg || placeholderImg}
-                  alt={alt}
-                  width={680}
-                  height={600}
-                  layout="responsive"
-                  objectFit="cover"
-                  placeholder="blur"
-                />
-              </Box>
             )}
-          </GridItem>
-        </Grid>
-      </Container>
+            <Heading>{header}</Heading>
+            <Text fontSize="sm" mt={10} mb={6}>
+              {description}
+            </Text>
+            <ButtonGroup>
+              <StandardButton
+                colorScheme="teal"
+                text={primaryButtonText}
+                onClick={callToAction}
+              />
+              {secondaryButtonText && (
+                <StandardButton
+                  variant="ghost"
+                  colorScheme="teal"
+                  text={secondaryButtonText}
+                  onClick={secondaryAction}
+                />
+              )}
+            </ButtonGroup>
+          </Box>
+        </GridItem>
+
+        <GridItem colSpan={6} className={classes.gridItem}>
+          {hasImage && (
+            <Box
+              height="80%"
+              overflow="hidden"
+              borderRadius="8px"
+              position="relative"
+            >
+              <Image
+                src={heroImg || placeholderImg}
+                alt={alt}
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+              />
+            </Box>
+          )}
+        </GridItem>
+      </Grid>
     </Section>
   );
 };

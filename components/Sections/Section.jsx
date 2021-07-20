@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
+import Container from "../Page/Container";
 
 const useStyles = createUseStyles({
   section: {
@@ -11,7 +12,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const Section = ({ children, ...props }) => {
+const Section = ({ children, fullView = false, ...props }) => {
   const classes = useStyles(props);
 
   return (
@@ -21,7 +22,7 @@ const Section = ({ children, ...props }) => {
       backgroundImage={props.bgImg}
       {...props}
     >
-      {children}
+      <Container fullView={fullView}>{children}</Container>
     </Box>
   );
 };

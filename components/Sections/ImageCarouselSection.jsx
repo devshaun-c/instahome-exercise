@@ -42,24 +42,23 @@ const ImageCarouselSection = (props) => {
       backgroundImage={bgImg}
       height={height}
       position="relative"
+      fullView={fullView}
     >
-      <Container fullView={fullView}>
-        {tag && (
-          <Text
-            fontSize="xx-small"
-            bg={`${theme.colors.primaryLight}`}
-            className={classes.tag}
-          >
-            {tag}
-          </Text>
-        )}
-        <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
-          {header}
-        </Heading>
-        <Box mt="40px" mb="24px">
-          <ResponsiveCarousel {...others}>{children}</ResponsiveCarousel>
-        </Box>
-      </Container>
+      {tag && (
+        <Text
+          fontSize="xx-small"
+          bg={`${theme.colors.primaryLight}`}
+          className={classes.tag}
+        >
+          {tag}
+        </Text>
+      )}
+      <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
+        {header}
+      </Heading>
+      <Box mt="40px" mb="24px">
+        <ResponsiveCarousel {...others}>{children}</ResponsiveCarousel>
+      </Box>
     </Section>
   );
 };
