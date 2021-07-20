@@ -31,6 +31,8 @@ import EditableInputBox from "../components/Controls/EditableInputBox";
 import BackToTop from "../components/Page/BackToTop";
 import SlickCarousel from "../components/Grouping/SlickCarousel";
 import { BADGES } from "../constants/badges";
+import IconCard from "../components/Cards/IconCard";
+import emailIcon from "../public/static/images/email.svg";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -58,6 +60,14 @@ const DemoPage = () => {
             badgeType={BADGES.popular}
             avatar={img}
           />
+          <Box w="400px">
+            <IconCard
+              title="Email Services"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+              icon={emailIcon}
+              hasShadow
+            />
+          </Box>
           <HorizontalImageCard
             width="800px"
             title="Tanaka Satomi"

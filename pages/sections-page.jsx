@@ -19,6 +19,7 @@ import SquareCard from "../components/Cards/SquareCard";
 import StandardButton from "../components/Buttons/StandardButton";
 import Headliner from "../components/Sections/Headliner";
 import PricingPlans from "../components/Sections/PricingPlans";
+import Offerings from "../components/Sections/Offerings";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -288,6 +289,7 @@ const DemoPage = () => {
             text="learn more"
             size="sm"
             colorScheme="teal"
+            onClick={() => {}}
           />
         </SquareCard>
         <SquareCard>
@@ -478,6 +480,11 @@ const DemoPage = () => {
             ],
           },
         ]}
+      />
+
+      <Offerings
+        header="Market and sell from one place"
+        description="Plans that start free and grow with you"
       />
 
       <BackToTop show right="5%" />

@@ -39,12 +39,12 @@
   - [x] Stack Group (Features)
   - [x] Stack Group (Partners)
   - [x] Plans
-  - [ ] How-it-works
+  - [x] Offerings
   - [ ] Topics
   - [ ] FAQ (with accordion)
   - [ ] Footer
+- [x] Icon card
 - [ ] Tab box
-- [ ] Icon card
 - [ ] Popup Modal
 - [ ] Social media button group
 - [ ] React-select

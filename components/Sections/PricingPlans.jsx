@@ -18,6 +18,16 @@ import { useTheme } from "@emotion/react";
 import { CheckIcon, MinusIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
+  header: {
+    width: "100%",
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "80px",
+    marginBottom: "40px",
+  },
   gridItem: {
     display: "flex",
     flexDirection: "column",
@@ -56,26 +66,19 @@ const PricingPlans = (props) => {
       h={height}
       position="relative"
     >
-      <Box
-        w="100%"
-        margin="auto"
-        display="flex"
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        p={10}
-        mb="40px"
-      >
-        <Heading
-          fontSize={["x-large", "x-large", "xxx-large"]}
-          textAlign="center"
-        >
+      <div className={classes.header}>
+        <Heading fontSize={["lg", "lg", "xx-large"]} textAlign="center">
           {header}
         </Heading>
-        <Text textAlign="center" fontSize={["lg", "lg", "x-large"]} mt={4}>
+        <Text
+          textAlign="center"
+          fontSize={["md", "md", "lg"]}
+          mt={2}
+          color="grey"
+        >
           {description}
         </Text>
-      </Box>
+      </div>
       <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
         {plans.map((plan) => (
           <GridItem
@@ -147,6 +150,13 @@ const PricingPlans = (props) => {
           </GridItem>
         ))}
       </Grid>
+      <Text textAlign="center" fontSize="sm" mt="40px">
+        *All Online transaction fees will be charged to you on a per transaction
+        basis based on the total order value (minus promotions and discounts,
+        plus tax and shipping) for each transaction. These transaction fees are
+        non-refundable. You will also be charged fees by Stripe. See Stripe.com
+        for details about Stripe fees.
+      </Text>
     </Section>
   );
 };
