@@ -33,6 +33,8 @@ import SlickCarousel from "../components/Grouping/SlickCarousel";
 import { BADGES } from "../constants/badges";
 import IconCard from "../components/Cards/IconCard";
 import emailIcon from "../public/static/images/email.svg";
+import Carousel from "../components/Grouping/Carousel";
+import { SwiperSlide } from "swiper/react";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -179,13 +181,55 @@ const DemoPage = () => {
 
       <Section>
         <Heading fontSize="lg" mb="4">
-          Image Carousel
+          Swiper
         </Heading>
-        <ResponsiveCarousel>
-          <Box bg="red" h="400px"></Box>
-          <Box bg="orange" h="400px"></Box>
-          <Box bg="green.400" h="400px"></Box>
-        </ResponsiveCarousel>
+        <Carousel slidesPerView={"auto"}>
+          <SwiperSlide style={{ width: "300px" }}>
+            <Box
+              h="400px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="whitesmoke"
+              width="300px"
+            >
+              Test 1
+            </Box>
+          </SwiperSlide>
+          <SwiperSlide style={{ width: "500px" }}>
+            <Box
+              h="400px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="orange.100"
+            >
+              Test 2
+            </Box>
+          </SwiperSlide>
+          <SwiperSlide style={{ width: "600px" }}>
+            <Box
+              h="400px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="green.300"
+            >
+              Test 3
+            </Box>
+          </SwiperSlide>
+          <SwiperSlide style={{ width: "600px" }}>
+            <Box
+              h="400px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="red.300"
+            >
+              Test 4
+            </Box>
+          </SwiperSlide>
+        </Carousel>
       </Section>
 
       <Divider />
@@ -195,8 +239,14 @@ const DemoPage = () => {
           Card Carousel
         </Heading>
         <Box>
-          <SlickCarousel>
-            <Box pr="16px">
+          <Carousel slidesPerView={"auto"} freeMode={true}>
+            <SwiperSlide
+              style={{
+                width: "300px",
+                paddingRight: "8px",
+                paddingLeft: "8px",
+              }}
+            >
               <VerticalImageCard
                 title="Tanaka Satomi "
                 subtitle="UI/UX designer"
@@ -210,8 +260,14 @@ const DemoPage = () => {
                   in.
                 </Text>
               </VerticalImageCard>
-            </Box>
-            <Box pr="16px">
+            </SwiperSlide>
+            <SwiperSlide
+              style={{
+                width: "300px",
+                paddingRight: "8px",
+                paddingLeft: "8px",
+              }}
+            >
               <VerticalImageCard
                 title="Tanaka Satomi "
                 subtitle="UI/UX designer"
@@ -225,14 +281,20 @@ const DemoPage = () => {
                   in.
                 </Text>
               </VerticalImageCard>
-            </Box>
-            <Box pr="16px">
+            </SwiperSlide>
+            <SwiperSlide
+              style={{
+                width: "300px",
+                paddingRight: "8px",
+                paddingLeft: "8px",
+              }}
+            >
               <VerticalImageCard
                 title="Tanaka Satomi "
                 subtitle="UI/UX designer"
                 badgeType="new"
-                width="300px"
                 action={() => alert("CLICKED")}
+                width="300px"
               >
                 <Text fontSize="xs">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -240,14 +302,20 @@ const DemoPage = () => {
                   in.
                 </Text>
               </VerticalImageCard>
-            </Box>
-            <Box pr="16px">
+            </SwiperSlide>
+            <SwiperSlide
+              style={{
+                width: "300px",
+                paddingRight: "8px",
+                paddingLeft: "8px",
+              }}
+            >
               <VerticalImageCard
                 title="Tanaka Satomi "
                 subtitle="UI/UX designer"
                 badgeType="popular"
-                width="300px"
                 action={() => alert("CLICKED")}
+                width="300px"
               >
                 <Text fontSize="xs">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -255,8 +323,34 @@ const DemoPage = () => {
                   in.
                 </Text>
               </VerticalImageCard>
-            </Box>
-          </SlickCarousel>
+            </SwiperSlide>
+          </Carousel>
+        </Box>
+      </Section>
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
+          Image Swiper
+        </Heading>
+        <Box>
+          <Carousel
+            navigation={false}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+          >
+            <SwiperSlide>
+              <Box bg="red" h="400px"></Box>
+            </SwiperSlide>
+            <SwiperSlide>
+              <Box bg="orange" h="400px"></Box>
+            </SwiperSlide>
+            <SwiperSlide>
+              <Box bg="green.400" h="400px"></Box>
+            </SwiperSlide>
+          </Carousel>
         </Box>
       </Section>
 

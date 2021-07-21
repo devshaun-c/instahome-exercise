@@ -6,6 +6,7 @@
 - express
 - chakra UI
 - react-icons
+- swiper (carousel)
 - react-responsive-carousel
 - react-slick (react-slick and slick-carousel styles)
 - next-images
@@ -25,16 +26,16 @@
 - [x] Cards
 - [x] AlwaysOnTop
 - [x] Buttons
-- [x] Image Carousel
-- [x] Card Carousel
+- [x] Image Carousel (replace with SwiperJS)
+- [x] Card Carousel (replace with SwiperJS)
 - [x] Section
 - [x] Container
 - [x] Inputs
 - [ ] Sections
   - [x] Hero
   - [x] Focus (image and text) - Left or Right
-  - [x] CardCarousel
-  - [x] ImageCarousel
+  - [ ] CardCarousel (replace with SwiperJS)
+  - [ ] ImageCarousel (replace with SwiperJS)
   - [x] Headliner (For newsletter, key message)
   - [x] Stack Group (Features)
   - [x] Stack Group (Partners)
@@ -44,11 +45,13 @@
   - [ ] FAQ (with accordion)
   - [ ] Footer
 - [x] Icon card
+- [ ] SwiperJS custom arrows
 - [ ] Tab box
 - [ ] Popup Modal
 - [ ] Social media button group
 - [ ] React-select
 - [ ] React-airbnb (date picker)
 - [ ] Accordion
+- [ ] Find new font with thick bold
 
 > Pending

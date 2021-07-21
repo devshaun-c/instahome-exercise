@@ -27,6 +27,7 @@
     "react-responsive-carousel": "^3.2.19",
     "react-slick": "^0.28.1",
     "slick-carousel": "^1.8.1",
+    "swiper": "^6.7.5",
     "swr": "^0.5.6"
   },
   "devDependencies": {
