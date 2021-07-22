@@ -1,0 +1,14 @@
+:root {
+  --primary-color: rgb(255, 113, 47);
+  --secondary-color: #cf461c;
+  --light-color: #999;
+  --default-font-color: #4f4f4f;
+  --button-hover-bg-lighter: #ee9a62;
+  --button-hover-bg-darker: #e9653c;
+  --light-bg: rgb(255, 254, 251);
+  --placeholder-bg: rgb(235, 235, 235);
+  --title-font: "Kaushan Script";
+  --default-font: "Poppins";
+  --tagline-font: "Catamaran";
+  --max-width: 1200px;
+}

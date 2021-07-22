@@ -30,9 +30,22 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel=" icon" href="/static/images/sushi.svg"></link>
-          <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+          ></link>
           <link
             href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&display=swap"
             rel="stylesheet"
           ></link>
           <meta content="" name="google-site-verification" />

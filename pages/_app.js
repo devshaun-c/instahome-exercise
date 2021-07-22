@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/theme.styles.css";
 import { ChakraProvider, CSSReset, extendTheme } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import SEO from "../next-seo.config";
@@ -27,9 +28,9 @@ const theme = extendTheme({
     highlight: "",
   },
   fonts: {
-    body: "Comfortaa, system-ui, sans-serif",
-    heading: "Comfortaa,Georgia, serif",
-    mono: "Comfortaa, Menlo, monospace",
+    body: "Montserrat, Comfortaa, system-ui, sans-serif",
+    heading: "Raleway,Montserrat,Comfortaa,Georgia, serif",
+    mono: "Montserrat,Comfortaa, Menlo, monospace",
   },
   components: {
     Button: {

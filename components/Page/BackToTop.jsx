@@ -29,6 +29,7 @@ const BackToTop = ({ show, right, left }) => {
           height="40px"
           outline="none"
           color="white"
+          zIndex="1000"
           bg={theme.colors.primary}
           _hover={{ bg: "" }}
           _focus={{ outline: "0" }}

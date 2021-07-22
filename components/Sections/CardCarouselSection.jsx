@@ -15,6 +15,7 @@ import Container from "../Page/Container";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 import SlickCarousel from "../Grouping/SlickCarousel";
+import Carousel from "../Grouping/Carousel";
 
 const useStyles = createUseStyles({
   content: {},
@@ -35,7 +36,15 @@ const useStyles = createUseStyles({
 const CardCarouselSection = (props) => {
   const theme = useTheme();
   const classes = useStyles(props);
-  const { bgColor, bgImg, tag, header, children, height = "600px" } = props;
+  const {
+    bgColor,
+    bgImg,
+    tag,
+    header,
+    children,
+    height = "600px",
+    ...others
+  } = props;
 
   return (
     <Section
@@ -53,11 +62,13 @@ const CardCarouselSection = (props) => {
           {tag}
         </Text>
       )}
-      <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
+      <Text fontSize="x-large" fontWeight="bold" lineHeight="1.4">
         {header}
-      </Heading>
+      </Text>
       <Box mt="40px" mb="24px">
-        <SlickCarousel dots={false}>{children}</SlickCarousel>
+        <Carousel slidesPerView={"auto"} {...others}>
+          {children}
+        </Carousel>
       </Box>
     </Section>
   );

@@ -20,6 +20,8 @@ import StandardButton from "../components/Buttons/StandardButton";
 import Headliner from "../components/Sections/Headliner";
 import PricingPlans from "../components/Sections/PricingPlans";
 import Offerings from "../components/Sections/Offerings";
+import { SwiperSlide } from "swiper/react";
+import Footer from "../components/Sections/Footer";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -121,12 +123,17 @@ const DemoPage = () => {
         height="100%"
         header="Explore Our Popular Activities"
       >
-        <Box pr="16px">
+        <SwiperSlide
+          style={{
+            width: "300px",
+            paddingRight: "8px",
+            paddingLeft: "8px",
+          }}
+        >
           <VerticalImageCard
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
             badgeObj={{ color: "purple", text: "new" }}
-            width="300px"
             action={() => alert("CLICKED")}
           >
             <Text fontSize="sm">
@@ -134,13 +141,18 @@ const DemoPage = () => {
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </VerticalImageCard>
-        </Box>
-        <Box pr="16px">
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            width: "300px",
+            paddingRight: "8px",
+            paddingLeft: "8px",
+          }}
+        >
           <VerticalImageCard
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
             badgeObj={{ color: "purple", text: "new" }}
-            width="300px"
             action={() => alert("CLICKED")}
           >
             <Text fontSize="sm">
@@ -148,13 +160,18 @@ const DemoPage = () => {
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </VerticalImageCard>
-        </Box>
-        <Box pr="16px">
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            width: "300px",
+            paddingRight: "8px",
+            paddingLeft: "8px",
+          }}
+        >
           <VerticalImageCard
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
-            badgeType="new"
-            width="300px"
+            badgeObj={{ color: "purple", text: "new" }}
             action={() => alert("CLICKED")}
           >
             <Text fontSize="sm">
@@ -162,13 +179,18 @@ const DemoPage = () => {
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </VerticalImageCard>
-        </Box>
-        <Box pr="16px">
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            width: "300px",
+            paddingRight: "8px",
+            paddingLeft: "8px",
+          }}
+        >
           <VerticalImageCard
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
-            badgeType="popular"
-            width="300px"
+            badgeObj={{ color: "purple", text: "new" }}
             action={() => alert("CLICKED")}
           >
             <Text fontSize="sm">
@@ -176,13 +198,18 @@ const DemoPage = () => {
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </VerticalImageCard>
-        </Box>
-        <Box pr="16px">
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            width: "300px",
+            paddingRight: "8px",
+            paddingLeft: "8px",
+          }}
+        >
           <VerticalImageCard
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
-            badgeType="featured"
-            width="300px"
+            badgeObj={{ color: "purple", text: "new" }}
             action={() => alert("CLICKED")}
           >
             <Text fontSize="sm">
@@ -190,33 +217,40 @@ const DemoPage = () => {
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </VerticalImageCard>
-        </Box>
+        </SwiperSlide>
       </CardCarouselSection>
 
-      <ImageCarouselSection
-        height="100%"
-        fullView
-        autoPlay
-        showArrows={false}
-        showIndicators={false}
-      >
-        <Box bg="orange" h="600px"></Box>
-        <Box bg="green.400" h="600px"></Box>
-        <Box height="600px">
-          <Image src={img} layout="fill" objectFit="cover" />
-        </Box>
+      <ImageCarouselSection fullView pagination={false}>
+        <SwiperSlide>
+          <Box bg="orange" h="600px"></Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box bg="green.400" h="600px"></Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box h="600px">
+            <Image src={img} layout="fill" objectFit="cover" />
+          </Box>
+        </SwiperSlide>
       </ImageCarouselSection>
 
       <ImageCarouselSection
         tag="ACTIVITY IMAGES"
-        height="100%"
         header="Highlights from our recent activities"
+        navigation={true}
+        autoplay={false}
       >
-        <Box height="500px">
-          <Image src={img} layout="fill" objectFit="cover" />
-        </Box>
-        <Box bg="orange" h="500px"></Box>
-        <Box bg="green.400" h="500px"></Box>
+        <SwiperSlide>
+          <Box bg="orange" h="600px"></Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box bg="green.400" h="600px"></Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box h="600px">
+            <Image src={img} layout="fill" objectFit="cover" />
+          </Box>
+        </SwiperSlide>
       </ImageCarouselSection>
 
       <StackGroup height="100%" bgColor="gray.100">
@@ -275,13 +309,7 @@ const DemoPage = () => {
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
             Meals
           </Text>
-          <Text
-            fontSize="sm"
-            color="grey"
-            fontWeight="bold"
-            textAlign="center"
-            mb={4}
-          >
+          <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
           <StandardButton
@@ -296,13 +324,7 @@ const DemoPage = () => {
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
             Fitness
           </Text>
-          <Text
-            fontSize="sm"
-            color="grey"
-            fontWeight="bold"
-            textAlign="center"
-            mb={4}
-          >
+          <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
           <StandardButton
@@ -316,13 +338,7 @@ const DemoPage = () => {
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
             Entertainment
           </Text>
-          <Text
-            fontSize="sm"
-            color="grey"
-            fontWeight="bold"
-            textAlign="center"
-            mb={4}
-          >
+          <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
           <StandardButton
@@ -336,13 +352,7 @@ const DemoPage = () => {
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
             Academy
           </Text>
-          <Text
-            fontSize="sm"
-            color="grey"
-            fontWeight="bold"
-            textAlign="center"
-            mb={4}
-          >
+          <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
           <StandardButton
@@ -486,6 +496,8 @@ const DemoPage = () => {
         header="Market and sell from one place"
         description="Plans that start free and grow with you"
       />
+
+      <Footer bgColor="whitesmoke" />
 
       <BackToTop show right="5%" />
     </div>

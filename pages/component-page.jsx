@@ -35,6 +35,7 @@ import IconCard from "../components/Cards/IconCard";
 import emailIcon from "../public/static/images/email.svg";
 import Carousel from "../components/Grouping/Carousel";
 import { SwiperSlide } from "swiper/react";
+import AccordionTable from "../components/Grouping/AccordionTable";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -366,6 +367,30 @@ const DemoPage = () => {
           Section with Full Background Image
         </Heading>
         <Box h="100px"></Box>
+      </Section>
+
+      <Divider />
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
+          Text accordion
+        </Heading>
+        <AccordionTable
+          items={[
+            {
+              title: "Section 1 Title",
+              text: "  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            },
+            {
+              title: "Section 2 Title",
+              text: "  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            },
+            {
+              title: "Section 3 Title",
+              text: "  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            },
+          ]}
+        />
       </Section>
 
       <Divider />

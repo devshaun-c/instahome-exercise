@@ -5,10 +5,9 @@ import Section from "./Section";
 import Container from "../Page/Container";
 import { useTheme } from "@emotion/react";
 import ResponsiveCarousel from "../Grouping/ResponsiveCarousel";
+import Carousel from "../Grouping/Carousel";
 
 const useStyles = createUseStyles({
-  content: {},
-  heroImg: {},
   tag: {
     marginBottom: "16px",
     display: "inline-block",
@@ -32,7 +31,7 @@ const ImageCarouselSection = (props) => {
     header,
     children,
     fullView = false,
-    height = "600px",
+    height = "100%",
     ...others
   } = props;
 
@@ -53,11 +52,21 @@ const ImageCarouselSection = (props) => {
           {tag}
         </Text>
       )}
-      <Heading fontSize="x-large" fontWeight="bold" lineHeight="1.4">
+      <Text fontSize="x-large" fontWeight="bold" lineHeight="1.4">
         {header}
-      </Heading>
+      </Text>
       <Box mt="40px" mb="24px">
-        <ResponsiveCarousel {...others}>{children}</ResponsiveCarousel>
+        <Carousel
+          navigation={false}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          {...others}
+        >
+          {children}
+        </Carousel>
       </Box>
     </Section>
   );

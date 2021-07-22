@@ -80,8 +80,9 @@ const PricingPlans = (props) => {
         </Text>
       </div>
       <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
-        {plans.map((plan) => (
+        {plans.map((plan, index) => (
           <GridItem
+            key={index}
             colSpan={columnSpan}
             className={classes.gridItem}
             bg={plan.highlight ? "blue.800" : "white"}
@@ -116,8 +117,9 @@ const PricingPlans = (props) => {
               />
               <Box mt={8}>
                 <List spacing={5}>
-                  {plan.list.map((item) => (
+                  {plan.list.map((item, index) => (
                     <ListItem
+                      key={index}
                       display="flex"
                       alignItems="center"
                       justifyContent="space-between"

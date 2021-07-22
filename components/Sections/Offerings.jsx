@@ -130,8 +130,14 @@ const Offerings = (props) => {
           {description}
         </Text>
       </div>
-      {offerings.map((offer) => (
-        <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={5} mb="80px">
+      {offerings.map((offer, index) => (
+        <Grid
+          key={index}
+          templateColumns="repeat(12, 1fr)"
+          height="100%"
+          gap={5}
+          mb="80px"
+        >
           <GridItem colSpan={4} mt={4}>
             <Text fontSize="x-large" fontWeight="bold">
               {offer.topic}
@@ -139,8 +145,8 @@ const Offerings = (props) => {
           </GridItem>
           <GridItem colSpan={8}>
             <Grid templateColumns="repeat(4, 1fr)">
-              {offer.offerings.map((item) => (
-                <GridItem colSpan={2}>
+              {offer.offerings.map((item, index) => (
+                <GridItem key={index} colSpan={2}>
                   <IconCard
                     title={item.title}
                     description={item.description}

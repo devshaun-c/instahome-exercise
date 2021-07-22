@@ -34,18 +34,18 @@
 - [ ] Sections
   - [x] Hero
   - [x] Focus (image and text) - Left or Right
-  - [ ] CardCarousel (replace with SwiperJS)
-  - [ ] ImageCarousel (replace with SwiperJS)
+  - [x] CardCarousel (replace with SwiperJS)
+  - [x] ImageCarousel (replace with SwiperJS)
   - [x] Headliner (For newsletter, key message)
   - [x] Stack Group (Features)
   - [x] Stack Group (Partners)
   - [x] Plans
   - [x] Offerings
-  - [ ] Topics
-  - [ ] FAQ (with accordion)
-  - [ ] Footer
+  - [x] Text accordion
+  - [ ] Newsletter
+  - [x] Footer
 - [x] Icon card
-- [ ] SwiperJS custom arrows
+- [x] SwiperJS custom arrows
 - [ ] Tab box
 - [ ] Popup Modal
 - [ ] Social media button group
@@ -53,5 +53,9 @@
 - [ ] React-airbnb (date picker)
 - [ ] Accordion
 - [ ] Find new font with thick bold
+- [ ] Mobile responsive
+- [ ] Remove unused carousel package (rrc and slick)
+- [ ] JSS RULE NOT LINKED
+  - [ ] At SwiperJS border radius
 
 > Pending

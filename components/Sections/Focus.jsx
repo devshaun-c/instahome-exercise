@@ -75,7 +75,7 @@ const Focus = (props) => {
               >
                 {header}
               </Heading>
-              <Text fontSize="xs" mt={4} mb={6}>
+              <Text fontSize="sm" mt={4} mb={6}>
                 {description}
               </Text>
               {children}
@@ -122,7 +122,7 @@ const Focus = (props) => {
               >
                 {header}
               </Heading>
-              <Text fontSize="xs" mt={4} mb={6}>
+              <Text fontSize="sm" mt={4} mb={6}>
                 {description}
               </Text>
               {children}

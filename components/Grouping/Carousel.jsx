@@ -20,6 +20,39 @@ const useStyles = createUseStyles({
     "& .swiper-button-disabled": {
       display: "none",
     },
+    "& .swiper-button-next": {
+      right: "0",
+      background: "rgba(255,255,255,1)",
+      width: "50px",
+      height: "100%",
+      top: "0",
+      borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
+      "&:hover": {
+        background: "rgba(255,255,255,0.8)",
+      },
+    },
+
+    "& .swiper-button-next::after": {
+      fontSize: "24px",
+      fontWeight: "bold",
+    },
+
+    "& .swiper-button-prev": {
+      left: "0",
+      background: "rgba(255,255,255,1)",
+      width: "50px",
+      height: "100%",
+      top: "0",
+      borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
+      "&:hover": {
+        background: "rgba(255,255,255,0.8)",
+      },
+    },
+
+    "& .swiper-button-prev::after": {
+      fontSize: "24px",
+      fontWeight: "bold",
+    },
 
     "& .swiper-pagination": {
       bottom: "0px",
@@ -27,8 +60,8 @@ const useStyles = createUseStyles({
   },
 });
 
-const Carousel = ({ children, ...others }) => {
-  const classes = useStyles();
+const Carousel = ({ children, ...params }) => {
+  const classes = useStyles(params);
 
   return (
     <Swiper
@@ -58,7 +91,7 @@ const Carousel = ({ children, ...others }) => {
       //       spaceBetween: 50,
       //     },
       //   }}
-      {...others}
+      {...params}
     >
       {children}
     </Swiper>
