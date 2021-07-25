@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import React from "react";
+import { Box, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
-import Container from "../Page/Container";
 import { useTheme } from "@emotion/react";
-import ResponsiveCarousel from "../Grouping/ResponsiveCarousel";
 import Carousel from "../Grouping/Carousel";
 
 const useStyles = createUseStyles({

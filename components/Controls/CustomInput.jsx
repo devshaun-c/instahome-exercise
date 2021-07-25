@@ -15,7 +15,7 @@ import {
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-  root: {},
+  root: { background: "rgba(255,255,255,0.5)" },
 });
 
 const StandardInput = (props) => {
@@ -36,10 +36,11 @@ const StandardInput = (props) => {
     rightElement,
     helperText,
     errorText,
+    ...others
   } = props;
   return (
-    <FormControl isRequired={required} isInvalid={errorText}>
-      <FormLabel>{label}</FormLabel>
+    <FormControl isRequired={required} isInvalid={errorText} {...others}>
+      {label && <FormLabel>{label}</FormLabel>}
       <InputGroup>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
         {leftElement && (
@@ -55,6 +56,8 @@ const StandardInput = (props) => {
           className={classes.root}
           variant={variant}
           placeholder={placeholder}
+          _focus={{ background: "white" }}
+          _hover={{ background: "white" }}
         ></Input>
         {rightAddOn && <InputRightAddon children={rightAddOn} />}
         {rightElement && <InputRightElement children={rightElement} />}

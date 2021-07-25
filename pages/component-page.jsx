@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   ButtonGroup,
   Divider,
   Grid,
@@ -10,12 +9,12 @@ import {
   IconButton,
   SimpleGrid,
   Stack,
+  TabPanel,
   Text,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
-import Container from "../components/Page/Container";
 import Section from "../components/Sections/Section";
 import Sidebar from "../components/Navigations/Sidebar";
 import AvatarCard from "../components/Cards/AvatarCard";
@@ -23,19 +22,20 @@ import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/newsletter-bg.jpg";
 import HorizontalImageCard from "../components/Cards/HorizontalImageCard";
 import StandardButton from "../components/Buttons/StandardButton";
-import ResponsiveCarousel from "../components/Grouping/ResponsiveCarousel";
 import SearchBox from "../components/Controls/SearchBox";
-import StandardInput from "../components/Controls/StandardInput";
+import CustomInput from "../components/Controls/CustomInput";
 import { CheckIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
-import EditableInputBox from "../components/Controls/EditableInputBox";
+import ToggleInput from "../components/Controls/ToggleInput";
 import BackToTop from "../components/Page/BackToTop";
-import SlickCarousel from "../components/Grouping/SlickCarousel";
 import { BADGES } from "../constants/badges";
 import IconCard from "../components/Cards/IconCard";
 import emailIcon from "../public/static/images/email.svg";
 import Carousel from "../components/Grouping/Carousel";
 import { SwiperSlide } from "swiper/react";
 import AccordionTable from "../components/Grouping/AccordionTable";
+import TabsPanel from "../components/Grouping/TabsPanel";
+import CustomSelect from "../components/Controls/CustomSelect";
+import Datepicker from "../components/Controls/Datepicker";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -123,29 +123,60 @@ const DemoPage = () => {
 
       <Section>
         <Heading fontSize="lg" mb="4">
+          Select
+        </Heading>
+        <CustomSelect
+          instanceId="id_1"
+          label="Standard select"
+          options={[
+            { value: "chocolate", label: "Chocolate" },
+            { value: "strawberry", label: "Strawberry" },
+            { value: "vanilla", label: "Vanilla" },
+          ]}
+          errorText="Error message"
+        />
+        <Box mt={4}>
+          <CustomSelect
+            instanceId="id_2"
+            label="Multi select"
+            options={[
+              { value: "chocolate", label: "Chocolate" },
+              { value: "strawberry", label: "Strawberry" },
+              { value: "vanilla", label: "Vanilla" },
+            ]}
+            isMulti
+            helperText="You may pick more than one option"
+          />
+        </Box>
+      </Section>
+
+      <Divider />
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
           Input Types
         </Heading>
         <Stack spacing={8}>
-          <StandardInput
+          <CustomInput
             label="Basic Input"
             placeholder="placeholder"
             helperText="Helper text"
           />
-          <StandardInput
+          <CustomInput
             label="Input with Left and Right addon"
             leftAddOn="https://"
             rightAddOn=".com"
           />
-          <StandardInput
+          <CustomInput
             label="Input with Error"
             errorText="This is an error message"
           />
-          <StandardInput
+          <CustomInput
             label="Input with Left and Right Elements"
             leftElement={<PhoneIcon color="gray.300" />}
             rightElement={<CheckIcon color="green.500" />}
           />
-          <StandardInput
+          <CustomInput
             label="Input with Inner Icon Button"
             leftElement={<IconButton variant="ghost" icon={<SearchIcon />} />}
             rightElement={
@@ -158,7 +189,7 @@ const DemoPage = () => {
               />
             }
           />
-          <EditableInputBox
+          <ToggleInput
             label="Editable Input (toggle to edit)"
             handleConfirm={(e) => {
               console.log(e);
@@ -440,6 +471,51 @@ const DemoPage = () => {
             <Box bg="whitesmoke" w="100%" height="400px"></Box>
           </GridItem>
         </Grid>
+      </Section>
+
+      <Divider />
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
+          Tabs panel
+        </Heading>
+        <TabsPanel>
+          <TabPanel bg="red.100">
+            <Box w="100%" height="300px">
+              <p>one!</p>
+            </Box>
+          </TabPanel>
+          <TabPanel bg="blue.100">
+            <Box w="100%" height="300px">
+              <p>two!</p>
+            </Box>
+          </TabPanel>
+          <TabPanel bg="green.100">
+            <Box w="100%" height="300px">
+              <p>three!</p>
+            </Box>
+          </TabPanel>
+        </TabsPanel>
+      </Section>
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
+          Date Picker
+        </Heading>
+        <Box display="flex" justifyContent="space-between">
+          <Box>
+            <Text>Single day</Text>
+            <Datepicker />
+          </Box>
+          <Box>
+            <Text>Multi day</Text>
+            <Datepicker type="multi" />
+          </Box>
+          <Box>
+            <Text>Range selection</Text>
+            <Datepicker type="range" />
+          </Box>
+        </Box>
       </Section>
 
       <Divider />

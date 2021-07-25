@@ -14,7 +14,6 @@ import ImageCarouselSection from "../components/Sections/ImageCarouselSection";
 import { StarIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import StackGroup from "../components/Sections/StackGroup";
-import SlickCarousel from "../components/Grouping/SlickCarousel";
 import SquareCard from "../components/Cards/SquareCard";
 import StandardButton from "../components/Buttons/StandardButton";
 import Headliner from "../components/Sections/Headliner";
@@ -22,6 +21,7 @@ import PricingPlans from "../components/Sections/PricingPlans";
 import Offerings from "../components/Sections/Offerings";
 import { SwiperSlide } from "swiper/react";
 import Footer from "../components/Sections/Footer";
+import Newsletter from "../components/Sections/Newsletter";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -496,6 +496,8 @@ const DemoPage = () => {
         header="Market and sell from one place"
         description="Plans that start free and grow with you"
       />
+
+      <Newsletter height="600px" bgColor="teal.300" />
 
       <Footer bgColor="whitesmoke" />
 

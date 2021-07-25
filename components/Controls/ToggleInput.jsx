@@ -1,9 +1,7 @@
 import React from "react";
 import {
   ButtonGroup,
-  Button,
   IconButton,
-  Box,
   Editable,
   EditableInput,
   EditablePreview,
@@ -15,13 +13,12 @@ import {
 import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
 
 import { createUseStyles } from "react-jss";
-import StandardInput from "./StandardInput";
 
 const useStyles = createUseStyles({
   root: {},
 });
 
-const EditableInputBox = (props) => {
+const ToggleInput = (props) => {
   const { label, handleConfirm, value } = props;
   const classes = useStyles();
 
@@ -83,4 +80,4 @@ const EditableInputBox = (props) => {
   );
 };
 
-export default EditableInputBox;
+export default ToggleInput;

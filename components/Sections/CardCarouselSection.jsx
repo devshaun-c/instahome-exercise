@@ -1,35 +1,16 @@
-import React, { useState } from "react";
-import {
-  Box,
-  ButtonGroup,
-  Grid,
-  GridItem,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import React from "react";
+import { Box, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
-import StandardButton from "../Buttons/StandardButton";
-import placeholderImg from "../../public/static/images/placeholder.png";
-import Container from "../Page/Container";
-import Image from "next/image";
 import { useTheme } from "@emotion/react";
-import SlickCarousel from "../Grouping/SlickCarousel";
 import Carousel from "../Grouping/Carousel";
 
 const useStyles = createUseStyles({
-  content: {},
-  heroImg: {},
   tag: {
     marginBottom: "16px",
     display: "inline-block",
     padding: "4px 16px",
     borderRadius: "8px",
-  },
-  gridItem: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
   },
 });
 

@@ -5,7 +5,10 @@
 - firebase
 - express
 - chakra UI
+- momentJS
+- react-day-picker
 - react-icons
+- react-select
 - swiper (carousel)
 - react-responsive-carousel
 - react-slick (react-slick and slick-carousel styles)
@@ -31,7 +34,7 @@
 - [x] Section
 - [x] Container
 - [x] Inputs
-- [ ] Sections
+- [x] Sections
   - [x] Hero
   - [x] Focus (image and text) - Left or Right
   - [x] CardCarousel (replace with SwiperJS)
@@ -42,17 +45,16 @@
   - [x] Plans
   - [x] Offerings
   - [x] Text accordion
-  - [ ] Newsletter
+  - [x] Newsletter
   - [x] Footer
 - [x] Icon card
 - [x] SwiperJS custom arrows
-- [ ] Tab box
+- [x] Tab box
+- [x] React-select
+- [x] Accordion
+- [x] Date picker / calendar
+- [x] Find new font with thick bold
 - [ ] Popup Modal
-- [ ] Social media button group
-- [ ] React-select
-- [ ] React-airbnb (date picker)
-- [ ] Accordion
-- [ ] Find new font with thick bold
 - [ ] Mobile responsive
 - [ ] Remove unused carousel package (rrc and slick)
 - [ ] JSS RULE NOT LINKED

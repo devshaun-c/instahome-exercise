@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/theme.styles.css";
+import "../styles/daypickerstyles.css";
 import { ChakraProvider, CSSReset, extendTheme } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import SEO from "../next-seo.config";
