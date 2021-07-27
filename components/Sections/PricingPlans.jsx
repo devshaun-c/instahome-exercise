@@ -25,7 +25,6 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "80px",
     marginBottom: "40px",
   },
   gridItem: {
@@ -66,20 +65,32 @@ const PricingPlans = (props) => {
       h={height}
       position="relative"
     >
-      <div className={classes.header}>
-        <Heading fontSize={["lg", "lg", "xx-large"]} textAlign="center">
+      <Box className={classes.header} p={["40px 0", "80px 0"]}>
+        <Heading
+          fontSize={["x-large", "x-large", "xx-large"]}
+          textAlign="center"
+          p="0 48px"
+        >
           {header}
         </Heading>
         <Text
-          textAlign="center"
-          fontSize={["md", "md", "lg"]}
-          mt={2}
+          // textAlign="center"
+          fontSize={["sm", "sm", "md"]}
+          mt={4}
           color="grey"
         >
           {description}
         </Text>
-      </div>
-      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
+      </Box>
+      <Grid
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(12, 1fr)",
+        ]}
+        height="100%"
+        gap={10}
+      >
         {plans.map((plan, index) => (
           <GridItem
             key={index}
@@ -109,12 +120,9 @@ const PricingPlans = (props) => {
                   </Text>
                 </Box>
               </Box>
-              <StandardButton
-                colorScheme="teal"
-                text="Select"
-                onClick={plan.fcn}
-                isFullWidth
-              />
+              <StandardButton colorScheme="teal" onClick={plan.fcn} isFullWidth>
+                Select
+              </StandardButton>
               <Box mt={8}>
                 <List spacing={5}>
                   {plan.list.map((item, index) => (

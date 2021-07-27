@@ -21,7 +21,7 @@ const BackToTop = ({ show, right, left }) => {
         <Button
           onClick={toTop}
           position="fixed"
-          bottom="8%"
+          bottom="5%"
           right={right}
           left={left}
           borderRadius="8px"

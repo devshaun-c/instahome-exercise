@@ -36,19 +36,27 @@ const Newsletter = (props) => {
       >
         <Box width={["100%", "100%", "50%"]}>
           <Heading>Get involved. Stay active.</Heading>
-          <Text mt={4}>
+          <Text mt={4} fontSize={["sm", "sm", "md"]}>
             Join our newsletter to stay updated on upcoming workshops, events,
             and community activities in Kuala Lumpur, Selangor and more to come!
           </Text>
         </Box>
-        <Box width="50%" display="flex" alignItems="center" mt={4}>
-          <CustomInput placeholder="Email" mr={2} variant="filled" />
-          <StandardButton
-            text="Subscribe"
-            pl="32px"
-            pr="32px"
-            colorScheme="teal"
+        <Box
+          width={["100%", "100%", "50%"]}
+          display="flex"
+          flexDir={["column", "column", "row"]}
+          alignItems="center"
+          mt={[6, 6, 4]}
+        >
+          <CustomInput
+            placeholder="Email"
+            mr={[0, 0, 2]}
+            mb={[2, 2, 0]}
+            variant="filled"
           />
+          <StandardButton pl="32px" pr="32px" colorScheme="teal" w="100%">
+            Subscribe
+          </StandardButton>
         </Box>
       </Box>
     </Section>

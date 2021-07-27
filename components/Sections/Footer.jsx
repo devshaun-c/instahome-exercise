@@ -59,32 +59,47 @@ const Footer = (props) => {
       h={height}
       position="relative"
     >
-      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap="60px">
-        <GridItem colSpan={4}>
+      <Grid
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(12, 1fr)",
+        ]}
+        height="100%"
+        gap={[0, 0, "60px"]}
+      >
+        <GridItem colSpan={4} mb={[6]}>
           <Box>
             <Text fontWeight="bold" mb={2}>
               Company Logo
             </Text>
-            <Text fontSize="sm">
+            <Text fontSize={["xs", "sm"]}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in.
             </Text>
           </Box>
         </GridItem>
         <GridItem colSpan={8}>
-          <Grid templateColumns="repeat(12, 1fr)">
+          <Grid
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(1, 1fr)",
+              "repeat(12, 1fr)",
+            ]}
+          >
             {footerList.map((item, index) => (
               <GridItem
                 key={index}
                 colSpan={colSpan}
                 className={classes.gridItem}
+                mb={6}
               >
-                <Text fontWeight="bold" mb={6}>
+                <Text fontWeight="bold" mb={[4, 4, 6]} fontSize={["sm", "md"]}>
                   {item.title}
                 </Text>
-                <List spacing={3}>
-                  {item.links.map((link) => (
-                    <ListItem>
+                <List spacing={3} fontSize={["xs", "sm"]}>
+                  {item.links.map((link, index) => (
+                    <ListItem key={index}>
                       <a href={link.url}>{link.text}</a>
                     </ListItem>
                   ))}

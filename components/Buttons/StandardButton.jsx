@@ -10,7 +10,7 @@ const useStyles = createUseStyles({
 const StandardButton = (props) => {
   const theme = useTheme();
   const {
-    text = "Click",
+    children,
     isLoading = false,
     loadingText = "Submitting",
     onClick = () => alert("Hi"),
@@ -34,13 +34,14 @@ const StandardButton = (props) => {
       colorScheme={colorScheme}
       variant={variant}
       onClick={onClick}
+      fontSize={["xs", "xs", "sm"]}
       {...others}
       // _hover={{
       //   filter: variant == "outline" ? "none" : "brightness(90%)",
       //   _disabled: { bg: "default" },
       // }}
     >
-      {text}
+      {children}
     </Button>
   );
 };

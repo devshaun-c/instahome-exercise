@@ -65,12 +65,9 @@ const Headliner = (props) => {
         >
           {description}
         </Text>
-        <StandardButton
-          colorScheme="teal"
-          text={buttonLabel}
-          size="lg"
-          onClick={handleClick}
-        />
+        <StandardButton colorScheme="teal" size="lg" onClick={handleClick}>
+          {buttonLabel}
+        </StandardButton>
       </Box>
     </Section>
   );

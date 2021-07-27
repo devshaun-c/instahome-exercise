@@ -13,9 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
-import StandardButton from "../Buttons/StandardButton";
 import { useTheme } from "@emotion/react";
-import { CheckIcon, MinusIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
 import IconCard from "../Cards/IconCard";
 import emailIcon from "../../public/static/images/email.svg";
 
@@ -25,9 +23,8 @@ const useStyles = createUseStyles({
     margin: "auto",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
-    padding: "80px",
     marginBottom: "40px",
   },
   gridItem: {
@@ -117,34 +114,49 @@ const Offerings = (props) => {
       h={height}
       position="relative"
     >
-      <div className={classes.header}>
-        <Heading fontSize={["lg", "lg", "xx-large"]} textAlign="center">
+      <Box className={classes.header} p={["40px 0", "80px 0"]}>
+        <Heading
+          fontSize={["x-large", "x-large", "xx-large"]}
+          // textAlign="center"
+          pr={["48px", "0"]}
+        >
           {header}
         </Heading>
         <Text
-          textAlign="center"
-          fontSize={["md", "md", "lg"]}
-          mt={2}
+          // textAlign="center"
+          fontSize={["sm", "sm", "md"]}
+          mt={4}
           color="grey"
         >
           {description}
         </Text>
-      </div>
+      </Box>
       {offerings.map((offer, index) => (
         <Grid
           key={index}
-          templateColumns="repeat(12, 1fr)"
+          templateColumns={["repeat(1, 1fr)", "repeat(12, 1fr)"]}
           height="100%"
           gap={5}
           mb="80px"
         >
-          <GridItem colSpan={4} mt={4}>
-            <Text fontSize="x-large" fontWeight="bold">
+          <GridItem colSpan={[12, 4]} mt={4}>
+            <Text
+              w="100%"
+              fontSize={["lg", "lg", "x-large"]}
+              fontWeight="bold"
+              textAlign={["center", "center", "start"]}
+            >
               {offer.topic}
             </Text>
           </GridItem>
-          <GridItem colSpan={8}>
-            <Grid templateColumns="repeat(4, 1fr)">
+          <GridItem colSpan={[12, 8]}>
+            <Grid
+              templateColumns={[
+                "repeat(1, 1fr)",
+                "repeat(1, 1fr)",
+                "repeat(4, 1fr)",
+              ]}
+            >
               {offer.offerings.map((item, index) => (
                 <GridItem key={index} colSpan={2}>
                   <IconCard

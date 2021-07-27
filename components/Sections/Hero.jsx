@@ -5,6 +5,7 @@ import {
   Grid,
   GridItem,
   Heading,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
@@ -15,21 +16,7 @@ import Container from "../Page/Container";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 
-const useStyles = createUseStyles({
-  content: {},
-  heroImg: {},
-  tag: {
-    marginBottom: "16px",
-    display: "inline-block",
-    padding: "4px 16px",
-    borderRadius: "8px",
-  },
-  gridItem: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-});
+const useStyles = createUseStyles({});
 
 const Hero = (props) => {
   const theme = useTheme();
@@ -41,7 +28,6 @@ const Hero = (props) => {
     primaryButtonText,
     secondaryButtonText,
     alt,
-    tag,
     header,
     description,
     callToAction,
@@ -57,59 +43,50 @@ const Hero = (props) => {
       h={height}
       position="relative"
     >
-      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
-        <GridItem colSpan={6} className={classes.gridItem}>
-          <Box>
-            {tag && (
-              <Text
-                fontSize="xx-small"
-                bg={`${theme.colors.primaryLight}`}
-                className={classes.tag}
-              >
-                {tag}
-              </Text>
-            )}
-            <Heading>{header}</Heading>
-            <Text fontSize="sm" mt={10} mb={6}>
-              {description}
-            </Text>
-            <ButtonGroup>
+      <Stack
+        direction={["column", "row", "row"]}
+        spacing="40px"
+        height={["80vh", "100%", "100%"]}
+      >
+        <Box h="100%" w="100%" mt={[4, 0, 0]}>
+          <Heading>{header}</Heading>
+          <Text fontSize="sm" mt={[6, 6, 10]} mb={6}>
+            {description}
+          </Text>
+          <Stack direction={"row"}>
+            <StandardButton colorScheme="teal" onClick={callToAction}>
+              {primaryButtonText}
+            </StandardButton>
+            {secondaryButtonText && (
               <StandardButton
+                variant="ghost"
                 colorScheme="teal"
-                text={primaryButtonText}
-                onClick={callToAction}
-              />
-              {secondaryButtonText && (
-                <StandardButton
-                  variant="ghost"
-                  colorScheme="teal"
-                  text={secondaryButtonText}
-                  onClick={secondaryAction}
-                />
-              )}
-            </ButtonGroup>
-          </Box>
-        </GridItem>
+                onClick={secondaryAction}
+              >
+                {secondaryButtonText}
+              </StandardButton>
+            )}
+          </Stack>
+        </Box>
 
-        <GridItem colSpan={6} className={classes.gridItem}>
-          {hasImage && (
-            <Box
-              height="80%"
-              overflow="hidden"
-              borderRadius="8px"
-              position="relative"
-            >
-              <Image
-                src={heroImg || placeholderImg}
-                alt={alt}
-                layout="fill"
-                objectFit="cover"
-                placeholder="blur"
-              />
-            </Box>
-          )}
-        </GridItem>
-      </Grid>
+        {hasImage && (
+          <Box
+            height="100%"
+            w="100%"
+            overflow="hidden"
+            borderRadius="8px"
+            position="relative"
+          >
+            <Image
+              src={heroImg || placeholderImg}
+              alt={alt}
+              layout="fill"
+              objectFit="cover"
+              placeholder="blur"
+            />
+          </Box>
+        )}
+      </Stack>
     </Section>
   );
 };

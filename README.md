@@ -10,8 +10,6 @@
 - react-icons
 - react-select
 - swiper (carousel)
-- react-responsive-carousel
-- react-slick (react-slick and slick-carousel styles)
 - next-images
 - next-SEO
 - Google Analytics at \_document.js
@@ -54,9 +52,13 @@
 - [x] Accordion
 - [x] Date picker / calendar
 - [x] Find new font with thick bold
-- [ ] Popup Modal
+- [x] Popup Modal
 - [ ] Mobile responsive
-- [ ] Remove unused carousel package (rrc and slick)
+  - [ ] Stopped at CardCarouselSection
+- [ ] Set global css variables
+  - [ ] Border radius
+  - [ ] Colors
+  - [ ]
 - [ ] JSS RULE NOT LINKED
   - [ ] At SwiperJS border radius
 

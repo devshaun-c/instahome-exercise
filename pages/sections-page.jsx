@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
@@ -30,7 +30,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const DemoPage = () => {
+const SectionsPage = () => {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
@@ -38,23 +38,22 @@ const DemoPage = () => {
   return (
     <div>
       <Hero
-        height="600px"
+        height={["100%", "500px", "600px"]}
         bgColor="whitesmoke"
         bgImage=""
         alt=""
         callToAction={() => {}}
         secondaryAction={() => {}}
-        primaryButtonText="Call to action"
-        secondaryButtonText="Secondary action"
+        primaryButtonText="Get Started Today"
+        secondaryButtonText="See Schedule"
         header="It's a Big World Out There, Go Explore!"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-        tag="Hello"
         hasImage
         heroImg={img}
       />
 
       <Focus
-        height="600px"
+        height={["100%", "50vh", "600px"]}
         bgColor="white"
         bgImage=""
         alt=""
@@ -65,7 +64,7 @@ const DemoPage = () => {
         image=""
         imageSide="left"
       >
-        <HStack spacing="40px">
+        <Stack direction={["column", "row", "row"]} spacing="40px">
           <Box display="flex" flexDir="column">
             <Text fontWeight="bold" fontSize="lg">
               20+
@@ -90,7 +89,7 @@ const DemoPage = () => {
               happy employees
             </Text>
           </Box>
-        </HStack>
+        </Stack>
       </Focus>
 
       <Focus
@@ -105,8 +104,10 @@ const DemoPage = () => {
         image={img}
         imageSide="right"
       >
-        <Text fontWeight="bold">Tanaka Satomi</Text>
-        <Text fontSize="sm" mt="4px">
+        <Text fontWeight="bold" fontSize={["sm", "md"]}>
+          Tanaka Satomi
+        </Text>
+        <Text fontSize={["xs", "sm"]} mt="4px">
           - Best customer service ever
         </Text>
         <HStack mt="16px">
@@ -241,13 +242,13 @@ const DemoPage = () => {
         autoplay={false}
       >
         <SwiperSlide>
-          <Box bg="orange" h="600px"></Box>
+          <Box bg="orange" h={["300px", "600px"]}></Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box bg="green.400" h="600px"></Box>
+          <Box bg="green.400" h={["300px", "600px"]}></Box>
         </SwiperSlide>
         <SwiperSlide>
-          <Box h="600px">
+          <Box h={["300px", "600px"]}>
             <Image src={img} layout="fill" objectFit="cover" />
           </Box>
         </SwiperSlide>
@@ -314,11 +315,12 @@ const DemoPage = () => {
           </Text>
           <StandardButton
             variant="link"
-            text="learn more"
             size="sm"
             colorScheme="teal"
             onClick={() => {}}
-          />
+          >
+            learn more
+          </StandardButton>
         </SquareCard>
         <SquareCard>
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
@@ -327,12 +329,9 @@ const DemoPage = () => {
           <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
-          <StandardButton
-            variant="link"
-            text="learn more"
-            size="sm"
-            colorScheme="teal"
-          />
+          <StandardButton variant="link" size="sm" colorScheme="teal">
+            learn more
+          </StandardButton>
         </SquareCard>
         <SquareCard>
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
@@ -341,12 +340,9 @@ const DemoPage = () => {
           <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
-          <StandardButton
-            variant="link"
-            text="learn more"
-            size="sm"
-            colorScheme="teal"
-          />
+          <StandardButton variant="link" size="sm" colorScheme="teal">
+            learn more
+          </StandardButton>
         </SquareCard>
         <SquareCard>
           <Text fontSize="lg" fontWeight="bold" mb={2} textAlign="center">
@@ -355,12 +351,9 @@ const DemoPage = () => {
           <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
             Highlights from our recent activities
           </Text>
-          <StandardButton
-            variant="link"
-            text="learn more"
-            size="sm"
-            colorScheme="teal"
-          />
+          <StandardButton variant="link" size="sm" colorScheme="teal">
+            learn more
+          </StandardButton>
         </SquareCard>
       </StackGroup>
 
@@ -377,7 +370,7 @@ const DemoPage = () => {
 
       <PricingPlans
         header="Market and sell from one place"
-        description="Plans that start free and grow with you"
+        description="Plans that start free and grow with you. "
         bgColor="whitesmoke"
         textColor="black"
         plans={[
@@ -506,4 +499,4 @@ const DemoPage = () => {
   );
 };
 
-export default DemoPage;
+export default SectionsPage;

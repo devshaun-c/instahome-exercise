@@ -1,29 +1,12 @@
-import React, { useState } from "react";
-import {
-  Box,
-  ButtonGroup,
-  Grid,
-  GridItem,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import React from "react";
+import { Box, Grid, GridItem, Heading, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
-import StandardButton from "../Buttons/StandardButton";
 import placeholderImg from "../../public/static/images/placeholder.png";
-import Container from "../Page/Container";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({
-  content: {},
-  heroImg: {},
-  tag: {
-    marginBottom: "16px",
-    display: "inline-block",
-    padding: "4px 16px",
-    borderRadius: "8px",
-  },
   gridItem: {
     display: "flex",
     flexDirection: "column",
@@ -54,82 +37,72 @@ const Focus = (props) => {
       h={height}
       position="relative"
     >
-      <Grid templateColumns="repeat(12, 1fr)" height="100%" gap={10}>
+      <Stack direction={["column", "row", "row"]} spacing="40px" height="100%">
         {imageSide === "right" && (
-          <GridItem colSpan={6} className={classes.gridItem}>
+          <Box display="flex" flexDir="column" w="100%" h="100%">
             <Box>
               {tag && (
-                <Text
-                  fontSize="xx-small"
-                  bg={`${theme.colors.primaryLight}`}
-                  className={classes.tag}
-                >
+                <Text fontSize={["xx-small", "xs"]} mb={2}>
                   {tag}
                 </Text>
               )}
               <Heading
-                fontSize="x-large"
+                fontSize={["large", "x-large"]}
                 fontWeight="bold"
                 maxW="380px"
                 lineHeight="1.3"
               >
                 {header}
               </Heading>
-              <Text fontSize="sm" mt={4} mb={6}>
+              <Text fontSize={["xs", "sm"]} mt={4} mb={6}>
                 {description}
               </Text>
               {children}
             </Box>
-          </GridItem>
+          </Box>
         )}
 
-        <GridItem colSpan={6} className={classes.gridItem}>
-          {hasImage && (
-            <Box
-              height="80%"
-              overflow="hidden"
-              borderRadius="8px"
-              position="relative"
-            >
-              <Image
-                src={image || placeholderImg}
-                alt={alt}
-                layout="fill"
-                objectFit="cover"
-                placeholder="blur"
-              />
-            </Box>
-          )}
-        </GridItem>
+        {hasImage && (
+          <Box
+            w="100%"
+            h="100%"
+            minH="150px"
+            overflow="hidden"
+            borderRadius="8px"
+            position="relative"
+          >
+            <Image
+              src={image || placeholderImg}
+              alt={alt}
+              layout="fill"
+              objectFit="cover"
+              placeholder="blur"
+            />
+          </Box>
+        )}
 
         {imageSide === "left" && (
-          <GridItem colSpan={6} className={classes.gridItem}>
-            <Box>
-              {tag && (
-                <Text
-                  fontSize="xx-small"
-                  bg={`${theme.colors.primaryLight}`}
-                  className={classes.tag}
-                >
-                  {tag}
-                </Text>
-              )}
-              <Heading
-                fontSize="x-large"
-                fontWeight="bold"
-                maxW="380px"
-                lineHeight="1.3"
-              >
-                {header}
-              </Heading>
-              <Text fontSize="sm" mt={4} mb={6}>
-                {description}
+          <Box display="flex" flexDir="column" w="100%">
+            {tag && (
+              <Text fontSize={["xx-small", "xs"]} mb={2}>
+                {tag}
               </Text>
-              {children}
-            </Box>
-          </GridItem>
+            )}
+            <Heading
+              fontSize={["large", "x-large"]}
+              fontWeight="bold"
+              maxW="380px"
+              lineHeight="1.3"
+            >
+              {header}
+            </Heading>
+            <Text fontSize={["xs", "sm"]} mt={4} mb={6}>
+              {description}
+            </Text>
+            {children}
+          </Box>
         )}
-      </Grid>
+      </Stack>
     </Section>
   );
 };

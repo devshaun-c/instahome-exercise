@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
@@ -13,15 +13,12 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 const useStyles = createUseStyles({
   swiper: {
     paddingBottom: "32px",
-    "& .swiper-wrapper": {
-      //   paddingLeft: "16px",
-    },
-    // padding: "16px",
+    "& .swiper-wrapper": {},
     "& .swiper-button-disabled": {
       display: "none",
     },
     "& .swiper-button-next": {
-      right: "0",
+      right: "-5px",
       background: "rgba(255,255,255,1)",
       width: "50px",
       height: "100%",
@@ -29,6 +26,10 @@ const useStyles = createUseStyles({
       borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
       "&:hover": {
         background: "rgba(255,255,255,0.8)",
+      },
+
+      "@media screen and (max-width: 1000px)": {
+        display: "none",
       },
     },
 
@@ -38,7 +39,7 @@ const useStyles = createUseStyles({
     },
 
     "& .swiper-button-prev": {
-      left: "0",
+      left: "-5px",
       background: "rgba(255,255,255,1)",
       width: "50px",
       height: "100%",
@@ -46,6 +47,10 @@ const useStyles = createUseStyles({
       borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
       "&:hover": {
         background: "rgba(255,255,255,0.8)",
+      },
+
+      "@media screen and (max-width: 1000px)": {
+        display: "none",
       },
     },
 

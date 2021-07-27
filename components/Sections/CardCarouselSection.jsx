@@ -1,18 +1,11 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import { useTheme } from "@emotion/react";
 import Carousel from "../Grouping/Carousel";
 
-const useStyles = createUseStyles({
-  tag: {
-    marginBottom: "16px",
-    display: "inline-block",
-    padding: "4px 16px",
-    borderRadius: "8px",
-  },
-});
+const useStyles = createUseStyles({});
 
 const CardCarouselSection = (props) => {
   const theme = useTheme();
@@ -35,18 +28,19 @@ const CardCarouselSection = (props) => {
       position="relative"
     >
       {tag && (
-        <Text
-          fontSize="xx-small"
-          bg={`${theme.colors.primaryLight}`}
-          className={classes.tag}
-        >
+        <Text fontSize={["xx-small", "xs"]} mb={2}>
           {tag}
         </Text>
       )}
-      <Text fontSize="x-large" fontWeight="bold" lineHeight="1.4">
+      <Heading
+        fontSize={["large", "x-large"]}
+        fontWeight="bold"
+        maxW="380px"
+        lineHeight="1.3"
+      >
         {header}
-      </Text>
-      <Box mt="40px" mb="24px">
+      </Heading>
+      <Box mt={5} mb={3}>
         <Carousel slidesPerView={"auto"} {...others}>
           {children}
         </Carousel>

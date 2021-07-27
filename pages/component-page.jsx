@@ -36,6 +36,7 @@ import AccordionTable from "../components/Grouping/AccordionTable";
 import TabsPanel from "../components/Grouping/TabsPanel";
 import CustomSelect from "../components/Controls/CustomSelect";
 import Datepicker from "../components/Controls/Datepicker";
+import OverlayModal from "../components/Page/OverlayModal";
 
 const useStyles = createUseStyles({
   contentWrapper: {
@@ -44,10 +45,12 @@ const useStyles = createUseStyles({
   },
 });
 
-const DemoPage = () => {
+const ComponentPage = () => {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
+
+  const [modalToggle, setModalToggle] = useState(false);
 
   return (
     <div>
@@ -63,7 +66,7 @@ const DemoPage = () => {
             badgeType={BADGES.popular}
             avatar={img}
           />
-          <Box w="400px">
+          <Box>
             <IconCard
               title="Email Services"
               description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
@@ -91,7 +94,7 @@ const DemoPage = () => {
             title="Tanaka Satomi "
             subtitle="UI/UX designer"
             badgeObj={{ color: "purple", text: "new" }}
-            width="300px"
+            width={["100%", "300px"]}
             image={img}
             action={() => alert("CLICKED")}
             badgeType={BADGES.popular}
@@ -111,12 +114,18 @@ const DemoPage = () => {
         <Heading fontSize="lg" mb="4">
           Button Group
         </Heading>
-        <ButtonGroup>
-          <StandardButton variant="outline" colorScheme="teal" text="outline" />
-          <StandardButton text="primary" colorScheme="teal" />
-          <StandardButton variant="ghost" text="ghost" colorScheme="teal" />
-          <StandardButton variant="link" text="link" colorScheme="teal" />
-        </ButtonGroup>
+        <Stack direction={["column", "row"]} spacing="24px">
+          <StandardButton variant="outline" colorScheme="teal">
+            outline
+          </StandardButton>
+          <StandardButton colorScheme="teal">primary</StandardButton>
+          <StandardButton variant="ghost" colorScheme="teal">
+            ghost
+          </StandardButton>
+          <StandardButton variant="link" colorScheme="teal">
+            link
+          </StandardButton>
+        </Stack>
       </Section>
 
       <Divider />
@@ -196,17 +205,6 @@ const DemoPage = () => {
             }}
           />
         </Stack>
-      </Section>
-
-      <Divider />
-
-      <Section>
-        <Heading fontSize="lg" mb="4">
-          Search
-        </Heading>
-        <SearchBox placeholder="search value" />
-        <SearchBox isLoading />
-        <SearchBox options={[{ title: "Option 1", value: 1 }]} />
       </Section>
 
       <Divider />
@@ -502,7 +500,7 @@ const DemoPage = () => {
         <Heading fontSize="lg" mb="4">
           Date Picker
         </Heading>
-        <Box display="flex" justifyContent="space-between">
+        <Stack direction={["column", "column", "row"]} spacing="24px">
           <Box>
             <Text>Single day</Text>
             <Datepicker />
@@ -515,13 +513,54 @@ const DemoPage = () => {
             <Text>Range selection</Text>
             <Datepicker type="range" />
           </Box>
-        </Box>
+        </Stack>
       </Section>
 
       <Divider />
+
+      <Section>
+        <Heading fontSize="lg" mb="4">
+          Modal popup
+        </Heading>
+        <Box display="flex">
+          <StandardButton onClick={() => setModalToggle(!modalToggle)}>
+            Pop up
+          </StandardButton>
+        </Box>
+        <OverlayModal
+          isOpen={modalToggle}
+          handleToggle={setModalToggle}
+          modalHeader={
+            <Box>
+              <Text>Header</Text>
+            </Box>
+          }
+          modalBody={
+            <Box>
+              <Text>
+                Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+                ullamco deserunt aute id consequat veniam incididunt duis in
+                sint irure nisi. Mollit officia cillum Lorem ullamco minim
+                nostrud elit officia tempor esse quis.
+              </Text>
+            </Box>
+          }
+          modalFooter={
+            <Box>
+              <StandardButton colorScheme="blue" mr={3}>
+                Close
+              </StandardButton>
+              <StandardButton variant="ghost">Secondary Action</StandardButton>
+            </Box>
+          }
+        />
+      </Section>
+
+      <Divider />
+
       <BackToTop show right="5%" />
     </div>
   );
 };
 
-export default DemoPage;
+export default ComponentPage;
