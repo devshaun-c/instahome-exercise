@@ -5,12 +5,6 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuItem,
-  MenuList,
-  Fade,
-  ScaleFade,
-  Slide,
-  SlideFade,
   useDisclosure,
   Collapse,
   Divider,
@@ -28,13 +22,13 @@ const useStyles = createUseStyles({
     width: "100%",
     zIndex: "1000",
     backgroundColor: "white",
+    borderBottom: "1px solid rgb(235,235,235)",
   },
   nav: {
     display: "flex",
-    padding: "18px 5%",
+    padding: "18px 0",
     alignItems: "center",
     justifyContent: "space-between",
-    borderBottom: "1px solid rgb(235,235,235)",
   },
   title: {
     cursor: "pointer",
@@ -79,45 +73,47 @@ const Navbar = () => {
   return (
     <nav className={classes.navbar}>
       <Box position="relative">
-        <div className={classes.nav}>
-          <div className={classes.title} onClick={() => handleNav("/")}>
-            Title
+        <Container>
+          <div className={classes.nav}>
+            <div className={classes.title} onClick={() => handleNav("/")}>
+              Title
+            </div>
+            <div className={classes.menuLinks}>
+              <Menu>
+                <MenuButton
+                  mr="24px"
+                  fontSize={["md", "sm"]}
+                  onClick={() => handleNav("/about")}
+                >
+                  About
+                </MenuButton>
+                <MenuButton
+                  mr="24px"
+                  fontSize={["md", "sm"]}
+                  onClick={() => handleNav("/component-page")}
+                >
+                  Components
+                </MenuButton>
+                <MenuButton
+                  mr="24px"
+                  fontSize={["md", "sm"]}
+                  onClick={() => handleNav("/sections-page")}
+                >
+                  Sections
+                </MenuButton>
+              </Menu>
+            </div>
+            <div className={classes.mobileMenu}>
+              <IconButton onClick={onToggle} size="sm">
+                {isOpen ? (
+                  <CloseIcon fontSize="xs" />
+                ) : (
+                  <HamburgerIcon fontSize="xs" />
+                )}
+              </IconButton>
+            </div>
           </div>
-          <div className={classes.menuLinks}>
-            <Menu>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/about")}
-              >
-                About
-              </MenuButton>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/component-page")}
-              >
-                Components
-              </MenuButton>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/sections-page")}
-              >
-                Sections
-              </MenuButton>
-            </Menu>
-          </div>
-          <div className={classes.mobileMenu}>
-            <IconButton onClick={onToggle} size="sm">
-              {isOpen ? (
-                <CloseIcon fontSize="xs" />
-              ) : (
-                <HamburgerIcon fontSize="xs" />
-              )}
-            </IconButton>
-          </div>
-        </div>
+        </Container>
 
         <Collapse in={isOpen} animateOpacity>
           <Box className={classes.mobileLinks}>
