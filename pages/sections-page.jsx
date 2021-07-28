@@ -28,6 +28,15 @@ const useStyles = createUseStyles({
     display: "flex",
     "@media screen and (max-width: 1000px)": {},
   },
+  swiperSlide: {
+    width: "300px",
+    paddingRight: "8px",
+    paddingLeft: "8px",
+
+    "@media screen and (max-width: 1000px)": {
+      width: "250px",
+    },
+  },
 });
 
 const SectionsPage = () => {
@@ -124,100 +133,55 @@ const SectionsPage = () => {
         height="100%"
         header="Explore Our Popular Activities"
       >
-        <SwiperSlide
-          style={{
-            width: "300px",
-            paddingRight: "8px",
-            paddingLeft: "8px",
-          }}
-        >
+        <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
-            title="Tanaka Satomi "
+            title="Tanaka Satomi"
             subtitle="UI/UX designer"
-            badgeObj={{ color: "purple", text: "new" }}
+            badgeType="new"
             action={() => alert("CLICKED")}
-          >
-            <Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            width: "300px",
-            paddingRight: "8px",
-            paddingLeft: "8px",
-          }}
-        >
+        <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
-            title="Tanaka Satomi "
+            title="Tanaka Satomi"
             subtitle="UI/UX designer"
-            badgeObj={{ color: "purple", text: "new" }}
+            badgeType="new"
             action={() => alert("CLICKED")}
-          >
-            <Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            width: "300px",
-            paddingRight: "8px",
-            paddingLeft: "8px",
-          }}
-        >
+        <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
-            title="Tanaka Satomi "
+            title="Tanaka Satomi"
             subtitle="UI/UX designer"
-            badgeObj={{ color: "purple", text: "new" }}
+            badgeType="new"
             action={() => alert("CLICKED")}
-          >
-            <Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            width: "300px",
-            paddingRight: "8px",
-            paddingLeft: "8px",
-          }}
-        >
+        <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
-            title="Tanaka Satomi "
+            title="Tanaka Satomi"
             subtitle="UI/UX designer"
-            badgeObj={{ color: "purple", text: "new" }}
+            badgeType="new"
             action={() => alert("CLICKED")}
-          >
-            <Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            width: "300px",
-            paddingRight: "8px",
-            paddingLeft: "8px",
-          }}
-        >
+        <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
-            title="Tanaka Satomi "
+            title="Tanaka Satomi"
             subtitle="UI/UX designer"
-            badgeObj={{ color: "purple", text: "new" }}
+            badgeType="new"
             action={() => alert("CLICKED")}
-          >
-            <Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          />
         </SwiperSlide>
       </CardCarouselSection>
 

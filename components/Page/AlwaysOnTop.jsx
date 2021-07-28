@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const AlwaysOnTop = ({ text, handleClick, right, left, ...others }) => {
   const [visible, setVisible] = useState(true);

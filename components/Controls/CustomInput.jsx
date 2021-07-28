@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { createUseStyles } from "react-jss";
@@ -38,10 +39,13 @@ const StandardInput = (props) => {
     errorText,
     ...others
   } = props;
+
+  const inputSize = useBreakpointValue(["sm", "sm", "md"]);
+
   return (
     <FormControl isRequired={required} isInvalid={errorText} {...others}>
-      {label && <FormLabel>{label}</FormLabel>}
-      <InputGroup>
+      {label && <FormLabel fontSize={["xs", "sm", "sm"]}>{label}</FormLabel>}
+      <InputGroup size={inputSize}>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
         {leftElement && (
           <InputLeftElement
@@ -63,11 +67,19 @@ const StandardInput = (props) => {
         {rightElement && <InputRightElement children={rightElement} />}
       </InputGroup>
       {helperText && (
-        <FormHelperText ml={4} fontSize="sm" color="gray.400">
+        <FormHelperText
+          ml={[2, 2, 4]}
+          fontSize={["xs", "sm", "sm"]}
+          color="gray.400"
+        >
           {helperText}
         </FormHelperText>
       )}
-      {errorText && <FormErrorMessage>{errorText}</FormErrorMessage>}
+      {errorText && (
+        <FormErrorMessage fontSize={["xs", "sm", "sm"]}>
+          {errorText}
+        </FormErrorMessage>
+      )}
     </FormControl>
   );
 };

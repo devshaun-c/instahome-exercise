@@ -1,23 +1,11 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import { useTheme } from "@emotion/react";
 import Carousel from "../Grouping/Carousel";
 
-const useStyles = createUseStyles({
-  tag: {
-    marginBottom: "16px",
-    display: "inline-block",
-    padding: "4px 16px",
-    borderRadius: "8px",
-  },
-  gridItem: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-});
+const useStyles = createUseStyles({});
 
 const ImageCarouselSection = (props) => {
   const theme = useTheme();
@@ -41,19 +29,23 @@ const ImageCarouselSection = (props) => {
       position="relative"
       fullView={fullView}
     >
-      {tag && (
-        <Text
-          fontSize="xx-small"
-          bg={`${theme.colors.primaryLight}`}
-          className={classes.tag}
-        >
-          {tag}
-        </Text>
+      {header && (
+        <Box mb={7}>
+          {tag && (
+            <Text fontSize={["xx-small", "xs"]} mb={2}>
+              {tag}
+            </Text>
+          )}
+          <Heading
+            fontSize={["sm", "x-large"]}
+            fontWeight="bold"
+            lineHeight="1.3"
+          >
+            {header}
+          </Heading>
+        </Box>
       )}
-      <Text fontSize="x-large" fontWeight="bold" lineHeight="1.4">
-        {header}
-      </Text>
-      <Box mt="40px" mb="24px">
+      <Box>
         <Carousel
           navigation={false}
           loop={true}

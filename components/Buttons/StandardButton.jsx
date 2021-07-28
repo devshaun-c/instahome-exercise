@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text, useBreakpointValue } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@chakra-ui/react";
 
@@ -23,9 +23,11 @@ const StandardButton = (props) => {
   } = props;
 
   const classes = useStyles();
+  const buttonSize = useBreakpointValue(["md", "md", "md"]);
+
   return (
     <Button
-      size={size}
+      size={buttonSize}
       isLoading={isLoading}
       loadingText={loadingText}
       className={classes.buttonStyle}

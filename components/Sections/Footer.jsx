@@ -94,10 +94,10 @@ const Footer = (props) => {
                 className={classes.gridItem}
                 mb={6}
               >
-                <Text fontWeight="bold" mb={[4, 4, 6]} fontSize={["sm", "md"]}>
+                <Text fontWeight="bold" mb={[2, 2, 4]} fontSize={["sm", "md"]}>
                   {item.title}
                 </Text>
-                <List spacing={3} fontSize={["xs", "sm"]}>
+                <List spacing={[1, 2, 2]} fontSize={["xs", "sm"]}>
                   {item.links.map((link, index) => (
                     <ListItem key={index}>
                       <a href={link.url}>{link.text}</a>
@@ -110,8 +110,8 @@ const Footer = (props) => {
         </GridItem>
       </Grid>
       <Divider mb={4} mt={6} />
-      <Box display="flex" justifyContent="space-between">
-        <Text>&copy; 2021 Company</Text>
+      <Box display="flex" justifyContent="space-between" pb="48px">
+        <Text fontSize={["xs", "sm"]}>&copy; 2021 Company</Text>
         <HStack spacing={3}>
           <FaInstagram fontSize="24px" />
           <FaFacebookSquare fontSize="24px" />

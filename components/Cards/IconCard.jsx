@@ -14,7 +14,15 @@ const useStyles = createUseStyles({
   },
 });
 
-const IconCard = ({ icon, bg, title, hasShadow, description, action }) => {
+const IconCard = ({
+  icon,
+  bg,
+  title,
+  hasShadow,
+  width,
+  description,
+  action,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -23,6 +31,7 @@ const IconCard = ({ icon, bg, title, hasShadow, description, action }) => {
       className={classes.card}
       boxShadow={hasShadow ? "0 2px 4px 0 rgb(0 0 0 / 12%)" : ""}
       bg={bg || "white"}
+      maxWidth={width}
     >
       <Box w="20%" mr={1}>
         <Box
@@ -41,7 +50,7 @@ const IconCard = ({ icon, bg, title, hasShadow, description, action }) => {
         <Text fontWeight="bold" fontSize="md" mb={2}>
           {title}
         </Text>
-        <Text fontSize="sm" color="grey">
+        <Text fontSize="xs" color="grey">
           {description}
         </Text>
         {action && (

@@ -49,7 +49,7 @@ const Hero = (props) => {
         height={["80vh", "100%", "100%"]}
       >
         <Box h="100%" w="100%" mt={[4, 0, 0]}>
-          <Heading>{header}</Heading>
+          <Heading w={["100%", "100%", "80%"]}>{header}</Heading>
           <Text fontSize="sm" mt={[6, 6, 10]} mb={6}>
             {description}
           </Text>

@@ -34,19 +34,19 @@ const Newsletter = (props) => {
         flexDir="column"
         justifyContent="center"
       >
-        <Box width={["100%", "100%", "50%"]}>
+        <Box width={["100%", "100%", "60%"]}>
           <Heading>Get involved. Stay active.</Heading>
-          <Text mt={4} fontSize={["sm", "sm", "md"]}>
+          <Text mt={[4, 6, 8]} fontSize={["xs", "sm", "md"]}>
             Join our newsletter to stay updated on upcoming workshops, events,
             and community activities in Kuala Lumpur, Selangor and more to come!
           </Text>
         </Box>
         <Box
-          width={["100%", "100%", "50%"]}
+          width={["100%", "100%", "60%"]}
           display="flex"
           flexDir={["column", "column", "row"]}
           alignItems="center"
-          mt={[6, 6, 4]}
+          mt={[6, 6, 6]}
         >
           <CustomInput
             placeholder="Email"
@@ -54,7 +54,12 @@ const Newsletter = (props) => {
             mb={[2, 2, 0]}
             variant="filled"
           />
-          <StandardButton pl="32px" pr="32px" colorScheme="teal" w="100%">
+          <StandardButton
+            pl="32px"
+            pr="32px"
+            colorScheme="teal"
+            w={["100%", "100%", "60%"]}
+          >
             Subscribe
           </StandardButton>
         </Box>

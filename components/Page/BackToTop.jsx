@@ -19,6 +19,7 @@ const BackToTop = ({ show, right, left }) => {
     <>
       {visible ? (
         <Button
+          display={["none", "flex", "flex"]}
           onClick={toTop}
           position="fixed"
           bottom="5%"

@@ -61,6 +61,7 @@ const ComponentPage = () => {
 
         <SimpleGrid width="100%" spacing={4} columns={1}>
           <AvatarCard
+            width="400px"
             title="Tanaka Satomi"
             subtitle="UI/UX designer"
             badgeType={BADGES.popular}
@@ -68,6 +69,7 @@ const ComponentPage = () => {
           />
           <Box>
             <IconCard
+              width="400px"
               title="Email Services"
               description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
               icon={emailIcon}
@@ -80,15 +82,12 @@ const ComponentPage = () => {
             subtitle="UI/UX designer"
             badgeType={BADGES.new}
             // image={img}
-          >
-            <Text fontSize="xs">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            text="  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in. Phasellus
               rutrum nisl magna. Etiam sed enim finibus, gravida sapien sed,
               varius velit. Nullam in facilisis ante. Sed nisi felis, sagittis
-              at odio at, aliquet placerat eros.
-            </Text>
-          </HorizontalImageCard>
+              at odio at, aliquet placerat eros."
+          />
 
           <VerticalImageCard
             title="Tanaka Satomi "
@@ -99,12 +98,9 @@ const ComponentPage = () => {
             action={() => alert("CLICKED")}
             badgeType={BADGES.popular}
             height="100%"
-          >
-            <Text fontSize="xs">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in.
-            </Text>
-          </VerticalImageCard>
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+          ></VerticalImageCard>
         </SimpleGrid>
       </Section>
 

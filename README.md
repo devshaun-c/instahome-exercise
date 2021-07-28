@@ -53,8 +53,7 @@
 - [x] Date picker / calendar
 - [x] Find new font with thick bold
 - [x] Popup Modal
-- [ ] Mobile responsive
-  - [ ] Stopped at CardCarouselSection
+- [x] Mobile responsive
 - [ ] Set global css variables
   - [ ] Border radius
   - [ ] Colors

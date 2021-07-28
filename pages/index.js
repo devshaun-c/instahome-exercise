@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useRouter } from "next/router";
 import Container from "../components/Page/Container";
@@ -20,7 +21,9 @@ const Home = () => {
 
   return (
     <Container>
-      <div className={classes.contentWrapper}></div>
+      <div className={classes.contentWrapper}>
+        <Box mt={10}>TEST TEST</Box>
+      </div>
     </Container>
   );
 };

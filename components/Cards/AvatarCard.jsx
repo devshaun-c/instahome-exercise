@@ -14,12 +14,12 @@ const useStyles = createUseStyles({
   },
 });
 
-const AvatarCard = ({ title, bg, subtitle, avatar, badgeObj }) => {
+const AvatarCard = ({ title, bg, subtitle, width, avatar, badgeObj }) => {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
-    <Box className={classes.card} bg={bg || "white"}>
+    <Box className={classes.card} bg={bg || "white"} maxWidth={width}>
       <Avatar src={avatar} />
       <Box ml="6">
         <Text fontWeight="bold">

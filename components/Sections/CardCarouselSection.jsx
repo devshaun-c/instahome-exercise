@@ -27,21 +27,22 @@ const CardCarouselSection = (props) => {
       h={height}
       position="relative"
     >
-      {tag && (
-        <Text fontSize={["xx-small", "xs"]} mb={2}>
-          {tag}
-        </Text>
-      )}
-      <Heading
-        fontSize={["large", "x-large"]}
-        fontWeight="bold"
-        maxW="380px"
-        lineHeight="1.3"
-      >
-        {header}
-      </Heading>
-      <Box mt={5} mb={3}>
-        <Carousel slidesPerView={"auto"} {...others}>
+      <Box mb={5}>
+        {tag && (
+          <Text fontSize={["xx-small", "xs"]} mb={[1, 2, 2]}>
+            {tag}
+          </Text>
+        )}
+        <Heading
+          fontSize={["sm", "x-large"]}
+          fontWeight="bold"
+          lineHeight="1.3"
+        >
+          {header}
+        </Heading>
+      </Box>
+      <Box>
+        <Carousel slidesPerView={"auto"} freeMode={true} {...others}>
           {children}
         </Carousel>
       </Box>

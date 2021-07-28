@@ -14,23 +14,23 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     borderRadius: "8px",
     boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
-    margin: "16px 0",
+    // margin: "16px 0",
     // alignItems: "center",
   },
 });
 
-const TestCard = (props) => {
+const VerticalImageCard = (props) => {
   const theme = useTheme();
   const classes = useStyles(props);
   const {
     width,
     title,
-    height = "500px",
+    height = "100%",
     bg,
     subtitle,
     image,
     badgeType,
-    children,
+    text,
     action,
     alt,
   } = props;
@@ -64,7 +64,7 @@ const TestCard = (props) => {
       cursor={action ? "pointer" : "default"}
     >
       <Box
-        minH="200px"
+        minH={["150px", "200px"]}
         overflow="hidden"
         borderRadius="8px 8px 0 0"
         position="relative"
@@ -77,20 +77,26 @@ const TestCard = (props) => {
           placeholder="blur"
         />
       </Box>
-      <Box p="4">
+      <Box p="8px 16px 16px 16px">
         {badgeObj && (
-          <Badge mb="2" colorScheme={badgeObj.color} fontSize="0.6em">
+          <Badge mb={[1, 2]} colorScheme={badgeObj.color} fontSize="0.6em">
             {badgeObj.text}
           </Badge>
         )}
-        <Text fontWeight="bold" fontSize="md">
+        <Text fontWeight="bold" fontSize="md" isTruncated>
           {title}
         </Text>
-        <Text fontSize="xs">{subtitle}</Text>
-        <Box marginTop="16px">{children}</Box>
+        <Text fontSize="xs" isTruncated>
+          {subtitle}
+        </Text>
+        <Box marginTop="16px">
+          <Text fontSize="xs" noOfLines={[2, 3, 3]}>
+            {text}
+          </Text>
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default TestCard;
+export default VerticalImageCard;

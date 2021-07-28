@@ -22,7 +22,7 @@ const useStyles = createUseStyles({
 
 const theme = extendTheme({
   colors: {
-    primary: "#D22326",
+    primary: "teal",
     primaryMedium: "#f18183",
     primaryLight: "#ffd9d9",
     secondary: "",

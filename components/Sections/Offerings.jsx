@@ -114,7 +114,7 @@ const Offerings = (props) => {
       h={height}
       position="relative"
     >
-      <Box className={classes.header} p={["40px 0", "80px 0"]}>
+      <Box className={classes.header} p={["40px 0 0 0", "80px 0"]}>
         <Heading
           fontSize={["x-large", "x-large", "xx-large"]}
           // textAlign="center"
@@ -137,14 +137,14 @@ const Offerings = (props) => {
           templateColumns={["repeat(1, 1fr)", "repeat(12, 1fr)"]}
           height="100%"
           gap={5}
-          mb="80px"
+          mb={["32 px", "80px"]}
         >
           <GridItem colSpan={[12, 4]} mt={4}>
             <Text
               w="100%"
-              fontSize={["lg", "lg", "x-large"]}
+              fontSize={["md", "md", "x-large"]}
               fontWeight="bold"
-              textAlign={["center", "center", "start"]}
+              textAlign={["start", "start", "start"]}
             >
               {offer.topic}
             </Text>
