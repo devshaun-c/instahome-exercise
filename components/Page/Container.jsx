@@ -6,7 +6,7 @@ const useStyles = createUseStyles({
     height: "100%",
     width: "90%",
     margin: "auto",
-    maxWidth: "1400px",
+    maxWidth: "1040px",
     "@media screen and (max-width: 800px)": {},
   },
 });

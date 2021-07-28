@@ -69,10 +69,10 @@ const Navbar = () => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const router = useRouter();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   const handleNav = (url) => {
-    onToggle();
+    onClose();
     router.push(url);
   };
 

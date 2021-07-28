@@ -89,7 +89,7 @@ const PricingPlans = (props) => {
           "repeat(12, 1fr)",
         ]}
         height="100%"
-        gap={10}
+        gap={2}
       >
         {plans.map((plan, index) => (
           <GridItem
