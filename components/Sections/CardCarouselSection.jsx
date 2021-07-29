@@ -29,12 +29,12 @@ const CardCarouselSection = (props) => {
     >
       <Box mb={5}>
         {tag && (
-          <Text fontSize={["xx-small", "xs"]} mb={[1, 2, 2]}>
+          <Text fontSize={["xs", "xs"]} mb={[1, 2, 2]}>
             {tag}
           </Text>
         )}
         <Heading
-          fontSize={["sm", "x-large"]}
+          fontSize={["md", "x-large"]}
           fontWeight="bold"
           lineHeight="1.3"
         >

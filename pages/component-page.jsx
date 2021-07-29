@@ -269,8 +269,7 @@ const ComponentPage = () => {
             <SwiperSlide
               style={{
                 width: "300px",
-                paddingRight: "8px",
-                paddingLeft: "8px",
+                padding: "8px",
               }}
             >
               <VerticalImageCard
@@ -290,8 +289,7 @@ const ComponentPage = () => {
             <SwiperSlide
               style={{
                 width: "300px",
-                paddingRight: "8px",
-                paddingLeft: "8px",
+                padding: "8px",
               }}
             >
               <VerticalImageCard
@@ -311,8 +309,7 @@ const ComponentPage = () => {
             <SwiperSlide
               style={{
                 width: "300px",
-                paddingRight: "8px",
-                paddingLeft: "8px",
+                padding: "8px",
               }}
             >
               <VerticalImageCard
@@ -332,8 +329,7 @@ const ComponentPage = () => {
             <SwiperSlide
               style={{
                 width: "300px",
-                paddingRight: "8px",
-                paddingLeft: "8px",
+                padding: "8px",
               }}
             >
               <VerticalImageCard

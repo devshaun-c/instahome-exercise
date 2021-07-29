@@ -35,8 +35,8 @@ const Newsletter = (props) => {
         justifyContent="center"
       >
         <Box width={["100%", "100%", "60%"]}>
-          <Heading>Get involved. Stay active.</Heading>
-          <Text mt={[4, 6, 8]} fontSize={["xs", "sm", "md"]}>
+          <Heading w="90%">Get involved. Stay active.</Heading>
+          <Text mt={[4, 6, 8]} fontSize={["sm", "sm", "md"]}>
             Join our newsletter to stay updated on upcoming workshops, events,
             and community activities in Kuala Lumpur, Selangor and more to come!
           </Text>

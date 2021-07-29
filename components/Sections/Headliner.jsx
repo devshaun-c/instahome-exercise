@@ -51,7 +51,7 @@ const Headliner = (props) => {
       >
         <Heading
           maxW={["80%", "70%"]}
-          fontSize={["lg", "x-large", "xx-large"]}
+          fontSize={["xx-large"]}
           textAlign="center"
         >
           {header}
@@ -59,7 +59,7 @@ const Headliner = (props) => {
         <Text
           maxW={["100%", "80%", "70%"]}
           textAlign="center"
-          fontSize={["xs", "sm", "md"]}
+          fontSize={["sm", "sm", "md"]}
           mt={10}
           mb={8}
         >
@@ -67,7 +67,7 @@ const Headliner = (props) => {
         </Text>
         <StandardButton
           colorScheme="teal"
-          size={["md", "lg"]}
+          size={["lg", "lg"]}
           onClick={handleClick}
         >
           {buttonLabel}

@@ -42,19 +42,19 @@ const Focus = (props) => {
           <Box display="flex" flexDir="column" w="100%" h="100%">
             <Box>
               {tag && (
-                <Text fontSize={["xx-small", "xs"]} mb={2}>
+                <Text fontSize={["xs", "xs"]} mb={2}>
                   {tag}
                 </Text>
               )}
               <Heading
-                fontSize={["large", "x-large"]}
+                fontSize={["x-large", "x-large"]}
                 fontWeight="bold"
                 maxW="380px"
                 lineHeight="1.3"
               >
                 {header}
               </Heading>
-              <Text fontSize={["xs", "sm"]} mt={4} mb={6}>
+              <Text fontSize={["sm", "md"]} mt={4} mb={6}>
                 {description}
               </Text>
               {children}
@@ -84,19 +84,19 @@ const Focus = (props) => {
         {imageSide === "left" && (
           <Box display="flex" flexDir="column" w="100%">
             {tag && (
-              <Text fontSize={["xx-small", "xs"]} mb={2}>
+              <Text fontSize={["xs", "xs"]} mb={2}>
                 {tag}
               </Text>
             )}
             <Heading
-              fontSize={["large", "x-large"]}
+              fontSize={["x-large", "x-large"]}
               fontWeight="bold"
               maxW="380px"
               lineHeight="1.3"
             >
               {header}
             </Heading>
-            <Text fontSize={["xs", "sm"]} mt={4} mb={6}>
+            <Text fontSize={["sm", "md"]} mt={4} mb={6}>
               {description}
             </Text>
             {children}

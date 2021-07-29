@@ -30,8 +30,7 @@ const useStyles = createUseStyles({
   },
   swiperSlide: {
     width: "300px",
-    paddingRight: "8px",
-    paddingLeft: "8px",
+    padding: "8px",
 
     "@media screen and (max-width: 1000px)": {
       width: "250px",

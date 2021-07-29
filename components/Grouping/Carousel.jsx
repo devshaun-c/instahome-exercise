@@ -79,7 +79,7 @@ const Carousel = ({ children, ...params }) => {
   return (
     <Swiper
       className={classes.swiper}
-      cssMode={mobileChromeIOS}
+      cssMode={true}
       navigation={true}
       pagination={true}
       slidesPerView={1}
