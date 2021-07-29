@@ -6,6 +6,7 @@
 - express
 - chakra UI
 - momentJS
+- react-device-detect
 - react-day-picker
 - react-icons
 - react-select

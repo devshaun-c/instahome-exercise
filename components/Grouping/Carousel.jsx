@@ -5,6 +5,7 @@ import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import { createUseStyles } from "react-jss";
+import { isMobile, isIOS, isChrome } from "react-device-detect";
 
 import SwiperCore, { Navigation, Autoplay, Pagination } from "swiper/core";
 
@@ -24,7 +25,7 @@ const useStyles = createUseStyles({
       width: "50px",
       height: "100%",
       top: "0",
-      // borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
+      borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
       "&:hover": {
         background: "rgba(255,255,255,1)",
       },
@@ -45,7 +46,7 @@ const useStyles = createUseStyles({
       width: "50px",
       height: "100%",
       top: "0",
-      // borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
+      borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
       "&:hover": {
         background: "rgba(255,255,255,1)",
       },
@@ -69,9 +70,16 @@ const useStyles = createUseStyles({
 const Carousel = ({ children, ...params }) => {
   const classes = useStyles(params);
 
+  var mobileChromeIOS = false;
+
+  if (isMobile && isIOS && isChrome) {
+    mobileChromeIOS = true;
+  }
+
   return (
     <Swiper
       className={classes.swiper}
+      cssMode={mobileChromeIOS}
       navigation={true}
       pagination={true}
       slidesPerView={1}
