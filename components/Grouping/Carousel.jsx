@@ -24,7 +24,7 @@ const useStyles = createUseStyles({
       width: "50px",
       height: "100%",
       top: "0",
-      borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
+      // borderRadius: (props) => (props.loop ? "none" : "50% 0 0 50%"),
       "&:hover": {
         background: "rgba(255,255,255,1)",
       },
@@ -45,7 +45,7 @@ const useStyles = createUseStyles({
       width: "50px",
       height: "100%",
       top: "0",
-      borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
+      // borderRadius: (props) => (props.loop ? "none" : "0 50% 50% 0"),
       "&:hover": {
         background: "rgba(255,255,255,1)",
       },

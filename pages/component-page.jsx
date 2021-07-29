@@ -362,10 +362,10 @@ const ComponentPage = () => {
           <Carousel
             navigation={false}
             loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //   delay: 2500,
+            //   disableOnInteraction: false,
+            // }}
           >
             <SwiperSlide>
               <Box bg="red" h="400px"></Box>

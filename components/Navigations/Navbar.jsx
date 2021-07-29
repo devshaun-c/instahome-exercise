@@ -115,7 +115,7 @@ const Navbar = () => {
           </div>
         </Container>
 
-        <Collapse in={isOpen} animateOpacity>
+        <Collapse in={isOpen}>
           <Box className={classes.mobileLinks}>
             <Menu>
               <MenuButton
