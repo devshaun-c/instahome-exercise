@@ -55,11 +55,12 @@
 - [x] Find new font with thick bold
 - [x] Popup Modal
 - [x] Mobile responsive
+- [x] Sticky area
 - [ ] Set global css variables
   - [ ] Border radius
   - [ ] Colors
-  - [ ]
-- [ ] JSS RULE NOT LINKED
-  - [ ] At SwiperJS border radius
+  - [ ] Container max width
+- [ ] JSS RULE NOT LINKED warning
+  - [ ] At SwiperJS border radius (but it does not affect styles)
 
 > Pending
