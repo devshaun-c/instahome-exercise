@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
-import img from "../public/static/images/newsletter-bg.jpg";
+import img from "../public/static/images/explore.svg";
 import BackToTop from "../components/Page/BackToTop";
 import { BADGES } from "../constants/badges";
 import Hero from "../components/Sections/Hero";
@@ -137,8 +137,9 @@ const SectionsPage = () => {
           <SwiperSlide className={classes.swiperSlide}>
             <VerticalImageCard
               title="Tanaka Satomi"
+              image={img}
               subtitle="UI/UX designer"
-              badgeType="new"
+              badgeType={BADGES.new}
               action={() => alert("CLICKED")}
               text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
@@ -148,7 +149,18 @@ const SectionsPage = () => {
             <VerticalImageCard
               title="Tanaka Satomi"
               subtitle="UI/UX designer"
-              badgeType="new"
+              badgeType={BADGES.new}
+              action={() => alert("CLICKED")}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Tanaka Satomi"
+              image={img}
+              subtitle="UI/UX designer"
+              badgeType={BADGES.popular}
               action={() => alert("CLICKED")}
               text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
@@ -158,7 +170,7 @@ const SectionsPage = () => {
             <VerticalImageCard
               title="Tanaka Satomi"
               subtitle="UI/UX designer"
-              badgeType="new"
+              badgeType={BADGES.limited}
               action={() => alert("CLICKED")}
               text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
@@ -167,18 +179,9 @@ const SectionsPage = () => {
           <SwiperSlide className={classes.swiperSlide}>
             <VerticalImageCard
               title="Tanaka Satomi"
+              image={img}
               subtitle="UI/UX designer"
-              badgeType="new"
-              action={() => alert("CLICKED")}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              subtitle="UI/UX designer"
-              badgeType="new"
+              badgeType={BADGES.new}
               action={() => alert("CLICKED")}
               text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
