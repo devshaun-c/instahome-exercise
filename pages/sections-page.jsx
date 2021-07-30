@@ -5,6 +5,7 @@ import { useTheme } from "@emotion/react";
 import { useRouter } from "next/router";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/explore.svg";
+import img2 from "../public/static/images/coding.svg";
 import BackToTop from "../components/Page/BackToTop";
 import { BADGES } from "../constants/badges";
 import Hero from "../components/Sections/Hero";
@@ -148,6 +149,7 @@ const SectionsPage = () => {
           <SwiperSlide className={classes.swiperSlide}>
             <VerticalImageCard
               title="Tanaka Satomi"
+              image={img2}
               subtitle="UI/UX designer"
               badgeType={BADGES.new}
               action={() => alert("CLICKED")}
@@ -169,6 +171,7 @@ const SectionsPage = () => {
           <SwiperSlide className={classes.swiperSlide}>
             <VerticalImageCard
               title="Tanaka Satomi"
+              image={img2}
               subtitle="UI/UX designer"
               badgeType={BADGES.limited}
               action={() => alert("CLICKED")}

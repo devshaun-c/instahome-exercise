@@ -7,7 +7,7 @@ const useStyles = createUseStyles({
   stickyDiv: {
     position: "sticky",
     top: 0,
-    zIndex: 1000,
+    zIndex: 500,
     boxShadow: "0 0 2px 0 rgb(46 62 72 / 12%), 0 2px 4px 0 rgb(46 62 72 / 12%)",
   },
   bottom: {

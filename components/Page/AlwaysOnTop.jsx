@@ -14,7 +14,7 @@ const AlwaysOnTop = ({ text, handleClick, right, left, ...others }) => {
           right={right}
           left={left}
           height="auto"
-          zIndex="100"
+          zIndex="1000"
           borderRadius="8px"
           fontSize="16px"
           outline="none"
