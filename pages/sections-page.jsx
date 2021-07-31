@@ -28,7 +28,6 @@ import StickyBox from "../components/Page/StickyBox";
 const useStyles = createUseStyles({
   contentWrapper: {
     display: "flex",
-    "@media screen and (max-width: 1000px)": {},
   },
   swiperSlide: {
     width: "300px",
@@ -343,7 +342,6 @@ const SectionsPage = () => {
           header="Market and sell from one place"
           description="Plans that start free and grow with you. "
           bgColor="whitesmoke"
-          textColor="black"
           plans={[
             {
               name: "Essentials",

@@ -15,33 +15,44 @@ const useStyles = createUseStyles({
   },
   content: {
     marginTop: "64px",
-    width: "100%",
-    "@media screen and (max-width: 1000px)": {},
   },
 });
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        color: "var(--default-font-color)",
+      },
+    },
+  },
   colors: {
-    primary: "teal",
-    primaryMedium: "#f18183",
-    primaryLight: "#ffd9d9",
-    secondary: "",
-    highlight: "",
+    primary: "var(--primary-color)",
+    secondary: "var(--secondary-color)",
+    brand: {
+      50: "#E6FFFA",
+      100: "#B2F5EA",
+      200: "#81E6D9",
+      300: "#4FD1C5",
+      400: "#38B2AC",
+      500: "#319795",
+      600: "#2C7A7B",
+      700: "#285E61",
+      800: "#234E52",
+      900: "#1D4044",
+    },
   },
   fonts: {
-    body: "Montserrat, Comfortaa, system-ui, sans-serif",
-    heading: "Raleway,Montserrat,Comfortaa,Georgia, serif",
-    mono: "Montserrat,Comfortaa, Menlo, monospace",
+    body: "var(--body-font)",
+    heading: "var(--heading-font)",
+    title: "var(--title-font)",
   },
   components: {
     Button: {
       baseStyle: {
-        // ...define your base styles
-        // background: "primary",
-        // color: "white",
+        borderRadius: "var(--border-radius)",
       },
       variants: {
-        // Make a variant, we'll call it `base` here and leave it empty
         base: {
           // background: "primary",
           // color: "white",

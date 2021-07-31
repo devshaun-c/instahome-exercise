@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Text, Badge } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Section from "../Sections/Section";
 import placeholderImg from "../../public/static/images/placeholder.png";
 import Image from "next/image";
-import { useTheme } from "@emotion/react";
 import { BADGES } from "../../constants/badges";
 
 const useStyles = createUseStyles({
@@ -12,15 +10,12 @@ const useStyles = createUseStyles({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
-    // margin: "16px 0",
-    // alignItems: "center",
+    borderRadius: "var(--border-radius)",
+    boxShadow: "var(--card-shadow)",
   },
 });
 
 const VerticalImageCard = (props) => {
-  const theme = useTheme();
   const classes = useStyles(props);
   const {
     width,

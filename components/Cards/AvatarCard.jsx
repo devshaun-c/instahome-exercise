@@ -8,9 +8,9 @@ const useStyles = createUseStyles({
     width: "100%",
     display: "flex",
     padding: "16px 24px",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
     alignItems: "center",
+    borderRadius: "var(--border-radius)",
+    boxShadow: "var(--card-shadow)",
   },
 });
 

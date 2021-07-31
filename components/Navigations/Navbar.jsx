@@ -21,17 +21,20 @@ const useStyles = createUseStyles({
     position: "fixed",
     width: "100%",
     zIndex: "1000",
+    height: "64px",
     backgroundColor: "white",
     borderBottom: "1px solid rgb(235,235,235)",
   },
   nav: {
     display: "flex",
-    padding: "18px 0",
     alignItems: "center",
+    height: "100%",
     justifyContent: "space-between",
   },
   title: {
     cursor: "pointer",
+    marginLeft: "5%",
+    // padding: "18px 0",
   },
   menuLinks: {
     display: "flex",
@@ -43,19 +46,24 @@ const useStyles = createUseStyles({
     display: "none",
     "@media screen and (max-width: 1000px)": {
       display: "flex",
+      justifyContent: "center",
+      height: "100%",
+      width: "50px",
     },
+  },
+  menuButton: {
+    borderRadius: "0px",
+    background: "none",
   },
   mobileLinks: {
     position: "absolute",
     right: "0",
-    width: "80%",
-    minHeight: "300px",
+    width: "100%",
     background: "white",
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
-    borderRadius: "0 0 0 8px",
   },
 });
 
@@ -72,48 +80,57 @@ const Navbar = () => {
 
   return (
     <nav className={classes.navbar}>
-      <Box position="relative">
-        <Container>
-          <div className={classes.nav}>
-            <div className={classes.title} onClick={() => handleNav("/")}>
-              Title
-            </div>
-            <div className={classes.menuLinks}>
-              <Menu>
-                <MenuButton
-                  mr="24px"
-                  fontSize={["md", "sm"]}
-                  onClick={() => handleNav("/about")}
-                >
-                  About
-                </MenuButton>
-                <MenuButton
-                  mr="24px"
-                  fontSize={["md", "sm"]}
-                  onClick={() => handleNav("/component-page")}
-                >
-                  Components
-                </MenuButton>
-                <MenuButton
-                  mr="24px"
-                  fontSize={["md", "sm"]}
-                  onClick={() => handleNav("/sections-page")}
-                >
-                  Sections
-                </MenuButton>
-              </Menu>
-            </div>
-            <div className={classes.mobileMenu}>
-              <IconButton onClick={onToggle} size="sm">
-                {isOpen ? (
-                  <CloseIcon fontSize="xs" />
-                ) : (
-                  <HamburgerIcon fontSize="xs" />
-                )}
-              </IconButton>
-            </div>
+      <Box position="relative" h="100%">
+        <div className={classes.nav}>
+          <div className={classes.title} onClick={() => handleNav("/")}>
+            Title
           </div>
-        </Container>
+          <div className={classes.menuLinks}>
+            <Menu>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/about")}
+              >
+                About
+              </MenuButton>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/component-page")}
+              >
+                Components
+              </MenuButton>
+              <MenuButton
+                mr="24px"
+                fontSize={["md", "sm"]}
+                onClick={() => handleNav("/sections-page")}
+              >
+                Sections
+              </MenuButton>
+            </Menu>
+          </div>
+          <Box className={classes.mobileMenu} bg={isOpen ? "teal.500" : "none"}>
+            <IconButton
+              onClick={onToggle}
+              className={classes.menuButton}
+              size="sm"
+              h="100%"
+              w="100%"
+              color={isOpen ? "white" : ""}
+              _focus={{ outline: "none", bg: "none" }}
+              _selected={{ outline: "none", bg: "none" }}
+              _active={{ outline: "none", bg: "none" }}
+              _hover={{ bg: "none" }}
+            >
+              {isOpen ? (
+                <CloseIcon fontSize="xs" />
+              ) : (
+                <HamburgerIcon fontSize="md" />
+              )}
+            </IconButton>
+          </Box>
+        </div>
 
         <Collapse in={isOpen}>
           <Box className={classes.mobileLinks}>
@@ -121,47 +138,42 @@ const Navbar = () => {
               <MenuButton
                 as={Button}
                 width="100%"
-                rightIcon={<ChevronRightIcon />}
+                rightIcon={<ChevronRightIcon fontSize="md" />}
                 borderRadius="none"
                 textAlign="start"
                 fontSize="xs"
                 fontWeight="normal"
-                bg="#F6F8FA"
-                borderBottom="1px solid #EEEEEE"
+                colorScheme="teal"
                 p="4px 16px"
                 onClick={() => handleNav("/about")}
               >
                 About
               </MenuButton>
-              <Divider />
               <MenuButton
                 as={Button}
                 width="100%"
-                rightIcon={<ChevronRightIcon />}
+                rightIcon={<ChevronRightIcon fontSize="md" />}
                 borderRadius="none"
                 textAlign="start"
                 fontSize="xs"
-                bg="#F6F8FA"
+                colorScheme="teal"
                 fontWeight="normal"
-                borderBottom="1px solid #EEEEEE"
                 p="4px 16px"
                 onClick={() => handleNav("/component-page")}
               >
                 Components
               </MenuButton>
 
-              <Divider />
               <MenuButton
                 as={Button}
                 width="100%"
-                rightIcon={<ChevronRightIcon />}
+                rightIcon={<ChevronRightIcon fontSize="md" />}
                 borderRadius="none"
                 textAlign="start"
                 fontSize="xs"
-                bg="#F6F8FA"
+                colorScheme="teal"
                 fontWeight="normal"
                 p="4px 16px"
-                borderBottom="1px solid #EEEEEE"
                 onClick={() => handleNav("/sections-page")}
               >
                 Sections

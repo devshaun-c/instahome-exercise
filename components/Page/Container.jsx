@@ -6,7 +6,7 @@ const useStyles = createUseStyles({
     height: "100%",
     width: "90%",
     margin: "auto",
-    maxWidth: "1200px",
+    maxWidth: "var(--max-width)",
   },
 });
 

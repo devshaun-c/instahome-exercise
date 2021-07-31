@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import { Box, Button, Text, useBreakpointValue } from "@chakra-ui/react";
-import { createUseStyles } from "react-jss";
-import { useTheme } from "@chakra-ui/react";
-
-const useStyles = createUseStyles({
-  buttonStyle: {},
-});
+import React from "react";
+import { Button, useBreakpointValue } from "@chakra-ui/react";
 
 const StandardButton = (props) => {
-  const theme = useTheme();
   const {
     children,
     isLoading = false,
@@ -22,7 +15,6 @@ const StandardButton = (props) => {
     ...others
   } = props;
 
-  const classes = useStyles();
   const buttonSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
@@ -30,13 +22,13 @@ const StandardButton = (props) => {
       size={buttonSize}
       isLoading={isLoading}
       loadingText={loadingText}
-      className={classes.buttonStyle}
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       colorScheme={colorScheme}
       variant={variant}
       onClick={onClick}
       fontSize={["xs", "xs", "sm"]}
+      _focus={{ outline: "0" }}
       {...others}
       // _hover={{
       //   filter: variant == "outline" ? "none" : "brightness(90%)",

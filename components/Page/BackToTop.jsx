@@ -19,20 +19,16 @@ const BackToTop = ({ show, right, left }) => {
     <>
       {visible ? (
         <Button
+          colorScheme="brand"
           display={["none", "flex", "flex"]}
           onClick={toTop}
           position="fixed"
-          bottom="5%"
+          bottom="3%"
           right={right}
           left={left}
-          borderRadius="8px"
           width="40px"
           height="40px"
-          outline="none"
-          color="white"
           zIndex="1000"
-          bg={theme.colors.primary}
-          _hover={{ bg: "" }}
           _focus={{ outline: "0" }}
         >
           <ChevronUpIcon fontSize="xl" />

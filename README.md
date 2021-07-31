@@ -56,10 +56,10 @@
 - [x] Popup Modal
 - [x] Mobile responsive
 - [x] Sticky area
-- [ ] Set global css variables
-  - [ ] Border radius
-  - [ ] Colors
-  - [ ] Container max width
+- [x] Set global css variables
+  - [x] Border radius
+  - [x] Colors
+  - [x] Container max width
 - [ ] JSS RULE NOT LINKED warning
   - [ ] At SwiperJS border radius (but it does not affect styles)
 

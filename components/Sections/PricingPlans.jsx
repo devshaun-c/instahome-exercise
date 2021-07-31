@@ -97,7 +97,7 @@ const PricingPlans = (props) => {
             colSpan={columnSpan}
             className={classes.gridItem}
             bg={plan.highlight ? "blue.800" : "white"}
-            color={plan.highlight ? "white" : "black"}
+            color={plan.highlight ? "white" : ""}
           >
             <Box>
               <Text fontSize="xx-large" fontWeight="bold">

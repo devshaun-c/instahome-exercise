@@ -2,15 +2,14 @@ import React from "react";
 import { Box, Text, Image } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import { SearchIcon } from "@chakra-ui/icons";
 import StandardButton from "../Buttons/StandardButton";
 
 const useStyles = createUseStyles({
   card: {
     width: "100%",
     display: "flex",
-    borderRadius: "8px",
     padding: "24px",
+    borderRadius: "var(--border-radius)",
   },
 });
 
@@ -24,7 +23,6 @@ const IconCard = ({
   action,
 }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <Box
