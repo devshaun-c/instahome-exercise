@@ -2,9 +2,9 @@
   --primary-color: rgb(255, 113, 47);
   --secondary-color: #cf461c;
   --default-font-color: #414141;
-  --title-font: Montserrat, Comfortaa, system-ui, sans-serif;
+  --title-font: Montserrat, system-ui, sans-serif;
   --body-font: Montserrat, Comfortaa, system-ui, sans-serif;
-  --heading-font: Raleway, Montserrat, Comfortaa, Georgia, serif;
+  --heading-font: Raleway, Montserrat, Comfortaa, serif;
   --max-width: 1200px;
   --border-radius: 8px;
   --card-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%);

@@ -31,6 +31,7 @@ const useStyles = createUseStyles({
     maxWidth: "var(--max-width)",
   },
   title: {
+    fontFamily: "var(--title-font)",
     cursor: "pointer",
     "@media screen and (max-width: 1000px)": {
       marginLeft: "5%",

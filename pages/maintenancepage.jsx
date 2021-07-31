@@ -24,7 +24,7 @@ const MaintenancePage = () => {
   const classes = useStyles();
 
   return (
-    <Container title="Website currently under maintenance." description="">
+    <Container>
       <div className={classes.contentWrapper}>
         <Text>We are currently adding more content to our website.</Text>
       </div>
