@@ -1,28 +1,21 @@
-const title = "Webpage Name";
-const description = "template description";
-
 const SEO = {
-  title,
-  description,
   canonical: "https://xxxxxxx.com",
   openGraph: {
     type: "website",
-    locale: "en_IE",
+    locale: "en_US",
     url: "https://xxxxxx.com",
-    title,
-    description,
+    site_name: "SiteName",
     images: [
       {
         url: "",
-        alt: title,
         width: 1200,
         height: 700,
       },
     ],
   },
   twitter: {
-    handle: "@xxxxxx",
-    site: "@xxxxxx",
+    handle: "@handle",
+    site: "@site",
     cardType: "summary_large_image",
   },
 };

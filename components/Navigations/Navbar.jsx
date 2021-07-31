@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -7,13 +7,10 @@ import {
   MenuButton,
   useDisclosure,
   Collapse,
-  Divider,
   Button,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import Container from "../../components/Page/Container";
 import { ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
@@ -30,11 +27,14 @@ const useStyles = createUseStyles({
     alignItems: "center",
     height: "100%",
     justifyContent: "space-between",
+    margin: "auto",
+    maxWidth: "var(--max-width)",
   },
   title: {
     cursor: "pointer",
-    marginLeft: "5%",
-    // padding: "18px 0",
+    "@media screen and (max-width: 1000px)": {
+      marginLeft: "5%",
+    },
   },
   menuLinks: {
     display: "flex",

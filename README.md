@@ -60,6 +60,7 @@
   - [x] Border radius
   - [x] Colors
   - [x] Container max width
+- [ ] Landing page
 - [ ] JSS RULE NOT LINKED warning
   - [ ] At SwiperJS border radius (but it does not affect styles)
 

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, HStack, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import { useTheme } from "@emotion/react";
-import { useRouter } from "next/router";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/explore.svg";
 import img2 from "../public/static/images/coding.svg";
@@ -24,11 +22,10 @@ import { SwiperSlide } from "swiper/react";
 import Footer from "../components/Sections/Footer";
 import Newsletter from "../components/Sections/Newsletter";
 import StickyBox from "../components/Page/StickyBox";
+import Page from "../components/Page/Page";
 
 const useStyles = createUseStyles({
-  contentWrapper: {
-    display: "flex",
-  },
+  pageWrapper: {},
   swiperSlide: {
     width: "300px",
     padding: "8px",
@@ -41,12 +38,15 @@ const useStyles = createUseStyles({
 
 const SectionsPage = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const router = useRouter();
 
   return (
-    <div>
-      <div>
+    <Page
+      pageMeta={{
+        title: "Sections - NextJS Template",
+        description: "Section examples built with NextJS components",
+      }}
+    >
+      <div className={classes.pageWrapper}>
         <Hero
           height={["100%", "500px", "600px"]}
           bgColor="whitesmoke"
@@ -476,7 +476,7 @@ const SectionsPage = () => {
       <Footer bgColor="whitesmoke" />
 
       <BackToTop show right="5%" />
-    </div>
+    </Page>
   );
 };
 

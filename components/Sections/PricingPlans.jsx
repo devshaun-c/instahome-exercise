@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  ButtonGroup,
   Grid,
   GridItem,
   Heading,
@@ -31,7 +30,7 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     boxShadow: "0 4px 6px 0 rgb(0 0 0 / 20%)",
-    borderRadius: "8px",
+    borderRadius: "var(--border-radius)",
     padding: "32px",
     "&:hover": {
       boxShadow: "0 20px 24px 0 rgb(0 0 0 / 20%)",
@@ -40,7 +39,6 @@ const useStyles = createUseStyles({
 });
 
 const PricingPlans = (props) => {
-  const theme = useTheme();
   const classes = useStyles(props);
   const {
     bgColor,
@@ -96,7 +94,7 @@ const PricingPlans = (props) => {
             key={index}
             colSpan={columnSpan}
             className={classes.gridItem}
-            bg={plan.highlight ? "blue.800" : "white"}
+            bg={plan.highlight ? "brand.800" : "white"}
             color={plan.highlight ? "white" : ""}
           >
             <Box>

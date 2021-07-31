@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Container from "../components/Page/Container";
 import imgHero2 from "../public/static/images/404-image.svg";
-import { useTheme } from "@emotion/react";
-import { useRouter } from "next/router";
 import Section from "../components/Sections/Section";
+import Page from "../components/Page/Page";
 
 const useStyles = createUseStyles({
   contentWrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    "@media screen and (max-width: 800px)": {
-      // padding: "0 32px",
-    },
   },
   header: {
-    padding: "32px 0",
-    "@media screen and (max-width: 800px)": {
-      width: "100%",
-    },
+    // padding: "32px 0",
   },
   topicWrapper: {
     margin: "32px 0",
@@ -31,28 +23,14 @@ const useStyles = createUseStyles({
       maxWidth: "100%",
     },
   },
-  topicHeader: {},
-  topicText: {
-    marginTop: "8px",
-    "@media screen and (max-width: 800px)": {
-      marginTop: "4px",
-      marginLeft: "0",
-    },
-  },
   heroImage: {
     width: "300px",
     margin: "auto",
-    // padding: "32px",
-    // "@media screen and (max-width: 800px)": {
-    //   display: "none",
-    // },
   },
 });
 
 const About = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const router = useRouter();
 
   const topics = [
     {
@@ -68,48 +46,55 @@ const About = () => {
   ];
 
   return (
-    <Section>
-      <div className={classes.contentWrapper}>
-        <div className={classes.header}>
-          <Text fontSize="x-large" fontWeight="bold" textAlign="center">
-            About Us
-          </Text>
-          <Text
-            fontSize="sm"
-            textAlign="center"
-            margin="auto"
-            mt={["md", "sm"]}
-            width="90%"
-          >
-            Subtitle
-          </Text>
-          <div className={classes.heroImage}>
-            <img src={imgHero2} />
-          </div>
-        </div>
-
-        {topics.map((topic, index) => (
-          <div key={index} className={classes.topicWrapper}>
-            <Text fontSize="lg">{topic.header}</Text>
-            <Text fontSize={["md", "sm"]} className={classes.topicText}>
-              {topic.description}
+    <Page
+      pageMeta={{
+        title: "About - This website",
+        description: "Explain the goal and objective of this website",
+      }}
+    >
+      <Section>
+        <div className={classes.contentWrapper}>
+          <div className={classes.header}>
+            <Text fontSize="x-large" fontWeight="bold" textAlign="center">
+              About Us
             </Text>
-            {topic.children}
+            <Text
+              fontSize="sm"
+              textAlign="center"
+              margin="auto"
+              mt={["md", "sm"]}
+              width="90%"
+            >
+              Subtitle
+            </Text>
+            <div className={classes.heroImage}>
+              <img src={imgHero2} />
+            </div>
           </div>
-        ))}
 
-        <Box mt="64px">
-          <Text fontSize="xs" className={classes.topicText}>
-            illustrations from{" "}
-            <u>
-              <a target="_blank" href="https://storyset.com/">
-                Storyset.com
-              </a>
-            </u>
-          </Text>
-        </Box>
-      </div>
-    </Section>
+          {topics.map((topic, index) => (
+            <div key={index} className={classes.topicWrapper}>
+              <Text fontSize="lg">{topic.header}</Text>
+              <Text fontSize="sm" mt={[2, 4, 4]}>
+                {topic.description}
+              </Text>
+              {topic.children}
+            </div>
+          ))}
+
+          <Box mt="64px">
+            <Text fontSize="xs">
+              illustrations from{" "}
+              <u>
+                <a target="_blank" href="https://storyset.com/">
+                  Storyset.com
+                </a>
+              </u>
+            </Text>
+          </Box>
+        </div>
+      </Section>
+    </Page>
   );
 };
 

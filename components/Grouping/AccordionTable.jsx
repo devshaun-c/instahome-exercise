@@ -31,13 +31,15 @@ const AccordionTable = ({ props, items, ...params }) => {
         <AccordionItem key={index} className={classes.accordionItem}>
           <h2>
             <AccordionButton
-              pb={4}
-              pt={4}
+              pb={[2, 4, 4]}
+              pt={[2, 4, 4]}
               _focus={{ outline: "none" }}
               _hover={{ bg: "none" }}
             >
               <Box flex="1" textAlign="left">
-                <Text fontWeight="bold">{item.title}</Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {item.title}
+                </Text>
               </Box>
               <AccordionIcon />
             </AccordionButton>

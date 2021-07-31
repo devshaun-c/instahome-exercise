@@ -1,49 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { createUseStyles } from "react-jss";
-import { useRouter } from "next/router";
+import React from "react";
 import Head from "next/head";
 
-const useStyles = createUseStyles({
-  container: {},
-  main: {},
-});
-
 const Page = (props) => {
-  const { children, ...customMeta } = props;
-  const router = useRouter();
-  const classes = useStyles();
-
-  const meta = {
-    name: "Template",
-    title: "Website - Site short description",
-    webUrl: "https://sitename.com",
-    description: `site description`,
-    image: "",
-    type: "website",
-    ...customMeta,
-  };
+  const { children, pageMeta = { title: "", description: "" } } = props;
 
   return (
-    <div className={classes.container}>
+    <>
       <Head>
-        <title>{meta.title}</title>
+        <title>{pageMeta.title}</title>
         <meta name="robots" content="follow, index" />
         <link rel="shortcut icon" href="/static/images/sushi.svg" />
-        <meta content={meta.description} name="description" />
-        <meta property="og:url" content={`${meta.webUrl}${router.asPath}`} />
-        <meta property="og:type" content={meta.type} />
-        <meta property="og:site_name" content={meta.name} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:image" content={meta.image} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
+        <meta content={pageMeta.description} name="description" />
+        {/* <meta property="og:url" content={`${pageMeta.webUrl}${router.asPath}`} /> */}
+        {/* <meta property="og:type" content={pageMeta.type} /> */}
+        {/* <meta property="og:site_name" content={pageMeta.name} /> */}
+        <meta property="og:description" content={pageMeta.description} />
+        <meta property="og:title" content={pageMeta.title} />
+        {/* <meta property="og:image" content={pageMeta.image} /> */}
+        <meta name="twitter:title" content={pageMeta.title} />
+        <meta name="twitter:description" content={pageMeta.description} />
       </Head>
-      <main className={classes.main}>{children}</main>
-    </div>
+      <div>{children}</div>
+    </>
   );
 };
 

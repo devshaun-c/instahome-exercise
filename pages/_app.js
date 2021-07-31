@@ -9,11 +9,11 @@ import Navbar from "../components/Navigations/Navbar";
 import AlwaysOnTop from "../components/Page/AlwaysOnTop";
 
 const useStyles = createUseStyles({
-  main: {
+  root: {
     display: "flex",
     flexDirection: "column",
   },
-  content: {
+  main: {
     marginTop: "64px",
   },
 });
@@ -81,11 +81,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <DefaultSeo {...SEO} />
-      <div className={classes.main}>
+      <div className={classes.root}>
         <Navbar />
-        <div className={classes.content}>
+        <main className={classes.main}>
           <Component {...pageProps} />
-        </div>
+        </main>
         <AlwaysOnTop text="Hello" left="5%" />
       </div>
       <CSSReset />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  ButtonGroup,
   Divider,
   Grid,
   GridItem,
@@ -36,23 +35,21 @@ import TabsPanel from "../components/Grouping/TabsPanel";
 import CustomSelect from "../components/Controls/CustomSelect";
 import Datepicker from "../components/Controls/Datepicker";
 import OverlayModal from "../components/Page/OverlayModal";
+import Page from "../components/Page/Page";
 
-const useStyles = createUseStyles({
-  contentWrapper: {
-    display: "flex",
-    "@media screen and (max-width: 1000px)": {},
-  },
-});
+const useStyles = createUseStyles({});
 
 const ComponentPage = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const router = useRouter();
-
   const [modalToggle, setModalToggle] = useState(false);
 
   return (
-    <div>
+    <Page
+      pageMeta={{
+        title: "Components - NextJS Template",
+        description: "Components available to be used",
+      }}
+    >
       <Section>
         <Heading fontSize="lg" mb="4">
           Cards
@@ -102,9 +99,7 @@ const ComponentPage = () => {
           ></VerticalImageCard>
         </SimpleGrid>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Button Group
@@ -122,9 +117,7 @@ const ComponentPage = () => {
           </StandardButton>
         </Stack>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Select
@@ -153,9 +146,7 @@ const ComponentPage = () => {
           />
         </Box>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Input Types
@@ -201,9 +192,7 @@ const ComponentPage = () => {
           />
         </Stack>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Swiper
@@ -256,9 +245,7 @@ const ComponentPage = () => {
           </SwiperSlide>
         </Carousel>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Card Carousel
@@ -348,7 +335,6 @@ const ComponentPage = () => {
           </Carousel>
         </Box>
       </Section>
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Image Swiper
@@ -374,23 +360,19 @@ const ComponentPage = () => {
           </Carousel>
         </Box>
       </Section>
-
       <Section bgColor="rgba(100,190,190,0.1)">
         <Heading fontSize="lg" mb="4">
           Section with Background color
         </Heading>
         <Box h="100px"></Box>
       </Section>
-
       <Section bgImg={img}>
-        <Heading fontSize="lg" mb="4" color="white">
+        <Heading fontSize="lg" mb="4">
           Section with Full Background Image
         </Heading>
         <Box h="100px"></Box>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Text accordion
@@ -412,9 +394,7 @@ const ComponentPage = () => {
           ]}
         />
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Sidebar
@@ -461,9 +441,7 @@ const ComponentPage = () => {
           </GridItem>
         </Grid>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Tabs panel
@@ -486,7 +464,6 @@ const ComponentPage = () => {
           </TabPanel>
         </TabsPanel>
       </Section>
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Date Picker
@@ -506,9 +483,7 @@ const ComponentPage = () => {
           </Box>
         </Stack>
       </Section>
-
       <Divider />
-
       <Section>
         <Heading fontSize="lg" mb="4">
           Modal popup
@@ -546,11 +521,9 @@ const ComponentPage = () => {
           }
         />
       </Section>
-
       <Divider />
-
       <BackToTop show right="5%" />
-    </div>
+    </Page>
   );
 };
 
