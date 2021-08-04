@@ -14,7 +14,6 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 const useStyles = createUseStyles({
   swiper: {
     paddingBottom: "32px",
-
     "& .swiper-wrapper": {},
     "& .swiper-button-disabled": {
       display: "none",

@@ -43,7 +43,7 @@ const StandardInput = (props) => {
   const inputSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
-    <FormControl isRequired={required} isInvalid={errorText} {...others}>
+    <FormControl isRequired={required} isInvalid={errorText}>
       {label && <FormLabel fontSize={["xs", "sm", "sm"]}>{label}</FormLabel>}
       <InputGroup size={inputSize}>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
@@ -54,6 +54,7 @@ const StandardInput = (props) => {
           />
         )}
         <Input
+          disabled
           name={name}
           value={value}
           type={type}
@@ -62,7 +63,8 @@ const StandardInput = (props) => {
           placeholder={placeholder}
           _focus={{ background: "white" }}
           _hover={{ background: "white" }}
-        ></Input>
+          {...others}
+        />
         {rightAddOn && <InputRightAddon children={rightAddOn} />}
         {rightElement && <InputRightElement children={rightElement} />}
       </InputGroup>

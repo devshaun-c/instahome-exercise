@@ -3,6 +3,8 @@
 - nextJS
 - styled-components-babelrc
 - firebase
+- draft-js (For rich text editor)
+- draft-convert (For rich text editor
 - express
 - chakra UI
 - momentJS
@@ -11,6 +13,7 @@
 - react-icons
 - react-select
 - swiper (carousel)
+- react-responsive-carousel
 - next-images
 - next-SEO
 - Google Analytics at \_document.js
@@ -24,44 +27,29 @@
 
 ## TO DO
 
-- [x] Navbar
-- [x] Cards
-- [x] AlwaysOnTop
-- [x] Buttons
-- [x] Image Carousel (replace with SwiperJS)
-- [x] Card Carousel (replace with SwiperJS)
-- [x] Section
-- [x] Container
-- [x] Inputs
-- [x] Sections
-  - [x] Hero
-  - [x] Focus (image and text) - Left or Right
-  - [x] CardCarousel (replace with SwiperJS)
-  - [x] ImageCarousel (replace with SwiperJS)
-  - [x] Headliner (For newsletter, key message)
-  - [x] Stack Group (Features)
-  - [x] Stack Group (Partners)
-  - [x] Plans
-  - [x] Offerings
-  - [x] Text accordion
-  - [x] Newsletter
-  - [x] Footer
-- [x] Icon card
-- [x] SwiperJS custom arrows
-- [x] Tab box
-- [x] React-select
-- [x] Accordion
-- [x] Date picker / calendar
-- [x] Find new font with thick bold
-- [x] Popup Modal
-- [x] Mobile responsive
-- [x] Sticky area
-- [x] Set global css variables
-  - [x] Border radius
-  - [x] Colors
-  - [x] Container max width
-- [ ] Landing page
-- [ ] JSS RULE NOT LINKED warning
-  - [ ] At SwiperJS border radius (but it does not affect styles)
+- [ ] Activity page
+  - [x] Connect to firebase
+  - [x] Merge Database structure in getServerSideProps
+    - [ ] Database of Template dictates the following info
+      - [ ] About activity
+      - [ ] Images
+      - [ ] Age restriction
+      - [ ] Category
+      - [ ] Business links (social media, email, phone)
+    - [ ] Database of Schedule dictates the following info
+      - [ ] Price
+      - [ ] Schedule (date and time)
+      - [ ] Location
+      - [ ] Participant Limit
+  - [ ] Link to components
+    - [ ] Page Header
+    - [ ] Activity Details
+    - [ ] Images
+    - [ ] RTE
+    - [ ] Participants (to hide as it is not used in first phase )
+    - [ ] Other activities from partner
+    - [ ] Other similar activities
+    - [ ] Tag whether it is online or inperson
+  - [ ] Separate to components
 
 > Pending

@@ -246,6 +246,7 @@ const ComponentPage = () => {
         </Carousel>
       </Section>
       <Divider />
+
       <Section>
         <Heading fontSize="lg" mb="4">
           Card Carousel
@@ -335,6 +336,7 @@ const ComponentPage = () => {
           </Carousel>
         </Box>
       </Section>
+
       <Section>
         <Heading fontSize="lg" mb="4">
           Image Swiper

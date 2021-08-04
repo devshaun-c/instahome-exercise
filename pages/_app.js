@@ -7,6 +7,7 @@ import SEO from "../next-seo.config";
 import { DefaultSeo } from "next-seo";
 import Navbar from "../components/Navigations/Navbar";
 import AlwaysOnTop from "../components/Page/AlwaysOnTop";
+import Footer from "../components/Sections/Footer";
 
 const useStyles = createUseStyles({
   root: {
@@ -86,6 +87,7 @@ function MyApp({ Component, pageProps }) {
         <main className={classes.main}>
           <Component {...pageProps} />
         </main>
+        <Footer bgColor="whitesmoke" />
         <AlwaysOnTop text="Hello" left="5%" />
       </div>
       <CSSReset />

@@ -4,20 +4,23 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   buttonStyle: {
+    display: "block",
     margin: "0",
-    padding: "0 4px",
     height: "auto",
     fontSize: "12px",
+    "&:hover": {
+      fontWeight: "bold",
+    },
   },
 });
 
 const TextButton = (props) => {
-  const { text, onClick, color } = props;
+  const { children, onClick, color, ...others } = props;
   const classes = useStyles();
   return (
     <button className={classes.buttonStyle} onClick={onClick}>
-      <Text fontSize="xs" color={color} textDecor="underline">
-        {text}
+      <Text fontSize="xs" color={color} {...others}>
+        {children}
       </Text>
     </button>
   );

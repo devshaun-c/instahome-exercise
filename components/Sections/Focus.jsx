@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, GridItem, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import placeholderImg from "../../public/static/images/placeholder.png";

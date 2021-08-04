@@ -1,9 +1,10 @@
 import React from "react";
-import Select from "react-select";
+// import Select from "react-select";
 import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
+  Select,
   FormLabel,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
@@ -14,8 +15,17 @@ const useStyles = createUseStyles({
 
 const CustomSelect = (props) => {
   const classes = useStyles();
-  const { isRequired, options, label, helperText, errorText, ...params } =
-    props;
+  const {
+    isRequired,
+    options,
+    value,
+    label,
+    helperText,
+    errorText,
+    defaultValue,
+    children,
+    ...params
+  } = props;
 
   const customStyles = {
     control: (base, state) => ({
@@ -35,8 +45,20 @@ const CustomSelect = (props) => {
 
   return (
     <FormControl isRequired={isRequired} isInvalid={errorText}>
-      {label && <FormLabel>{label}</FormLabel>}
-      <Select options={options} styles={customStyles} {...params} />
+      {label && <FormLabel fontSize="xs">{label}</FormLabel>}
+      <Select
+        options={options}
+        styles={customStyles}
+        value={value}
+        defaultValue={defaultValue}
+        {...params}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </Select>
       {helperText && (
         <FormHelperText ml={4} fontSize="sm" color="gray.400">
           {helperText}

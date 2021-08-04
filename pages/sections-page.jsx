@@ -473,8 +473,6 @@ const SectionsPage = () => {
         </StickyBox>
       </div>
 
-      <Footer bgColor="whitesmoke" />
-
       <BackToTop show right="5%" />
     </Page>
   );
