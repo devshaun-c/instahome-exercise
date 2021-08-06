@@ -28,28 +28,48 @@
 ## TO DO
 
 - [ ] Activity page
+  - [x] "I'm Interested" popup
+  - [ ] Send notification Details to partner object
+  - [ ] Request private class?
+  - [ ] Request date
+  - [ ] About Trainer/host
+- [ ] Landing page
+  - [ ] Hero
+- [ ] Review database
+  - [ ] PartnerId change to orgName rather than Firebase GID
+    - [ ] Format example (tomi-build) which need to check if exist or not first
+  - [ ] Database of Template
+    - [ ] Add duration into Template
+    - [ ] About activity
+    - [ ] Images
+    - [ ] Age restriction
+    - [ ] Category
+    - [ ] Business links (social media, email, phone)
+    - [ ] Default Price (multiple price?)
+    - [ ] Participant Limit
+  - [ ] Database of Schedule
+    - [ ] Add HostDetails in Schedule
+    - [ ] Add spots left
+    - [ ] Schedule (date and time)
+      - [ ] Time should be based exactly on Duration set in template
+    - [ ] Remove unnecessary info
+      - [ ] Location to be removed here
+      - [ ] Price to be removed here
+      - [ ] Participant Limit to be removed here
+  - [ ] Other similar activities
+
+> Done
+
+- [x] Activity Page
+
   - [x] Connect to firebase
   - [x] Merge Database structure in getServerSideProps
-    - [ ] Database of Template dictates the following info
-      - [ ] About activity
-      - [ ] Images
-      - [ ] Age restriction
-      - [ ] Category
-      - [ ] Business links (social media, email, phone)
-    - [ ] Database of Schedule dictates the following info
-      - [ ] Price
-      - [ ] Schedule (date and time)
-      - [ ] Location
-      - [ ] Participant Limit
-  - [ ] Link to components
-    - [ ] Page Header
-    - [ ] Activity Details
-    - [ ] Images
-    - [ ] RTE
-    - [ ] Participants (to hide as it is not used in first phase )
-    - [ ] Other activities from partner
-    - [ ] Other similar activities
-    - [ ] Tag whether it is online or inperson
-  - [ ] Separate to components
-
-> Pending
+  - [x] Booking link override platform booking system
+  - [x] Link DB to components
+    - [x] Page Header
+    - [x] Images
+    - [x] RTE
+    - [x] Remove Participants
+    - [x] Other activities from partner
+    - [x] Tag whether it is online or inperson
+  - [x] Separate to components

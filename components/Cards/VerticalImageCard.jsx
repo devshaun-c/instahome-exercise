@@ -45,7 +45,7 @@ const VerticalImageCard = (props) => {
       break;
 
     default:
-      badgeObj = { color: "red", text: "" };
+      badgeObj = { color: "gray", text: badgeType };
       break;
   }
 

@@ -51,6 +51,7 @@ const CustomSelect = (props) => {
         styles={customStyles}
         value={value}
         defaultValue={defaultValue}
+        fontSize="xs"
         {...params}
       >
         {options.map((option) => (

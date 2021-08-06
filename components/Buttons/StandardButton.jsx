@@ -6,7 +6,7 @@ const StandardButton = (props) => {
     children,
     isLoading = false,
     loadingText = "Submitting",
-    onClick = () => alert("Hi"),
+    onClick,
     variant,
     colorScheme,
     leftIcon,
@@ -15,11 +15,11 @@ const StandardButton = (props) => {
     ...others
   } = props;
 
-  const buttonSize = useBreakpointValue(["md", "md", "md"]);
+  // const buttonSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
     <Button
-      size={buttonSize}
+      size={size}
       isLoading={isLoading}
       loadingText={loadingText}
       leftIcon={leftIcon}

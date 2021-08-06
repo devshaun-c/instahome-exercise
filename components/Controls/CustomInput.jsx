@@ -37,6 +37,7 @@ const StandardInput = (props) => {
     rightElement,
     helperText,
     errorText,
+    disabled,
     ...others
   } = props;
 
@@ -54,7 +55,6 @@ const StandardInput = (props) => {
           />
         )}
         <Input
-          disabled
           name={name}
           value={value}
           type={type}
