@@ -26,6 +26,8 @@ import OrganizerInfo from "../../../components/ActivityPage/OrganizerInfo";
 import ActivityDetails from "../../../components/ActivityPage/ActivityDetails";
 import Paper from "../../../components/ActivityPage/Paper";
 import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
+import ShareBar from "../../../components/Miscellaneous/ShareBar";
+import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 
 const useStyles = createUseStyles({
   participantSection: {
@@ -46,8 +48,8 @@ const useStyles = createUseStyles({
 const ActivityPage = (props) => {
   const classes = useStyles();
   const router = useRouter();
-  const { id } = router.query;
-
+  const { partnerId, templateId } = router.query;
+  const url = `http://localhost:3000/activity/${partnerId}/${templateId}`;
   //scheduleId: LQG8kDCKI93wwo5mMm4u
   //templateId: zhfkhyMcDsvxweOLVBFY
   //PartnerId: tomi-build
@@ -88,12 +90,10 @@ const ActivityPage = (props) => {
     allSchedules[0].scheduledStartDate
   );
 
-  const handleCardSelect = (activity) => {
+  const getCardUrl = (activity) => {
     const { partnerId, activityId } = activity;
-    router.push(`/activity/${partnerId}/${activityId}`);
+    return `/activity/${partnerId}/${activityId}`;
   };
-
-  const handleInterest = () => {};
 
   return (
     <Page
@@ -103,11 +103,14 @@ const ActivityPage = (props) => {
       }}
     >
       <Section fullView={false} bgColor="whitesmoke">
-        <Header mb={6} title={activityName} />
+        <Header mb={6} title={activityName} type={activityDetails.category} />
         <Grid templateColumns="repeat(5, 1fr)" gap="40px">
           <GridItem colSpan={3}>
             <ImageCarousel info={activityDetails} />
             <AboutActivity aboutActivity={aboutActivity} mt={4} />
+            <Paper>
+              <ConductorInfo />
+            </Paper>
           </GridItem>
 
           <GridItem colSpan={2}>
@@ -115,6 +118,7 @@ const ActivityPage = (props) => {
               <OrganizerInfo info={organizationDetails} />
             </Paper>
             <Paper mt={4}>
+              <ShareBar url={url} mb={4} />
               <ActivityDetails
                 activityDetails={activityDetails}
                 duration={duration}
@@ -145,7 +149,7 @@ const ActivityPage = (props) => {
                 image={activity.coverImage[0].url}
                 subtitle=""
                 badgeType={activity.type}
-                action={() => handleCardSelect(activity)}
+                url={getCardUrl(activity)}
                 text={activity.shortSummary}
               />
             </SwiperSlide>

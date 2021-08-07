@@ -1,7 +1,12 @@
 import React from "react";
 import { Avatar, Box, HStack, IconButton, Link, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebookSquare,
+  FaHome,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { BsEnvelope } from "react-icons/bs";
 
 const useStyles = createUseStyles({
@@ -19,12 +24,27 @@ const OrganizerInfo = (props) => {
     orgName,
     orgContact,
     orgWebsite,
-    orgDescription,
+    orgSummary,
     orgInstagram,
     orgFacebook,
     partnerImage,
     publicEmail,
   } = info;
+
+  const LinkIconButton = ({ url, icon }) => {
+    return (
+      <IconButton
+        as={Link}
+        variant="ghost"
+        fontSize="24px"
+        icon={icon}
+        size="sm"
+        href={url}
+        target="_blank"
+        rel="noopener,noreferrer"
+      />
+    );
+  };
 
   return (
     <Box {...others} className={classes.organizerInfo}>
@@ -33,17 +53,12 @@ const OrganizerInfo = (props) => {
         <Text fontSize="md" fontWeight="bold">
           {orgName}
         </Text>
-        <Text fontSize="xs" mt={2} mb={1}>
-          {orgDescription}
+        <Text fontSize="xs" mt={1} mb={2}>
+          {orgSummary}
         </Text>
-        {orgWebsite && (
-          <Text fontSize="xs" mt={1} mb={2}>
-            <Link color="teal.500" href={orgWebsite}>
-              {orgWebsite}
-            </Link>
-          </Text>
-        )}
-        <HStack color="lightgrey" spacing={3}>
+
+        <HStack color="lightgrey" spacing={1}>
+          {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
           {orgContact && (
             <IconButton
               variant="ghost"

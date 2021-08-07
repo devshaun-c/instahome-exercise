@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
+import { getCategory } from "../../constants/activity";
 
 const useStyles = createUseStyles({
   pageHeader: {},
@@ -8,11 +9,12 @@ const useStyles = createUseStyles({
 
 const Header = (props) => {
   const classes = useStyles();
-  const { title, ...others } = props;
+  const { title, type, ...others } = props;
 
   return (
     <Box className={classes.pageHeader} {...others}>
       <Heading fontSize={["x-large", "x-large"]}>{title}</Heading>
+      <Text>{type ? getCategory(type) : ""}</Text>
     </Box>
   );
 };

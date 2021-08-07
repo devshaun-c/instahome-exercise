@@ -19,6 +19,7 @@ import TextButton from "../Buttons/TextButton.jsx";
 import CustomSelect from "../Controls/CustomSelect.jsx";
 import OverlayModal from "../Page/OverlayModal";
 import CustomInput from "../Controls/CustomInput.jsx";
+import InterestForm from "./InterestForm";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -123,13 +124,6 @@ const ScheduleBooking = (props) => {
         )}
       </Flex>
     );
-  };
-
-  const handleNotify = (e) => {
-    e.preventDefault();
-
-    //Submit notificationDetails to Firebase (partner Object)
-    setIsOpen(false);
   };
 
   return (
@@ -256,51 +250,8 @@ const ScheduleBooking = (props) => {
       <OverlayModal
         isOpen={isOpen}
         handleToggle={setIsOpen}
-        modalHeader={<Box>Get notified !</Box>}
-        modalBody={
-          <form onSubmit={handleNotify}>
-            <Text fontSize="sm" mb={2}>
-              You will be notified by email when a new schedule is created
-            </Text>
-            <CustomInput placeholder="name" required />
-            <CustomInput placeholder="email" type="email" mt={2} required />
-            <Text fontSize="sm" mt={6} mb={2}>
-              When would you like this session?
-            </Text>
-            <HStack spacing={2}>
-              <CustomSelect
-                options={[
-                  { value: "weekdays", label: "Any weekday" },
-                  { value: "weekends", label: "Weekends" },
-                  { value: "mon", label: "Monday" },
-                  { value: "tue", label: "Tuesday" },
-                  { value: "wed", label: "Wednesday" },
-                  { value: "thu", label: "Thursday" },
-                  { value: "fri", label: "Friday" },
-                  { value: "sat", label: "Saturday" },
-                  { value: "sun", label: "Sunday" },
-                ]}
-              />
-              <CustomSelect
-                options={[
-                  { value: "no preferrence", label: "Anytime" },
-                  { value: "morning", label: "Morning " },
-                  { value: "afternoon", label: "Afternoon " },
-                  { value: "evening", label: "Evening " },
-                  { value: "night", label: "Night " },
-                ]}
-              />
-            </HStack>
-            <ButtonGroup mt={4}>
-              <StandardButton colorScheme="teal" type="submit">
-                Submit
-              </StandardButton>
-              <StandardButton variant="ghost" onClick={() => setIsOpen(false)}>
-                Cancel
-              </StandardButton>
-            </ButtonGroup>
-          </form>
-        }
+        modalHeader={<Text>Get notified !</Text>}
+        modalBody={<InterestForm handleToggle={setIsOpen} />}
       />
     </Box>
   );

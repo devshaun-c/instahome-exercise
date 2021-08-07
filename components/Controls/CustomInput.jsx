@@ -16,7 +16,9 @@ import {
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-  root: { background: "rgba(255,255,255,0.5)" },
+  root: {
+    background: "rgba(255,255,255,0.5)",
+  },
 });
 
 const StandardInput = (props) => {
@@ -25,7 +27,7 @@ const StandardInput = (props) => {
     label,
     name,
     required,
-    handleChange,
+    onChange,
     value,
     size,
     type,
@@ -44,8 +46,12 @@ const StandardInput = (props) => {
   const inputSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
-    <FormControl isRequired={required} isInvalid={errorText}>
-      {label && <FormLabel fontSize={["xs", "sm", "sm"]}>{label}</FormLabel>}
+    <FormControl isRequired={required} isInvalid={errorText} mb={label ? 6 : 2}>
+      {label && (
+        <FormLabel mb={0} fontSize="xs" fontWeight="bold">
+          {label}
+        </FormLabel>
+      )}
       <InputGroup size={inputSize}>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
         {leftElement && (
@@ -61,26 +67,23 @@ const StandardInput = (props) => {
           className={classes.root}
           variant={variant}
           placeholder={placeholder}
+          fontSize="sm"
           _focus={{ background: "white" }}
           _hover={{ background: "white" }}
+          _disabled={{ background: "whitesmoke" }}
+          onChange={onChange}
           {...others}
         />
         {rightAddOn && <InputRightAddon children={rightAddOn} />}
         {rightElement && <InputRightElement children={rightElement} />}
       </InputGroup>
       {helperText && (
-        <FormHelperText
-          ml={[2, 2, 4]}
-          fontSize={["xs", "sm", "sm"]}
-          color="gray.400"
-        >
+        <FormHelperText fontSize="xs" color="gray.400">
           {helperText}
         </FormHelperText>
       )}
       {errorText && (
-        <FormErrorMessage fontSize={["xs", "sm", "sm"]}>
-          {errorText}
-        </FormErrorMessage>
+        <FormErrorMessage fontSize="xs">{errorText}</FormErrorMessage>
       )}
     </FormControl>
   );

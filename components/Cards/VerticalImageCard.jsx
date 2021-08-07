@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Badge } from "@chakra-ui/react";
+import { Box, Text, Badge, Link } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import placeholderImg from "../../public/static/images/placeholder.png";
 import Image from "next/image";
@@ -26,8 +26,8 @@ const VerticalImageCard = (props) => {
     image,
     badgeType,
     text,
-    action,
     alt,
+    url,
   } = props;
 
   var badgeObj = null;
@@ -50,13 +50,15 @@ const VerticalImageCard = (props) => {
   }
 
   return (
-    <Box
+    <Link
       h={height}
       className={classes.card}
       bg={bg || "white"}
       maxWidth={width}
-      onClick={action}
-      cursor={action ? "pointer" : "default"}
+      href={url}
+      cursor={url ? "pointer" : "default"}
+      _hover={{ outline: "none" }}
+      target="_blank"
     >
       <Box
         minH={["150px", "200px"]}
@@ -90,7 +92,7 @@ const VerticalImageCard = (props) => {
           </Text>
         </Box>
       </Box>
-    </Box>
+    </Link>
   );
 };
 
