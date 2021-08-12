@@ -31,24 +31,17 @@ const ImageCarousel = (props) => {
   const { info, ...others } = props;
   const { coverImage = [], imageList = [] } = info;
 
-  const [images, setImages] = useState([
-    { url: img1, name: "" },
-    { url: img2, name: "" },
-    { url: img1, name: "" },
-    { url: img2, name: "" },
-    { url: img1, name: "" },
-    { url: img2, name: "" },
-    { url: img1, name: "" },
-    { url: img2, name: "" },
-  ]);
+  const [images, setImages] = useState([{ url: img1, name: "" }]);
 
   useEffect(() => {
+    var newImages = [];
     if (coverImage.length) {
-      setImages(coverImage);
+      newImages = [...coverImage];
     }
     if (imageList.length) {
-      setImages([...images, imageList]);
+      newImages = [...newImages, ...imageList];
     }
+    setImages([...newImages]);
   }, []);
 
   return (

@@ -18,7 +18,7 @@ const ConductorInfo = (props) => {
       <Avatar mr={6} size="xl" src={conductorImage} />
       <Box>
         <Text fontSize="xs" mb={2} color="grey">
-          Your host for this session
+          Your host for this activity
         </Text>
         <Text fontSize="md" fontWeight="bold">
           {conductorName || "Host not confirmed yet"}

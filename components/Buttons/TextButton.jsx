@@ -9,7 +9,7 @@ const useStyles = createUseStyles({
     height: "auto",
     fontSize: "12px",
     "&:hover": {
-      fontWeight: "bold",
+      // fontWeight: "bold",
     },
   },
 });

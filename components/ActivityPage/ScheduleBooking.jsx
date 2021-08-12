@@ -1,25 +1,19 @@
 import React, { useState } from "react";
-import {
-  Box,
-  ButtonGroup,
-  Divider,
-  Flex,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
 import {
   convertFirebaseTimestamp,
   ConverToDate,
+  GetClickableLink,
   GetTimeSummary,
 } from "../../lib/utils";
 import StandardButton from "../Buttons/StandardButton";
 import TextButton from "../Buttons/TextButton.jsx";
 import CustomSelect from "../Controls/CustomSelect.jsx";
 import OverlayModal from "../Page/OverlayModal";
-import CustomInput from "../Controls/CustomInput.jsx";
 import InterestForm from "./InterestForm";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -41,25 +35,10 @@ const useStyles = createUseStyles({
   },
 });
 
-const tempSchedules = [
-  {
-    scheduledEndDate: { seconds: 1625662800, nanoseconds: 0 },
-    scheduledStartDate: { seconds: 1625662800, nanoseconds: 0 },
-  },
-  {
-    scheduledEndDate: { seconds: 1625670000, nanoseconds: 0 },
-    scheduledStartDate: { seconds: 1625865500, nanoseconds: 0 },
-  },
-  {
-    scheduledEndDate: { seconds: 1625670000, nanoseconds: 0 },
-    scheduledStartDate: { seconds: 1625865500, nanoseconds: 0 },
-  },
-];
-
 const ScheduleBooking = (props) => {
   const classes = useStyles();
   const { info, schedules, ...others } = props;
-  const { defaultPrice, bookingLink, activityName } = info;
+  const { defaultPrice, bookingLink, paymentNotes } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState({
     name: "",
@@ -67,10 +46,11 @@ const ScheduleBooking = (props) => {
     dayPreference: "",
     timePreference: "",
   });
+  const [showAll, setShowAll] = useState(false);
 
   const scheduleOptions = [];
   var allSchedules = schedules;
-  allSchedules = [...allSchedules, ...tempSchedules];
+  var displayedSchedules = [];
   allSchedules.forEach((schedule) => {
     const date = moment(
       convertFirebaseTimestamp(schedule.scheduledStartDate)
@@ -85,11 +65,17 @@ const ScheduleBooking = (props) => {
 
     if (schedule.activityId) {
       scheduleOptions.push({
-        value: schedule.activityId,
+        value: schedule.scheduleId,
         label: optionSummary,
       });
     }
   });
+
+  if (!showAll) {
+    displayedSchedules = allSchedules.slice(0, 3);
+  } else {
+    displayedSchedules = allSchedules;
+  }
 
   const PriceBox = () => {
     return (
@@ -128,90 +114,113 @@ const ScheduleBooking = (props) => {
 
   return (
     <Box className={classes.scheduleBooking} {...others}>
-      {bookingLink == "0" ? (
-        <Box mt={6}>
-          <Text fontSize="md" fontWeight="bold">
+      {allSchedules.length > 0 ? (
+        <Flex flexDirection="column">
+          <Text fontSize="sm" fontWeight="bold">
+            {`Upcoming Sessions (${allSchedules.length})`}
+          </Text>
+          <Flex mt={4} flexDir="column" alignItems="flex-start">
+            {displayedSchedules.map((schedule, index) => {
+              var isAnotherDay = true;
+              if (index > 0) {
+                const currentDate = ConverToDate(
+                  allSchedules[index].scheduledStartDate
+                );
+                const previousDate = ConverToDate(
+                  allSchedules[index - 1].scheduledStartDate
+                );
+
+                if (currentDate === previousDate) {
+                  isAnotherDay = false;
+                }
+              }
+
+              return (
+                <Flex
+                  key={index}
+                  justify="space-between"
+                  fontSize="sm"
+                  w="100%"
+                  mb={4}
+                >
+                  <Box>
+                    {isAnotherDay && (
+                      <>
+                        <Text fontWeight="bold">
+                          {moment(
+                            convertFirebaseTimestamp(
+                              schedule.scheduledStartDate
+                            )
+                          ).format("ddd")}
+                        </Text>
+                        <Text>
+                          {moment(
+                            convertFirebaseTimestamp(
+                              schedule.scheduledStartDate
+                            )
+                          ).format("D MMM, YYYY")}
+                        </Text>
+                      </>
+                    )}
+                  </Box>
+                  <Box>
+                    <Text>
+                      {GetTimeSummary(
+                        schedule.scheduledStartDate,
+                        schedule.scheduledEndDate
+                      )}
+                    </Text>
+                    {/* <Text color="teal.400">5 spots left</Text> */}
+                  </Box>
+                </Flex>
+              );
+            })}
+          </Flex>
+          <TextButton onClick={() => setShowAll(!showAll)} color="grey">
+            {showAll ? "see less" : "see more"}
+            {showAll ? (
+              <ChevronUpIcon fontSize="lg" ml={2} />
+            ) : (
+              <ChevronDownIcon fontSize="lg" ml={2} />
+            )}
+          </TextButton>
+        </Flex>
+      ) : (
+        <Box fontSize="sm" mt={4} className={classes.booking}>
+          <Text fontSize="sm">
+            Looks like we have not set a date for this activity yet. Show your
+            interest and get updated when it is available.
+          </Text>
+          <PriceBox />
+          <StandardButton mt={4} onClick={setIsOpen}>
+            I'm Interested !
+          </StandardButton>
+        </Box>
+      )}
+      {bookingLink && allSchedules.length > 0 ? (
+        <Box mt={10}>
+          <Text fontSize="sm" fontWeight="bold">
             Schedule & Booking
           </Text>
           <PriceBox />
-          <Text mt={4} fontSize="xs">
+          {/* <Text mt={4} fontSize="xs">
             Our latest schedule is available in the link below
-          </Text>
+          </Text> */}
           <StandardButton
             colorScheme="teal"
             variant="outline"
             size="sm"
-            mt={2}
+            mt={4}
             isFullWidth
-            onClick={() => window.open(bookingLink, "_blank")}
+            onClick={() => window.open(GetClickableLink(bookingLink), "_blank")}
           >
             Schedule and book here
           </StandardButton>
         </Box>
       ) : (
-        <Box mt={6}>
-          {allSchedules.length < 0 ? (
+        <Box mt={2}>
+          {allSchedules.length > 0 && (
             <Flex direction="column">
-              <Text fontSize="md" fontWeight="bold">
-                Upcoming Sessions
-              </Text>
-              <Flex mt={4} flexDir="column" alignItems="flex-start">
-                {allSchedules.map((schedule, index) => {
-                  var isAnotherDay = true;
-                  if (index > 0) {
-                    const currentDate = ConverToDate(
-                      allSchedules[index].scheduledStartDate
-                    );
-                    const previousDate = ConverToDate(
-                      allSchedules[index - 1].scheduledStartDate
-                    );
-
-                    if (currentDate === previousDate) {
-                      isAnotherDay = false;
-                    }
-                  }
-
-                  return (
-                    <Flex
-                      key={index}
-                      justify="space-between"
-                      fontSize="sm"
-                      w="100%"
-                      mb={4}
-                    >
-                      <Box>
-                        {isAnotherDay && (
-                          <>
-                            <Text fontWeight="bold">
-                              {moment(
-                                convertFirebaseTimestamp(
-                                  schedule.scheduledStartDate
-                                )
-                              ).format("ddd")}
-                            </Text>
-                            <Text>
-                              {moment(
-                                convertFirebaseTimestamp(
-                                  schedule.scheduledStartDate
-                                )
-                              ).format("D MMM, YYYY")}
-                            </Text>
-                          </>
-                        )}
-                      </Box>
-                      <Box>
-                        <Text>
-                          {GetTimeSummary(
-                            schedule.scheduledStartDate,
-                            schedule.scheduledEndDate
-                          )}
-                        </Text>
-                        <Text color="teal.400">5 spots left</Text>
-                      </Box>
-                    </Flex>
-                  );
-                })}
-              </Flex>
               <Box fontSize="sm" mt={4} className={classes.booking}>
                 <CustomSelect
                   label="Select Date"
@@ -222,22 +231,17 @@ const ScheduleBooking = (props) => {
                 <StandardButton mt={4}>Book now</StandardButton>
               </Box>
             </Flex>
-          ) : (
-            <Box fontSize="sm" mt={4} className={classes.booking}>
-              <Text fontSize="sm">
-                Looks like we have not set a date for this activity yet. Show
-                your interest and get updated when it is available.
-              </Text>
-              <PriceBox />
-              <StandardButton mt={4} onClick={setIsOpen}>
-                I'm Interested !
-              </StandardButton>
-            </Box>
           )}
         </Box>
       )}
+      {paymentNotes && (
+        <Flex flexDirection="column" mt={4}>
+          <Text fontSize="xs">Notes:</Text>
+          <Text fontSize="xs">{paymentNotes}</Text>
+        </Flex>
+      )}
       <Divider mt={8} />
-      <Box mt={2} w="100%">
+      {/* <Box mt={2} w="100%">
         <Text fontSize="xs">Can't find a suitable date?</Text>
         <TextButton fontSize="xs" color="teal.500" mt={1}>
           Request date
@@ -245,7 +249,7 @@ const ScheduleBooking = (props) => {
         <TextButton fontSize="xs" color="teal.500">
           Request private class
         </TextButton>
-      </Box>
+      </Box> */}
 
       <OverlayModal
         isOpen={isOpen}

@@ -1,4 +1,6 @@
 import React from "react";
+import { EmailShareButton, WhatsappShareButton } from "react-share";
+import { EmailIcon, WhatsappIcon } from "react-share";
 import { Avatar, Box, HStack, IconButton, Link, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import {
@@ -8,6 +10,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { BsEnvelope } from "react-icons/bs";
+import { GetClickableLink } from "../../lib/utils";
 
 const useStyles = createUseStyles({
   organizerInfo: {
@@ -24,9 +27,7 @@ const OrganizerInfo = (props) => {
     orgName,
     orgContact,
     orgWebsite,
-    orgSummary,
-    orgInstagram,
-    orgFacebook,
+    orgDescription,
     partnerImage,
     publicEmail,
   } = info;
@@ -39,10 +40,18 @@ const OrganizerInfo = (props) => {
         fontSize="24px"
         icon={icon}
         size="sm"
-        href={url}
+        href={GetClickableLink(url)}
         target="_blank"
         rel="noopener,noreferrer"
       />
+    );
+  };
+
+  const mailTo = (email, subject, body) => {
+    window.open(
+      `mailto:${email}?subject=${encodeURIComponent(subject) || ""}&body=${
+        encodeURIComponent(body) || ""
+      }`
     );
   };
 
@@ -50,11 +59,11 @@ const OrganizerInfo = (props) => {
     <Box {...others} className={classes.organizerInfo}>
       <Avatar mr={6} size="lg" src={partnerImage} />
       <Box>
-        <Text fontSize="md" fontWeight="bold">
+        <Text fontSize="sm" fontWeight="bold">
           {orgName}
         </Text>
         <Text fontSize="xs" mt={1} mb={2}>
-          {orgSummary}
+          {orgDescription}
         </Text>
 
         <HStack color="lightgrey" spacing={1}>
@@ -65,6 +74,7 @@ const OrganizerInfo = (props) => {
               fontSize="24px"
               icon={<FaWhatsapp />}
               size="sm"
+              onClick={() => window.open(`https://wa.me/${orgContact}`)}
             />
           )}
           {publicEmail && (
@@ -73,22 +83,7 @@ const OrganizerInfo = (props) => {
               fontSize="24px"
               icon={<BsEnvelope />}
               size="sm"
-            />
-          )}
-          {orgInstagram && (
-            <IconButton
-              variant="ghost"
-              fontSize="24px"
-              icon={<FaInstagram />}
-              size="sm"
-            />
-          )}
-          {orgFacebook && (
-            <IconButton
-              variant="ghost"
-              fontSize="24px"
-              icon={<FaFacebookSquare />}
-              size="sm"
+              onClick={() => mailTo(publicEmail, `Contact Us - ${orgName}`, "")}
             />
           )}
         </HStack>

@@ -379,6 +379,7 @@ const ComponentPage = () => {
         <Heading fontSize="lg" mb="4">
           Text accordion
         </Heading>
+
         <AccordionTable
           items={[
             {

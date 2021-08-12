@@ -28,6 +28,7 @@ const VerticalImageCard = (props) => {
     text,
     alt,
     url,
+    ...others
   } = props;
 
   var badgeObj = null;
@@ -59,6 +60,7 @@ const VerticalImageCard = (props) => {
       cursor={url ? "pointer" : "default"}
       _hover={{ outline: "none" }}
       target="_blank"
+      {...others}
     >
       <Box
         minH={["150px", "200px"]}

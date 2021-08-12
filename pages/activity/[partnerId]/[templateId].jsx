@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "../../../components/Sections/Section";
 import Page from "../../../components/Page/Page";
@@ -17,8 +17,6 @@ import {
   GetAllPartnerSchedules,
   GetAllPartnerActivities,
 } from "../../../lib/firebase";
-import moment from "moment";
-import { GetDurationText } from "../../../lib/utils";
 import Header from "../../../components/ActivityPage/Header";
 import ImageCarousel from "../../../components/ActivityPage/ImageCarousel";
 import AboutActivity from "../../../components/ActivityPage/AboutActivity";
@@ -56,13 +54,26 @@ const ActivityPage = (props) => {
   //URL format: activity/[partnerId]/[templateId]
   //URL: activity/tomi-build/zhfkhyMcDsvxweOLVBFY
 
-  const { aboutActivity, activityId, activityName, shortSummary } = JSON.parse(
-    props.activityData
-  );
+  var activityData = {};
+  if (props.activityData) {
+    activityData = JSON.parse(props.activityData);
+  } else {
+    activityData = { activityName: "Activity Not Found" };
+  }
 
-  const activityDetails = JSON.parse(props.activityData);
-  const organizationDetails = JSON.parse(props.partnerData).organizationDetails;
+  const activityDetails = JSON.parse(props.activityData) || {};
+  const organizationDetails =
+    JSON.parse(props.partnerData).organizationDetails || {};
+  const allSchedules = JSON.parse(props.schedules) || [];
   const orgName = organizationDetails.orgName;
+
+  const {
+    aboutActivity,
+    activityId,
+    activityName,
+    shortSummary,
+    durationInSeconds,
+  } = activityData;
 
   // const {
   //   price,
@@ -74,21 +85,19 @@ const ActivityPage = (props) => {
   //   scheduledEndDate,
   // } = JSON.parse(props.scheduleData);
 
-  const allSchedules = JSON.parse(props.schedules);
-
   var otherPartnerActivities = [];
   if (props.activities) {
     const allPartnerActivities = JSON.parse(props.activities);
     otherPartnerActivities = allPartnerActivities.filter(
-      (activity) => activity.activityId === activityId
+      (activity) => activity.activityId !== activityId
     );
   }
 
   //TEMPORARY (TO EDIT ONCE TEMPLATE DB IS UPDATED)
-  const duration = GetDurationText(
-    allSchedules[0].scheduledEndDate,
-    allSchedules[0].scheduledStartDate
-  );
+  // const duration = GetDurationText(
+  //   allSchedules[0].scheduledEndDate,
+  //   allSchedules[0].scheduledStartDate
+  // );
 
   const getCardUrl = (activity) => {
     const { partnerId, activityId } = activity;
@@ -102,37 +111,45 @@ const ActivityPage = (props) => {
         description: shortSummary,
       }}
     >
-      <Section fullView={false} bgColor="whitesmoke">
-        <Header mb={6} title={activityName} type={activityDetails.category} />
-        <Grid templateColumns="repeat(5, 1fr)" gap="40px">
-          <GridItem colSpan={3}>
-            <ImageCarousel info={activityDetails} />
-            <AboutActivity aboutActivity={aboutActivity} mt={4} />
-            <Paper>
-              <ConductorInfo />
-            </Paper>
-          </GridItem>
+      {activityName !== "Activity Not Found" ? (
+        <Section fullView={false} bgColor="whitesmoke">
+          <Header mb={6} title={activityName} type={activityDetails.category} />
+          <Grid templateColumns="repeat(5, 1fr)" gap="56px">
+            <GridItem colSpan={3}>
+              <ImageCarousel info={activityDetails} />
+              <Paper mt={4}>
+                <ConductorInfo
+                  conductorName={activityDetails.conductorName}
+                  conductorImage={activityDetails.conductorImage}
+                  conductorSummary={activityDetails.conductorSummary}
+                />
+              </Paper>
+              <AboutActivity aboutActivity={aboutActivity} mt={4} />
+            </GridItem>
 
-          <GridItem colSpan={2}>
-            <Paper>
-              <OrganizerInfo info={organizationDetails} />
-            </Paper>
-            <Paper mt={4}>
-              <ShareBar url={url} mb={4} />
-              <ActivityDetails
-                activityDetails={activityDetails}
-                duration={duration}
-              />
-              <ScheduleBooking
-                mt={8}
-                info={activityDetails}
-                schedules={allSchedules}
-              />
-            </Paper>
-          </GridItem>
-        </Grid>
-      </Section>
-
+            <GridItem colSpan={2}>
+              <Paper>
+                <OrganizerInfo info={organizationDetails} />
+              </Paper>
+              <Paper mt={4}>
+                <ShareBar url={url} mb={4} />
+                <ActivityDetails activityDetails={activityDetails} />
+                <ScheduleBooking
+                  mt="56px"
+                  info={activityDetails}
+                  schedules={allSchedules}
+                />
+              </Paper>
+            </GridItem>
+          </Grid>
+        </Section>
+      ) : (
+        <Section fullView={false}>
+          <Flex justify="center" align="center" height="50vh">
+            Hmmm.. Looks like this activity does not exist anymore
+          </Flex>
+        </Section>
+      )}
       {otherPartnerActivities.length > 0 && (
         <CardCarouselSection
           tag="MORE ACTIVITIES"
@@ -145,8 +162,9 @@ const ActivityPage = (props) => {
               className={classes.swiperSlide}
             >
               <VerticalImageCard
+                minHeight="380px"
                 title={activity.activityName}
-                image={activity.coverImage[0].url}
+                image={activity.coverImage[0]?.url}
                 subtitle=""
                 badgeType={activity.type}
                 url={getCardUrl(activity)}
@@ -165,6 +183,7 @@ const ActivityPage = (props) => {
         <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
             title="Tanaka Satomi"
+            minHeight="380px"
             image={img1}
             subtitle="UI/UX designer"
             badgeType={BADGES.new}
@@ -234,13 +253,13 @@ export const getServerSideProps = async (context) => {
 
   const partnerData = await GetSpecificDocFromFirebase(partnerId, "partners");
   // const scheduleData = await GetScheduleFromFirebase(partnerId, scheduleId);
-  const schedules = await GetAllPartnerSchedules(partnerId);
+  const schedules = await GetAllPartnerSchedules(partnerId, templateId);
   const allActivities = await GetAllPartnerActivities(partnerId);
 
   return {
     props: {
-      partnerData: JSON.stringify(partnerData),
-      activityData: JSON.stringify(activityData),
+      partnerData: partnerData ? JSON.stringify(partnerData) : null,
+      activityData: activityData ? JSON.stringify(activityData) : null,
       // scheduleData: JSON.stringify(scheduleData),
       schedules: schedules ? JSON.stringify(schedules) : null,
       activities: allActivities ? JSON.stringify(allActivities) : null,

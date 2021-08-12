@@ -28,10 +28,10 @@ const AboutActivity = (props) => {
 
   return (
     <Box className={classes.aboutSection} {...others}>
-      <Text fontSize="md" fontWeight="bold">
+      <Text fontSize="sm" fontWeight="bold">
         About
       </Text>
-      <Box mt={4}>
+      <Box mt={4} mb={6} fontSize="sm">
         <div
           dangerouslySetInnerHTML={{
             __html: convertedContent,

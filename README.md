@@ -28,26 +28,13 @@
 
 ## TO DO
 
-- [ ] Database updates
-  - [ ] PartnerId change to orgName rather than Firebase GID
-    - [ ] Format example (tomi-build) which need to check if exist or not first
-  - [ ] Database of Template
-    - [ ] Add duration into Template
-    - [ ] Edit Default Price (how to deal with multiple pricing under one booking?)
-    - [ ] Add Conductor info (conductorSummary, conductorName, conductorImage)
-  - [ ] Database of Partner
-    - [ ] Change orgDescription to orgSummary (limit to 30 characters)
-    - [ ] Edit orgWebsite to include https:// by default
-  - [ ] Database of Schedule
-    - [ ] Add HostDetails in Schedule
-    - [ ] Add spots left
-    - [ ] Schedule (date and time)
-      - [ ] Time should be based exactly on Duration set in template
-    - [ ] Remove unnecessary info
-      - [ ] Location to be removed here
-      - [ ] Price to be removed here
-      - [ ] Participant Limit to be removed here
-  - [ ] Send notification Details to partner object
+- [x] Payment notes
+- [x] Fix Vertical card size (380px)
+- [ ] Order schedule by date
+- [x] Show only upcoming 3 schedules (add "see all" to expand list)
+- [ ] Filter away inactive/past activities
+- [ ] Show only Published activities (isActive)
+- [ ] Send "I'm interested" to Database
 - [ ] Landing page
   - [ ] Hero
 - [ ] Other similar activities
