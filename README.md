@@ -30,10 +30,10 @@
 
 - [x] Payment notes
 - [x] Fix Vertical card size (380px)
-- [ ] Order schedule by date
+- [x] Order schedule by date
 - [x] Show only upcoming 3 schedules (add "see all" to expand list)
 - [ ] Filter away inactive/past activities
-- [ ] Show only Published activities (isActive)
+- [x] Show only Published activities (isActive)
 - [ ] Send "I'm interested" to Database
 - [ ] Landing page
   - [ ] Hero

@@ -183,12 +183,10 @@ const ActivityPage = (props) => {
         <SwiperSlide className={classes.swiperSlide}>
           <VerticalImageCard
             title="Tanaka Satomi"
-            minHeight="380px"
             image={img1}
             subtitle="UI/UX designer"
             badgeType={BADGES.new}
-            action={() => alert("CLICKED")}
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
           />
         </SwiperSlide>
@@ -198,40 +196,6 @@ const ActivityPage = (props) => {
             image={img2}
             subtitle="UI/UX designer"
             badgeType={BADGES.new}
-            action={() => alert("CLICKED")}
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-          />
-        </SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>
-          <VerticalImageCard
-            title="Tanaka Satomi"
-            image={img1}
-            subtitle="UI/UX designer"
-            badgeType={BADGES.popular}
-            action={() => alert("CLICKED")}
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-          />
-        </SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>
-          <VerticalImageCard
-            title="Tanaka Satomi"
-            image={img2}
-            subtitle="UI/UX designer"
-            badgeType={BADGES.limited}
-            action={() => alert("CLICKED")}
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-          />
-        </SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>
-          <VerticalImageCard
-            title="Tanaka Satomi"
-            image={img1}
-            subtitle="UI/UX designer"
-            badgeType={BADGES.new}
-            action={() => alert("CLICKED")}
             text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               congue bibendum ante, sed imperdiet eros fermentum in."
           />

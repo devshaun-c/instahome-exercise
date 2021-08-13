@@ -59,7 +59,8 @@ const VerticalImageCard = (props) => {
       href={url}
       cursor={url ? "pointer" : "default"}
       _hover={{ outline: "none" }}
-      target="_blank"
+      rel="noopener,noreferrer"
+      // target="_blank"
       {...others}
     >
       <Box

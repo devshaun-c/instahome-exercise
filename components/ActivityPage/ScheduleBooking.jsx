@@ -7,6 +7,7 @@ import {
   ConverToDate,
   GetClickableLink,
   GetTimeSummary,
+  SortByDate,
 } from "../../lib/utils";
 import StandardButton from "../Buttons/StandardButton";
 import TextButton from "../Buttons/TextButton.jsx";
@@ -49,7 +50,7 @@ const ScheduleBooking = (props) => {
   const [showAll, setShowAll] = useState(false);
 
   const scheduleOptions = [];
-  var allSchedules = schedules;
+  var allSchedules = SortByDate(schedules);
   var displayedSchedules = [];
   allSchedules.forEach((schedule) => {
     const date = moment(
@@ -199,9 +200,9 @@ const ScheduleBooking = (props) => {
       )}
       {bookingLink && allSchedules.length > 0 ? (
         <Box mt={10}>
-          <Text fontSize="sm" fontWeight="bold">
+          {/* <Text fontSize="sm" fontWeight="bold">
             Schedule & Booking
-          </Text>
+          </Text> */}
           <PriceBox />
           {/* <Text mt={4} fontSize="xs">
             Our latest schedule is available in the link below
