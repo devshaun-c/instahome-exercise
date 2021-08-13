@@ -74,7 +74,6 @@ const VerticalImageCard = (props) => {
           alt={alt}
           layout="fill"
           objectFit="cover"
-          placeholder="blur"
         />
       </Box>
       <Box p="8px 16px 16px 16px">

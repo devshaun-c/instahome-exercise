@@ -76,7 +76,8 @@ const Focus = (props) => {
               alt={alt}
               layout="fill"
               objectFit="cover"
-              placeholder="blur"
+              // placeholder="blur"
+              // blurDataURL={placeholderImg}
             />
           </Box>
         )}

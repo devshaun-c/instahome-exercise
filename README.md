@@ -1,6 +1,6 @@
 ## Packages used in this template
 
-- nextJS
+- nextJS (v11)
 - styled-components-babelrc
 - firebase
 - draft-js (For rich text editor)
@@ -28,13 +28,6 @@
 
 ## TO DO
 
-- [x] Payment notes
-- [x] Fix Vertical card size (380px)
-- [x] Order schedule by date
-- [x] Show only upcoming 3 schedules (add "see all" to expand list)
-- [ ] Filter away inactive/past activities
-- [x] Show only Published activities (isActive)
-- [ ] Send "I'm interested" to Database
 - [ ] Landing page
   - [ ] Hero
 - [ ] Other similar activities
@@ -42,8 +35,25 @@
   - [ ] Request date and private class
   - [ ] Get users interested topics
     - [ ] Reconsider usage of react-select (multi select is important)
+- [ ] Signup
+  - [ ] Signup is disabled at InterestForm
 
-> Done
+## Done
+
+> 13/8/2021
+
+- [x] Activity Page
+  - [x] Payment notes
+  - [x] Fix Vertical card size (380px)
+  - [x] Order schedule by date
+  - [x] Show only upcoming 3 schedules (add "see all" to expand list)
+  - [x] Show only Published activities (isActive)
+  - [x] Send "I'm interested" to Partner Database
+- [x] Updated NextJS to V11
+  - [x] Update Next Image (removed placeholder="blur")
+  - [x] Updated next.config.js to allow png
+
+> Previous
 
 - [x] Activity Page
   - [x] Connect to firebase

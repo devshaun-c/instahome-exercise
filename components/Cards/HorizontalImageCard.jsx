@@ -73,6 +73,7 @@ const HorizontalImageCard = (props) => {
           layout="fill"
           objectFit="cover"
           placeholder="blur"
+          blurDataURL={image || placeholderImg}
         />
       </Box>
       <Box p="16px">

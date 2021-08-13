@@ -83,6 +83,7 @@ const Hero = (props) => {
               layout="fill"
               objectFit="cover"
               placeholder="blur"
+              blurDataURL={heroImg}
             />
           </Box>
         )}

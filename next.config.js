@@ -4,6 +4,7 @@ const withImages = require("next-images");
 const nextConfig = {
   images: {
     domains: ["firebasestorage.googleapis.com"],
+    disableStaticImages: true,
   },
 };
 

@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { Box, ButtonGroup, Flex, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  ButtonGroup,
+  Flex,
+  HStack,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import StandardButton from "../Buttons/StandardButton";
 import CustomSelect from "../Controls/CustomSelect.jsx";
 import CustomInput from "../Controls/CustomInput.jsx";
-import { SignUpWithPopup } from "../../lib/firebase";
+import { CreateNewInterest, SignUpWithPopup } from "../../lib/firebase";
 
 const useStyles = createUseStyles({});
 
@@ -31,17 +38,19 @@ const TIME_PREFERENCE = {
 
 const InterestForm = (props) => {
   const classes = useStyles();
-  const { handleToggle, ...others } = props;
+  const toast = useToast();
+  const { handleToggle, info, ...others } = props;
+
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
+    password: "",
     dayPreference: DAY_PREFERENCE.anyday,
     timePreference: TIME_PREFERENCE.anytime,
-    password: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const isLoggedIn = false;
+  const isLoggedIn = true; //Temporarily disable signup
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,16 +60,38 @@ const InterestForm = (props) => {
     });
   };
 
-  const handleNotify = (e) => {
+  const handleNotify = async (e) => {
     e.preventDefault();
-    //Submit notificationDetails to Firebase (partner Object)
-    setIsSubmitted(true);
+    const { activityId, activityName, partnerId } = info;
+    const { name, email, dayPreference, timePreference } = formValues;
+    const obj = {
+      activityId,
+      activityName,
+      name,
+      email,
+      dayPreference,
+      timePreference,
+    };
+    const isSuccess = await CreateNewInterest(obj, partnerId);
+
+    if (isSuccess) {
+      toast({
+        title: "Thanks for your interest!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setIsSubmitted(true);
+      if (isLoggedIn) {
+        handleToggle(false);
+      }
+    }
   };
 
   const handleSignUp = (e) => {
     e.preventDefault();
     const { email, password } = formValues;
-    alert(`${email} user is created`);
+    // alert(`${email} user is created`);
     handleToggle(false);
   };
 

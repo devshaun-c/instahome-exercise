@@ -1,31 +1,12 @@
 import React from "react";
 import {
-  EmailShareButton,
-  FacebookMessengerShareButton,
-  FacebookShareButton,
   LineShareButton,
   TelegramShareButton,
   WhatsappShareButton,
 } from "react-share";
-import {
-  EmailIcon,
-  FacebookIcon,
-  FacebookMessengerIcon,
-  TelegramIcon,
-  WhatsappIcon,
-} from "react-share";
 import { Box, Text, Flex, Stack, IconButton, useToast } from "@chakra-ui/react";
-import {} from "react-icons";
 import { BsLink } from "react-icons/bs";
-import {
-  FaFacebookMessenger,
-  FaFacebookSquare,
-  FaLine,
-  FaTelegram,
-  FaTelegramPlane,
-  FaWhatsapp,
-  FaWhatsappSquare,
-} from "react-icons/fa";
+import { FaLine, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({

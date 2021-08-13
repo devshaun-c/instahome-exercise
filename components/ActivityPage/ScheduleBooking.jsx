@@ -41,17 +41,10 @@ const ScheduleBooking = (props) => {
   const { info, schedules, ...others } = props;
   const { defaultPrice, bookingLink, paymentNotes } = info;
   const [isOpen, setIsOpen] = useState(false);
-  const [notificationDetails, setNotificationDetails] = useState({
-    name: "",
-    email: "",
-    dayPreference: "",
-    timePreference: "",
-  });
   const [showAll, setShowAll] = useState(false);
 
   const scheduleOptions = [];
-  var allSchedules = SortByDate(schedules);
-  var displayedSchedules = [];
+  const allSchedules = SortByDate(schedules);
   allSchedules.forEach((schedule) => {
     const date = moment(
       convertFirebaseTimestamp(schedule.scheduledStartDate)
@@ -72,6 +65,7 @@ const ScheduleBooking = (props) => {
     }
   });
 
+  var displayedSchedules = [];
   if (!showAll) {
     displayedSchedules = allSchedules.slice(0, 3);
   } else {
@@ -178,7 +172,7 @@ const ScheduleBooking = (props) => {
             })}
           </Flex>
           <TextButton onClick={() => setShowAll(!showAll)} color="grey">
-            {showAll ? "see less" : "see more"}
+            {showAll ? "see less" : "see all"}
             {showAll ? (
               <ChevronUpIcon fontSize="lg" ml={2} />
             ) : (
@@ -200,13 +194,7 @@ const ScheduleBooking = (props) => {
       )}
       {bookingLink && allSchedules.length > 0 ? (
         <Box mt={10}>
-          {/* <Text fontSize="sm" fontWeight="bold">
-            Schedule & Booking
-          </Text> */}
           <PriceBox />
-          {/* <Text mt={4} fontSize="xs">
-            Our latest schedule is available in the link below
-          </Text> */}
           <StandardButton
             colorScheme="teal"
             variant="outline"
@@ -256,7 +244,7 @@ const ScheduleBooking = (props) => {
         isOpen={isOpen}
         handleToggle={setIsOpen}
         modalHeader={<Text>Get notified !</Text>}
-        modalBody={<InterestForm handleToggle={setIsOpen} />}
+        modalBody={<InterestForm handleToggle={setIsOpen} info={info} />}
       />
     </Box>
   );

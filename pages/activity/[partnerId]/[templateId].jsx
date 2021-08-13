@@ -132,7 +132,7 @@ const ActivityPage = (props) => {
                 <OrganizerInfo info={organizationDetails} />
               </Paper>
               <Paper mt={4}>
-                <ShareBar url={url} mb={4} />
+                <ShareBar url={url} mb={8} />
                 <ActivityDetails activityDetails={activityDetails} />
                 <ScheduleBooking
                   mt="56px"
