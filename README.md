@@ -26,10 +26,32 @@
 - Need styled-components-babelrc
 - add \_document.js into Pages
 
+## Changes to Template
+
+- Reduce margin between sections
+- Upgrade to NextJS v11
+- Updated next.config.js
+
 ## TO DO
 
-- [ ] Landing page
-  - [ ] Hero
+- [ ] Landing page (index.js)
+  - [ ] Featured
+    - [ ] FeaturedObject
+    - [ ] Add button to direct to activity
+    - [ ] Change to full size carousel
+  - [ ] Cards
+    - [ ] Link workshops
+      - [ ] Show only the upcoming date (more available note (if applicable))
+    - [ ] Link community
+    - [ ] Link fitness
+    - [ ] Link Events
+    - [ ] Show if online activity
+  - [ ] Partner cards
+    - [ ] Reduce image size
+    - [ ] Remove tag
+    - [ ] Change card design
+  - [ ] Newsletter
+  - [ ] Timetable (for this week)
 - [ ] Other similar activities
 - [ ] Nice to have
   - [ ] Request date and private class

@@ -84,7 +84,7 @@ const Navbar = () => {
       <Box position="relative" h="100%">
         <div className={classes.nav}>
           <div className={classes.title} onClick={() => handleNav("/")}>
-            Title
+            AfterWork
           </div>
           <div className={classes.menuLinks}>
             <Menu>
