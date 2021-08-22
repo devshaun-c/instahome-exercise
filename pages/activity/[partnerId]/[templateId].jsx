@@ -48,14 +48,17 @@ const ActivityPage = (props) => {
   const router = useRouter();
   const { partnerId, templateId } = router.query;
   const url = `http://localhost:3000/activity/${partnerId}/${templateId}`;
-  //scheduleId: LQG8kDCKI93wwo5mMm4u
-  //templateId: zhfkhyMcDsvxweOLVBFY
-  //PartnerId: tomi-build
-  //URL format: activity/[partnerId]/[templateId]
-  //URL: activity/tomi-build/zhfkhyMcDsvxweOLVBFY
+
+  const CheckValidPartnerAndActivity = () => {
+    const activityData = JSON.parse(props.activityData);
+    const isActive = activityData.isActive;
+    const isByPartner = activityData.partnerId === partnerId;
+
+    return activityData && isActive && isByPartner;
+  };
 
   var activityData = {};
-  if (props.activityData) {
+  if (CheckValidPartnerAndActivity()) {
     activityData = JSON.parse(props.activityData);
   } else {
     activityData = { activityName: "Activity Not Found" };
@@ -75,16 +78,6 @@ const ActivityPage = (props) => {
     durationInSeconds,
   } = activityData;
 
-  // const {
-  //   price,
-  //   priceType,
-  //   participantLimit,
-  //   locationDescription,
-  //   locationMaps,
-  //   scheduledStartDate,
-  //   scheduledEndDate,
-  // } = JSON.parse(props.scheduleData);
-
   var otherPartnerActivities = [];
   if (props.activities) {
     const allPartnerActivities = JSON.parse(props.activities);
@@ -92,12 +85,6 @@ const ActivityPage = (props) => {
       (activity) => activity.activityId !== activityId
     );
   }
-
-  //TEMPORARY (TO EDIT ONCE TEMPLATE DB IS UPDATED)
-  // const duration = GetDurationText(
-  //   allSchedules[0].scheduledEndDate,
-  //   allSchedules[0].scheduledStartDate
-  // );
 
   const getCardUrl = (activity) => {
     const { partnerId, activityId } = activity;
@@ -107,7 +94,7 @@ const ActivityPage = (props) => {
   return (
     <Page
       pageMeta={{
-        title: `${activityName}`,
+        title: `${activityName} | AfterWork`,
         description: shortSummary,
       }}
     >

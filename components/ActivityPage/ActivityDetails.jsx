@@ -10,10 +10,7 @@ import {
   BsGeo,
   BsTag,
 } from "react-icons/bs";
-import {
-  ConvertToDaysHoursMinutes,
-  ConvertToDurationText,
-} from "../../lib/utils";
+import { GetDurationText } from "../../lib/utils";
 
 const useStyles = createUseStyles({
   activityDetails: {},
@@ -32,13 +29,6 @@ const ActivityDetails = (props) => {
     durationInSeconds,
   } = activityDetails;
 
-  const getDurationText = (durationInSeconds) => {
-    const { days, hours, minutes } =
-      ConvertToDaysHoursMinutes(durationInSeconds);
-
-    return ConvertToDurationText(days, hours, minutes);
-  };
-
   return (
     <Box className={classes.activityDetails} {...others}>
       {/* <Text fontSize="sm" fontWeight="bold">
@@ -47,7 +37,7 @@ const ActivityDetails = (props) => {
       <Flex align="center" mt={4}>
         <BsClock fontSize="24px" color="lightgrey" />
         <Box fontSize="xs" ml={4}>
-          <Text>{getDurationText(durationInSeconds)}</Text>
+          <Text>{GetDurationText(durationInSeconds)}</Text>
         </Box>
       </Flex>
       <Flex align="center" mt={4}>

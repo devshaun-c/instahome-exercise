@@ -35,23 +35,20 @@
 ## TO DO
 
 - [ ] Landing page (index.js)
-  - [ ] Featured
-    - [ ] FeaturedObject
-    - [ ] Add button to direct to activity
-    - [ ] Change to full size carousel
+  - [x] Featured
+    - [x] FeaturedObject
+    - [x] Add button to direct to activity
   - [ ] Cards
-    - [ ] Link workshops
-      - [ ] Show only the upcoming date (more available note (if applicable))
-    - [ ] Link community
-    - [ ] Link fitness
-    - [ ] Link Events
-    - [ ] Show if online activity
+    - [x] Show if online activity
+    - [ ] Randomize cards order
+  - [ ] Review Hero design
   - [ ] Partner cards
     - [ ] Reduce image size
     - [ ] Remove tag
     - [ ] Change card design
   - [ ] Newsletter
   - [ ] Timetable (for this week)
+- [ ] Fix focus image sizing
 - [ ] Other similar activities
 - [ ] Nice to have
   - [ ] Request date and private class

@@ -54,7 +54,7 @@ const Focus = (props) => {
               >
                 {header}
               </Heading>
-              <Text fontSize={["sm", "md"]} mt={4} mb={6}>
+              <Text fontSize={["sm", "sm"]} mt={4} mb={6}>
                 {description}
               </Text>
               {children}
@@ -68,7 +68,7 @@ const Focus = (props) => {
             h="100%"
             minH="150px"
             overflow="hidden"
-            borderRadius="8px"
+            borderRadius="80px 8px 80px 8px"
             position="relative"
           >
             <Image

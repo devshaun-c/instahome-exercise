@@ -44,6 +44,7 @@ const Hero = (props) => {
       position="relative"
     >
       <Stack
+        pt={10}
         direction={["column", "row", "row"]}
         spacing="40px"
         height={["80vh", "100%", "100%"]}

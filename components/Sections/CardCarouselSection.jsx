@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import { useTheme } from "@emotion/react";
@@ -33,13 +33,17 @@ const CardCarouselSection = (props) => {
             {tag}
           </Text>
         )}
-        <Heading
-          fontSize={["md", "x-large"]}
-          fontWeight="bold"
-          lineHeight="1.3"
-        >
-          {header}
-        </Heading>
+        <Flex justify="space-between" align="center">
+          <Heading
+            fontSize={["md", "x-large"]}
+            fontWeight="bold"
+            lineHeight="1.3"
+          >
+            {header}
+          </Heading>
+
+          <Link fontSize="md">See all</Link>
+        </Flex>
       </Box>
       <Box>
         <Carousel slidesPerView={"auto"} freeMode={true} {...others}>

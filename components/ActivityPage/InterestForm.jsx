@@ -99,7 +99,7 @@ const InterestForm = (props) => {
     <>
       {!isSubmitted && (
         <form onSubmit={handleNotify}>
-          <Text fontSize="sm" mb={2}>
+          <Text fontSize="sm" mb={4}>
             You will be notified by email when a new schedule is created for
             this activity
           </Text>
@@ -110,6 +110,7 @@ const InterestForm = (props) => {
             value={formValues.name}
             onChange={handleInputChange}
             required
+            mt={1}
           />
           <CustomInput
             label="Emaill address"
@@ -119,7 +120,7 @@ const InterestForm = (props) => {
             placeholder="bruce@wayne.com"
             type="email"
             required
-            mt={2}
+            mt={1}
           />
           <Text fontSize="sm" mt={6} mb={2}>
             When would you like this session?

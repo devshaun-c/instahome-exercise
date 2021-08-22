@@ -43,7 +43,7 @@ const StandardInput = (props) => {
     ...others
   } = props;
 
-  const inputSize = useBreakpointValue(["md", "md", "md"]);
+  const inputSize = useBreakpointValue(["md", "md", "sm"]);
 
   return (
     <FormControl isRequired={required} isInvalid={errorText} mb={label ? 6 : 0}>

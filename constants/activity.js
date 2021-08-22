@@ -1,3 +1,8 @@
+export const ACTIVITY_TYPE = {
+  inPerson: "inPerson",
+  online: "online",
+};
+
 export const getActivityTypeCollection = () => [
   { id: ACTIVITY_TYPE.inPerson, title: "In person" },
   { id: ACTIVITY_TYPE.online, title: "Online" },

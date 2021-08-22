@@ -9,24 +9,18 @@ import { BADGES } from "../constants/badges";
 import Hero from "../components/Sections/Hero";
 import Focus from "../components/Sections/Focus";
 import CardCarouselSection from "../components/Sections/CardCarouselSection";
-import ImageCarouselSection from "../components/Sections/ImageCarouselSection";
-import { StarIcon } from "@chakra-ui/icons";
-import Image from "next/image";
 import StackGroup from "../components/Sections/StackGroup";
-import SquareCard from "../components/Cards/SquareCard";
-import StandardButton from "../components/Buttons/StandardButton";
-import Headliner from "../components/Sections/Headliner";
-import PricingPlans from "../components/Sections/PricingPlans";
-import Offerings from "../components/Sections/Offerings";
 import { SwiperSlide } from "swiper/react";
 import Newsletter from "../components/Sections/Newsletter";
-import StickyBox from "../components/Page/StickyBox";
 import Page from "../components/Page/Page";
 import { useRouter } from "next/router";
+import Featured from "../components/LandingPage/Featured";
+import { GetAllActiveActivities, GetAllPartners } from "../lib/firebase";
+import ActivitiesBucket from "../components/Sections/ActivitiesBucket";
 
 const useStyles = createUseStyles({
   home: {
-    marginTop: "32px",
+    // marginTop: "64px",
   },
   swiperSlide: {
     width: "300px",
@@ -38,9 +32,63 @@ const useStyles = createUseStyles({
   },
 });
 
-const Home = () => {
+const temporaryFeatured = [
+  {
+    title: "Learn Woodworking with Tomi",
+    orgName: "Art Matrix",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in.",
+    coverImage:
+      "https://firebasestorage.googleapis.com/v0/b/after-work-73b2f.appspot.com/o/R2b2xwxpchxjGktnS61O%2Fimglist-1.jpg?alt=media&token=c1c2cd85-db6a-45c8-b495-c4eba96fa80b",
+    partnerId: "art-matrix",
+    activityId: "eu55lY0rGxSca3pnfY8H",
+    children: (
+      <Box>
+        {/* <Text fontWeight="bold" fontSize={["sm", "md"]}>
+          Tanaka Satomi
+        </Text>
+        <Text fontSize={["xs", "sm"]} mt="4px">
+          - A great introduction to woodworking. Tomi's workshop has been
+          nothing but fun and inspirational.
+        </Text>
+        <HStack mt="16px">
+          <StarIcon color="gold" />
+          <StarIcon color="gold" />
+          <StarIcon color="gold" />
+          <StarIcon color="gold" />
+          <StarIcon color="gold" />
+        </HStack> */}
+      </Box>
+    ),
+  },
+  {
+    title: "Learn Woodworking with Mike",
+    orgName: "Art Matrix",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in.",
+    coverImage:
+      "https://firebasestorage.googleapis.com/v0/b/after-work-73b2f.appspot.com/o/R2b2xwxpchxjGktnS61O%2Fimglist-woodwork2.jpg?alt=media&token=8eeb5331-562c-4beb-854e-16e5aabbe648",
+    partnerId: "art-matrix",
+    activityId: "eu55lY0rGxSca3pnfY8H",
+  },
+];
+
+const Home = (props) => {
   const classes = useStyles();
   const router = useRouter();
+  const [activities, setActivities] = useState([]);
+  const [workshops, setWorkshops] = useState([]);
+
+  const activitiesFromServer = JSON.parse(props.activities);
+
+  useEffect(() => {
+    if (activitiesFromServer.length) {
+      setActivities(activitiesFromServer);
+      setWorkshops([...activitiesFromServer, ...activitiesFromServer]);
+    }
+  }, []);
+
+  console.log(activities);
 
   return (
     <Page
@@ -50,7 +98,7 @@ const Home = () => {
       }}
     >
       <div className={classes.home}>
-        {/* <Hero
+        <Hero
           height={["100%", "500px", "600px"]}
           bgColor="whitesmoke"
           bgImage=""
@@ -63,37 +111,10 @@ const Home = () => {
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
           hasImage
           heroImg={img}
-        /> */}
+        />
+        {/* <Featured list={temporaryFeatured} /> */}
 
-        <Focus
-          height={["100%", "500px"]}
-          // bgColor="none"
-          bgImage=""
-          alt=""
-          header="Learn Woodworking with Tomi"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-          tag="FEATURED THIS WEEK"
-          hasImage
-          image={img}
-          imageSide="right"
-        >
-          <Text fontWeight="bold" fontSize={["sm", "md"]}>
-            Tanaka Satomi
-          </Text>
-          <Text fontSize={["xs", "sm"]} mt="4px">
-            - A great introduction to woodworking. Tomi's workshop has been
-            nothing but fun and inspirational.
-          </Text>
-          <HStack mt="16px">
-            <StarIcon color="gold" />
-            <StarIcon color="gold" />
-            <StarIcon color="gold" />
-            <StarIcon color="gold" />
-            <StarIcon color="gold" />
-          </HStack>
-        </Focus>
-
-        <StackGroup height="100%" bgColor="white">
+        <StackGroup height="100%" bgColor="whitesmoke">
           <Box
             w="100%"
             h="100%"
@@ -144,67 +165,19 @@ const Home = () => {
           </Box>
         </StackGroup>
 
+        {workshops.length > 0 && (
+          <ActivitiesBucket
+            tag="WORKSHOPS"
+            height="100%"
+            header="Develop New Skills or Find a Hobby"
+            list={workshops}
+          />
+        )}
+
         <CardCarouselSection
           tag="LIMITED TIME EVENTS"
           height="100%"
-          header="Events You Should Not Miss"
-        >
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.popular}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.limited}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-        </CardCarouselSection>
-
-        <CardCarouselSection
-          tag="WORKSHOPS"
-          height="100%"
-          header="Develop New Skills or Find a Hobby"
+          header="Upcoming Events You Should Not Miss"
         >
           <SwiperSlide className={classes.swiperSlide}>
             <VerticalImageCard
@@ -430,3 +403,15 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = async (context) => {
+  const partners = await GetAllPartners();
+  const activities = await GetAllActiveActivities();
+
+  return {
+    props: {
+      partners: partners ? JSON.stringify(partners) : null,
+      activities: activities ? JSON.stringify(activities) : null,
+    },
+  };
+};
