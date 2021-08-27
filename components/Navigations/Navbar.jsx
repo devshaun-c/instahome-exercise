@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -8,19 +8,27 @@ import {
   useDisclosure,
   Collapse,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
-  navbar: {
+  navbarShow: {
     position: "fixed",
     width: "100%",
     zIndex: "1000",
     height: "64px",
     backgroundColor: "white",
-    borderBottom: "1px solid rgb(235,235,235)",
+    opacity: "1",
+    boxShadow: "0 4px 12px -4px rgb(0 0 0 / 10%)",
+    transition: "opacity 0.3s",
+  },
+  navbarHide: {
+    height: "0",
+    opacity: "0",
+    transition: "opacity 0.3s",
   },
   nav: {
     display: "flex",
@@ -32,6 +40,8 @@ const useStyles = createUseStyles({
   },
   title: {
     fontFamily: "var(--title-font)",
+    fontSize: "24px",
+    fontWeight: "bold",
     cursor: "pointer",
     "@media screen and (max-width: 1000px)": {
       marginLeft: "5%",
@@ -73,6 +83,21 @@ const Navbar = () => {
   const classes = useStyles(theme);
   const router = useRouter();
   const { isOpen, onToggle, onClose } = useDisclosure();
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    if (position > 50) setShowNavbar(true);
+    if (position <= 50) setShowNavbar(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleNav = (url) => {
     onClose();
@@ -80,12 +105,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={classes.navbar}>
+    <Box className={showNavbar ? classes.navbarShow : classes.navbarHide}>
       <Box position="relative" h="100%">
         <div className={classes.nav}>
-          <div className={classes.title} onClick={() => handleNav("/")}>
+          <Text
+            className={classes.title}
+            onClick={() => handleNav("/")}
+            color="brand.400"
+          >
             AfterWork
-          </div>
+          </Text>
           <div className={classes.menuLinks}>
             <Menu>
               <MenuButton
@@ -183,7 +212,7 @@ const Navbar = () => {
           </Box>
         </Collapse>
       </Box>
-    </nav>
+    </Box>
   );
 };
 

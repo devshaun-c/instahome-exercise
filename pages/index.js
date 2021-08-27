@@ -7,7 +7,6 @@ import img2 from "../public/static/images/coding.svg";
 import BackToTop from "../components/Page/BackToTop";
 import { BADGES } from "../constants/badges";
 import Hero from "../components/Sections/Hero";
-import Focus from "../components/Sections/Focus";
 import CardCarouselSection from "../components/Sections/CardCarouselSection";
 import StackGroup from "../components/Sections/StackGroup";
 import { SwiperSlide } from "swiper/react";
@@ -17,10 +16,14 @@ import { useRouter } from "next/router";
 import Featured from "../components/LandingPage/Featured";
 import { GetAllActiveActivities, GetAllPartners } from "../lib/firebase";
 import ActivitiesBucket from "../components/Sections/ActivitiesBucket";
+import { shuffle } from "../lib/utils";
+import LocationBar from "../components/Miscellaneous/LocationBar";
+import Section from "../components/Sections/Section";
 
 const useStyles = createUseStyles({
   home: {
     // marginTop: "64px",
+    position: "relative",
   },
   swiperSlide: {
     width: "300px",
@@ -84,7 +87,10 @@ const Home = (props) => {
   useEffect(() => {
     if (activitiesFromServer.length) {
       setActivities(activitiesFromServer);
-      setWorkshops([...activitiesFromServer, ...activitiesFromServer]);
+      setWorkshops([
+        ...shuffle(activitiesFromServer),
+        ...shuffle(activitiesFromServer),
+      ]);
     }
   }, []);
 
@@ -98,72 +104,11 @@ const Home = (props) => {
       }}
     >
       <div className={classes.home}>
-        <Hero
-          height={["100%", "500px", "600px"]}
-          bgColor="whitesmoke"
-          bgImage=""
-          alt=""
-          callToAction={() => {}}
-          secondaryAction={() => {}}
-          primaryButtonText="Get Started Today"
-          secondaryButtonText="See Schedule"
-          header="It's a Big World Out There, Go Explore!"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-          hasImage
-          heroImg={img}
-        />
+        <Hero />
+
         {/* <Featured list={temporaryFeatured} /> */}
 
-        <StackGroup height="100%" bgColor="whitesmoke">
-          <Box
-            w="100%"
-            h="100%"
-            p="32px"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text fontSize="32px" color="lightgrey" fontWeight="bold">
-              Simon Build
-            </Text>
-          </Box>
-          <Box
-            w="100%"
-            h="100%"
-            p="32px"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text fontSize="32px" color="lightgrey" fontWeight="bold">
-              Just Dance
-            </Text>
-          </Box>
-          <Box
-            w="100%"
-            h="100%"
-            p="32px"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text fontSize="32px" color="lightgrey" fontWeight="bold">
-              HoolaHoo
-            </Text>
-          </Box>
-          <Box
-            w="100%"
-            h="100%"
-            p="32px"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text fontSize="32px" color="lightgrey" fontWeight="bold">
-              AfterWork
-            </Text>
-          </Box>
-        </StackGroup>
+        <LocationBar />
 
         {workshops.length > 0 && (
           <ActivitiesBucket

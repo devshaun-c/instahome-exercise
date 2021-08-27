@@ -31,31 +31,39 @@
 - Reduce margin between sections
 - Upgrade to NextJS v11
 - Updated next.config.js
+- Added npm i react-input-autosize
 
-## TO DO
+## PENDING
 
-- [ ] Landing page (index.js)
-  - [x] Featured
-    - [x] FeaturedObject
-    - [x] Add button to direct to activity
-  - [ ] Cards
-    - [x] Show if online activity
-    - [ ] Randomize cards order
-  - [ ] Review Hero design
-  - [ ] Partner cards
-    - [ ] Reduce image size
-    - [ ] Remove tag
-    - [ ] Change card design
-  - [ ] Newsletter
-  - [ ] Timetable (for this week)
-- [ ] Fix focus image sizing
-- [ ] Other similar activities
+- [ ] Partner cards
+  - [ ] Reduce image size
+  - [ ] Remove tag
+  - [ ] Change card design
+- [ ] Timetable (for this week)
 - [ ] Nice to have
   - [ ] Request date and private class
   - [ ] Get users interested topics
     - [ ] Reconsider usage of react-select (multi select is important)
 - [ ] Signup
   - [ ] Signup is disabled at InterestForm
+
+## TO DO
+
+- [x] Landing page (index.js)
+  - [x] Featured
+    - [x] FeaturedObject
+    - [x] Add button to direct to activity
+  - [x] Cards
+    - [x] Show if online activity
+    - [x] Randomize cards order
+  - [x] Review Hero design
+  - [x] Location bar
+  - [x] Navbar
+  - [ ] Community activities
+  - [ ] Branding
+  - [ ] Payment system
+  - [ ] Newsletter
+    - [ ] Get notified if there's new activities
 
 ## Done
 

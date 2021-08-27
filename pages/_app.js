@@ -15,7 +15,7 @@ const useStyles = createUseStyles({
     flexDirection: "column",
   },
   main: {
-    marginTop: "64px",
+    // marginTop: "64px",
   },
 });
 
@@ -31,16 +31,16 @@ const theme = extendTheme({
     primary: "var(--primary-color)",
     secondary: "var(--secondary-color)",
     brand: {
-      50: "#E6FFFA",
-      100: "#B2F5EA",
-      200: "#81E6D9",
-      300: "#4FD1C5",
-      400: "#38B2AC",
-      500: "#319795",
-      600: "#2C7A7B",
-      700: "#285E61",
-      800: "#234E52",
-      900: "#1D4044",
+      50: "#FF712F",
+      100: "#FF712F",
+      200: "#FF712F",
+      300: "#FF712F",
+      400: "#FF712F",
+      500: "#FF712F",
+      600: "#FF712F",
+      700: "#FF712F",
+      800: "#FF712F",
+      900: "#FF712F",
     },
   },
   fonts: {

@@ -88,8 +88,6 @@ const ActivityCard = (props) => {
     tags,
   } = activity;
 
-  console.log(activity);
-
   const url = `activity/${partnerId}/${activityId}`;
 
   return (

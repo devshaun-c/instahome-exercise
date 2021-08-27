@@ -11,10 +11,9 @@ import {
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import StandardButton from "../Buttons/StandardButton";
-import placeholderImg from "../../public/static/images/placeholder.png";
-import Container from "../Page/Container";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
+import img from "../../public/static/images/hero.jpg";
 
 const useStyles = createUseStyles({});
 
@@ -24,40 +23,50 @@ const Hero = (props) => {
   const {
     bgColor,
     bgImg,
-    heroImg,
+    heroImg = "",
     primaryButtonText,
     secondaryButtonText,
     alt,
-    header,
-    description,
     callToAction,
     secondaryAction,
     hasImage = false,
-    height = "600px",
   } = props;
 
   return (
     <Section
       bgColor={bgColor}
-      backgroundImage={bgImg}
-      h={height}
+      backgroundImage={bgImg || img}
+      height={["100%", "500px", "600px"]}
       position="relative"
+      backgroundPosition="top"
     >
       <Stack
         pt={10}
         direction={["column", "row", "row"]}
-        spacing="40px"
+        spacing="80px"
         height={["80vh", "100%", "100%"]}
+        display="flex"
+        justify="center"
+        alignItems="center"
       >
         <Box h="100%" w="100%" mt={[4, 0, 0]}>
-          <Heading w={["100%", "100%", "80%"]}>{header}</Heading>
-          <Text fontSize="sm" mt={[6, 6, 10]} mb={6}>
+          <Heading
+            w={["100%", "100%", "80%"]}
+            color="white"
+            fontSize="xxx-large"
+            maxWidth="800px"
+          >
+            It's a Big World Out There. Go Explore!
+          </Heading>
+          {/* <Text fontSize="sm" mt={[6, 6, 10]} mb={6}>
             {description}
-          </Text>
+          </Text> */}
           <Stack direction={"row"}>
-            <StandardButton colorScheme="teal" onClick={callToAction}>
-              {primaryButtonText}
-            </StandardButton>
+            {primaryButtonText && (
+              <StandardButton colorScheme="teal" onClick={callToAction}>
+                {primaryButtonText}
+              </StandardButton>
+            )}
             {secondaryButtonText && (
               <StandardButton
                 variant="ghost"
@@ -77,15 +86,9 @@ const Hero = (props) => {
             overflow="hidden"
             borderRadius="8px"
             position="relative"
+            // bg="white"
           >
-            <Image
-              src={heroImg || placeholderImg}
-              alt={alt}
-              layout="fill"
-              objectFit="cover"
-              placeholder="blur"
-              blurDataURL={heroImg}
-            />
+            <Image src={heroImg} alt={alt} layout="fill" objectFit="cover" />
           </Box>
         )}
       </Stack>

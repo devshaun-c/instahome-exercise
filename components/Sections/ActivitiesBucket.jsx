@@ -62,7 +62,7 @@ const ActivitiesBucket = (props) => {
       h={height}
       position="relative"
     >
-      <Box mb={8}>
+      <Box mb={8} mt={8}>
         {tag && (
           <Text fontSize={["xs", "xs"]} mb={[1, 2, 2]}>
             {tag}

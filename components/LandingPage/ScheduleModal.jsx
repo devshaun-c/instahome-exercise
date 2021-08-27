@@ -11,6 +11,7 @@ import {
   Flex,
   Button,
   Link,
+  Progress,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
@@ -36,6 +37,7 @@ const ScheduleModal = (props) => {
   const classes = useStyles();
   const { isOpen, handleToggle, activity } = props;
   const [schedules, setSchedules] = useState([]);
+  const [noDates, setNoDates] = useState(false);
 
   const { activityName, activityId, partnerId, defaultPrice, locationMaps } =
     activity;
@@ -44,7 +46,9 @@ const ScheduleModal = (props) => {
 
   useEffect(() => {
     if (isOpen && activity) {
-      GetActiveSchedules();
+      setTimeout(() => {
+        GetActiveSchedules();
+      }, 500);
     }
 
     async function GetActiveSchedules() {
@@ -54,6 +58,8 @@ const ScheduleModal = (props) => {
       );
       if (scheduleFromDb) {
         setSchedules(scheduleFromDb);
+      } else {
+        setNoDates(true);
       }
     }
   }, [isOpen]);
@@ -111,28 +117,41 @@ const ScheduleModal = (props) => {
               See Details
             </Link>
           </Flex>
-          <Box mt={4}>
-            {schedules.map((schedule) => (
-              <Flex mb={1} boxShadow="var(--card-shadow)" p={2}>
-                <Text fontSize="sm" width="64px">
-                  {moment(
-                    convertFirebaseTimestamp(schedule.scheduledStartDate)
-                  ).format("ddd")}
-                </Text>
-                <Text fontSize="sm" width="88px">
-                  {moment(
-                    convertFirebaseTimestamp(schedule.scheduledStartDate)
-                  ).format("D MMM")}
-                </Text>
-                <Text fontSize="sm" ml={3}>
-                  {GetTimeSummary(
-                    schedule.scheduledStartDate,
-                    schedule.scheduledEndDate
-                  )}
-                </Text>
-              </Flex>
-            ))}
-          </Box>
+          {schedules.length > 0 ? (
+            <Box mt={4}>
+              {schedules.map((schedule) => (
+                <Flex
+                  key={schedule.scheduleId}
+                  mb={1}
+                  boxShadow="var(--card-shadow)"
+                  p={2}
+                >
+                  <Text fontSize="sm" width="64px">
+                    {moment(
+                      convertFirebaseTimestamp(schedule.scheduledStartDate)
+                    ).format("ddd")}
+                  </Text>
+                  <Text fontSize="sm" width="88px">
+                    {moment(
+                      convertFirebaseTimestamp(schedule.scheduledStartDate)
+                    ).format("D MMM")}
+                  </Text>
+                  <Text fontSize="sm" ml={3}>
+                    {GetTimeSummary(
+                      schedule.scheduledStartDate,
+                      schedule.scheduledEndDate
+                    )}
+                  </Text>
+                </Flex>
+              ))}
+            </Box>
+          ) : noDates ? (
+            <Text fontSize="sm" mt={4}>
+              See activity details for more information on schedule
+            </Text>
+          ) : (
+            <Progress size="xs" isIndeterminate mt={4} colorScheme="brand" />
+          )}
         </ModalBody>
 
         <ModalFooter>

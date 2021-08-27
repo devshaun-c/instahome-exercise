@@ -7,8 +7,8 @@ const useStyles = createUseStyles({
   section: {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    backgroundPosition: "center",
-    padding: "30px 0 20px 0",
+    // backgroundPosition: "center",
+    padding: "40px 0",
   },
 });
 
@@ -20,6 +20,7 @@ const Section = ({ children, fullView = false, ...props }) => {
       className={classes.section}
       bgColor={props.bgColor}
       backgroundImage={props.bgImg}
+      backgroundPosition="center"
       {...props}
     >
       <Container fullView={fullView}>{children}</Container>
