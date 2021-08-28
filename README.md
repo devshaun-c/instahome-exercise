@@ -59,7 +59,7 @@
   - [x] Review Hero design
   - [x] Location bar
   - [x] Navbar
-  - [ ] Community activities
+  - [x] Community activities
   - [ ] Branding
   - [ ] Payment system
   - [ ] Newsletter

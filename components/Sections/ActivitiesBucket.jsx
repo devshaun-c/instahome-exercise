@@ -21,6 +21,7 @@ const ActivitiesBucket = (props) => {
     children,
     height = "600px",
     list,
+    image,
   } = props;
 
   const LastCard = () => {
@@ -31,6 +32,7 @@ const ActivitiesBucket = (props) => {
         flexDirection="column"
         bg="brand.800"
         boxShadow="var(--card-shadow)"
+        h={["380px", "420px"]}
       >
         <Flex flexDirection="column" p={4} mt={4}>
           <Text fontSize="sm" fontWeight="bold" color="white">
@@ -44,12 +46,13 @@ const ActivitiesBucket = (props) => {
         </Flex>
         <Box
           minH="200px"
+          height="100%"
           width="100%"
           overflow="hidden"
           borderRadius="8px 8px 0 0"
           position="relative"
         >
-          <Image src={img} layout="fill" objectFit="cover" />
+          <Image src={image || img} layout="fill" objectFit="contain" />
         </Box>
       </Flex>
     );

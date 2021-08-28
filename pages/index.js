@@ -19,6 +19,8 @@ import ActivitiesBucket from "../components/Sections/ActivitiesBucket";
 import { shuffle } from "../lib/utils";
 import LocationBar from "../components/Miscellaneous/LocationBar";
 import Section from "../components/Sections/Section";
+import volunteerImg from "../public/static/images/volunteer.svg";
+import workshopImg from "../public/static/images/workshop.svg";
 
 const useStyles = createUseStyles({
   home: {
@@ -81,6 +83,7 @@ const Home = (props) => {
   const router = useRouter();
   const [activities, setActivities] = useState([]);
   const [workshops, setWorkshops] = useState([]);
+  const [communityEvents, setCommunityEvents] = useState([]);
 
   const activitiesFromServer = JSON.parse(props.activities);
 
@@ -91,10 +94,9 @@ const Home = (props) => {
         ...shuffle(activitiesFromServer),
         ...shuffle(activitiesFromServer),
       ]);
+      setCommunityEvents([...shuffle(activitiesFromServer)]);
     }
   }, []);
-
-  console.log(activities);
 
   return (
     <Page
@@ -116,122 +118,19 @@ const Home = (props) => {
             height="100%"
             header="Develop New Skills or Find a Hobby"
             list={workshops}
+            image={workshopImg}
           />
         )}
 
-        <CardCarouselSection
-          tag="LIMITED TIME EVENTS"
-          height="100%"
-          header="Upcoming Events You Should Not Miss"
-        >
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.popular}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.limited}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-        </CardCarouselSection>
-
-        <CardCarouselSection
-          tag="COMMUNITY EVENTS"
-          height="100%"
-          header="Be a part of a movement"
-        >
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.popular}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.limited}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-        </CardCarouselSection>
+        {communityEvents.length > 0 && (
+          <ActivitiesBucket
+            tag="COMMUNITY EVENTS"
+            height="100%"
+            header="Be part of a positive change"
+            list={communityEvents}
+            image={volunteerImg}
+          />
+        )}
 
         <CardCarouselSection
           tag="FITNESS & HEALTH"

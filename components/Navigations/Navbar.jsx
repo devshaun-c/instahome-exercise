@@ -13,6 +13,7 @@ import {
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import HoverMenu from "./HoverMenu";
 
 const useStyles = createUseStyles({
   navbarShow: {
@@ -117,27 +118,25 @@ const Navbar = () => {
           </Text>
           <div className={classes.menuLinks}>
             <Menu>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/about")}
-              >
-                About
-              </MenuButton>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/component-page")}
-              >
-                Components
-              </MenuButton>
-              <MenuButton
-                mr="24px"
-                fontSize={["md", "sm"]}
-                onClick={() => handleNav("/sections-page")}
-              >
-                Sections
-              </MenuButton>
+              <HoverMenu title="Home" mainUrl="/" />
+
+              <HoverMenu title="About us" mainUrl="/about" />
+
+              <HoverMenu
+                title="Organize"
+                items={[
+                  { name: "Our partners", url: "/sections-page" },
+                  { name: "Why partner with us?", url: "/component-page" },
+                ]}
+              />
+
+              <HoverMenu
+                title="Corporate"
+                items={[
+                  { name: "Why join us?", url: "/component-page" },
+                  { name: "Employee benefits program", url: "/component-page" },
+                ]}
+              />
             </Menu>
           </div>
           <Box className={classes.mobileMenu} bg={isOpen ? "teal.500" : "none"}>
