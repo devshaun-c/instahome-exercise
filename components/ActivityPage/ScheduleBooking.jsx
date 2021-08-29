@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
@@ -15,6 +15,15 @@ import CustomSelect from "../Controls/CustomSelect.jsx";
 import OverlayModal from "../Page/OverlayModal";
 import InterestForm from "./InterestForm";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { loadStripe } from "@stripe/stripe-js";
+import { fetchPostJSON } from "../../lib/api-helpers";
+import getStripe from "../../lib/get-stripe";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -39,12 +48,37 @@ const useStyles = createUseStyles({
 const ScheduleBooking = (props) => {
   const classes = useStyles();
   const { info, schedules, ...others } = props;
-  const { defaultPrice, bookingLink, paymentNotes } = info;
+  const {
+    defaultPrice,
+    bookingLink,
+    paymentNotes,
+    activityName,
+    partnerId,
+    activityId,
+  } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
   const scheduleOptions = [];
   const allSchedules = SortByDate(schedules);
+
+  console.log(info);
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      console.log("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      console.log(
+        "Order canceled -- continue to shop around and checkout when you’re ready."
+      );
+    }
+  }, []);
+
   allSchedules.forEach((schedule) => {
     const date = moment(
       convertFirebaseTimestamp(schedule.scheduledStartDate)
@@ -71,6 +105,38 @@ const ScheduleBooking = (props) => {
   } else {
     displayedSchedules = allSchedules;
   }
+
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+
+    const response = await fetchPostJSON("/api/checkout_sessions", {
+      redirectUrl: `activity/${partnerId}/${activityId}`,
+      line_items: [
+        {
+          price_data: {
+            currency: "myr",
+            product_data: {
+              name: `${activityName} by ${partnerId} `,
+            },
+            unit_amount: defaultPrice * 100,
+          },
+          quantity: 1,
+        },
+      ],
+    });
+
+    if (response.statusCode === 500) {
+      console.error(response.message);
+      return;
+    }
+
+    // Redirect to Checkout.
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: response.id,
+    });
+    console.warn(error.message);
+  };
 
   const PriceBox = () => {
     return (
@@ -192,7 +258,7 @@ const ScheduleBooking = (props) => {
           </StandardButton>
         </Box>
       )}
-      {bookingLink && allSchedules.length > 0 ? (
+      {bookingLink == false && allSchedules.length > 0 ? (
         <Box mt={10}>
           <PriceBox />
           <StandardButton
@@ -217,7 +283,9 @@ const ScheduleBooking = (props) => {
                   options={scheduleOptions}
                 />
                 <PriceBox />
-                <StandardButton mt={4}>Book now</StandardButton>
+                <StandardButton mt={4} onClick={handleCheckout}>
+                  Book now
+                </StandardButton>
               </Box>
             </Flex>
           )}

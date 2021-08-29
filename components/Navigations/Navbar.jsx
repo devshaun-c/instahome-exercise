@@ -112,7 +112,7 @@ const Navbar = () => {
           <Text
             className={classes.title}
             onClick={() => handleNav("/")}
-            color="brand.400"
+            color="brand.600"
           >
             AfterWork
           </Text>

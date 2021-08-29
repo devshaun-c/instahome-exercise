@@ -21,6 +21,7 @@ import LocationBar from "../components/Miscellaneous/LocationBar";
 import Section from "../components/Sections/Section";
 import volunteerImg from "../public/static/images/volunteer.svg";
 import workshopImg from "../public/static/images/workshop.svg";
+import { ACTIVITY_CATEGORY, ACTIVITY_TYPE } from "../constants/activity";
 
 const useStyles = createUseStyles({
   home: {
@@ -118,7 +119,11 @@ const Home = (props) => {
             height="100%"
             header="Develop New Skills or Find a Hobby"
             list={workshops}
-            image={workshopImg}
+            categoryDetails={{
+              topic: "Looking for more workshops?",
+              image: workshopImg,
+              activityType: ACTIVITY_CATEGORY.workshop,
+            }}
           />
         )}
 
@@ -128,7 +133,11 @@ const Home = (props) => {
             height="100%"
             header="Be part of a positive change"
             list={communityEvents}
-            image={volunteerImg}
+            categoryDetails={{
+              topic: "Ideas for more community events?",
+              image: volunteerImg,
+              activityType: ACTIVITY_CATEGORY.community,
+            }}
           />
         )}
 

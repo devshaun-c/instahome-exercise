@@ -18,11 +18,16 @@ const ActivitiesBucket = (props) => {
     bgImg,
     tag,
     header,
-    children,
     height = "600px",
     list,
-    image,
+    categoryDetails = {
+      topic: "Looking for more activities?",
+      image: img,
+      category: "",
+    },
   } = props;
+
+  const { topic, image, category } = categoryDetails;
 
   const LastCard = () => {
     return (
@@ -30,17 +35,22 @@ const ActivitiesBucket = (props) => {
         borderRadius="var(--border-radius)"
         justifyContent="space-between"
         flexDirection="column"
-        bg="brand.800"
+        bg="brand.700"
         boxShadow="var(--card-shadow)"
         h={["380px", "420px"]}
       >
-        <Flex flexDirection="column" p={4} mt={4}>
+        <Flex flexDirection="column" p={4} mt={2}>
           <Text fontSize="sm" fontWeight="bold" color="white">
-            Tell us what you love
+            {topic}
           </Text>
-          <Box mt={2}>
-            <Button size="sm" fontSize="14px" colorScheme="teal">
-              Get started
+          <Box mt={4}>
+            <Button
+              size="sm"
+              fontSize="14px"
+              colorScheme="teal"
+              onClick={() => console.log(category)}
+            >
+              Let us know
             </Button>
           </Box>
         </Flex>
@@ -52,7 +62,7 @@ const ActivitiesBucket = (props) => {
           borderRadius="8px 8px 0 0"
           position="relative"
         >
-          <Image src={image || img} layout="fill" objectFit="contain" />
+          <Image src={image} layout="fill" objectFit="contain" />
         </Box>
       </Flex>
     );

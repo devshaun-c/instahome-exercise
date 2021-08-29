@@ -60,8 +60,10 @@
   - [x] Location bar
   - [x] Navbar
   - [x] Community activities
-  - [ ] Branding
-  - [ ] Payment system
+  - [x] Branding
+  - [ ] Integrate stripe system
+    - [ ] Success page
+    - [ ] Pull pricing from database in api instead of from client side
   - [ ] Newsletter
     - [ ] Get notified if there's new activities
 

@@ -3,6 +3,12 @@ export const ACTIVITY_TYPE = {
   online: "online",
 };
 
+export const ACTIVITY_CATEGORY = {
+  event: "Event",
+  workshop: "Workshop",
+  community: "Community",
+};
+
 export const getActivityTypeCollection = () => [
   { id: ACTIVITY_TYPE.inPerson, title: "In person" },
   { id: ACTIVITY_TYPE.online, title: "Online" },

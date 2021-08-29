@@ -39,10 +39,10 @@ const LocationBar = (props) => {
   const [location, setLocation] = useState("SGR");
 
   return (
-    <Tooltip label="More locations coming soon" bg="primary" hasArrow>
+    <Tooltip label="More locations coming soon" bg="brand.500" hasArrow>
       <Box className={classes.locationBar} onClick={() => console.log("CLICK")}>
         <Flex alignItems="center" justify="flex-end">
-          <BsGeoAlt fontSize="large" color={theme.colors.primary} />
+          <BsGeoAlt fontSize="large" color={theme.colors.brand[600]} />
           <Text fontSize="large" fontWeight="bold" ml={2} color="grey">
             Things to do near
           </Text>
@@ -54,7 +54,13 @@ const LocationBar = (props) => {
             ]}
             onChange={handleLocationChange}
           /> */}
-          <Text fontSize="large" color="primary" fontWeight="bold" ml={2}>
+          <Text
+            fontSize="large"
+            color="brand.600"
+            fontWeight="bold"
+            ml={2}
+            textDecoration="underline"
+          >
             Selangor
           </Text>
         </Flex>

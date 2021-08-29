@@ -68,8 +68,12 @@ const HoverMenu = (props) => {
         </MenuButton>
         {items.length > 0 && (
           <MenuList borderRadius="none" p={0} fontSize="sm">
-            {items.map((item) => (
-              <MenuItem p="16px 24px" onClick={() => handleNav(item.url)}>
+            {items.map((item, index) => (
+              <MenuItem
+                key={index}
+                p="16px 24px"
+                onClick={() => handleNav(item.url)}
+              >
                 {item.name}
               </MenuItem>
             ))}
