@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 import moment from "moment";
 import {
   convertFirebaseTimestamp,
-  ConverToDate,
+  ConvertToDate,
   GetClickableLink,
   GetTimeSummary,
   SortByDate,
@@ -123,6 +123,10 @@ const ScheduleBooking = (props) => {
           quantity: 1,
         },
       ],
+      metadata: {
+        bookedSchedule: "31/08/2021",
+        organizer: partnerId,
+      },
     });
 
     if (response.statusCode === 500) {
@@ -184,10 +188,10 @@ const ScheduleBooking = (props) => {
             {displayedSchedules.map((schedule, index) => {
               var isAnotherDay = true;
               if (index > 0) {
-                const currentDate = ConverToDate(
+                const currentDate = ConvertToDate(
                   allSchedules[index].scheduledStartDate
                 );
-                const previousDate = ConverToDate(
+                const previousDate = ConvertToDate(
                   allSchedules[index - 1].scheduledStartDate
                 );
 

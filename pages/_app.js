@@ -83,7 +83,6 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <DefaultSeo {...SEO} />
       <div className={classes.root}>
-        <Navbar />
         <main className={classes.main}>
           <Component {...pageProps} />
         </main>

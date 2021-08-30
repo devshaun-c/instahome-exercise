@@ -63,6 +63,8 @@
   - [x] Branding
   - [ ] Integrate stripe system
     - [ ] Success page
+      - [ ] Add selected schedule date into metadata
+      - [ ] Pull information from Metadata
     - [ ] Pull pricing from database in api instead of from client side
   - [ ] Newsletter
     - [ ] Get notified if there's new activities

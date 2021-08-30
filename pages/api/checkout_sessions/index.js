@@ -4,6 +4,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     // console.log(req.body);
     const line_items = req.body.line_items;
+    const metadata = req.body.metadata;
     const redirectUrl = req.body.redirectUrl;
     try {
       // Validate the amount that was passed from the client.
@@ -16,6 +17,7 @@ export default async function handler(req, res) {
         mode: "payment",
         payment_method_types: ["card", "fpx"],
         line_items,
+        metadata,
         success_url: `${req.headers.origin}/success?id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/${redirectUrl}`,
       };

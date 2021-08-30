@@ -105,6 +105,7 @@ const Home = (props) => {
         title: "AfterWork - Never miss out on life",
         description: "",
       }}
+      autohideNavbar
     >
       <div className={classes.home}>
         <Hero />

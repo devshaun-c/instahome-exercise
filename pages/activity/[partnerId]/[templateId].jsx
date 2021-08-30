@@ -97,6 +97,7 @@ const ActivityPage = (props) => {
         title: `${activityName} | AfterWork`,
         description: shortSummary,
       }}
+      alwaysShowNav
     >
       {activityName !== "Activity Not Found" ? (
         <Section fullView={false} bgColor="whitesmoke">

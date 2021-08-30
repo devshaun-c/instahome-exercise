@@ -1,8 +1,14 @@
 import React from "react";
 import Head from "next/head";
+import Navbar from "../Navigations/Navbar";
+import { Box } from "@chakra-ui/react";
 
 const Page = (props) => {
-  const { children, pageMeta = { title: "", description: "" } } = props;
+  const {
+    children,
+    alwaysShowNav = false,
+    pageMeta = { title: "", description: "" },
+  } = props;
 
   return (
     <>
@@ -20,7 +26,10 @@ const Page = (props) => {
         <meta name="twitter:title" content={pageMeta.title} />
         <meta name="twitter:description" content={pageMeta.description} />
       </Head>
-      <div>{children}</div>
+      <div>
+        <Navbar alwaysVisible={alwaysShowNav} />
+        <Box pt={alwaysShowNav ? "60px" : "0px"}>{children}</Box>
+      </div>
     </>
   );
 };

@@ -79,12 +79,13 @@ const useStyles = createUseStyles({
   },
 });
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { alwaysVisible } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
   const router = useRouter();
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const [showNavbar, setShowNavbar] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(alwaysVisible || false);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -93,11 +94,13 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    if (!alwaysVisible) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);
 
   const handleNav = (url) => {
