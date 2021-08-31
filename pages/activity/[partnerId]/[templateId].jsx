@@ -26,6 +26,7 @@ import Paper from "../../../components/ActivityPage/Paper";
 import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
+import ActivityCard from "../../../components/Cards/ActivityCard";
 
 const useStyles = createUseStyles({
   participantSection: {
@@ -70,13 +71,8 @@ const ActivityPage = (props) => {
   const allSchedules = JSON.parse(props.schedules) || [];
   const orgName = organizationDetails.orgName;
 
-  const {
-    aboutActivity,
-    activityId,
-    activityName,
-    shortSummary,
-    durationInSeconds,
-  } = activityData;
+  const { aboutActivity, activityId, activityName, shortSummary } =
+    activityData;
 
   var otherPartnerActivities = [];
   if (props.activities) {
@@ -85,11 +81,6 @@ const ActivityPage = (props) => {
       (activity) => activity.activityId !== activityId
     );
   }
-
-  const getCardUrl = (activity) => {
-    const { partnerId, activityId } = activity;
-    return `/activity/${partnerId}/${activityId}`;
-  };
 
   return (
     <Page
@@ -100,18 +91,20 @@ const ActivityPage = (props) => {
       alwaysShowNav
     >
       {activityName !== "Activity Not Found" ? (
-        <Section fullView={false} bgColor="whitesmoke">
+        <Section fullView={false} bgColor="#F9F9F9">
           <Header mb={6} title={activityName} type={activityDetails.category} />
           <Grid templateColumns="repeat(5, 1fr)" gap="56px">
             <GridItem colSpan={3}>
               <ImageCarousel info={activityDetails} />
-              <Paper mt={4}>
-                <ConductorInfo
-                  conductorName={activityDetails.conductorName}
-                  conductorImage={activityDetails.conductorImage}
-                  conductorSummary={activityDetails.conductorSummary}
-                />
-              </Paper>
+              {activityDetails.conductorName && (
+                <Paper mt={4}>
+                  <ConductorInfo
+                    conductorName={activityDetails.conductorName}
+                    conductorImage={activityDetails.conductorImage}
+                    conductorSummary={activityDetails.conductorSummary}
+                  />
+                </Paper>
+              )}
               <AboutActivity aboutActivity={aboutActivity} mt={4} />
             </GridItem>
 
@@ -143,54 +136,22 @@ const ActivityPage = (props) => {
           tag="MORE ACTIVITIES"
           height="100%"
           header={`Check out more activities by ${orgName}`}
+          pagination={otherPartnerActivities.length > 4 ? true : false}
+          grabCursor={otherPartnerActivities.length > 4 ? true : false}
+          enabled={otherPartnerActivities.length > 1 ? true : false}
         >
           {otherPartnerActivities.map((activity) => (
             <SwiperSlide
               key={activity.activityId}
               className={classes.swiperSlide}
             >
-              <VerticalImageCard
-                minHeight="380px"
-                title={activity.activityName}
-                image={activity.coverImage[0]?.url}
-                subtitle=""
-                badgeType={activity.type}
-                url={getCardUrl(activity)}
-                text={activity.shortSummary}
-              />
+              <ActivityCard activity={activity} />
             </SwiperSlide>
           ))}
         </CardCarouselSection>
       )}
 
-      <CardCarouselSection
-        tag="POPULAR ACTIVITIES"
-        height="100%"
-        header="Explore Our Popular Activities"
-      >
-        <SwiperSlide className={classes.swiperSlide}>
-          <VerticalImageCard
-            title="Tanaka Satomi"
-            image={img1}
-            subtitle="UI/UX designer"
-            badgeType={BADGES.new}
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-          />
-        </SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>
-          <VerticalImageCard
-            title="Tanaka Satomi"
-            image={img2}
-            subtitle="UI/UX designer"
-            badgeType={BADGES.new}
-            text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-          />
-        </SwiperSlide>
-      </CardCarouselSection>
-
-      <Newsletter height="400px" bgColor="teal.300" />
+      <Newsletter height="500px" bgColor="teal.300" />
     </Page>
   );
 };

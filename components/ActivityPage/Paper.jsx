@@ -5,17 +5,17 @@ import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
   paper: {
     padding: "24px 32px",
-    background: "white",
+    // background: "white",
     borderRadius: "var(--border-radius)",
   },
 });
 
 const Paper = (props) => {
   const classes = useStyles();
-  const { children, ...others } = props;
+  const { children, bgColor = "white", ...others } = props;
 
   return (
-    <Box {...others} className={classes.paper}>
+    <Box className={classes.paper} background={bgColor} {...others}>
       {children}
     </Box>
   );

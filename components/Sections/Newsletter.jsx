@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Input } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import CustomInput from "../Controls/CustomInput";
 import StandardButton from "../Buttons/StandardButton";
-import placeholderImg from "../../public/static/images/placeholder.png";
-import Image from "next/image";
 import { useTheme } from "@emotion/react";
-import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 
 const useStyles = createUseStyles({
   gridItem: {

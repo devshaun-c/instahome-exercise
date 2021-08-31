@@ -32,8 +32,8 @@ const SuccessPage = () => {
   return (
     <Page
       pageMeta={{
-        title: "About - This website",
-        description: "Explain the goal and objective of this website",
+        title: "Payment success - AfterWork",
+        description: "",
       }}
       alwaysShowNav
     >

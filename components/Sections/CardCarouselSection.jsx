@@ -16,6 +16,9 @@ const CardCarouselSection = (props) => {
     tag,
     header,
     children,
+    pagination = true,
+    grabCursor = true,
+    enabled = true,
     height = "600px",
     ...others
   } = props;
@@ -41,12 +44,17 @@ const CardCarouselSection = (props) => {
           >
             {header}
           </Heading>
-
-          <Link fontSize="md">See all</Link>
         </Flex>
       </Box>
       <Box>
-        <Carousel slidesPerView={"auto"} freeMode={true} {...others}>
+        <Carousel
+          slidesPerView={"auto"}
+          freeMode={true}
+          pagination={pagination}
+          grabCursor={grabCursor}
+          enabled={enabled}
+          {...others}
+        >
           {children}
         </Carousel>
       </Box>

@@ -55,29 +55,18 @@ const ScheduleBooking = (props) => {
     activityName,
     partnerId,
     activityId,
+    locationMaps,
+    hostEmail,
+    hostContact,
+    coverImage,
   } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [noSelect, setNoSelect] = useState(false);
 
   const scheduleOptions = [];
   const allSchedules = SortByDate(schedules);
-
-  console.log(info);
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
-      );
-    }
-  }, []);
 
   allSchedules.forEach((schedule) => {
     const date = moment(
@@ -109,37 +98,64 @@ const ScheduleBooking = (props) => {
   const handleCheckout = async (e) => {
     e.preventDefault();
 
-    const response = await fetchPostJSON("/api/checkout_sessions", {
-      redirectUrl: `activity/${partnerId}/${activityId}`,
-      line_items: [
-        {
-          price_data: {
-            currency: "myr",
-            product_data: {
-              name: `${activityName} by ${partnerId} `,
+    if (selectedDate) {
+      const response = await fetchPostJSON("/api/checkout_sessions", {
+        redirectUrl: `activity/${partnerId}/${activityId}`,
+        productId: activityId,
+        line_items: [
+          {
+            price_data: {
+              currency: "myr",
+              product_data: {
+                name: `${activityName}`,
+                description: selectedDate.date,
+                images: [coverImage[0].url],
+              },
+              unit_amount: defaultPrice * 100,
             },
-            unit_amount: defaultPrice * 100,
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1,
+              maximum: 10,
+            },
+            quantity: 1,
           },
-          quantity: 1,
+        ],
+        metadata: {
+          bookedSession: selectedDate.date,
+          scheduleId: selectedDate.scheduleId,
+          organizer: partnerId,
+          organizerEmail: hostEmail,
+          organizerContact: hostContact,
+          location: locationMaps,
         },
-      ],
-      metadata: {
-        bookedSchedule: "31/08/2021",
-        organizer: partnerId,
-      },
-    });
+      });
 
-    if (response.statusCode === 500) {
-      console.error(response.message);
-      return;
+      if (response.statusCode === 500) {
+        console.error(response.message);
+        return;
+      }
+
+      // Redirect to Checkout.
+      const stripe = await getStripe();
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: response.id,
+      });
+      console.warn(error.message);
+    } else {
+      setNoSelect(true);
     }
+  };
 
-    // Redirect to Checkout.
-    const stripe = await getStripe();
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: response.id,
-    });
-    console.warn(error.message);
+  const handleSelectDate = async (e) => {
+    const selectedDate = e.target.selectedOptions[0].text;
+    const selectedId = e.target.value;
+    setNoSelect(false);
+    if (selectedId) {
+      setSelectedDate({ scheduleId: selectedId, date: selectedDate });
+    } else {
+      setSelectedDate(null);
+    }
   };
 
   const PriceBox = () => {
@@ -241,14 +257,16 @@ const ScheduleBooking = (props) => {
               );
             })}
           </Flex>
-          <TextButton onClick={() => setShowAll(!showAll)} color="grey">
-            {showAll ? "see less" : "see all"}
-            {showAll ? (
-              <ChevronUpIcon fontSize="lg" ml={2} />
-            ) : (
-              <ChevronDownIcon fontSize="lg" ml={2} />
-            )}
-          </TextButton>
+          {scheduleOptions > 3 && (
+            <TextButton onClick={() => setShowAll(!showAll)} color="grey">
+              {showAll ? "see less" : "see all"}
+              {showAll ? (
+                <ChevronUpIcon fontSize="lg" ml={2} />
+              ) : (
+                <ChevronDownIcon fontSize="lg" ml={2} />
+              )}
+            </TextButton>
+          )}
         </Flex>
       ) : (
         <Box fontSize="sm" mt={4} className={classes.booking}>
@@ -282,12 +300,23 @@ const ScheduleBooking = (props) => {
             <Flex direction="column">
               <Box fontSize="sm" mt={4} className={classes.booking}>
                 <CustomSelect
-                  label="Select Date"
-                  defaultValue="1"
+                  label=""
                   options={scheduleOptions}
+                  onChange={handleSelectDate}
+                  value={selectedDate?.selectedId}
+                  placeholder="Select date"
                 />
+                {noSelect && (
+                  <Text fontSize="xs" color="red.500">
+                    Please select a date
+                  </Text>
+                )}
                 <PriceBox />
-                <StandardButton mt={4} onClick={handleCheckout}>
+                <StandardButton
+                  mt={4}
+                  onClick={handleCheckout}
+                  colorScheme="brand"
+                >
                   Book now
                 </StandardButton>
               </Box>
@@ -302,15 +331,6 @@ const ScheduleBooking = (props) => {
         </Flex>
       )}
       <Divider mt={8} />
-      {/* <Box mt={2} w="100%">
-        <Text fontSize="xs">Can't find a suitable date?</Text>
-        <TextButton fontSize="xs" color="teal.500" mt={1}>
-          Request date
-        </TextButton>
-        <TextButton fontSize="xs" color="teal.500">
-          Request private class
-        </TextButton>
-      </Box> */}
 
       <OverlayModal
         isOpen={isOpen}

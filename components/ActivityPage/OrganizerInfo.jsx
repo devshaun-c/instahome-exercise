@@ -1,14 +1,7 @@
 import React from "react";
-import { EmailShareButton, WhatsappShareButton } from "react-share";
-import { EmailIcon, WhatsappIcon } from "react-share";
 import { Avatar, Box, HStack, IconButton, Link, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import {
-  FaFacebookSquare,
-  FaHome,
-  FaInstagram,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaHome, FaWhatsapp } from "react-icons/fa";
 import { BsEnvelope } from "react-icons/bs";
 import { GetClickableLink } from "../../lib/utils";
 

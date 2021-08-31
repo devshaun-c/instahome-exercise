@@ -32,6 +32,8 @@
 - Upgrade to NextJS v11
 - Updated next.config.js
 - Added npm i react-input-autosize
+- Added npm i react-to-print
+- Added stripeJS
 
 ## PENDING
 
@@ -62,10 +64,12 @@
   - [x] Community activities
   - [x] Branding
   - [ ] Integrate stripe system
-    - [ ] Success page
-      - [ ] Add selected schedule date into metadata
-      - [ ] Pull information from Metadata
+    - [x] Success page
+      - [x] Add selected schedule date into metadata
+      - [x] Pull information from Metadata
     - [ ] Pull pricing from database in api instead of from client side
+      - [ ] Use activityId
+      - [ ] Get price from activityId at index.js/checkout_sessions
   - [ ] Newsletter
     - [ ] Get notified if there's new activities
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, HStack, Stack, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/explore.svg";
@@ -8,7 +8,6 @@ import BackToTop from "../components/Page/BackToTop";
 import { BADGES } from "../constants/badges";
 import Hero from "../components/Sections/Hero";
 import CardCarouselSection from "../components/Sections/CardCarouselSection";
-import StackGroup from "../components/Sections/StackGroup";
 import { SwiperSlide } from "swiper/react";
 import Newsletter from "../components/Sections/Newsletter";
 import Page from "../components/Page/Page";
@@ -18,14 +17,12 @@ import { GetAllActiveActivities, GetAllPartners } from "../lib/firebase";
 import ActivitiesBucket from "../components/Sections/ActivitiesBucket";
 import { shuffle } from "../lib/utils";
 import LocationBar from "../components/Miscellaneous/LocationBar";
-import Section from "../components/Sections/Section";
 import volunteerImg from "../public/static/images/volunteer.svg";
 import workshopImg from "../public/static/images/workshop.svg";
 import { ACTIVITY_CATEGORY, ACTIVITY_TYPE } from "../constants/activity";
 
 const useStyles = createUseStyles({
   home: {
-    // marginTop: "64px",
     position: "relative",
   },
   swiperSlide: {
@@ -121,7 +118,7 @@ const Home = (props) => {
             header="Develop New Skills or Find a Hobby"
             list={workshops}
             categoryDetails={{
-              topic: "Looking for more workshops?",
+              topic: "Ideas for workshops?",
               image: workshopImg,
               activityType: ACTIVITY_CATEGORY.workshop,
             }}
@@ -135,7 +132,7 @@ const Home = (props) => {
             header="Be part of a positive change"
             list={communityEvents}
             categoryDetails={{
-              topic: "Ideas for more community events?",
+              topic: "Ideas for community events?",
               image: volunteerImg,
               activityType: ACTIVITY_CATEGORY.community,
             }}

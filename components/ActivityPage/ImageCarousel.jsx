@@ -3,8 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import img1 from "../../public/static/images/coding.svg";
-import img2 from "../../public/static/images/explore.svg";
+import img1 from "../../public/static/images/placeholder.png";
 
 const useStyles = createUseStyles({
   imageCarousel: {
