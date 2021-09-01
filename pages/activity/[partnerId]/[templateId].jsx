@@ -110,9 +110,6 @@ const ActivityPage = (props) => {
 
             <GridItem colSpan={2}>
               <Paper>
-                <OrganizerInfo info={organizationDetails} />
-              </Paper>
-              <Paper mt={4}>
                 <ShareBar url={url} mb={8} />
                 <ActivityDetails activityDetails={activityDetails} />
                 <ScheduleBooking
@@ -120,6 +117,9 @@ const ActivityPage = (props) => {
                   info={activityDetails}
                   schedules={allSchedules}
                 />
+              </Paper>
+              <Paper mt={4}>
+                <OrganizerInfo info={organizationDetails} />
               </Paper>
             </GridItem>
           </Grid>

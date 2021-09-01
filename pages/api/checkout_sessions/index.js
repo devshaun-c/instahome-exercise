@@ -1,22 +1,39 @@
+import { GetSpecificDocFromFirebase } from "../../../lib/firebase";
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    // console.log(req.body);
-    const line_items = req.body.line_items;
+    const productId = req.body.productId;
     const metadata = req.body.metadata;
     const redirectUrl = req.body.redirectUrl;
     try {
-      // Validate the amount that was passed from the client.
-      if (line_items.length <= 0) {
-        console.log("NO ITEMS");
-      }
+      const { defaultPrice, activityName, partnerId, coverImage } =
+        await GetSpecificDocFromFirebase(productId, "templates");
 
       // Create Checkout Sessions from body params.
       const params = {
         mode: "payment",
         payment_method_types: ["card", "fpx"],
-        line_items,
+        line_items: [
+          {
+            price_data: {
+              currency: "myr",
+              product_data: {
+                name: activityName,
+                description: `${activityName} by ${partnerId} @ ${metadata.bookedSession}`,
+                images: [coverImage[0].url],
+              },
+              unit_amount: defaultPrice * 100,
+            },
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1,
+              maximum: 10,
+            },
+            quantity: 1,
+          },
+        ],
         metadata,
         success_url: `${req.headers.origin}/success?id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/${redirectUrl}`,

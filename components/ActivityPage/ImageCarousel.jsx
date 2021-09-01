@@ -4,6 +4,7 @@ import { createUseStyles } from "react-jss";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import img1 from "../../public/static/images/placeholder.png";
+import Image from "next/image";
 
 const useStyles = createUseStyles({
   imageCarousel: {

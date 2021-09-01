@@ -18,6 +18,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { loadStripe } from "@stripe/stripe-js";
 import { fetchPostJSON } from "../../lib/api-helpers";
 import getStripe from "../../lib/get-stripe";
+import { useTheme } from "@emotion/react";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -30,35 +31,38 @@ const useStyles = createUseStyles({
   booking: {
     display: "flex",
     flexDirection: "column",
-    border: "1px solid lightgrey",
-    padding: "24px",
+    // border: (props) => `1px solid ${props.colors.brand[600]}`,
+    // padding: "24px",
     width: "100%",
     borderRadius: "var(--border-radius)",
+    // background: (props) => props.colors.brand[50],
   },
   priceBox: {
     flexDirrection: "column",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    border: "1px solid whitesmoke",
-    borderRadius: "var(--border-radius)",
+    padding: "16px",
+    color: (props) => props.colors.brand[700],
+    // border: (props) => `1px solid ${props.colors.brand[600]}`,
+    borderRadius: "var(--border-radius) var(--border-radius) 0 0",
+    background: (props) => props.colors.brand[100],
   },
 });
 
 const ScheduleBooking = (props) => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const { info, schedules, ...others } = props;
   const {
     defaultPrice,
     bookingLink,
     paymentNotes,
-    activityName,
     partnerId,
     activityId,
     locationMaps,
     hostEmail,
     hostContact,
-    coverImage,
   } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -102,25 +106,6 @@ const ScheduleBooking = (props) => {
       const response = await fetchPostJSON("/api/checkout_sessions", {
         redirectUrl: `activity/${partnerId}/${activityId}`,
         productId: activityId,
-        line_items: [
-          {
-            price_data: {
-              currency: "myr",
-              product_data: {
-                name: `${activityName}`,
-                description: selectedDate.date,
-                images: [coverImage[0].url],
-              },
-              unit_amount: defaultPrice * 100,
-            },
-            adjustable_quantity: {
-              enabled: true,
-              minimum: 1,
-              maximum: 10,
-            },
-            quantity: 1,
-          },
-        ],
         metadata: {
           bookedSession: selectedDate.date,
           scheduleId: selectedDate.scheduleId,
@@ -160,22 +145,13 @@ const ScheduleBooking = (props) => {
 
   const PriceBox = () => {
     return (
-      <Flex
-        mt={4}
-        flexDir="column"
-        justifyContent="center"
-        alignItems="center"
-        w="100%"
-        padding={2}
-        border="1px solid whitesmoke"
-        borderRadius="var(--border-radius)"
-      >
+      <Flex mt={4} className={classes.priceBox}>
         {defaultPrice <= 0 ? (
           <Text fontSize="lg" fontWeight="bold">
             FREE
           </Text>
         ) : (
-          <Flex flexDir="column" color="teal">
+          <Flex flexDir="column">
             <Text fontWeight="bold" fontSize="sm" mr={1}>
               RM
             </Text>
@@ -275,7 +251,11 @@ const ScheduleBooking = (props) => {
             interest and get updated when it is available.
           </Text>
           <PriceBox />
-          <StandardButton mt={4} onClick={setIsOpen}>
+          <StandardButton
+            mt={4}
+            onClick={setIsOpen}
+            borderRadius="0 0 var(--border-radius) var(--border-radius)"
+          >
             I'm Interested !
           </StandardButton>
         </Box>
@@ -287,6 +267,7 @@ const ScheduleBooking = (props) => {
             colorScheme="teal"
             variant="outline"
             size="sm"
+            borderRadius="0 0 var(--border-radius) var(--border-radius)"
             mt={4}
             isFullWidth
             onClick={() => window.open(GetClickableLink(bookingLink), "_blank")}
@@ -305,6 +286,8 @@ const ScheduleBooking = (props) => {
                   onChange={handleSelectDate}
                   value={selectedDate?.selectedId}
                   placeholder="Select date"
+                  borderColor="brand.600"
+                  backgroundColor="white"
                 />
                 {noSelect && (
                   <Text fontSize="xs" color="red.500">
@@ -313,7 +296,8 @@ const ScheduleBooking = (props) => {
                 )}
                 <PriceBox />
                 <StandardButton
-                  mt={4}
+                  mt={0}
+                  borderRadius="0 0 var(--border-radius) var(--border-radius)"
                   onClick={handleCheckout}
                   colorScheme="brand"
                 >

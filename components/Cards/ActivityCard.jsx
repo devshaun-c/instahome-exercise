@@ -88,7 +88,7 @@ const ActivityCard = (props) => {
     tags,
   } = activity;
 
-  const url = `activity/${partnerId}/${activityId}`;
+  const url = `/activity/${partnerId}/${activityId}`;
 
   return (
     <Box
@@ -110,6 +110,8 @@ const ActivityCard = (props) => {
           alt={coverImage[0].name}
           layout="fill"
           objectFit="cover"
+          placeholder="blur"
+          blurDataURL={coverImage[0].url}
         />
       </Box>
       <Flex

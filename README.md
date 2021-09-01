@@ -63,13 +63,19 @@
   - [x] Navbar
   - [x] Community activities
   - [x] Branding
-  - [ ] Integrate stripe system
+  - [x] Integrate stripe system
     - [x] Success page
       - [x] Add selected schedule date into metadata
       - [x] Pull information from Metadata
-    - [ ] Pull pricing from database in api instead of from client side
-      - [ ] Use activityId
-      - [ ] Get price from activityId at index.js/checkout_sessions
+    - [x] Pull pricing from database in api instead of from client side
+      - [x] Use activityId
+      - [x] Get price from activityId at index.js/checkout_sessions
+  - [ ] Checkout summary page
+    - [ ] Summary of activity and price
+    - [ ] Can adjust quantity
+    - [ ] Contact information (name, email, contact)
+    - [ ] Link to payment page
+    - [ ] Redirect back to page after payment
   - [ ] Newsletter
     - [ ] Get notified if there's new activities
 
