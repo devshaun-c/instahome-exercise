@@ -27,6 +27,8 @@ import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 import ActivityCard from "../../../components/Cards/ActivityCard";
+import OverlayModal from "../../../components/Page/OverlayModal";
+import CheckoutSummary from "../../../components/ActivityPage/CheckoutSummary";
 
 const useStyles = createUseStyles({
   participantSection: {

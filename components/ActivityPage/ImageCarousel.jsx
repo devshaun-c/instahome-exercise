@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  CircularProgress,
+  CircularProgressLabel,
+  Flex,
+} from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -9,7 +14,6 @@ import Image from "next/image";
 const useStyles = createUseStyles({
   imageCarousel: {
     backgroundColor: "white",
-    paddingBottom: "2px",
     borderRadius: "8px",
   },
 });
@@ -30,7 +34,7 @@ const ImageCarousel = (props) => {
   const classes = useStyles();
   const { info, ...others } = props;
   const { coverImage = [], imageList = [] } = info;
-
+  const [isLoading, setIsLoading] = useState(true);
   const [images, setImages] = useState([{ url: img1, name: "" }]);
 
   useEffect(() => {
@@ -49,6 +53,20 @@ const ImageCarousel = (props) => {
       <Carousel {...getConfigurableProps()}>
         {images.map((img, index) => (
           <Box key={index}>
+            {isLoading && (
+              <Flex height="400px" justifyContent="center" alignItems="center">
+                <CircularProgress
+                  isIndeterminate
+                  size="120px"
+                  thickness="4px"
+                  color="brand.600"
+                >
+                  <CircularProgressLabel fontSize="14px">
+                    Loading
+                  </CircularProgressLabel>
+                </CircularProgress>
+              </Flex>
+            )}
             <img
               src={img.url}
               alt={img.name}
@@ -56,6 +74,7 @@ const ImageCarousel = (props) => {
                 maxHeight: "400px",
                 borderRadius: "8px 8px 0 0",
               }}
+              onLoad={() => setIsLoading(false)}
             />
           </Box>
         ))}

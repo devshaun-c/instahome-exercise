@@ -5,7 +5,7 @@ const StandardButton = (props) => {
   const {
     children,
     isLoading = false,
-    loadingText = "Submitting",
+    loadingText = "",
     onClick,
     variant,
     colorScheme,

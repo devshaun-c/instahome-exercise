@@ -1,14 +1,12 @@
 import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Paper from "./Paper";
 import {
   BsCameraVideo,
   BsClock,
   BsPeople,
   BsPersonCheck,
   BsGeo,
-  BsTag,
 } from "react-icons/bs";
 import { GetDurationText } from "../../lib/utils";
 

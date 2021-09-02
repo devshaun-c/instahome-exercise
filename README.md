@@ -51,6 +51,21 @@
 
 ## TO DO
 
+- [ ] Checkout summary page
+  - [x] Summary of activity and price
+  - [x] Can adjust quantity
+  - [ ] Contact information (name, email, contact)
+  - [ ] Ticket info for each attendant
+  - [x] Link to payment page
+  - [x] Redirect back to page after payment
+  - [ ] Ticket information for all participants
+- [ ] Newsletter
+  - [ ] Get notified if there's new activities
+
+## Done
+
+> 1/9/2021
+
 - [x] Landing page (index.js)
   - [x] Featured
     - [x] FeaturedObject
@@ -70,16 +85,6 @@
     - [x] Pull pricing from database in api instead of from client side
       - [x] Use activityId
       - [x] Get price from activityId at index.js/checkout_sessions
-  - [ ] Checkout summary page
-    - [ ] Summary of activity and price
-    - [ ] Can adjust quantity
-    - [ ] Contact information (name, email, contact)
-    - [ ] Link to payment page
-    - [ ] Redirect back to page after payment
-  - [ ] Newsletter
-    - [ ] Get notified if there's new activities
-
-## Done
 
 > 13/8/2021
 

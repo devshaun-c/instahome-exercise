@@ -25,9 +25,10 @@ a {
 */
 
 .placeholder {
-  background-color: whitesmoke;
+  background-color: rgb(235, 235, 235);
   animation: pulse 1s infinite ease-in-out;
   height: 100%;
+  border-radius: var(--border-radius);
 }
 
 @keyframes pulse {
@@ -35,7 +36,7 @@ a {
     opacity: 1;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.8;
   }
   100% {
     opacity: 1;

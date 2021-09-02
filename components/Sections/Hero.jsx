@@ -88,7 +88,14 @@ const Hero = (props) => {
             position="relative"
             // bg="white"
           >
-            <Image src={heroImg} alt={alt} layout="fill" objectFit="cover" />
+            <Image
+              src={heroImg}
+              alt={alt}
+              layout="fill"
+              objectFit="cover"
+              placeholder="blur"
+              blurDataURL={heroImg}
+            />
           </Box>
         )}
       </Stack>

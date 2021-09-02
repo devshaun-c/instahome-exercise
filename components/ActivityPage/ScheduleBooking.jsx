@@ -15,16 +15,8 @@ import CustomSelect from "../Controls/CustomSelect.jsx";
 import OverlayModal from "../Page/OverlayModal";
 import InterestForm from "./InterestForm";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { loadStripe } from "@stripe/stripe-js";
-import { fetchPostJSON } from "../../lib/api-helpers";
-import getStripe from "../../lib/get-stripe";
 import { useTheme } from "@emotion/react";
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+import CheckoutSummary from "./CheckoutSummary";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -54,16 +46,7 @@ const ScheduleBooking = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const { info, schedules, ...others } = props;
-  const {
-    defaultPrice,
-    bookingLink,
-    paymentNotes,
-    partnerId,
-    activityId,
-    locationMaps,
-    hostEmail,
-    hostContact,
-  } = info;
+  const { defaultPrice, bookingLink, paymentNotes, activityName } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -99,39 +82,6 @@ const ScheduleBooking = (props) => {
     displayedSchedules = allSchedules;
   }
 
-  const handleCheckout = async (e) => {
-    e.preventDefault();
-
-    if (selectedDate) {
-      const response = await fetchPostJSON("/api/checkout_sessions", {
-        redirectUrl: `activity/${partnerId}/${activityId}`,
-        productId: activityId,
-        metadata: {
-          bookedSession: selectedDate.date,
-          scheduleId: selectedDate.scheduleId,
-          organizer: partnerId,
-          organizerEmail: hostEmail,
-          organizerContact: hostContact,
-          location: locationMaps,
-        },
-      });
-
-      if (response.statusCode === 500) {
-        console.error(response.message);
-        return;
-      }
-
-      // Redirect to Checkout.
-      const stripe = await getStripe();
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: response.id,
-      });
-      console.warn(error.message);
-    } else {
-      setNoSelect(true);
-    }
-  };
-
   const handleSelectDate = async (e) => {
     const selectedDate = e.target.selectedOptions[0].text;
     const selectedId = e.target.value;
@@ -140,6 +90,15 @@ const ScheduleBooking = (props) => {
       setSelectedDate({ scheduleId: selectedId, date: selectedDate });
     } else {
       setSelectedDate(null);
+    }
+  };
+
+  const handleBook = async (e) => {
+    e.preventDefault();
+    if (selectedDate) {
+      setIsOpen(true);
+    } else {
+      setNoSelect(true);
     }
   };
 
@@ -298,7 +257,7 @@ const ScheduleBooking = (props) => {
                 <StandardButton
                   mt={0}
                   borderRadius="0 0 var(--border-radius) var(--border-radius)"
-                  onClick={handleCheckout}
+                  onClick={handleBook}
                   colorScheme="brand"
                 >
                   Book now
@@ -317,10 +276,19 @@ const ScheduleBooking = (props) => {
       <Divider mt={8} />
 
       <OverlayModal
+        size={selectedDate ? "lg" : "lg"}
         isOpen={isOpen}
         handleToggle={setIsOpen}
-        modalHeader={<Text>Get notified !</Text>}
-        modalBody={<InterestForm handleToggle={setIsOpen} info={info} />}
+        modalHeader={
+          <Text>{selectedDate ? activityName : "Get notified !"}</Text>
+        }
+        modalBody={
+          selectedDate ? (
+            <CheckoutSummary info={info} selectedDate={selectedDate} />
+          ) : (
+            <InterestForm handleToggle={setIsOpen} info={info} />
+          )
+        }
       />
     </Box>
   );

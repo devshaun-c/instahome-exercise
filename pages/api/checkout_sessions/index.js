@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     const productId = req.body.productId;
     const metadata = req.body.metadata;
     const redirectUrl = req.body.redirectUrl;
+    const quantity = req.body.quantity;
     try {
       const { defaultPrice, activityName, partnerId, coverImage } =
         await GetSpecificDocFromFirebase(productId, "templates");
@@ -26,12 +27,7 @@ export default async function handler(req, res) {
               },
               unit_amount: defaultPrice * 100,
             },
-            adjustable_quantity: {
-              enabled: true,
-              minimum: 1,
-              maximum: 10,
-            },
-            quantity: 1,
+            quantity,
           },
         ],
         metadata,
