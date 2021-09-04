@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text, Avatar } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
 import {
   convertFirebaseTimestamp,
   ConvertToDate,
+  ConvertToDayDate,
   GetClickableLink,
   GetTimeSummary,
   SortByDate,
@@ -16,7 +17,7 @@ import OverlayModal from "../Page/OverlayModal";
 import InterestForm from "./InterestForm";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useTheme } from "@emotion/react";
-import CheckoutSummary from "./CheckoutSummary";
+import CheckoutSummary from "../Checkout/CheckoutSummary";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -85,9 +86,18 @@ const ScheduleBooking = (props) => {
   const handleSelectDate = async (e) => {
     const selectedDate = e.target.selectedOptions[0].text;
     const selectedId = e.target.value;
+
+    const scheduleInfo = allSchedules.find(
+      (schedule) => schedule.scheduleId === selectedId
+    );
+    const { scheduledStartDate, scheduledEndDate } = scheduleInfo;
+
+    const date = ConvertToDayDate(scheduledStartDate);
+    const time = GetTimeSummary(scheduledStartDate, scheduledEndDate);
+
     setNoSelect(false);
     if (selectedId) {
-      setSelectedDate({ scheduleId: selectedId, date: selectedDate });
+      setSelectedDate({ scheduleId: selectedId, date, time });
     } else {
       setSelectedDate(null);
     }
@@ -119,7 +129,7 @@ const ScheduleBooking = (props) => {
                 {defaultPrice}
               </Text>
               <Text fontSize="sm" ml={1}>
-                / person
+                / participant
               </Text>
             </Box>
           </Flex>
@@ -211,7 +221,7 @@ const ScheduleBooking = (props) => {
           </Text>
           <PriceBox />
           <StandardButton
-            mt={4}
+            colorScheme="brand"
             onClick={setIsOpen}
             borderRadius="0 0 var(--border-radius) var(--border-radius)"
           >
@@ -223,7 +233,7 @@ const ScheduleBooking = (props) => {
         <Box mt={10}>
           <PriceBox />
           <StandardButton
-            colorScheme="teal"
+            colorScheme="brand"
             variant="outline"
             size="sm"
             borderRadius="0 0 var(--border-radius) var(--border-radius)"
@@ -267,12 +277,7 @@ const ScheduleBooking = (props) => {
           )}
         </Box>
       )}
-      {paymentNotes && (
-        <Flex flexDirection="column" mt={4}>
-          <Text fontSize="xs">Notes:</Text>
-          <Text fontSize="xs">{paymentNotes}</Text>
-        </Flex>
-      )}
+
       <Divider mt={8} />
 
       <OverlayModal
@@ -280,11 +285,34 @@ const ScheduleBooking = (props) => {
         isOpen={isOpen}
         handleToggle={setIsOpen}
         modalHeader={
-          <Text>{selectedDate ? activityName : "Get notified !"}</Text>
+          selectedDate ? (
+            <Flex justifyContent="space-between" alignItems="center">
+              <Box>
+                <Text fontSize="md" mb={2}>
+                  {activityName}
+                </Text>
+                <Text fontSize="xs" fontWeight="normal">
+                  {selectedDate.date}
+                </Text>
+                <Text fontSize="xs" fontWeight="normal">
+                  {selectedDate.time}
+                </Text>
+              </Box>
+              <Box>
+                <Avatar mr={6} size="lg" src={info.coverImage[0].url} />
+              </Box>
+            </Flex>
+          ) : (
+            <Text>"Get notified !"</Text>
+          )
         }
         modalBody={
           selectedDate ? (
-            <CheckoutSummary info={info} selectedDate={selectedDate} />
+            <CheckoutSummary
+              info={info}
+              selectedDate={selectedDate}
+              handleToggle={setIsOpen}
+            />
           ) : (
             <InterestForm handleToggle={setIsOpen} info={info} />
           )

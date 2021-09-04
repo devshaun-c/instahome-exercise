@@ -29,7 +29,7 @@ const StandardInput = (props) => {
     required,
     onChange,
     value,
-    size,
+    size = "sm",
     type,
     variant,
     placeholder,
@@ -46,9 +46,9 @@ const StandardInput = (props) => {
   // const inputSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
-    <FormControl isRequired={required} isInvalid={errorText} mb={label ? 6 : 0}>
+    <FormControl isRequired={required} isInvalid={errorText} mb={label ? 4 : 0}>
       {label && (
-        <FormLabel mb={0} fontSize="xs" fontWeight="bold">
+        <FormLabel mb={0} fontSize="xs">
           {label}
         </FormLabel>
       )}
@@ -67,7 +67,7 @@ const StandardInput = (props) => {
           className={classes.root}
           variant={variant}
           placeholder={placeholder}
-          fontSize="sm"
+          fontSize="xs"
           _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}

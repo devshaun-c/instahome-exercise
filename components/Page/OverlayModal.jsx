@@ -29,10 +29,12 @@ const OverlayModal = (props) => {
       isOpen={isOpen}
       onClose={closeModal}
       size={size}
+      scrollBehavior="inside"
+      position="relative"
     >
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
-        <ModalHeader>{modalHeader}</ModalHeader>
+        <ModalHeader boxShadow="var(--card-shadow)">{modalHeader}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>{modalBody}</ModalBody>
 

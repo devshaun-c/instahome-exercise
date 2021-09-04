@@ -54,8 +54,10 @@
 - [ ] Checkout summary page
   - [x] Summary of activity and price
   - [x] Can adjust quantity
-  - [ ] Contact information (name, email, contact)
+  - [x] Contact information (name, email, contact)
   - [ ] Ticket info for each attendant
+    - [ ] Create component for Participant Info
+  - [ ] Add timing once proceed to register
   - [x] Link to payment page
   - [x] Redirect back to page after payment
   - [ ] Ticket information for all participants

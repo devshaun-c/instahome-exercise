@@ -5,14 +5,9 @@ import Section from "../../../components/Sections/Section";
 import Page from "../../../components/Page/Page";
 import Newsletter from "../../../components/Sections/Newsletter";
 import { useRouter } from "next/router";
-import VerticalImageCard from "../../../components/Cards/VerticalImageCard";
 import CardCarouselSection from "../../../components/Sections/CardCarouselSection";
 import { SwiperSlide } from "swiper/react";
-import { BADGES } from "../../../constants/badges";
-import img1 from "../../../public/static/images/coding.svg";
-import img2 from "../../../public/static/images/explore.svg";
 import {
-  GetScheduleFromFirebase,
   GetSpecificDocFromFirebase,
   GetAllPartnerSchedules,
   GetAllPartnerActivities,
@@ -27,8 +22,6 @@ import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 import ActivityCard from "../../../components/Cards/ActivityCard";
-import OverlayModal from "../../../components/Page/OverlayModal";
-import CheckoutSummary from "../../../components/ActivityPage/CheckoutSummary";
 
 const useStyles = createUseStyles({
   participantSection: {

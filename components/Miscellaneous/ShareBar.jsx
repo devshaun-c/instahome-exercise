@@ -4,7 +4,15 @@ import {
   TelegramShareButton,
   WhatsappShareButton,
 } from "react-share";
-import { Box, Text, Flex, Stack, IconButton, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Stack,
+  IconButton,
+  useToast,
+  Tooltip,
+} from "@chakra-ui/react";
 import { BsLink } from "react-icons/bs";
 import { FaLine, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
@@ -25,7 +33,7 @@ const ShareBar = ({ url, ...others }) => {
     e.preventDefault();
     navigator.clipboard.writeText(url);
     toast({
-      title: "Copied link",
+      title: "Link copied into clipboard",
       //   status: "success",
       duration: 2000,
       isClosable: true,
@@ -36,9 +44,11 @@ const ShareBar = ({ url, ...others }) => {
     <Flex alignItems="center" justify="space-between" {...others}>
       <Text fontSize="sm">Share this:</Text>
       <Stack direction="row" color="grey">
-        <button className={classes.button} onClick={handleCopytoClipboard}>
-          <BsLink />
-        </button>
+        <Tooltip label="copy link" hasArrow bg="whitesmoke" color="black">
+          <button className={classes.button} onClick={handleCopytoClipboard}>
+            <BsLink />
+          </button>
+        </Tooltip>
         <WhatsappShareButton
           url={url}
           title="Check out this activity"
@@ -50,9 +60,6 @@ const ShareBar = ({ url, ...others }) => {
         <TelegramShareButton className={classes.button} url={url}>
           <FaTelegramPlane />
         </TelegramShareButton>
-        <LineShareButton className={classes.button} url={url}>
-          <FaLine />
-        </LineShareButton>
       </Stack>
     </Flex>
   );

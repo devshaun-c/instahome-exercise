@@ -29,9 +29,6 @@ const ActivityDetails = (props) => {
 
   return (
     <Box className={classes.activityDetails} {...others}>
-      {/* <Text fontSize="sm" fontWeight="bold">
-        Activity Details
-      </Text> */}
       <Flex align="center" mt={4}>
         <BsClock fontSize="24px" color="lightgrey" />
         <Box fontSize="xs" ml={4}>
