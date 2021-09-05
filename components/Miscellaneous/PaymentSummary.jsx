@@ -26,6 +26,11 @@ const PaymentSummary = (props) => {
   const router = useRouter();
   const componentRef = useRef();
 
+  const { organizer, participants, payee } = data.metadata;
+  const organizerInfo = JSON.parse(organizer);
+  const participantList = JSON.parse(participants);
+  const payeeInfo = JSON.parse(payee);
+
   return (
     <Flex
       flexDirection="column"
@@ -66,10 +71,10 @@ const PaymentSummary = (props) => {
               <Td>
                 <Flex flexDirection="column">
                   <Text fontWeight="bold" mt={1}>
-                    {data.metadata?.organizer}
+                    {organizerInfo?.name}
                   </Text>
-                  <Text mt={1}>{data.metadata?.organizerContact}</Text>
-                  <Text mt={1}>{data.metadata?.organizerEmail}</Text>
+                  <Text mt={1}>{organizerInfo?.contact}</Text>
+                  <Text mt={1}>{organizerInfo?.email}</Text>
                 </Flex>
               </Td>
             </Tr>
@@ -96,7 +101,7 @@ const PaymentSummary = (props) => {
                   <Text fontWeight="bold">
                     {data.line_items?.data[0].description}
                   </Text>
-                  <Text>By {data.metadata?.organizer}</Text>
+                  <Text>By {organizerInfo?.name}</Text>
                 </Flex>
               </Td>
               <Td>

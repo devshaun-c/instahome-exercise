@@ -55,12 +55,16 @@
   - [x] Summary of activity and price
   - [x] Can adjust quantity
   - [x] Contact information (name, email, contact)
-  - [ ] Ticket info for each attendant
-    - [ ] Create component for Participant Info
-  - [ ] Add timing once proceed to register
+  - [x] Participant info for each attendant
+  - [x] Add timing once proceed to register
   - [x] Link to payment page
   - [x] Redirect back to page after payment
-  - [ ] Ticket information for all participants
+  - [x] Added 2% service fee
+  - [x] Ticket information for all participants
+  - [ ] Create form
+  - [ ] Bug for undefined controlled inputs
+- [ ] Payment success page
+  - [ ] Add Participant info
 - [ ] Newsletter
   - [ ] Get notified if there's new activities
 

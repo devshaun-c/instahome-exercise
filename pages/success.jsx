@@ -27,8 +27,6 @@ const SuccessPage = () => {
     fetchGetJSON
   );
 
-  console.log(data);
-
   return (
     <Page
       pageMeta={{

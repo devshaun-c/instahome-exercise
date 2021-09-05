@@ -7,12 +7,15 @@ export default async function handler(req, res) {
     const productId = req.body.productId;
     const metadata = req.body.metadata;
     const redirectUrl = req.body.redirectUrl;
-    const quantity = req.body.quantity;
+    const payeeEmail = JSON.parse(metadata.payee).email;
+    const quantity = parseInt(req.body.quantity);
+
     try {
       const { defaultPrice, activityName, partnerId, coverImage } =
         await GetSpecificDocFromFirebase(productId, "templates");
+      const serviceFee = Math.ceil(parseInt(defaultPrice) * 0.02);
+      const unitPrice = parseInt(defaultPrice) + serviceFee;
 
-      // Create Checkout Sessions from body params.
       const params = {
         mode: "payment",
         payment_method_types: ["card", "fpx"],
@@ -25,11 +28,12 @@ export default async function handler(req, res) {
                 description: `${activityName} by ${partnerId} @ ${metadata.bookedSession}`,
                 images: [coverImage[0].url],
               },
-              unit_amount: defaultPrice * 100,
+              unit_amount: unitPrice * 100,
             },
             quantity,
           },
         ],
+        customer_email: payeeEmail,
         metadata,
         success_url: `${req.headers.origin}/success?id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/${redirectUrl}`,

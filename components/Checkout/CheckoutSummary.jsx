@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Text,
-  Flex,
-  Grid,
-  GridItem,
-  Divider,
-  Stack,
-  Checkbox,
-  ButtonGroup,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, ButtonGroup, Stack } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import CustomSelect from "../Controls/CustomSelect";
-import CustomInput from "../Controls/CustomInput";
 import StandardButton from "../Buttons/StandardButton";
 import { loadStripe } from "@stripe/stripe-js";
 import { fetchPostJSON } from "../../lib/api-helpers";
@@ -21,6 +10,7 @@ import { quantityDropdown } from "../../constants/dropdowns";
 import PayeeInfoForm from "./PayeeInfoForm";
 import OrderSummary from "./OrderSummary";
 import ParticipantInfoForm from "./ParticipantInfoForm";
+import Timer from "./Timer";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -35,12 +25,9 @@ const CheckoutSummary = (props) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const [checkout, setCheckout] = useState(false);
-  const [formValues, setFormValues] = useState({
-    quantity: "1",
-    pFirstName: "",
-    pLastName: "",
-    pEmail: "",
-  });
+  const [participants, setParticipants] = useState([]);
+  const [payeeInfo, setPayeeInfo] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
   const {
     defaultPrice,
@@ -52,30 +39,30 @@ const CheckoutSummary = (props) => {
     hostContact,
   } = info;
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
-
   const handleCheckout = async (e) => {
     e.preventDefault();
+
+    const participantsJSON = JSON.stringify(participants);
+    const payeeJSON = JSON.stringify(payeeInfo);
+    const organizerJSON = JSON.stringify({
+      name: partnerId,
+      email: hostEmail,
+      contact: hostContact,
+    });
 
     if (selectedDate) {
       setIsLoading(true);
       const response = await fetchPostJSON("/api/checkout_sessions", {
         redirectUrl: `activity/${partnerId}/${activityId}`,
         productId: activityId,
-        quantity: formValues.quantity,
+        quantity: quantity,
         metadata: {
           bookedSession: selectedDate.date,
           scheduleId: selectedDate.scheduleId,
-          organizer: partnerId,
-          organizerEmail: hostEmail,
-          organizerContact: hostContact,
           location: locationMaps,
+          organizer: organizerJSON,
+          payee: payeeJSON,
+          participants: participantsJSON,
         },
       });
 
@@ -89,7 +76,7 @@ const CheckoutSummary = (props) => {
       const { error } = await stripe.redirectToCheckout({
         sessionId: response.id,
       });
-      console.warn(error.message);
+      console.log(error.message);
     } else {
       setNoSelect(true);
     }
@@ -104,8 +91,6 @@ const CheckoutSummary = (props) => {
     }, 1000);
   };
 
-  console.log(formValues);
-
   return (
     <Flex flexDirection="column" fontSize="xs" mb="60px" mt={6}>
       {!checkout ? (
@@ -119,61 +104,28 @@ const CheckoutSummary = (props) => {
               <CustomSelect
                 name="quantity"
                 options={quantityDropdown}
-                onChange={handleInputChange}
-                value={formValues.quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                value={quantity}
                 width="100px"
               />
             </Box>
           </Flex>
-          <OrderSummary
-            quantity={formValues.quantity}
-            unitPrice={defaultPrice}
-          />
+          <OrderSummary quantity={quantity} unitPrice={defaultPrice} />
         </>
       ) : (
         <>
-          <OrderSummary
-            quantity={formValues.quantity}
-            unitPrice={defaultPrice}
-            mb={10}
-          />
+          <OrderSummary quantity={quantity} unitPrice={defaultPrice} mb={10} />
           <PayeeInfoForm
-            formValues={formValues}
-            handleInputChange={handleInputChange}
+            payeeInfo={payeeInfo}
+            handlePayeeInfo={setPayeeInfo}
             mb={6}
           />
 
           <ParticipantInfoForm
-            formValues={formValues}
-            handleInputChange={handleInputChange}
+            quantity={quantity}
+            participants={participants}
+            handleParticipants={setParticipants}
           />
-          {/* {Array.from({ length: quantity }, (item, index) => (
-            <Box mb={8} key={index}>
-              <Text fontWeight="bold" mb={2}>
-                {`Participant ${index + 2}`}
-              </Text>
-              <Stack direction="row">
-                <CustomInput
-                  label="First name"
-                  placeholder="First name"
-                  required
-                />
-                <CustomInput
-                  label="Last name"
-                  placeholder="Last name"
-                  required
-                />
-              </Stack>
-              <Box>
-                <CustomInput
-                  label="Cell phone"
-                  placeholder="Cell phone"
-                  required
-                />
-                <CustomInput label="Email" placeholder="Email" />
-              </Box>
-            </Box>
-          ))} */}
         </>
       )}
 
@@ -184,10 +136,24 @@ const CheckoutSummary = (props) => {
         bg="white"
         w="100%"
         p="16px 32px"
-        // boxShadow="0 -2px 4px 0 rgb(0 0 0 / 12%)"
+        borderTop="1px solid whitesmoke"
         borderRadius="0 0 var(--border-radius) var(--border-radius)"
-        justifyContent="flex-end"
+        justifyContent="space-between"
+        alignItems="center"
       >
+        <Box fontSize="sm" fontWeight="bold">
+          {checkout && (
+            <Stack direction="row">
+              <Text fontWeight="normal">Time left:</Text>
+              <Timer
+                initialMinute={8}
+                initialSeconds={0}
+                handleTimesup={() => setCheckout(false)}
+              />
+            </Stack>
+          )}
+        </Box>
+
         <ButtonGroup>
           <StandardButton
             variant="outline"

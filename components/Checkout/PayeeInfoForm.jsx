@@ -3,38 +3,46 @@ import { Box, Text, Stack } from "@chakra-ui/react";
 import CustomInput from "../Controls/CustomInput";
 
 const PayeeInfoForm = (props) => {
-  const { formValues, handleInputChange, ...others } = props;
+  const { payeeInfo, handlePayeeInfo, ...others } = props;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    handlePayeeInfo({
+      ...payeeInfo,
+      [name]: value,
+    });
+  };
 
   return (
     <Box {...others}>
       <Text fontWeight="bold" mb={2}>
-        Contact information
+        Payee Information
       </Text>
       <Stack direction="row">
         <CustomInput
-          name="pFirstName"
+          name="firstName"
           label="First name"
-          placeholder="First name"
+          placeholder="Bruce"
           onChange={handleInputChange}
-          value={formValues.pFirstName}
+          value={payeeInfo.firstName}
           required
         />
         <CustomInput
-          name="pLastName"
+          name="lastName"
           label="Last name"
-          placeholder="Last name"
+          placeholder="Wayne"
           onChange={handleInputChange}
-          value={formValues.pLastName}
+          value={payeeInfo.lastName}
           required
         />
       </Stack>
       <Box>
         <CustomInput
-          name="pEmail"
+          name="email"
           label="Email"
-          placeholder="Email"
+          placeholder="bruce@batcave.com"
           onChange={handleInputChange}
-          value={formValues.pEmail}
+          value={payeeInfo.email}
           required
         />
       </Box>

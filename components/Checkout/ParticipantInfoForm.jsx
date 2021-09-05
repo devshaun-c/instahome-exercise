@@ -1,50 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Text, Stack } from "@chakra-ui/react";
 import CustomInput from "../Controls/CustomInput";
 
-const participantInfo = {
-  firstName: "",
-  lastName: "",
-  contact: "",
-  email: "",
-};
-
 const ParticipantInfoForm = (props) => {
-  const { formValues, handleInputChange, ...others } = props;
-  const participantArray = [];
+  const { quantity, participants, handleParticipants, ...others } = props;
 
-  const quantity = formValues.quantity;
+  useEffect(() => {
+    const participantArray = [];
+    for (var i = 1; i <= quantity; i++) {
+      const info = {
+        firstName: "",
+        lastName: "",
+        contact: "",
+        email: "",
+      };
+      participantArray.push(info);
+    }
+    handleParticipants(participantArray);
+  }, []);
 
-  for (var i = 1; i <= quantity; i++) {
-    participantArray.push({ [i]: participantInfo });
-  }
-
-  console.log(participantArray);
-
-  const ParticipantObj = ({ participant }) => {
-    const participantNum = Object.keys(participant)[0];
-
-    return (
-      <>
-        <Text fontWeight="bold" mb={2}>
-          {`Participant ${participantNum}`}
-        </Text>
-        <Stack direction="row">
-          <CustomInput label="First name" placeholder="First name" required />
-          <CustomInput label="Last name" placeholder="Last name" required />
-        </Stack>
-        <Box>
-          <CustomInput label="Cell phone" placeholder="Cell phone" required />
-          <CustomInput label="Email" placeholder="Email" />
-        </Box>
-      </>
-    );
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...participants];
+    list[index][name] = value;
+    handleParticipants(list);
   };
 
   return (
     <Box {...others}>
-      {participantArray.map((participant, index) => (
-        <ParticipantObj key={index} participant={participant} />
+      {participants.map((participant, index) => (
+        <Box mb={8} key={index}>
+          <Text fontWeight="bold" mb={2}>
+            {`Participant ${index + 1}`}
+          </Text>
+          <Stack direction="row">
+            <CustomInput
+              name="firstName"
+              label="First name"
+              onChange={(e) => handleInputChange(e, index)}
+              value={participant.firstName}
+              placeholder="First name"
+              required
+            />
+            <CustomInput
+              name="lastName"
+              label="Last name"
+              onChange={(e) => handleInputChange(e, index)}
+              value={participant.lastName}
+              placeholder="Last name"
+              required
+            />
+          </Stack>
+          <Box>
+            <CustomInput
+              name="contact"
+              onChange={(e) => handleInputChange(e, index)}
+              value={participant.contact}
+              label="Contact number"
+              placeholder="(555) 555-5555"
+              required
+            />
+            <CustomInput
+              name="email"
+              onChange={(e) => handleInputChange(e, index)}
+              value={participant.email}
+              label="Email"
+              placeholder="participant@email.com"
+            />
+          </Box>
+        </Box>
       ))}
     </Box>
   );
