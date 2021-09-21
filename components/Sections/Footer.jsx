@@ -20,6 +20,10 @@ import { useTheme } from "@emotion/react";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 
 const useStyles = createUseStyles({
+  footer: {
+    color: "gray",
+    paddingTop: "40px",
+  },
   gridItem: {
     display: "flex",
     flexDirection: "column",
@@ -54,10 +58,11 @@ const Footer = (props) => {
 
   return (
     <Section
-      bgColor={bgColor}
+      bgColor="gray.800"
       backgroundImage={bgImg}
       h={height}
       position="relative"
+      className={classes.footer}
     >
       <Grid
         templateColumns={[
@@ -66,12 +71,17 @@ const Footer = (props) => {
           "repeat(12, 1fr)",
         ]}
         height="100%"
-        gap={[0, 0, "60px"]}
+        gap={[0, 0, "100px"]}
       >
         <GridItem colSpan={4} mb={[6]}>
           <Box>
-            <Text fontWeight="bold" mb={2}>
-              Company Logo
+            <Text
+              fontWeight="bold"
+              mb={2}
+              fontFamily="var(--title-font)"
+              fontSize="x-large"
+            >
+              AfterWork
             </Text>
             <Text fontSize={["xs", "sm"]}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
@@ -94,12 +104,23 @@ const Footer = (props) => {
                 className={classes.gridItem}
                 mb={6}
               >
-                <Text fontWeight="bold" mb={[2, 2, 4]} fontSize={["sm", "md"]}>
+                <Text
+                  color="whiteAlpha.800"
+                  fontWeight="bold"
+                  mb={[2, 2, 4]}
+                  fontSize={["sm", "md"]}
+                >
                   {item.title}
                 </Text>
                 <List spacing={[1, 2, 2]} fontSize={["xs", "sm"]}>
                   {item.links.map((link, index) => (
-                    <ListItem key={index}>
+                    <ListItem
+                      key={index}
+                      _hover={{
+                        color: "whiteAlpha.800",
+                        textDecoration: "underline",
+                      }}
+                    >
                       <a href={link.url}>{link.text}</a>
                     </ListItem>
                   ))}

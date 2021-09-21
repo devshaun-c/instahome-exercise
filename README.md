@@ -57,12 +57,18 @@
     - [ ] Hero
     - [ ] Schedule modal
   - [ ] Activity page
+- [ ] Get Activities based on Category
+  - [ ] Workshops
+  - [ ] Community events
+  - [ ] Set limit for each to 7
+  - [ ] Add see all
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Checkout summary page
   - [ ] On register + countdown, set firebase to reserve spot
     - [ ] Field for viewing:TRUE and paid:TRUE
   - [ ] On dismount, remove record if no checkout
+- [ ] Loading placeholder on activities for landing page
 - [ ] Newsletter
   - [ ] Get notified if there's new activities
 

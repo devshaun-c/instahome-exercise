@@ -46,6 +46,7 @@ const Newsletter = (props) => {
           mt={[6, 6, 6]}
         >
           <CustomInput
+            size="md"
             placeholder="Email"
             mr={[0, 0, 2]}
             mb={[2, 2, 0]}

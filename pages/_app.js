@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }) {
         <main className={classes.main}>
           <Component {...pageProps} />
         </main>
-        <Footer bgColor="whitesmoke" />
+        <Footer />
         <AlwaysOnTop text="Hello" left="5%" />
       </div>
       <CSSReset />
