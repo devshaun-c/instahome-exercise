@@ -129,18 +129,18 @@ const Navbar = (props) => {
                 <HoverMenu
                   title="Organize"
                   items={[
-                    { name: "Our partners", url: "/sections-page" },
-                    { name: "Why partner with us?", url: "/component-page" },
+                    { name: "Our partners", url: "/" },
+                    { name: "Why partner with us?", url: "/" },
                   ]}
                 />
 
                 <HoverMenu
                   title="Corporate"
                   items={[
-                    { name: "Why join us?", url: "/component-page" },
+                    { name: "Why join us?", url: "/" },
                     {
                       name: "Employee benefits program",
-                      url: "/component-page",
+                      url: "/",
                     },
                   ]}
                 />
@@ -199,7 +199,7 @@ const Navbar = (props) => {
                   colorScheme="teal"
                   fontWeight="normal"
                   p="4px 16px"
-                  onClick={() => handleNav("/component-page")}
+                  onClick={() => handleNav("/")}
                 >
                   Components
                 </MenuButton>
@@ -214,7 +214,7 @@ const Navbar = (props) => {
                   colorScheme="teal"
                   fontWeight="normal"
                   p="4px 16px"
-                  onClick={() => handleNav("/sections-page")}
+                  onClick={() => handleNav("/")}
                 >
                   Sections
                 </MenuButton>
