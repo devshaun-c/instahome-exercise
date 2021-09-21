@@ -129,6 +129,7 @@ const ActivityCard = (props) => {
             _hover={{ outline: "none" }}
             rel="noopener,noreferrer"
             position="relative"
+            target="_blank"
           >
             <Text fontWeight="bold" fontSize="md" isTruncated>
               {activityName}
@@ -162,7 +163,7 @@ const ActivityCard = (props) => {
             <Text fontSize="xs" fontWeight="bold">
               {partnerId}
             </Text>
-            <Text>{`RM ${defaultPrice}`}</Text>
+            {/* <Text>{`RM ${defaultPrice}`}</Text> */}
           </Flex>
           {/* <Link
             className={classes.cardButton}

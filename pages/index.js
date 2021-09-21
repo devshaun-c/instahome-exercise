@@ -84,6 +84,7 @@ const Home = (props) => {
   const [communityEvents, setCommunityEvents] = useState([]);
 
   const activitiesFromServer = JSON.parse(props.activities);
+  const partnersFromServer = JSON.parse(props.partners);
 
   useEffect(() => {
     if (activitiesFromServer.length) {

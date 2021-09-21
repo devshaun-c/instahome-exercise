@@ -52,6 +52,28 @@
 ## TO DO
 
 - [ ] Checkout summary page
+  - [ ] On register + countdown, set firebase to reserve spot
+    - [ ] Field for viewing:TRUE and paid:TRUE
+  - [ ] On dismount, remove record if no checkout
+- [ ] Newsletter
+  - [ ] Get notified if there's new activities
+- [ ] Mobile responsive
+  - [ ] Landing page
+    - [ ] Separation between sections
+    - [ ] Hero
+    - [ ] Schedule modal
+  - [ ] Activity page
+
+## Done
+
+> 21/9/2021
+
+- [x] Remove price from Activity Card
+- [x] Redirect to google search for locationMaps click
+
+> 6/9/2021
+
+- [x] Checkout summary page UI
   - [x] Summary of activity and price
   - [x] Can adjust quantity
   - [x] Contact information (name, email, contact)
@@ -61,14 +83,9 @@
   - [x] Redirect back to page after payment
   - [x] Added 2% service fee
   - [x] Ticket information for all participants
-  - [ ] Create form
-  - [ ] Bug for undefined controlled inputs
-- [ ] Payment success page
-  - [ ] Add Participant info
-- [ ] Newsletter
-  - [ ] Get notified if there's new activities
-
-## Done
+  - [x] Convert to form
+- [x] Payment success page
+  - [x] Add Participant info into receipt
 
 > 1/9/2021
 

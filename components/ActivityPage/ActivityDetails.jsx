@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Link } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import {
   BsCameraVideo,
@@ -13,6 +13,12 @@ import { GetDurationText } from "../../lib/utils";
 const useStyles = createUseStyles({
   activityDetails: {},
 });
+
+const searchGoogle = (e) => {
+  e.preventDefault();
+  const term = "SS18/3e";
+  window.open("//" + "google.com/search?q=" + term, "_blank");
+};
 
 const ActivityDetails = (props) => {
   const classes = useStyles();
@@ -61,7 +67,18 @@ const ActivityDetails = (props) => {
             <BsGeo fontSize="24px" color="lightgrey" />
             <Box fontSize="xs" ml={4}>
               <Text> {locationDescription || ""}</Text>
-              <Text>{locationMaps || "TBC"}</Text>
+
+              <Link
+                href={`//google.com/search?q=${locationMaps}`}
+                cursor="pointer"
+                _hover={{ outline: "none" }}
+                textDecoration="underline"
+                rel="noopener,noreferrer"
+                position="relative"
+                target="_blank"
+              >
+                <Text>{locationMaps || "TBC"}</Text>
+              </Link>
             </Box>
           </>
         ) : (

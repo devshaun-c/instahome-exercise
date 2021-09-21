@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     const redirectUrl = req.body.redirectUrl;
     const payeeEmail = JSON.parse(metadata.payee).email;
     const quantity = parseInt(req.body.quantity);
+    const { bookedDate, bookedTime } = metadata;
 
     try {
       const { defaultPrice, activityName, partnerId, coverImage } =
@@ -25,7 +26,7 @@ export default async function handler(req, res) {
               currency: "myr",
               product_data: {
                 name: activityName,
-                description: `${activityName} by ${partnerId} @ ${metadata.bookedSession}`,
+                description: `By ${partnerId} @ ${bookedDate} ${bookedTime}`,
                 images: [coverImage[0].url],
               },
               unit_amount: unitPrice * 100,

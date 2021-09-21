@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Divider,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
@@ -31,6 +32,10 @@ const PaymentSummary = (props) => {
   const participantList = JSON.parse(participants);
   const payeeInfo = JSON.parse(payee);
 
+  const InfoRow = ({ children }) => {
+    return <Box p="8px 0">{children}</Box>;
+  };
+
   return (
     <Flex
       flexDirection="column"
@@ -40,54 +45,89 @@ const PaymentSummary = (props) => {
       boxShadow="var(--card-shadow)"
       p={5}
     >
-      <Box ref={componentRef} p="32px 0">
+      <Box ref={componentRef} p="32px ">
         <Flex flexDirection="column" alignItems="center">
           <Text fontSize="x-large" color="brand.600" fontWeight="bold">
             Thank you for your purchase!
           </Text>
-          <Text mt={2}>
+          <Text mt={2} textAlign="center">
             You will receive a confirmation receipt via email shortly.
           </Text>
         </Flex>
 
-        <Table mt={8} fontSize="sm" size="sm">
+        <Table mt={8} size="xs" fontSize="xs">
           <Tbody>
             <Tr>
               <Td>Email</Td>
-              <Td fontWeight="bold">{data.customer_details.email}</Td>
+              <Td>
+                <InfoRow>
+                  <Text>{data.customer_details.email}</Text>
+                </InfoRow>
+              </Td>
             </Tr>
             <Tr>
               <Td>Payment number</Td>
-              <Td fontWeight="bold">{data.payment_intent}</Td>
+
+              <Td>
+                <InfoRow>
+                  <Text>{data.payment_intent}</Text>
+                </InfoRow>
+              </Td>
             </Tr>
             <Tr>
               <Td>Payment date</Td>
-              <Td fontWeight="bold">
-                {ConvertEpochToDate(data.line_items.data[0].price.created)}
+              <Td>
+                <InfoRow>
+                  <Text>
+                    {ConvertEpochToDate(data.line_items.data[0].price.created)}
+                  </Text>
+                </InfoRow>
               </Td>
             </Tr>
             <Tr>
               <Td>Organizer</Td>
               <Td>
-                <Flex flexDirection="column">
-                  <Text fontWeight="bold" mt={1}>
-                    {organizerInfo?.name}
-                  </Text>
-                  <Text mt={1}>{organizerInfo?.contact}</Text>
-                  <Text mt={1}>{organizerInfo?.email}</Text>
-                </Flex>
+                <InfoRow>
+                  <Flex flexDirection="column">
+                    <Text>{organizerInfo?.name}</Text>
+                    <Text>{organizerInfo?.contact}</Text>
+                    <Text>{organizerInfo?.email}</Text>
+                  </Flex>
+                </InfoRow>
               </Td>
             </Tr>
             <Tr>
               <Td>Location</Td>
-              <Td fontWeight="bold">
-                <Text>{data.metadata?.location}</Text>
+              <Td>
+                <InfoRow>
+                  <Text fontWeight="bold">{data.metadata?.location}</Text>
+                </InfoRow>
               </Td>
             </Tr>
             <Tr>
               <Td>Schedule</Td>
-              <Td fontWeight="bold">
-                <Text>{data.metadata?.bookedSession}</Text>
+              <Td>
+                <InfoRow>
+                  <Text fontWeight="bold">{data.metadata?.bookedDate}</Text>
+                  <Text>{data.metadata?.bookedTime}</Text>
+                </InfoRow>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>Participants</Td>
+              <Td>
+                <InfoRow>
+                  {participantList.map((participant, index) => (
+                    <Flex key={index} alignItems="center" mb={2}>
+                      <Text mr={6}>{index + 1}</Text>
+                      <Box>
+                        <Text fontWeight="bold">{`${participant.firstName} ${participant.lastName}`}</Text>
+                        <Text>{participant.email}</Text>
+                        <Text>{participant.contact}</Text>
+                      </Box>
+                    </Flex>
+                  ))}
+                </InfoRow>
               </Td>
             </Tr>
           </Tbody>

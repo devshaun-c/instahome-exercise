@@ -26,7 +26,11 @@ const CheckoutSummary = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [checkout, setCheckout] = useState(false);
   const [participants, setParticipants] = useState([]);
-  const [payeeInfo, setPayeeInfo] = useState({});
+  const [payeeInfo, setPayeeInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
   const [quantity, setQuantity] = useState(1);
 
   const {
@@ -50,36 +54,35 @@ const CheckoutSummary = (props) => {
       contact: hostContact,
     });
 
-    if (selectedDate) {
-      setIsLoading(true);
-      const response = await fetchPostJSON("/api/checkout_sessions", {
-        redirectUrl: `activity/${partnerId}/${activityId}`,
-        productId: activityId,
-        quantity: quantity,
-        metadata: {
-          bookedSession: selectedDate.date,
-          scheduleId: selectedDate.scheduleId,
-          location: locationMaps,
-          organizer: organizerJSON,
-          payee: payeeJSON,
-          participants: participantsJSON,
-        },
-      });
+    setIsLoading(true);
+    const response = await fetchPostJSON("/api/checkout_sessions", {
+      redirectUrl: `activity/${partnerId}/${activityId}`,
+      productId: activityId,
+      quantity: quantity,
+      metadata: {
+        bookedDate: selectedDate.date,
+        bookedTime: selectedDate.time,
+        scheduleId: selectedDate.scheduleId,
+        location: locationMaps,
+        organizer: organizerJSON,
+        payee: payeeJSON,
+        participants: participantsJSON,
+      },
+    });
 
-      if (response.statusCode === 500) {
-        console.error(response.message);
-        return;
-      }
-
-      // Redirect to Checkout.
-      const stripe = await getStripe();
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: response.id,
-      });
-      console.log(error.message);
-    } else {
-      setNoSelect(true);
+    if (response.statusCode === 500) {
+      console.log(response.message);
+      setIsLoading(false);
+      return;
     }
+
+    // Redirect to Checkout.
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: response.id,
+    });
+
+    console.log(error.message);
   };
 
   const handleRegister = (e) => {
@@ -92,88 +95,95 @@ const CheckoutSummary = (props) => {
   };
 
   return (
-    <Flex flexDirection="column" fontSize="xs" mb="60px" mt={6}>
-      {!checkout ? (
-        <>
-          <Flex alignItems="center" justifyContent="space-between" mb={10}>
-            <Box>
-              <Text fontWeight="bold">Online Booking</Text>
-              <Text>{`RM ${defaultPrice}`}</Text>
-            </Box>
-            <Box>
-              <CustomSelect
-                name="quantity"
-                options={quantityDropdown}
-                onChange={(e) => setQuantity(e.target.value)}
-                value={quantity}
-                width="100px"
-              />
-            </Box>
-          </Flex>
-          <OrderSummary quantity={quantity} unitPrice={defaultPrice} />
-        </>
-      ) : (
-        <>
-          <OrderSummary quantity={quantity} unitPrice={defaultPrice} mb={10} />
-          <PayeeInfoForm
-            payeeInfo={payeeInfo}
-            handlePayeeInfo={setPayeeInfo}
-            mb={6}
-          />
+    <form onSubmit={checkout ? handleCheckout : handleRegister}>
+      <Flex flexDirection="column" fontSize="xs" mb="60px" mt={6}>
+        {!checkout ? (
+          <>
+            <Flex alignItems="center" justifyContent="space-between" mb={10}>
+              <Box>
+                <Text fontWeight="bold">Online Booking</Text>
+                <Text>{`RM ${defaultPrice}`}</Text>
+              </Box>
+              <Box>
+                <CustomSelect
+                  name="quantity"
+                  options={quantityDropdown}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  value={quantity}
+                  width="100px"
+                />
+              </Box>
+            </Flex>
+            <OrderSummary quantity={quantity} unitPrice={defaultPrice} />
+          </>
+        ) : (
+          <>
+            <OrderSummary
+              quantity={quantity}
+              unitPrice={defaultPrice}
+              mb={10}
+            />
 
-          <ParticipantInfoForm
-            quantity={quantity}
-            participants={participants}
-            handleParticipants={setParticipants}
-          />
-        </>
-      )}
+            <PayeeInfoForm
+              payeeInfo={payeeInfo}
+              handlePayeeInfo={setPayeeInfo}
+              mb={6}
+            />
 
-      <Flex
-        position="absolute"
-        bottom="0"
-        left="0"
-        bg="white"
-        w="100%"
-        p="16px 32px"
-        borderTop="1px solid whitesmoke"
-        borderRadius="0 0 var(--border-radius) var(--border-radius)"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Box fontSize="sm" fontWeight="bold">
-          {checkout && (
-            <Stack direction="row">
-              <Text fontWeight="normal">Time left:</Text>
-              <Timer
-                initialMinute={8}
-                initialSeconds={0}
-                handleTimesup={() => setCheckout(false)}
-              />
-            </Stack>
-          )}
-        </Box>
+            <ParticipantInfoForm
+              quantity={quantity}
+              participants={participants}
+              handleParticipants={setParticipants}
+            />
+          </>
+        )}
 
-        <ButtonGroup>
-          <StandardButton
-            variant="outline"
-            colorScheme="brand"
-            onClick={() => {
-              checkout ? setCheckout(false) : handleToggle(false);
-            }}
-          >
-            {checkout ? "Back" : "Cancel"}
-          </StandardButton>
-          <StandardButton
-            colorScheme="brand"
-            onClick={checkout ? handleCheckout : handleRegister}
-            isLoading={isLoading}
-          >
-            {checkout ? "Checkout" : "Register"}
-          </StandardButton>
-        </ButtonGroup>
+        <Flex
+          position="absolute"
+          bottom="0"
+          left="0"
+          bg="white"
+          w="100%"
+          p="16px 32px"
+          borderTop="1px solid whitesmoke"
+          borderRadius="0 0 var(--border-radius) var(--border-radius)"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Box fontSize="sm" fontWeight="bold">
+            {checkout && (
+              <Stack direction="row">
+                <Text fontWeight="normal">Time left:</Text>
+                <Timer
+                  initialMinute={8}
+                  initialSeconds={0}
+                  handleTimesup={() => setCheckout(false)}
+                />
+              </Stack>
+            )}
+          </Box>
+
+          <ButtonGroup>
+            <StandardButton
+              variant="outline"
+              colorScheme="brand"
+              onClick={() => {
+                checkout ? setCheckout(false) : handleToggle(false);
+              }}
+            >
+              {checkout ? "Back" : "Cancel"}
+            </StandardButton>
+            <StandardButton
+              colorScheme="brand"
+              type="submit"
+              isLoading={isLoading}
+            >
+              {checkout ? "Checkout" : "Register"}
+            </StandardButton>
+          </ButtonGroup>
+        </Flex>
       </Flex>
-    </Flex>
+    </form>
   );
 };
 
