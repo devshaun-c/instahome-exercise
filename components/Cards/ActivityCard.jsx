@@ -81,6 +81,7 @@ const ActivityCard = (props) => {
     coverImage,
     shortSummary,
     partnerId,
+    orgName,
     defaultPrice,
     locationDescription,
     locationMaps,
@@ -161,7 +162,7 @@ const ActivityCard = (props) => {
         <Flex flexDirection="column">
           <Flex justifyContent="space-between">
             <Text fontSize="xs" fontWeight="bold">
-              {partnerId}
+              By {orgName}
             </Text>
             {/* <Text>{`RM ${defaultPrice}`}</Text> */}
           </Flex>

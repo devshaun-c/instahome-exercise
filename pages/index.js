@@ -140,7 +140,7 @@ const Home = (props) => {
           />
         )}
 
-        <CardCarouselSection
+        {/* <CardCarouselSection
           tag="FITNESS & HEALTH"
           height="100%"
           header="Keep Fit, Stay Active"
@@ -195,7 +195,7 @@ const Home = (props) => {
               congue bibendum ante, sed imperdiet eros fermentum in."
             />
           </SwiperSlide>
-        </CardCarouselSection>
+        </CardCarouselSection> */}
 
         <Newsletter height="600px" bgColor="teal.300" />
 

@@ -51,12 +51,6 @@
 
 ## TO DO
 
-- [ ] Checkout summary page
-  - [ ] On register + countdown, set firebase to reserve spot
-    - [ ] Field for viewing:TRUE and paid:TRUE
-  - [ ] On dismount, remove record if no checkout
-- [ ] Newsletter
-  - [ ] Get notified if there's new activities
 - [ ] Mobile responsive
   - [ ] Landing page
     - [ ] Separation between sections
@@ -65,6 +59,12 @@
   - [ ] Activity page
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
+- [ ] Checkout summary page
+  - [ ] On register + countdown, set firebase to reserve spot
+    - [ ] Field for viewing:TRUE and paid:TRUE
+  - [ ] On dismount, remove record if no checkout
+- [ ] Newsletter
+  - [ ] Get notified if there's new activities
 
 ## Done
 
@@ -73,6 +73,7 @@
 - [x] Remove price from Activity Card
 - [x] Redirect to google search for locationMaps click
 - [x] Limit schedule read to 5 on load. Show all if "see all" is selected
+- [x] Show orgName in Activity Card instead of partnerId
 
 > 6/9/2021
 
