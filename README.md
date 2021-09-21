@@ -63,6 +63,8 @@
     - [ ] Hero
     - [ ] Schedule modal
   - [ ] Activity page
+- [ ] Revise schedule database
+  - [ ] Make schedule as Root (use partnerName as key)
 
 ## Done
 
@@ -70,6 +72,7 @@
 
 - [x] Remove price from Activity Card
 - [x] Redirect to google search for locationMaps click
+- [x] Limit schedule read to 5 on load. Show all if "see all" is selected
 
 > 6/9/2021
 

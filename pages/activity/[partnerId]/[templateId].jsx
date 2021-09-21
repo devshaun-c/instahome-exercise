@@ -44,6 +44,7 @@ const ActivityPage = (props) => {
   const router = useRouter();
   const { partnerId, templateId } = router.query;
   const url = `http://localhost:3000/activity/${partnerId}/${templateId}`;
+  const [schedules, setSchedules] = useState([]);
 
   const CheckValidPartnerAndActivity = () => {
     const activityData = JSON.parse(props.activityData);
@@ -68,6 +69,14 @@ const ActivityPage = (props) => {
 
   const { aboutActivity, activityId, activityName, shortSummary } =
     activityData;
+
+  useEffect(async () => {
+    if (allSchedules) {
+      setSchedules(allSchedules);
+    } else {
+      setSchedules([]);
+    }
+  }, []);
 
   var otherPartnerActivities = [];
   if (props.activities) {
@@ -110,7 +119,8 @@ const ActivityPage = (props) => {
                 <ScheduleBooking
                   mt="56px"
                   info={activityDetails}
-                  schedules={allSchedules}
+                  schedules={schedules}
+                  handleSchedules={setSchedules}
                 />
               </Paper>
               <Paper mt={4}>
@@ -161,7 +171,7 @@ export const getServerSideProps = async (context) => {
 
   const partnerData = await GetSpecificDocFromFirebase(partnerId, "partners");
   // const scheduleData = await GetScheduleFromFirebase(partnerId, scheduleId);
-  const schedules = await GetAllPartnerSchedules(partnerId, templateId);
+  const schedules = await GetAllPartnerSchedules(partnerId, templateId, 5);
   const allActivities = await GetAllPartnerActivities(partnerId);
 
   return {

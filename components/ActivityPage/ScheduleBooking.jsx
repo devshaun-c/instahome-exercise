@@ -10,6 +10,7 @@ import {
   GetTimeSummary,
   SortByDate,
 } from "../../lib/utils";
+import { GetAllPartnerSchedules } from "../../lib/firebase.js";
 import StandardButton from "../Buttons/StandardButton";
 import TextButton from "../Buttons/TextButton.jsx";
 import CustomSelect from "../Controls/CustomSelect.jsx";
@@ -46,7 +47,7 @@ const useStyles = createUseStyles({
 const ScheduleBooking = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { info, schedules, ...others } = props;
+  const { info, schedules, handleSchedules, ...others } = props;
   const { defaultPrice, bookingLink, paymentNotes, activityName } = info;
   const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -109,6 +110,23 @@ const ScheduleBooking = (props) => {
       setIsOpen(true);
     } else {
       setNoSelect(true);
+    }
+  };
+
+  const showAllSchedules = async (e) => {
+    e.preventDefault();
+    if (!showAll) {
+      const schedules = await GetAllPartnerSchedules(
+        info.partnerId,
+        info.activityId,
+        undefined
+      );
+      handleSchedules(schedules);
+      setShowAll(true);
+    } else {
+      const slicedArray = schedules.slice(0, 5);
+      handleSchedules(slicedArray);
+      setShowAll(false);
     }
   };
 
@@ -202,8 +220,8 @@ const ScheduleBooking = (props) => {
               );
             })}
           </Flex>
-          {scheduleOptions > 3 && (
-            <TextButton onClick={() => setShowAll(!showAll)} color="grey">
+          {scheduleOptions.length > 5 && (
+            <TextButton onClick={showAllSchedules} color="grey">
               {showAll ? "see less" : "see all"}
               {showAll ? (
                 <ChevronUpIcon fontSize="lg" ml={2} />
