@@ -14,6 +14,7 @@ import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import HoverMenu from "./HoverMenu";
+import { isMobile, isIOS, isChrome } from "react-device-detect";
 
 const useStyles = createUseStyles({
   navbarShow: {
@@ -103,18 +104,18 @@ const Navbar = (props) => {
     }
   }, []);
 
-  const handleNav = (url) => {
-    onClose();
-    router.push(url);
-  };
-
   useEffect(() => {
-    if (alwaysVisible) {
+    if (alwaysVisible || isMobile) {
       setShowNavbar(true);
     } else {
       setShowNavbar(false);
     }
-  }, [alwaysVisible]);
+  }, []);
+
+  const handleNav = (url) => {
+    onClose();
+    router.push(url);
+  };
 
   return (
     <>

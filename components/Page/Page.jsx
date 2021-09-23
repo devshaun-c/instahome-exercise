@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../Navigations/Navbar";
-import { isMobile, isIOS, isChrome } from "react-device-detect";
 import { Box } from "@chakra-ui/react";
 
 const Page = (props) => {
   const {
     children,
-    alwaysShowNav = false,
+    alwaysVisible = false,
     pageMeta = { title: "", description: "" },
   } = props;
-
-  // console.log(window.innerWidth <= 760);
 
   return (
     <>
@@ -30,9 +27,9 @@ const Page = (props) => {
         <meta name="twitter:description" content={pageMeta.description} />
       </Head>
       <div>
-        <Navbar alwaysVisible={isMobile ? true : alwaysShowNav} />
+        <Navbar alwaysVisible={alwaysVisible} />
 
-        <Box pt={alwaysShowNav ? "60px" : "0px"}>{children}</Box>
+        <Box pt={alwaysVisible ? "60px" : "0px"}>{children}</Box>
       </div>
     </>
   );
