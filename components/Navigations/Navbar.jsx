@@ -109,8 +109,12 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if (showNavbar) alert("SHOW");
-  }, [showNavbar]);
+    if (alwaysVisible) {
+      setShowNavbar(true);
+    } else {
+      setShowNavbar(false);
+    }
+  }, [alwaysVisible]);
 
   return (
     <>
