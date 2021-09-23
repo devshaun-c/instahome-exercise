@@ -11,8 +11,6 @@ const Page = (props) => {
     pageMeta = { title: "", description: "" },
   } = props;
 
-  if (isMobile) alert("IS MOBILE");
-
   // console.log(window.innerWidth <= 760);
 
   return (
@@ -33,6 +31,7 @@ const Page = (props) => {
       </Head>
       <div>
         <Navbar alwaysVisible={isMobile ? true : alwaysShowNav} />
+
         <Box pt={alwaysShowNav ? "60px" : "0px"}>{children}</Box>
       </div>
     </>

@@ -57,7 +57,8 @@
     - [x] Hero
     - [ ] Schedule modal
     - [x] Activity card mobile version
-    - [ ] Nav menu bug
+    - [ ] Navbar bug
+    - [ ] Footer mobile grid issue
   - [ ] Activity page
 - [ ] Get Activities based on Category
   - [ ] Workshops
