@@ -29,7 +29,7 @@ const StandardInput = (props) => {
     required,
     onChange,
     value,
-    size = "sm",
+    size = "md",
     type,
     variant,
     placeholder,
@@ -67,7 +67,7 @@ const StandardInput = (props) => {
           className={classes.root}
           variant={variant}
           placeholder={placeholder}
-          fontSize="xs"
+          size="md"
           _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}

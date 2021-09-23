@@ -93,15 +93,15 @@ const ActivityCard = (props) => {
 
   return (
     <Box
-      h={["380px", "420px"]}
+      h={["100%", "380px", "420px"]}
       className={classes.card}
       bg="white"
       maxWidth={width}
       position="relative"
-      boxShadow={["none", "var(--card-shadow)"]}
+      boxShadow={["var(--card-shadow)"]}
     >
       <Box
-        minH={["150px", "150px"]}
+        minH={["150px", "150px", "150px"]}
         overflow="hidden"
         borderRadius="8px 8px 0 0"
         position="relative"
@@ -132,7 +132,7 @@ const ActivityCard = (props) => {
             position="relative"
             target="_blank"
           >
-            <Text fontWeight="bold" fontSize="md" isTruncated>
+            <Text fontWeight="bold" fontSize={["lg", "md", "md"]} isTruncated>
               {activityName}
             </Text>
           </Link>
@@ -140,42 +140,37 @@ const ActivityCard = (props) => {
           {type === ACTIVITY_TYPE.inPerson ? (
             <Flex alignItems="center">
               <BsGeoAlt color="grey" fontSize="16px" />
-              <Text fontSize="xs" isTruncated color="grey" ml={2}>
+              <Text
+                fontSize={["md", "xs", "xs"]}
+                isTruncated
+                color="grey"
+                ml={2}
+              >
                 {locationMaps}
               </Text>
             </Flex>
           ) : (
             <Flex alignItems="center">
               <BsCameraVideo color="grey" fontSize="16px" />
-              <Text fontSize="xs" isTruncated color="grey" ml={2}>
+              <Text fontSize={["md", "xs", "xs"]} color="grey" ml={2}>
                 Online activity
               </Text>
             </Flex>
           )}
 
-          <Box marginTop="16px">
-            <Text fontSize="xs" noOfLines={[2, 3, 3]}>
+          <Box marginTop={3}>
+            <Text fontSize={["md", "xs", "xs"]} noOfLines={[2, 3, 3]}>
               {shortSummary}
             </Text>
           </Box>
         </Box>
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" mt={8}>
           <Flex justifyContent="space-between">
-            <Text fontSize="xs" fontWeight="bold">
+            <Text fontSize={["md", "xs", "xs"]} fontWeight="bold">
               By {orgName}
             </Text>
             {/* <Text>{`RM ${defaultPrice}`}</Text> */}
           </Flex>
-          {/* <Link
-            className={classes.cardButton}
-            href={url}
-            cursor={url ? "pointer" : "default"}
-            _hover={{ outline: "none" }}
-            rel="noopener,noreferrer"
-            position="relative"
-          >
-            Check it out
-          </Link> */}
         </Flex>
       </Flex>
 

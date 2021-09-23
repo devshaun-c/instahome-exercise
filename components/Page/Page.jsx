@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Navbar from "../Navigations/Navbar";
+import { isMobile, isIOS, isChrome } from "react-device-detect";
 import { Box } from "@chakra-ui/react";
 
 const Page = (props) => {
@@ -9,6 +10,8 @@ const Page = (props) => {
     alwaysShowNav = false,
     pageMeta = { title: "", description: "" },
   } = props;
+
+  // console.log(window.innerWidth <= 760);
 
   return (
     <>
@@ -27,7 +30,7 @@ const Page = (props) => {
         <meta name="twitter:description" content={pageMeta.description} />
       </Head>
       <div>
-        <Navbar alwaysVisible={alwaysShowNav} />
+        <Navbar alwaysVisible={isMobile ? true : alwaysShowNav} />
         <Box pt={alwaysShowNav ? "60px" : "0px"}>{children}</Box>
       </div>
     </>

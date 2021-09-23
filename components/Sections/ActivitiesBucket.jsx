@@ -77,13 +77,13 @@ const ActivitiesBucket = (props) => {
     >
       <Box mb={8} mt={8}>
         {tag && (
-          <Text fontSize={["xs", "xs"]} mb={[1, 2, 2]}>
+          <Text fontSize={["md", "md"]} mb={[1, 2, 2]}>
             {tag}
           </Text>
         )}
         <Flex justify="space-between" align="center">
           <Heading
-            fontSize={["md", "x-large"]}
+            fontSize={["large", "large", "xx-large"]}
             fontWeight="bold"
             lineHeight="1.3"
           >

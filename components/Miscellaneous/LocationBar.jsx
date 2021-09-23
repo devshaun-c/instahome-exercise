@@ -22,12 +22,11 @@ const useStyles = createUseStyles({
   locationWrapper: {},
   locationBar: {
     position: "absolute",
-    top: "20%",
-    right: "0",
+    // top: "10%",
+    // right: "0",
     background: "white",
-    padding: "16px 32px",
-    borderRadius: "25px",
-    boxShadow: "var(--card-shadow)",
+    borderRadius: "var(--border-radius)",
+    // boxShadow: "var(--card-shadow)",
     cursor: "pointer",
     zIndex: "10",
   },
@@ -40,39 +39,41 @@ const LocationBar = (props) => {
   const [location, setLocation] = useState("SGR");
 
   return (
-    <Flex position="relative">
-      <Tooltip label="More locations coming soon" bg="brand.500" hasArrow>
-        <Box
-          className={classes.locationBar}
-          onClick={() => console.log("CLICK")}
-        >
-          <Flex alignItems="center" justify="flex-end">
-            <BsGeoAlt
-              fontSize={["md", "large"]}
-              color={theme.colors.brand[600]}
-            />
-            <Text
-              display={["none", "block"]}
-              fontSize={["md", "large"]}
-              fontWeight="bold"
-              ml={2}
-              color="grey"
-            >
-              Things to do near
-            </Text>
-            <Text
-              fontSize={["md", "large"]}
-              color="brand.600"
-              fontWeight="bold"
-              ml={2}
-              textDecoration="underline"
-            >
-              Selangor
-            </Text>
-          </Flex>
-        </Box>
-      </Tooltip>
-    </Flex>
+    <Container>
+      <Flex pt={8} pb={[0, 4, 4]}>
+        <Tooltip label="More locations coming soon" bg="brand.500" hasArrow>
+          <Box
+            className={classes.locationBar}
+            onClick={() => console.log("CLICK")}
+          >
+            <Flex alignItems="center" justify="flex-end">
+              <BsGeoAlt
+                fontSize={["md", "md", "large"]}
+                color={theme.colors.brand[600]}
+              />
+              <Text
+                display={["none", "block"]}
+                fontSize={["md", "md", "large"]}
+                fontWeight="bold"
+                ml={2}
+                color="grey"
+              >
+                Things to do near
+              </Text>
+              <Text
+                fontSize={["md", "md", "large"]}
+                color="brand.600"
+                fontWeight="bold"
+                ml={2}
+                textDecoration="underline"
+              >
+                Selangor
+              </Text>
+            </Flex>
+          </Box>
+        </Tooltip>
+      </Flex>
+    </Container>
   );
 };
 

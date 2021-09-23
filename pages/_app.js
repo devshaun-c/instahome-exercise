@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </main>
         <Footer />
-        <AlwaysOnTop text="Hello" left="5%" />
+        {/* <AlwaysOnTop text="Hello" left="5%" /> */}
       </div>
       <CSSReset />
     </ChakraProvider>

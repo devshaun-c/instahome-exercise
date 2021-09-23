@@ -108,6 +108,7 @@ const Home = (props) => {
       <div className={classes.home}>
         <Hero />
 
+        <LocationBar />
         {/* <Featured list={temporaryFeatured} /> */}
 
         {workshops.length > 0 && (

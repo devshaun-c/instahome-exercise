@@ -7,8 +7,8 @@ const useStyles = createUseStyles({
   section: {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    // backgroundPosition: "center",
     padding: "40px 0",
+    position: "relative",
   },
 });
 
