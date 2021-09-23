@@ -95,20 +95,14 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if (!alwaysVisible) {
+    if (isMobile || alwaysVisible) {
+      setShowNavbar(true);
+    } else if (!alwaysVisible) {
       window.addEventListener("scroll", handleScroll, { passive: true });
 
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }
-  }, []);
-
-  useEffect(() => {
-    if (alwaysVisible || isMobile) {
-      setShowNavbar(true);
-    } else {
-      setShowNavbar(false);
     }
   }, []);
 
@@ -118,124 +112,121 @@ const Navbar = (props) => {
   };
 
   return (
-    <>
-      <Text>{`SHOW NAVBAR : ${showNavbar}`}</Text>
-      <Box className={showNavbar ? classes.navbarShow : classes.navbarHide}>
-        {showNavbar && (
-          <Box position="relative" h="100%">
-            <div className={classes.nav}>
-              <Text
-                className={classes.title}
-                onClick={() => handleNav("/")}
-                color="brand.600"
-              >
-                AfterWork
-              </Text>
-              <div className={classes.menuLinks}>
-                <Menu>
-                  <HoverMenu title="Home" mainUrl="/" />
+    <Box className={showNavbar ? classes.navbarShow : classes.navbarHide}>
+      {showNavbar && (
+        <Box position="relative" h="100%">
+          <div className={classes.nav}>
+            <Text
+              className={classes.title}
+              onClick={() => handleNav("/")}
+              color="brand.600"
+            >
+              AfterWork
+            </Text>
+            <div className={classes.menuLinks}>
+              <Menu>
+                <HoverMenu title="Home" mainUrl="/" />
 
-                  <HoverMenu title="About us" mainUrl="/about" />
+                <HoverMenu title="About us" mainUrl="/about" />
 
-                  <HoverMenu
-                    title="Organize"
-                    items={[
-                      { name: "Our partners", url: "/" },
-                      { name: "Why partner with us?", url: "/" },
-                    ]}
-                  />
+                <HoverMenu
+                  title="Organize"
+                  items={[
+                    { name: "Our partners", url: "/" },
+                    { name: "Why partner with us?", url: "/" },
+                  ]}
+                />
 
-                  <HoverMenu
-                    title="Corporate"
-                    items={[
-                      { name: "Why join us?", url: "/" },
-                      {
-                        name: "Employee benefits program",
-                        url: "/",
-                      },
-                    ]}
-                  />
-                </Menu>
-              </div>
-
-              <Box
-                className={classes.mobileMenu}
-                bg={isOpen ? "teal.500" : "none"}
-              >
-                <IconButton
-                  onClick={onToggle}
-                  className={classes.menuButton}
-                  size="sm"
-                  h="100%"
-                  w="100%"
-                  color={isOpen ? "white" : ""}
-                  _focus={{ outline: "none", bg: "none" }}
-                  _selected={{ outline: "none", bg: "none" }}
-                  _active={{ outline: "none", bg: "none" }}
-                  _hover={{ bg: "none" }}
-                >
-                  {isOpen ? (
-                    <CloseIcon fontSize="xs" />
-                  ) : (
-                    <HamburgerIcon fontSize="md" />
-                  )}
-                </IconButton>
-              </Box>
+                <HoverMenu
+                  title="Corporate"
+                  items={[
+                    { name: "Why join us?", url: "/" },
+                    {
+                      name: "Employee benefits program",
+                      url: "/",
+                    },
+                  ]}
+                />
+              </Menu>
             </div>
 
-            <Collapse in={isOpen}>
-              <Box className={classes.mobileLinks}>
-                <Menu>
-                  <MenuButton
-                    as={Button}
-                    width="100%"
-                    rightIcon={<ChevronRightIcon fontSize="md" />}
-                    borderRadius="none"
-                    textAlign="start"
-                    fontSize="xs"
-                    fontWeight="normal"
-                    colorScheme="teal"
-                    p="4px 16px"
-                    onClick={() => handleNav("/about")}
-                  >
-                    About
-                  </MenuButton>
-                  <MenuButton
-                    as={Button}
-                    width="100%"
-                    rightIcon={<ChevronRightIcon fontSize="md" />}
-                    borderRadius="none"
-                    textAlign="start"
-                    fontSize="xs"
-                    colorScheme="teal"
-                    fontWeight="normal"
-                    p="4px 16px"
-                    onClick={() => handleNav("/")}
-                  >
-                    Components
-                  </MenuButton>
+            <Box
+              className={classes.mobileMenu}
+              bg={isOpen ? "teal.500" : "none"}
+            >
+              <IconButton
+                onClick={onToggle}
+                className={classes.menuButton}
+                size="sm"
+                h="100%"
+                w="100%"
+                color={isOpen ? "white" : ""}
+                _focus={{ outline: "none", bg: "none" }}
+                _selected={{ outline: "none", bg: "none" }}
+                _active={{ outline: "none", bg: "none" }}
+                _hover={{ bg: "none" }}
+              >
+                {isOpen ? (
+                  <CloseIcon fontSize="xs" />
+                ) : (
+                  <HamburgerIcon fontSize="md" />
+                )}
+              </IconButton>
+            </Box>
+          </div>
 
-                  <MenuButton
-                    as={Button}
-                    width="100%"
-                    rightIcon={<ChevronRightIcon fontSize="md" />}
-                    borderRadius="none"
-                    textAlign="start"
-                    fontSize="xs"
-                    colorScheme="teal"
-                    fontWeight="normal"
-                    p="4px 16px"
-                    onClick={() => handleNav("/")}
-                  >
-                    Sections
-                  </MenuButton>
-                </Menu>
-              </Box>
-            </Collapse>
-          </Box>
-        )}
-      </Box>
-    </>
+          <Collapse in={isOpen}>
+            <Box className={classes.mobileLinks}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  width="100%"
+                  rightIcon={<ChevronRightIcon fontSize="md" />}
+                  borderRadius="none"
+                  textAlign="start"
+                  fontSize="xs"
+                  fontWeight="normal"
+                  colorScheme="teal"
+                  p="4px 16px"
+                  onClick={() => handleNav("/about")}
+                >
+                  About
+                </MenuButton>
+                <MenuButton
+                  as={Button}
+                  width="100%"
+                  rightIcon={<ChevronRightIcon fontSize="md" />}
+                  borderRadius="none"
+                  textAlign="start"
+                  fontSize="xs"
+                  colorScheme="teal"
+                  fontWeight="normal"
+                  p="4px 16px"
+                  onClick={() => handleNav("/")}
+                >
+                  Components
+                </MenuButton>
+
+                <MenuButton
+                  as={Button}
+                  width="100%"
+                  rightIcon={<ChevronRightIcon fontSize="md" />}
+                  borderRadius="none"
+                  textAlign="start"
+                  fontSize="xs"
+                  colorScheme="teal"
+                  fontWeight="normal"
+                  p="4px 16px"
+                  onClick={() => handleNav("/")}
+                >
+                  Sections
+                </MenuButton>
+              </Menu>
+            </Box>
+          </Collapse>
+        </Box>
+      )}
+    </Box>
   );
 };
 

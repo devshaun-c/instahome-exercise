@@ -114,7 +114,7 @@ const Home = (props) => {
           <ActivitiesBucket
             tag="WORKSHOPS"
             height="100%"
-            header="Develop New Skills or Find a Hobby"
+            header="Develop Your Skills, Discover New Hobbies"
             list={workshops}
             categoryDetails={{
               topic: "Ideas for workshops?",
@@ -128,7 +128,7 @@ const Home = (props) => {
           <ActivitiesBucket
             tag="COMMUNITY EVENTS"
             height="100%"
-            header="Be part of a positive change"
+            header="Volunteer, Bring Positive Change"
             list={communityEvents}
             categoryDetails={{
               topic: "Ideas for community events?",
