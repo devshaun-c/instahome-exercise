@@ -14,6 +14,7 @@ import StandardButton from "../Buttons/StandardButton";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 import img from "../../public/static/images/hero.jpg";
+import LocationBar from "../Miscellaneous/LocationBar";
 
 const useStyles = createUseStyles({});
 
@@ -36,7 +37,7 @@ const Hero = (props) => {
     <Section
       bgColor={bgColor}
       backgroundImage={bgImg || img}
-      height={["100%", "500px", "600px"]}
+      height={["50vh", "500px", "600px"]}
       position="relative"
       backgroundPosition="top"
     >
@@ -44,7 +45,7 @@ const Hero = (props) => {
         pt={10}
         direction={["column", "row", "row"]}
         spacing="80px"
-        height={["80vh", "100%", "100%"]}
+        height="100%"
         display="flex"
         justify="center"
         alignItems="center"
@@ -53,7 +54,7 @@ const Hero = (props) => {
           <Heading
             w={["100%", "100%", "80%"]}
             color="white"
-            fontSize="xxx-large"
+            fontSize={["40px", "60px"]}
             maxWidth="800px"
           >
             It's a Big World Out There. Go Explore!
@@ -99,6 +100,8 @@ const Hero = (props) => {
           </Box>
         )}
       </Stack>
+
+      <LocationBar />
     </Section>
   );
 };

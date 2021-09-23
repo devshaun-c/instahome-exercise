@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import {
   Box,
-  ButtonGroup,
   Divider,
   Grid,
   GridItem,
-  Heading,
   HStack,
   List,
   ListItem,
@@ -13,9 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
-import StandardButton from "../Buttons/StandardButton";
-import placeholderImg from "../../public/static/images/placeholder.png";
-import Image from "next/image";
 import { useTheme } from "@emotion/react";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 

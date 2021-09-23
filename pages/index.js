@@ -110,8 +110,6 @@ const Home = (props) => {
 
         {/* <Featured list={temporaryFeatured} /> */}
 
-        <LocationBar />
-
         {workshops.length > 0 && (
           <ActivitiesBucket
             tag="WORKSHOPS"

@@ -62,6 +62,8 @@
   - [ ] Community events
   - [ ] Set limit for each to 7
   - [ ] Add see all
+- [ ] ActivityCard
+  - [ ] Show tags
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Checkout summary page
