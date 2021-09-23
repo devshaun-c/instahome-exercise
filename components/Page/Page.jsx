@@ -11,6 +11,8 @@ const Page = (props) => {
     pageMeta = { title: "", description: "" },
   } = props;
 
+  if (isMobile) alert("IS MOBILE");
+
   // console.log(window.innerWidth <= 760);
 
   return (

@@ -54,8 +54,10 @@
 - [ ] Mobile responsive
   - [ ] Landing page
     - [ ] Separation between sections
-    - [ ] Hero
+    - [x] Hero
     - [ ] Schedule modal
+    - [x] Activity card mobile version
+    - [ ] Nav menu bug
   - [ ] Activity page
 - [ ] Get Activities based on Category
   - [ ] Workshops
