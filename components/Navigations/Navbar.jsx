@@ -7,8 +7,14 @@ import {
   MenuButton,
   useDisclosure,
   Collapse,
+  Flex,
   Button,
   Text,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
@@ -69,14 +75,17 @@ const useStyles = createUseStyles({
     background: "none",
   },
   mobileLinks: {
-    position: "absolute",
-    right: "0",
-    width: "100%",
-    background: "white",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
+    display: "none",
+    "@media screen and (max-width: 1000px)": {
+      position: "absolute",
+      right: "0",
+      width: "100%",
+      background: "white",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      boxShadow: "0 2px 4px 0 rgb(0 0 0 / 12%)",
+    },
   },
 });
 
@@ -111,6 +120,30 @@ const Navbar = (props) => {
     router.push(url);
   };
 
+  const navList = [
+    { title: "Home", mainUrl: "/", items: [] },
+    { title: "About", mainUrl: "/about", items: [] },
+    {
+      title: "Organize",
+      mainUrl: "",
+      items: [
+        { name: "Our partners", url: "/" },
+        { name: "Why partner with us?", url: "/" },
+      ],
+    },
+    {
+      title: "Corporate",
+      mainUrl: "",
+      items: [
+        { name: "Why join us?", url: "/" },
+        {
+          name: "Employee benefits program",
+          url: "/",
+        },
+      ],
+    },
+  ];
+
   return (
     <Box className={showNavbar ? classes.navbarShow : classes.navbarHide}>
       {showNavbar && (
@@ -125,34 +158,20 @@ const Navbar = (props) => {
             </Text>
             <div className={classes.menuLinks}>
               <Menu>
-                <HoverMenu title="Home" mainUrl="/" />
-
-                <HoverMenu title="About us" mainUrl="/about" />
-
-                <HoverMenu
-                  title="Organize"
-                  items={[
-                    { name: "Our partners", url: "/" },
-                    { name: "Why partner with us?", url: "/" },
-                  ]}
-                />
-
-                <HoverMenu
-                  title="Corporate"
-                  items={[
-                    { name: "Why join us?", url: "/" },
-                    {
-                      name: "Employee benefits program",
-                      url: "/",
-                    },
-                  ]}
-                />
+                {navList.map((item, index) => (
+                  <HoverMenu
+                    key={index}
+                    title={item.title}
+                    mainUrl={item.mainUrl}
+                    items={item.items}
+                  />
+                ))}
               </Menu>
             </div>
 
             <Box
               className={classes.mobileMenu}
-              bg={isOpen ? "teal.500" : "none"}
+              // bg={isOpen ? "teal.500" : "none"}
             >
               <IconButton
                 onClick={onToggle}
@@ -160,7 +179,7 @@ const Navbar = (props) => {
                 size="sm"
                 h="100%"
                 w="100%"
-                color={isOpen ? "white" : ""}
+                // color={isOpen ? "white" : ""}
                 _focus={{ outline: "none", bg: "none" }}
                 _selected={{ outline: "none", bg: "none" }}
                 _active={{ outline: "none", bg: "none" }}
@@ -177,51 +196,49 @@ const Navbar = (props) => {
 
           <Collapse in={isOpen}>
             <Box className={classes.mobileLinks}>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  width="100%"
-                  rightIcon={<ChevronRightIcon fontSize="md" />}
-                  borderRadius="none"
-                  textAlign="start"
-                  fontSize="xs"
-                  fontWeight="normal"
-                  colorScheme="teal"
-                  p="4px 16px"
-                  onClick={() => handleNav("/about")}
-                >
-                  About
-                </MenuButton>
-                <MenuButton
-                  as={Button}
-                  width="100%"
-                  rightIcon={<ChevronRightIcon fontSize="md" />}
-                  borderRadius="none"
-                  textAlign="start"
-                  fontSize="xs"
-                  colorScheme="teal"
-                  fontWeight="normal"
-                  p="4px 16px"
-                  onClick={() => handleNav("/")}
-                >
-                  Components
-                </MenuButton>
-
-                <MenuButton
-                  as={Button}
-                  width="100%"
-                  rightIcon={<ChevronRightIcon fontSize="md" />}
-                  borderRadius="none"
-                  textAlign="start"
-                  fontSize="xs"
-                  colorScheme="teal"
-                  fontWeight="normal"
-                  p="4px 16px"
-                  onClick={() => handleNav("/")}
-                >
-                  Sections
-                </MenuButton>
-              </Menu>
+              <Accordion
+                allowToggle
+                width="100%"
+                borderColor="whitesmoke"
+                bg="white"
+                pb={4}
+              >
+                {navList.map((item) => (
+                  <AccordionItem>
+                    <AccordionButton
+                      _expanded={{ background: "gray.100" }}
+                      _focus={{ outline: "none" }}
+                      bg="whitesmoke"
+                      onClick={() =>
+                        item.mainUrl ? handleNav(item.mainUrl) : {}
+                      }
+                    >
+                      <Text flex="1" textAlign="left" fontSize="sm">
+                        {item.title}
+                      </Text>
+                      {item.mainUrl ? null : <AccordionIcon />}
+                    </AccordionButton>
+                    <AccordionPanel p={0} bg="white">
+                      <Flex flexDirection="column">
+                        {item.items.map((subItem) => (
+                          <Button
+                            variant="unstyled"
+                            textAlign="left"
+                            fontSize="sm"
+                            fontWeight="normal"
+                            pl={8}
+                            _focus={{ outline: "none" }}
+                            borderBottom="1px solid whitesmoke"
+                            onClick={() => handleNav(subItem.url)}
+                          >
+                            {subItem.name}
+                          </Button>
+                        ))}
+                      </Flex>
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </Box>
           </Collapse>
         </Box>

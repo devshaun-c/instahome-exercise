@@ -53,12 +53,13 @@
 
 - [ ] Mobile responsive
   - [ ] Landing page
-    - [ ] Separation between sections
+    - [x] Separation between sections
     - [x] Hero
     - [ ] Schedule modal
     - [x] Activity card mobile version
-    - [ ] Navbar bug
-    - [ ] Footer mobile grid issue
+    - [x] Navbar bug
+    - [x] Navbar menu issue
+    - [x] Footer mobile grid issue
   - [ ] Activity page
 - [ ] Get Activities based on Category
   - [ ] Workshops

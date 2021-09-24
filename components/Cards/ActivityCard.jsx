@@ -99,6 +99,7 @@ const ActivityCard = (props) => {
       maxWidth={width}
       position="relative"
       boxShadow={["var(--card-shadow)"]}
+      _hover={{ boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%);" }}
     >
       <Box
         minH={["150px", "150px", "150px"]}
@@ -132,7 +133,12 @@ const ActivityCard = (props) => {
             position="relative"
             target="_blank"
           >
-            <Text fontWeight="bold" fontSize={["lg", "md", "md"]} isTruncated>
+            <Text
+              fontWeight="bold"
+              fontSize={["lg", "md", "md"]}
+              isTruncated
+              mb={1}
+            >
               {activityName}
             </Text>
           </Link>

@@ -66,10 +66,9 @@ const Footer = (props) => {
           "repeat(12, 1fr)",
         ]}
         height="100%"
-        // gap={[0, "100px", "100px"]}
-        gap="50px"
+        gap={[0, 0, "50px"]}
       >
-        <GridItem colSpan={4} mb={[6]}>
+        <GridItem colSpan={[12, 12, 4]} mb={[6]}>
           <Box>
             <Text
               fontWeight="bold"
