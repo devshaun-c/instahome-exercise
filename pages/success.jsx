@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Flex,
-  Progress,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Progress } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "../components/Sections/Section";
 import Page from "../components/Page/Page";
-import { fetchGetJSON } from "../lib/api-helpers";
+import { fetchGetJSON } from "../utils/api-helpers";
 import useSWR from "swr";
-import Navbar from "../components/Navigations/Navbar";
 import PaymentSummary from "../components/Miscellaneous/PaymentSummary";
 
 const useStyles = createUseStyles({});
