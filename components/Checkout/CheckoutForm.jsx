@@ -17,10 +17,15 @@ import getStripe from "../../utils/get-stripe";
 import { quantityDropdown } from "../../constants/dropdowns";
 import PayeeInfoForm from "./PayeeInfoForm";
 import OrderSummary from "./OrderSummary";
-import ParticipantInfoForm from "./ParticipantInfoForm";
+import ParticipantInfoForm from "./ParticipantInfo";
 import Timer from "./Timer";
 import { isMobile, isIOS, isChrome } from "react-device-detect";
-import Spinner from "../Miscellaneous/Spinner";
+import {
+  BsCreditCard,
+  BsChevronRight,
+  BsChevronLeft,
+  BsPlayFill,
+} from "react-icons/bs";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -192,7 +197,16 @@ const CheckoutSummary = (props) => {
                 isLoading={isIOS && isMobile ? false : isLoading}
                 isDisabled={isIOS && isMobile && isLoading}
               >
-                {checkout ? "Checkout" : "Register"}
+                {checkout ? (
+                  <Flex alignItems="center">
+                    <BsCreditCard />
+                    <Text ml={2}>Checkout</Text>
+                  </Flex>
+                ) : (
+                  <Flex alignItems="center">
+                    <Text>Proceed</Text>
+                  </Flex>
+                )}
               </StandardButton>
             </ButtonGroup>
           </Flex>

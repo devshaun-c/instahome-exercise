@@ -51,7 +51,7 @@
 
 ## TO DO
 
-- [ ] Show placeholder cards on page load instantly
+- [x] Show placeholder cards on page load instantly
 - [ ] Mobile issues on iOS
   - [ ] Payment
     - [ ] loading icon bug

@@ -29,7 +29,7 @@ const useStyles = createUseStyles({
     position: "absolute",
     // top: "10%",
     // right: "0",
-    background: "white",
+    background: "transparent",
     borderRadius: "var(--border-radius)",
     // boxShadow: "var(--card-shadow)",
     cursor: "pointer",

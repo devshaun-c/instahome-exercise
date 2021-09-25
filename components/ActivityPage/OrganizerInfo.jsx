@@ -58,7 +58,7 @@ const OrganizerInfo = (props) => {
       alignItems={["center", "start", "start"]}
     >
       <Avatar mr={[0, 6, 6]} size="lg" src={partnerImage} />
-      <Box textAlign="center">
+      <Box textAlign={["center", "start", "start"]}>
         <Text fontSize="sm" fontWeight="bold" mt={[2, 0, 0]}>
           {orgName}
         </Text>
@@ -66,7 +66,11 @@ const OrganizerInfo = (props) => {
           {orgDescription}
         </Text>
 
-        <HStack color="lightgrey" spacing={1} justifyContent="center">
+        <HStack
+          color="lightgrey"
+          spacing={1}
+          justifyContent={["center", "flex-start", "flex-start"]}
+        >
           {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
           {orgContact && (
             <IconButton

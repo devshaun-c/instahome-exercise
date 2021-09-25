@@ -18,7 +18,7 @@ import OverlayModal from "../Page/OverlayModal";
 import InterestForm from "./InterestForm";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useTheme } from "@emotion/react";
-import CheckoutSummary from "../Checkout/CheckoutSummary";
+import CheckoutSummary from "../Checkout/CheckoutForm";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},

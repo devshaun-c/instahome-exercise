@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text, Stack } from "@chakra-ui/react";
+import { Box, Text, Stack, Tooltip } from "@chakra-ui/react";
 import CustomInput from "../Controls/CustomInput";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
 
-const ParticipantInfoForm = (props) => {
+const ParticipantInfo = (props) => {
   const { quantity, participants, handleParticipants, ...others } = props;
 
   useEffect(() => {
     const participantArray = [];
     for (var i = 1; i <= quantity; i++) {
       const info = {
-        firstName: "",
-        lastName: "",
-        contact: "",
-        email: "",
+        pName: "",
+        pContact: "",
+        pEmail: "",
       };
       participantArray.push(info);
     }
@@ -35,37 +35,40 @@ const ParticipantInfoForm = (props) => {
           </Text>
           <Stack direction="row">
             <CustomInput
-              name="firstName"
-              label="First name"
+              name="pName"
+              type="text"
+              label="Name"
               onChange={(e) => handleInputChange(e, index)}
-              value={participant.firstName}
-              placeholder="First name"
-              required
-            />
-            <CustomInput
-              name="lastName"
-              label="Last name"
-              onChange={(e) => handleInputChange(e, index)}
-              value={participant.lastName}
-              placeholder="Last name"
+              value={participant.pName}
+              placeholder="Name"
               required
             />
           </Stack>
           <Box>
             <CustomInput
-              name="contact"
+              name="pContact"
               onChange={(e) => handleInputChange(e, index)}
-              value={participant.contact}
+              value={participant.pContact}
               label="Contact number"
-              placeholder="(555) 555-5555"
+              placeholder="123 456-7890"
               required
             />
             <CustomInput
-              name="email"
+              name="pEmail"
+              type="email"
               onChange={(e) => handleInputChange(e, index)}
-              value={participant.email}
+              value={participant.pEmail}
               label="Email"
-              placeholder="participant@email.com"
+              placeholder="participant@email.com (optional)"
+              rightElement={
+                <Tooltip
+                  hasArrow
+                  closeOnClick={false}
+                  label="A confirmation email will be sent to this participant"
+                >
+                  <QuestionOutlineIcon />
+                </Tooltip>
+              }
             />
           </Box>
         </Box>
@@ -74,4 +77,4 @@ const ParticipantInfoForm = (props) => {
   );
 };
 
-export default ParticipantInfoForm;
+export default ParticipantInfo;

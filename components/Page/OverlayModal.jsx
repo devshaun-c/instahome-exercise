@@ -8,14 +8,26 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import React from "react";
+import { createUseStyles } from "react-jss";
+
+const useStyles = createUseStyles({
+  overlay: {
+    "&::-webkit-scrollbar": {
+      width: 0,
+      background: "transparent",
+    },
+  },
+});
 
 const OverlayModal = (props) => {
+  const classes = useStyles();
   const {
     isOpen,
     handleToggle,
     modalHeader,
     modalBody,
     modalFooter,
+    hasClose = false,
     size = "lg",
   } = props;
 
@@ -36,8 +48,8 @@ const OverlayModal = (props) => {
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
         <ModalHeader boxShadow="var(--card-shadow)">{modalHeader}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>{modalBody}</ModalBody>
+        {hasClose && <ModalCloseButton />}
+        <ModalBody className={classes.overlay}>{modalBody}</ModalBody>
 
         <ModalFooter>{modalFooter}</ModalFooter>
       </ModalContent>

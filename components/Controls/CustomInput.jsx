@@ -29,7 +29,6 @@ const StandardInput = (props) => {
     required,
     onChange,
     value,
-    size = "md",
     type,
     variant,
     placeholder,
@@ -43,7 +42,7 @@ const StandardInput = (props) => {
     ...others
   } = props;
 
-  // const inputSize = useBreakpointValue(["md", "md", "md"]);
+  const inputSize = useBreakpointValue(["md", "sm", "sm"]);
 
   return (
     <FormControl isRequired={required} isInvalid={errorText} mb={label ? 4 : 0}>
@@ -52,7 +51,7 @@ const StandardInput = (props) => {
           {label}
         </FormLabel>
       )}
-      <InputGroup size={size}>
+      <InputGroup size={inputSize}>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
         {leftElement && (
           <InputLeftElement
@@ -63,11 +62,13 @@ const StandardInput = (props) => {
         <Input
           name={name}
           value={value}
+          autocomplete="nope"
           type={type}
           className={classes.root}
           variant={variant}
           placeholder={placeholder}
-          size="md"
+          size={inputSize}
+          fontSize={["md", "xs", "xs"]}
           _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}

@@ -20,6 +20,7 @@ const PayeeInfoForm = (props) => {
       </Text>
       <Stack direction="row">
         <CustomInput
+          type="text"
           name="firstName"
           label="First name"
           placeholder="Bruce"
@@ -28,6 +29,7 @@ const PayeeInfoForm = (props) => {
           required
         />
         <CustomInput
+          type="text"
           name="lastName"
           label="Last name"
           placeholder="Wayne"
@@ -38,6 +40,7 @@ const PayeeInfoForm = (props) => {
       </Stack>
       <Box>
         <CustomInput
+          type="email"
           name="email"
           label="Email"
           placeholder="bruce@batcave.com"

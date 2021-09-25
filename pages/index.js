@@ -19,6 +19,7 @@ import LocationBar from "../components/Miscellaneous/LocationBar";
 import volunteerImg from "../public/static/images/volunteer.svg";
 import workshopImg from "../public/static/images/workshop.svg";
 import { ACTIVITY_CATEGORY, ACTIVITY_TYPE } from "../constants/activity";
+import ActivitiesPlaceholder from "../components/Sections/ActivitesPlaceholder";
 
 const useStyles = createUseStyles({
   home: {
@@ -109,32 +110,38 @@ const Home = (props) => {
         <LocationBar />
         {/* <Featured list={temporaryFeatured} /> */}
 
-        {workshops.length > 0 && (
-          <ActivitiesBucket
-            tag="WORKSHOPS"
-            height="100%"
-            header="Develop Your Skills, Discover New Hobbies"
-            list={workshops}
-            categoryDetails={{
-              topic: "Ideas for workshops?",
-              image: workshopImg,
-              activityType: ACTIVITY_CATEGORY.workshop,
-            }}
-          />
-        )}
+        {workshops.length > 0 && communityEvents.length > 0 ? (
+          <>
+            {workshops.length > 0 && (
+              <ActivitiesBucket
+                tag="WORKSHOPS"
+                height="100%"
+                header="Develop Your Skills, Discover New Hobbies"
+                list={workshops}
+                categoryDetails={{
+                  topic: "Ideas for workshops?",
+                  image: workshopImg,
+                  activityType: ACTIVITY_CATEGORY.workshop,
+                }}
+              />
+            )}
 
-        {communityEvents.length > 0 && (
-          <ActivitiesBucket
-            tag="COMMUNITY EVENTS"
-            height="100%"
-            header="Volunteer, Bring Positive Change"
-            list={communityEvents}
-            categoryDetails={{
-              topic: "Ideas for community events?",
-              image: volunteerImg,
-              activityType: ACTIVITY_CATEGORY.community,
-            }}
-          />
+            {communityEvents.length > 0 && (
+              <ActivitiesBucket
+                tag="COMMUNITY EVENTS"
+                height="100%"
+                header="Volunteer, Bring Positive Change"
+                list={communityEvents}
+                categoryDetails={{
+                  topic: "Ideas for community events?",
+                  image: volunteerImg,
+                  activityType: ACTIVITY_CATEGORY.community,
+                }}
+              />
+            )}
+          </>
+        ) : (
+          <ActivitiesPlaceholder />
         )}
 
         {/* <CardCarouselSection
