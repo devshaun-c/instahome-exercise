@@ -5,7 +5,8 @@ import {
   Flex,
   ButtonGroup,
   Stack,
-  CircularProgress,
+  Divider,
+  Progress,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import CustomSelect from "../Controls/CustomSelect";
@@ -146,51 +147,55 @@ const CheckoutSummary = (props) => {
 
         <Flex
           position="absolute"
+          flexDirection="column"
           bottom="0"
           left="0"
           bg="white"
           w="100%"
           p="16px 32px"
-          borderTop="1px solid whitesmoke"
           borderRadius="0 0 var(--border-radius) var(--border-radius)"
-          justifyContent="space-between"
-          alignItems="center"
         >
-          <Box fontSize="sm" fontWeight="bold">
-            {checkout && (
-              <Stack direction="row">
-                <Text fontWeight="normal">Time left:</Text>
-                <Timer
-                  initialMinute={8}
-                  initialSeconds={0}
-                  handleTimesup={() => setCheckout(false)}
-                />
-              </Stack>
-            )}
-          </Box>
+          {isIOS && isMobile && isLoading ? (
+            <Box w="100%" mb={4}>
+              <Progress size="xs" isIndeterminate colorScheme="brand" />
+            </Box>
+          ) : (
+            <Divider color="whitesmoke" mb={4} />
+          )}
+          <Flex justifyContent="space-between" alignItems="center">
+            <Box fontSize="sm" fontWeight="bold">
+              {checkout && (
+                <Stack direction="row">
+                  <Text fontWeight="normal">Time left:</Text>
+                  <Timer
+                    initialMinute={8}
+                    initialSeconds={0}
+                    handleTimesup={() => setCheckout(false)}
+                  />
+                </Stack>
+              )}
+            </Box>
 
-          <ButtonGroup>
-            <StandardButton
-              variant="outline"
-              colorScheme="brand"
-              onClick={() => {
-                checkout ? setCheckout(false) : handleToggle(false);
-              }}
-            >
-              {checkout ? "Back" : "Cancel"}
-            </StandardButton>
-            <StandardButton
-              colorScheme="brand"
-              type="submit"
-              isDisabled={isLoading}
-            >
-              {isLoading && <Spinner size="sm" />}
-              <Text visibility={isLoading ? "hidden" : "visible"}>
+            <ButtonGroup>
+              <StandardButton
+                variant="outline"
+                colorScheme="brand"
+                onClick={() => {
+                  checkout ? setCheckout(false) : handleToggle(false);
+                }}
+              >
+                {checkout ? "Back" : "Cancel"}
+              </StandardButton>
+              <StandardButton
+                colorScheme="brand"
+                type="submit"
+                isLoading={isIOS && isMobile ? false : isLoading}
+                isDisabled={isIOS && isMobile && isLoading}
+              >
                 {checkout ? "Checkout" : "Register"}
-              </Text>
-            </StandardButton>
-          </ButtonGroup>
-          <CircularProgress isIndeterminate />
+              </StandardButton>
+            </ButtonGroup>
+          </Flex>
         </Flex>
       </Flex>
     </form>
