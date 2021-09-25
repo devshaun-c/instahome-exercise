@@ -1,4 +1,4 @@
-import { GetSpecificDocFromFirebase } from "../../../lib/firebase";
+import { GetSpecificDocFromFirebase } from "../../../utils/firebase";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
