@@ -1,7 +1,7 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import getStripe from "../lib/get-stripe";
-import { fetchPostJSON } from "../lib/api-helpers";
+import getStripe from "../utils/get-stripe";
+import { fetchPostJSON } from "../utils/api-helpers";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

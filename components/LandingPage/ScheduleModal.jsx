@@ -16,8 +16,11 @@ import {
 import { createUseStyles } from "react-jss";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { GetAllPartnerSchedules } from "../../lib/firebase";
-import { convertFirebaseTimestamp, GetTimeSummary } from "../../lib/utils";
+import { GetAllPartnerSchedules } from "../../utils/firebase";
+import {
+  convertFirebaseTimestamp,
+  GetTimeSummary,
+} from "../../utils/functions";
 import { CalendarIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
@@ -35,12 +38,18 @@ const useStyles = createUseStyles({
 
 const ScheduleModal = (props) => {
   const classes = useStyles();
-  const { isOpen, handleToggle, activity } = props;
+  const { isOpen, handleToggle, showClose = true, activity } = props;
   const [schedules, setSchedules] = useState([]);
   const [noDates, setNoDates] = useState(false);
 
-  const { activityName, activityId, partnerId, defaultPrice, locationMaps } =
-    activity;
+  const {
+    activityName,
+    activityId,
+    orgName,
+    partnerId,
+    defaultPrice,
+    locationMaps,
+  } = activity;
 
   const url = `activity/${partnerId}/${activityId}`;
 
@@ -54,9 +63,15 @@ const ScheduleModal = (props) => {
     async function GetActiveSchedules() {
       const scheduleFromDb = await GetAllPartnerSchedules(
         partnerId,
-        activityId
+        activityId,
+        5
       );
       if (scheduleFromDb) {
+        if (scheduleFromDb > 4) {
+          //Removes the 5th element so that we can show "More dates available"
+          //Only 4 elements will be shown at Modal
+          scheduleFromDb.pop();
+        }
         setSchedules(scheduleFromDb);
       } else {
         setNoDates(true);
@@ -70,32 +85,37 @@ const ScheduleModal = (props) => {
   };
 
   return (
-    <Modal blockScrollOnMount={true} isOpen={isOpen} onClose={closeModal}>
+    <Modal
+      blockScrollOnMount={true}
+      isOpen={isOpen}
+      onClose={closeModal}
+      trapFocus={false}
+    >
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
         <ModalHeader>
           <Text>{activityName}</Text>
         </ModalHeader>
-        <ModalCloseButton />
+        {showClose && <ModalCloseButton />}
         <ModalBody>
           <Box mb={8}>
             <Flex mb={1}>
-              <Text fontSize="xs" width="30%">
+              <Text fontSize={["md", "xs", "xs"]} width="50%">
                 Organizer
               </Text>
-              <Text fontSize="xs">{partnerId}</Text>
+              <Text fontSize={["md", "xs", "xs"]}>{orgName}</Text>
             </Flex>
             <Flex mb={1}>
-              <Text fontSize="xs" width="30%">
+              <Text fontSize={["md", "xs", "xs"]} width="50%">
                 Price
               </Text>
-              <Text fontSize="xs">{`RM ${defaultPrice}`}</Text>
+              <Text fontSize={["md", "xs", "xs"]}>{`RM ${defaultPrice}`}</Text>
             </Flex>
             <Flex mb={1}>
-              <Text fontSize="xs" width="30%">
+              <Text fontSize={["md", "xs", "xs"]} width="50%">
                 Location
               </Text>
-              <Text fontSize="xs">{locationMaps}</Text>
+              <Text fontSize={["md", "xs", "xs"]}>{locationMaps}</Text>
             </Flex>
           </Box>
 
@@ -144,6 +164,11 @@ const ScheduleModal = (props) => {
                   </Text>
                 </Flex>
               ))}
+              {schedules.length > 0 && (
+                <Text textAlign="center" mt={4} fontSize={["md", "sm", "sm"]}>
+                  More dates available
+                </Text>
+              )}
             </Box>
           ) : noDates ? (
             <Text fontSize="sm" mt={4}>

@@ -1,16 +1,19 @@
 import React from "react";
-import { Avatar, Box, HStack, IconButton, Link, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  HStack,
+  IconButton,
+  Link,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { FaHome, FaWhatsapp } from "react-icons/fa";
 import { BsEnvelope } from "react-icons/bs";
-import { GetClickableLink } from "../../lib/utils";
+import { GetClickableLink } from "../../utils/functions";
 
-const useStyles = createUseStyles({
-  organizerInfo: {
-    display: "flex",
-    flexDirection: "row",
-  },
-});
+const useStyles = createUseStyles({});
 
 const OrganizerInfo = (props) => {
   const classes = useStyles();
@@ -49,17 +52,21 @@ const OrganizerInfo = (props) => {
   };
 
   return (
-    <Box {...others} className={classes.organizerInfo}>
-      <Avatar mr={6} size="lg" src={partnerImage} />
-      <Box>
-        <Text fontSize="sm" fontWeight="bold">
+    <Flex
+      {...others}
+      flexDirection={["column", "row", "row"]}
+      alignItems={["center", "start", "start"]}
+    >
+      <Avatar mr={[0, 6, 6]} size="lg" src={partnerImage} />
+      <Box textAlign="center">
+        <Text fontSize="sm" fontWeight="bold" mt={[2, 0, 0]}>
           {orgName}
         </Text>
         <Text fontSize="xs" mt={1} mb={2}>
           {orgDescription}
         </Text>
 
-        <HStack color="lightgrey" spacing={1}>
+        <HStack color="lightgrey" spacing={1} justifyContent="center">
           {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
           {orgContact && (
             <IconButton
@@ -81,7 +88,7 @@ const OrganizerInfo = (props) => {
           )}
         </HStack>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

@@ -188,6 +188,7 @@ const ActivityCard = (props) => {
       </Box>
 
       <ScheduleModal
+        showClose={false}
         isOpen={scheduleOpen}
         handleToggle={setScheduleOpen}
         activity={activity}

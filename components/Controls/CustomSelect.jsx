@@ -34,7 +34,8 @@ const CustomSelect = (props) => {
         options={options}
         value={value}
         defaultValue={defaultValue}
-        fontSize="xs"
+        // fontSize="md"
+        size="md"
         {...params}
       >
         {options.map((option) => (

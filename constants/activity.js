@@ -10,65 +10,67 @@ export const ACTIVITY_CATEGORY = {
 };
 
 export const getActivityTypeCollection = () => [
-  { id: ACTIVITY_TYPE.inPerson, title: "In person" },
-  { id: ACTIVITY_TYPE.online, title: "Online" },
+  { value: ACTIVITY_TYPE.inPerson, label: "In person" },
+  { value: ACTIVITY_TYPE.online, label: "Online" },
 ];
 
 export const getCategoryCollection = () => [
-  { id: 1, title: "Event" },
-  { id: 2, title: "Workshop" },
-  { id: 3, title: "Community" },
+  { value: 1, label: "Event" },
+  { value: 2, label: "Workshop" },
+  { value: 3, label: "Community" },
 ];
 
-export const getCityCollection = () => [
-  { id: "KL", title: "Kuala Lumpur" },
-  { id: "SGR", title: "Selangor" },
-  { id: "PNG", title: "Penang" },
-  { id: "JHR", title: "Johor" },
+export const getAreaCollection = () => [
+  { value: "SGR", label: "Selangor" },
+  { value: "KL", label: "Kuala Lumpur" },
+  { value: "PJ", label: "Putrajaya" },
+  { value: "PNG", label: "Penang" },
+  { value: "JHR", label: "Johor" },
+  { value: "Others", label: "Others" },
 ];
 
 export const getCountryCollection = () => [
-  { id: "MY", title: "Malaysia" },
-  { id: "SG", title: "Singapore" },
-  { id: "IN", title: "Indonesia" },
+  { value: "MY", label: "Malaysia" },
+  { value: "SG", label: "Singapore" },
+  { value: "IN", label: "Indonesia" },
 ];
 
 export const getTagCollection = () => [
-  { id: 1, title: "Arts & Craft" },
-  { id: 2, title: "Volunteer" },
-  { id: 3, title: "Nature" },
-  { id: 4, title: "Entrepreneurship" },
-  { id: 5, title: "Networking" },
-  { id: 6, title: "Language" },
-  { id: 7, title: "Business" },
-  { id: 8, title: "Badminton" },
-  { id: 9, title: "DIY" },
-  { id: 10, title: "e-Sports" },
+  { value: 1, label: "Arts & Craft" },
+  { value: 2, label: "Volunteer" },
+  { value: 3, label: "Nature" },
+  { value: 4, label: "Entrepreneurship" },
+  { value: 5, label: "Networking" },
+  { value: 6, label: "Language" },
+  { value: 7, label: "Business" },
+  { value: 8, label: "Badminton" },
+  { value: 9, label: "DIY" },
+  { value: 10, label: "e-Sports" },
 ];
 
 export const getCategory = (category) => {
   var categories = getCategoryCollection();
   var selectedCategory = categories.filter((obj) => {
-    return obj.id == category;
+    return obj.value == category;
   });
 
-  return selectedCategory[0].title;
+  return selectedCategory[0].label;
 };
 
 export const getActivityType = (type) => {
   var typeList = getActivityTypeCollection();
   var selectedType = typeList.filter((obj) => {
-    return obj.id == type;
+    return obj.value == type;
   });
 
-  return selectedType[0].title;
+  return selectedType[0].label;
 };
 
 export const getTags = (tag) => {
   var tagList = getTagCollection();
   var selected = tagList.filter((obj) => {
-    return obj.id == tag;
+    return obj.value == tag;
   });
 
-  return selected[0].title;
+  return selected[0].label;
 };

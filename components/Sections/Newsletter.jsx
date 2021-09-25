@@ -33,7 +33,7 @@ const Newsletter = (props) => {
       >
         <Box width={["100%", "100%", "60%"]}>
           <Heading w="90%">Get involved. Stay active.</Heading>
-          <Text mt={[4, 6, 8]} fontSize={["sm", "sm", "md"]}>
+          <Text mt={[4, 6, 8]} fontSize={["md", "sm", "md"]}>
             Join our newsletter to stay updated on upcoming workshops, events,
             and community activities in Kuala Lumpur, Selangor and more to come!
           </Text>
@@ -58,7 +58,7 @@ const Newsletter = (props) => {
             colorScheme="teal"
             w={["100%", "100%", "60%"]}
           >
-            Subscribe
+            Join the community!
           </StandardButton>
         </Box>
       </Box>

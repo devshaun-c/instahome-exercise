@@ -51,16 +51,6 @@
 
 ## TO DO
 
-- [ ] Mobile responsive
-  - [ ] Landing page
-    - [x] Separation between sections
-    - [x] Hero
-    - [ ] Schedule modal
-    - [x] Activity card mobile version
-    - [x] Navbar bug
-    - [x] Navbar menu issue
-    - [x] Footer mobile grid issue
-  - [ ] Activity page
 - [ ] Get Activities based on Category
   - [ ] Workshops
   - [ ] Community events
@@ -79,6 +69,19 @@
   - [ ] Get notified if there's new activities
 
 ## Done
+
+> 25/9/2021
+
+- [x] Mobile responsive
+  - [x] Activity page
+  - [x] Landing page
+    - [x] Separation between sections
+    - [x] Hero
+    - [x] Schedule modal
+    - [x] Activity card mobile version
+    - [x] Navbar bug
+    - [x] Navbar menu issue
+    - [x] Footer mobile grid issue
 
 > 21/9/2021
 

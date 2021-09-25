@@ -9,8 +9,8 @@ import {
   GetClickableLink,
   GetTimeSummary,
   SortByDate,
-} from "../../lib/utils";
-import { GetAllPartnerSchedules } from "../../lib/firebase.js";
+} from "../../utils/functions";
+import { GetAllPartnerSchedules } from "../../utils/firebase.js";
 import StandardButton from "../Buttons/StandardButton";
 import TextButton from "../Buttons/TextButton.jsx";
 import CustomSelect from "../Controls/CustomSelect.jsx";
@@ -85,22 +85,23 @@ const ScheduleBooking = (props) => {
   }
 
   const handleSelectDate = async (e) => {
-    const selectedDate = e.target.selectedOptions[0].text;
-    const selectedId = e.target.value;
+    if (e.target.value) {
+      const selectedId = e.target.value;
 
-    const scheduleInfo = allSchedules.find(
-      (schedule) => schedule.scheduleId === selectedId
-    );
-    const { scheduledStartDate, scheduledEndDate } = scheduleInfo;
+      const scheduleInfo = allSchedules.find(
+        (schedule) => schedule.scheduleId === selectedId
+      );
+      const { scheduledStartDate, scheduledEndDate } = scheduleInfo;
 
-    const date = ConvertToDayDate(scheduledStartDate);
-    const time = GetTimeSummary(scheduledStartDate, scheduledEndDate);
+      const date = ConvertToDayDate(scheduledStartDate);
+      const time = GetTimeSummary(scheduledStartDate, scheduledEndDate);
 
-    setNoSelect(false);
-    if (selectedId) {
-      setSelectedDate({ scheduleId: selectedId, date, time });
-    } else {
-      setSelectedDate(null);
+      setNoSelect(false);
+      if (selectedId) {
+        setSelectedDate({ scheduleId: selectedId, date, time });
+      } else {
+        setSelectedDate(null);
+      }
     }
   };
 
@@ -182,6 +183,7 @@ const ScheduleBooking = (props) => {
               return (
                 <Flex
                   key={index}
+                  flexDirection={["column", "row", "row"]}
                   justify="space-between"
                   fontSize="sm"
                   w="100%"
@@ -189,8 +191,8 @@ const ScheduleBooking = (props) => {
                 >
                   <Box>
                     {isAnotherDay && (
-                      <>
-                        <Text fontWeight="bold">
+                      <Flex flexDirection={["row", "column", "column"]}>
+                        <Text fontWeight="bold" mr={[2, 0, 0]}>
                           {moment(
                             convertFirebaseTimestamp(
                               schedule.scheduledStartDate
@@ -204,7 +206,7 @@ const ScheduleBooking = (props) => {
                             )
                           ).format("D MMM, YYYY")}
                         </Text>
-                      </>
+                      </Flex>
                     )}
                   </Box>
                   <Box>

@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 import img1 from "../../public/static/images/placeholder.png";
 import Image from "next/image";
 
@@ -52,7 +52,7 @@ const ImageCarousel = (props) => {
     <Box className={classes.imageCarousel} {...others}>
       <Carousel {...getConfigurableProps()}>
         {images.map((img, index) => (
-          <Box key={index}>
+          <Box key={index} borderRadius="8px 8px 0 0" overflow="hidden">
             {isLoading && (
               <Flex height="400px" justifyContent="center" alignItems="center">
                 <CircularProgress
@@ -72,7 +72,6 @@ const ImageCarousel = (props) => {
               alt={img.name}
               style={{
                 maxHeight: "400px",
-                borderRadius: "8px 8px 0 0",
               }}
               onLoad={() => setIsLoading(false)}
             />

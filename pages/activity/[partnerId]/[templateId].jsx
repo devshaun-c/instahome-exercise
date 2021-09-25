@@ -11,7 +11,7 @@ import {
   GetSpecificDocFromFirebase,
   GetAllPartnerSchedules,
   GetAllPartnerActivities,
-} from "../../../lib/firebase";
+} from "../../../utils/firebase";
 import Header from "../../../components/ActivityPage/Header";
 import ImageCarousel from "../../../components/ActivityPage/ImageCarousel";
 import AboutActivity from "../../../components/ActivityPage/AboutActivity";
@@ -22,6 +22,7 @@ import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 import ActivityCard from "../../../components/Cards/ActivityCard";
+import { getCategory } from "../../../constants/activity";
 
 const useStyles = createUseStyles({
   participantSection: {
@@ -92,13 +93,20 @@ const ActivityPage = (props) => {
         title: `${activityName} | AfterWork`,
         description: shortSummary,
       }}
-      alwaysShowNav
+      alwaysVisible
     >
       {activityName !== "Activity Not Found" ? (
         <Section fullView={false} bgColor="#F9F9F9">
           <Header mb={6} title={activityName} type={activityDetails.category} />
-          <Grid templateColumns="repeat(5, 1fr)" gap="56px">
-            <GridItem colSpan={3}>
+          <Grid
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(1, 1fr)",
+              "repeat(5, 1fr)",
+            ]}
+            gap={[0, 0, "56px"]}
+          >
+            <GridItem colSpan={[5, 5, 3]}>
               <ImageCarousel info={activityDetails} />
               {activityDetails.conductorName && (
                 <Paper mt={4}>
@@ -112,7 +120,7 @@ const ActivityPage = (props) => {
               <AboutActivity aboutActivity={aboutActivity} mt={4} />
             </GridItem>
 
-            <GridItem colSpan={2}>
+            <GridItem colSpan={[5, 5, 2]}>
               <Paper>
                 <ShareBar url={url} mb={8} />
                 <ActivityDetails activityDetails={activityDetails} />
@@ -138,9 +146,9 @@ const ActivityPage = (props) => {
       )}
       {otherPartnerActivities.length > 0 && (
         <CardCarouselSection
-          tag="MORE ACTIVITIES"
+          tag={getCategory(activityDetails.category)}
           height="100%"
-          header={`Check out more activities by ${orgName}`}
+          header={`Check out more by ${orgName}`}
           pagination={otherPartnerActivities.length > 4 ? true : false}
           grabCursor={otherPartnerActivities.length > 4 ? true : false}
           enabled={otherPartnerActivities.length > 1 ? true : false}

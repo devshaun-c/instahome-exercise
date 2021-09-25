@@ -8,7 +8,7 @@ import {
   BsPersonCheck,
   BsGeo,
 } from "react-icons/bs";
-import { GetDurationText } from "../../lib/utils";
+import { GetDurationText } from "../../utils/functions";
 
 const useStyles = createUseStyles({
   activityDetails: {},

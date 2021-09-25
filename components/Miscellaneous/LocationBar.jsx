@@ -17,6 +17,11 @@ import { BsGeoAlt } from "react-icons/bs";
 import AutosizeInput from "react-input-autosize";
 import LocationSelect from "../Controls/LocationSelect";
 import Container from "../Page/Container";
+import NotificationModal from "../LandingPage/NotificationModal";
+import CustomInput from "../Controls/CustomInput";
+import CustomSelect from "../Controls/CustomSelect";
+import { getAreaCollection } from "../../constants/activity";
+import StandardButton from "../Buttons/StandardButton";
 
 const useStyles = createUseStyles({
   locationWrapper: {},
@@ -37,6 +42,7 @@ const LocationBar = (props) => {
   const classes = useStyles(props);
   const {} = props;
   const [location, setLocation] = useState("SGR");
+  const [showNotification, setShowNotification] = useState(false);
 
   return (
     <Container>
@@ -66,6 +72,7 @@ const LocationBar = (props) => {
                 fontWeight="bold"
                 ml={2}
                 textDecoration="underline"
+                onClick={() => setShowNotification(true)}
               >
                 Selangor
               </Text>
@@ -73,6 +80,26 @@ const LocationBar = (props) => {
           </Box>
         </Tooltip>
       </Flex>
+      <NotificationModal
+        handleToggle={setShowNotification}
+        hasClose={false}
+        isOpen={showNotification}
+        modalBody={
+          <Box p={["16px 0", 4, 4]}>
+            <Text fontSize="lg" textAlign="center" fontWeight="bold" mb={8}>
+              More locations coming soon!
+            </Text>
+            <Text textAlign="center" mb={[2, 4, 4]}>
+              We will be expanding to other cities in Malaysia and beyond. Sign
+              up to our newsletter to get notified.
+            </Text>
+            <CustomInput placeholder="Email" mb={2} />
+            <StandardButton colorScheme="brand" isFullWidth>
+              Join the community!
+            </StandardButton>
+          </Box>
+        }
+      />
     </Container>
   );
 };

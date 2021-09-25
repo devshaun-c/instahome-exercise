@@ -11,7 +11,7 @@ import { createUseStyles } from "react-jss";
 import StandardButton from "../Buttons/StandardButton";
 import CustomSelect from "../Controls/CustomSelect.jsx";
 import CustomInput from "../Controls/CustomInput.jsx";
-import { CreateNewInterest, SignUpWithPopup } from "../../lib/firebase";
+import { CreateNewInterest, SignUpWithPopup } from "../../utils/firebase";
 
 const useStyles = createUseStyles({});
 

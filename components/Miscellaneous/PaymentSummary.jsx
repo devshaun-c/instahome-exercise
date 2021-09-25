@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import { ConvertEpochToDate } from "../../lib/utils";
+import { ConvertEpochToDate } from "../../utils/functions";
 import ReactToPrint from "react-to-print";
 import { useRouter } from "next/router";
 

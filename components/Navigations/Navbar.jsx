@@ -203,8 +203,8 @@ const Navbar = (props) => {
                 bg="white"
                 pb={4}
               >
-                {navList.map((item) => (
-                  <AccordionItem>
+                {navList.map((item, index) => (
+                  <AccordionItem key={index}>
                     <AccordionButton
                       _expanded={{ background: "gray.100" }}
                       _focus={{ outline: "none" }}
@@ -220,8 +220,9 @@ const Navbar = (props) => {
                     </AccordionButton>
                     <AccordionPanel p={0} bg="white">
                       <Flex flexDirection="column">
-                        {item.items.map((subItem) => (
+                        {item.items.map((subItem, index) => (
                           <Button
+                            key={index}
                             variant="unstyled"
                             textAlign="left"
                             fontSize="sm"
