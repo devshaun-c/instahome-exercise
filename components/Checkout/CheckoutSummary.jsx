@@ -12,6 +12,7 @@ import OrderSummary from "./OrderSummary";
 import ParticipantInfoForm from "./ParticipantInfoForm";
 import Timer from "./Timer";
 import { isMobile, isIOS, isChrome } from "react-device-detect";
+import Spinner from "../Miscellaneous/Spinner";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -86,10 +87,10 @@ const CheckoutSummary = (props) => {
   const handleRegister = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // setTimeout(() => {
-    //   setCheckout(true);
-    //   setIsLoading(false);
-    // }, 1000);
+    setTimeout(() => {
+      setCheckout(true);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
@@ -174,9 +175,12 @@ const CheckoutSummary = (props) => {
             <StandardButton
               colorScheme="brand"
               type="submit"
-              isLoading={isLoading}
+              isDisabled={isLoading}
             >
-              {checkout ? "Checkout" : "Register"}
+              {isLoading && <Spinner size="sm" />}
+              <Text visibility={isLoading ? "hidden" : "visible"}>
+                {checkout ? "Checkout" : "Register"}
+              </Text>
             </StandardButton>
           </ButtonGroup>
         </Flex>
