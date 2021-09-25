@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, ButtonGroup, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  ButtonGroup,
+  Stack,
+  CircularProgress,
+} from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import CustomSelect from "../Controls/CustomSelect";
 import StandardButton from "../Buttons/StandardButton";
@@ -183,6 +190,7 @@ const CheckoutSummary = (props) => {
               </Text>
             </StandardButton>
           </ButtonGroup>
+          <CircularProgress isIndeterminate />
         </Flex>
       </Flex>
     </form>

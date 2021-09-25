@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     animation: "loading-bar-spinner 400ms linear infinite",
   },
   spinnerIcon: {
-    border: "solid 4px transparent",
+    border: "solid 2px transparent",
     borderRadius: "50%",
   },
 });
