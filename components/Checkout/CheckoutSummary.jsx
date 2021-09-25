@@ -71,7 +71,6 @@ const CheckoutSummary = (props) => {
     });
 
     if (response.statusCode === 500) {
-      console.log(response.message);
       setIsLoading(false);
       return;
     }
@@ -81,8 +80,6 @@ const CheckoutSummary = (props) => {
     const { error } = await stripe.redirectToCheckout({
       sessionId: response.id,
     });
-
-    console.log(error.message);
   };
 
   const handleRegister = (e) => {
@@ -173,11 +170,7 @@ const CheckoutSummary = (props) => {
             >
               {checkout ? "Back" : "Cancel"}
             </StandardButton>
-            <StandardButton
-              colorScheme="brand"
-              type="submit"
-              isLoading={isLoading}
-            >
+            <StandardButton colorScheme="brand" type="submit" isLoading={true}>
               {checkout ? "Checkout" : "Register"}
             </StandardButton>
           </ButtonGroup>

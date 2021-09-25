@@ -51,6 +51,14 @@
 
 ## TO DO
 
+- [ ] Mobile issues on iOS
+  - [ ] Payment
+    - [ ] loading icon bug
+    - [ ] Number of participant issue
+    - [ ] Success page mobile
+  - [ ] Sharing
+    - [ ] Don't open new window if mobile
+  - [ ] React-responsive-carousel bug on iOS
 - [ ] Get Activities based on Category
   - [ ] Workshops
   - [ ] Community events

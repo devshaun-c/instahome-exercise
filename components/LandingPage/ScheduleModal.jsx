@@ -9,7 +9,6 @@ import {
   Text,
   Box,
   Flex,
-  Button,
   Link,
   Progress,
 } from "@chakra-ui/react";
@@ -41,6 +40,7 @@ const ScheduleModal = (props) => {
   const { isOpen, handleToggle, showClose = true, activity } = props;
   const [schedules, setSchedules] = useState([]);
   const [noDates, setNoDates] = useState(false);
+  const [showHasMore, setShowHasMore] = useState(false);
 
   const {
     activityName,
@@ -64,13 +64,14 @@ const ScheduleModal = (props) => {
       const scheduleFromDb = await GetAllPartnerSchedules(
         partnerId,
         activityId,
-        5
+        6
       );
       if (scheduleFromDb) {
-        if (scheduleFromDb > 4) {
-          //Removes the 5th element so that we can show "More dates available"
-          //Only 4 elements will be shown at Modal
+        if (scheduleFromDb > 6) {
+          //Removes the 6th element so that we can show "More dates available"
+          //Only 5 elements will be shown at Modal
           scheduleFromDb.pop();
+          setShowHasMore(true);
         }
         setSchedules(scheduleFromDb);
       } else {
@@ -164,7 +165,7 @@ const ScheduleModal = (props) => {
                   </Text>
                 </Flex>
               ))}
-              {schedules.length > 0 && (
+              {showHasMore && (
                 <Text textAlign="center" mt={4} fontSize={["md", "sm", "sm"]}>
                   More dates available
                 </Text>

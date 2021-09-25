@@ -14,12 +14,6 @@ const useStyles = createUseStyles({
   activityDetails: {},
 });
 
-const searchGoogle = (e) => {
-  e.preventDefault();
-  const term = "SS18/3e";
-  window.open("//" + "google.com/search?q=" + term, "_blank");
-};
-
 const ActivityDetails = (props) => {
   const classes = useStyles();
   const { activityDetails, ...others } = props;
