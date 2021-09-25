@@ -11,6 +11,7 @@ import PayeeInfoForm from "./PayeeInfoForm";
 import OrderSummary from "./OrderSummary";
 import ParticipantInfoForm from "./ParticipantInfoForm";
 import Timer from "./Timer";
+import { isMobile, isIOS, isChrome } from "react-device-detect";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -85,10 +86,10 @@ const CheckoutSummary = (props) => {
   const handleRegister = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setCheckout(true);
-      setIsLoading(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   setCheckout(true);
+    //   setIsLoading(false);
+    // }, 1000);
   };
 
   return (
@@ -170,7 +171,11 @@ const CheckoutSummary = (props) => {
             >
               {checkout ? "Back" : "Cancel"}
             </StandardButton>
-            <StandardButton colorScheme="brand" type="submit" isLoading={true}>
+            <StandardButton
+              colorScheme="brand"
+              type="submit"
+              isLoading={isLoading}
+            >
               {checkout ? "Checkout" : "Register"}
             </StandardButton>
           </ButtonGroup>

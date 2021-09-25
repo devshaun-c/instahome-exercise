@@ -31,6 +31,7 @@ const OverlayModal = (props) => {
       size={size}
       scrollBehavior="inside"
       position="relative"
+      trapFocus={false}
     >
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
