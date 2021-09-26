@@ -15,7 +15,7 @@ const useStyles = createUseStyles({
       "linear-gradient(rgba(255,255,255,0.4) 100%,rgba(255,255,255,0) 100%)",
     backgroundRepeat: "repeat-y",
     backgroundPosition: "-5000px 0",
-    animation: "shimmerBackground 1.5s linear infinite",
+    animation: "shimmerBackground 2s linear infinite",
   },
 });
 

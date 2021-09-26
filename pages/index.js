@@ -20,6 +20,8 @@ import volunteerImg from "../public/static/images/volunteer.svg";
 import workshopImg from "../public/static/images/workshop.svg";
 import { ACTIVITY_CATEGORY, ACTIVITY_TYPE } from "../constants/activity";
 import ActivitiesPlaceholder from "../components/Sections/ActivitesPlaceholder";
+import TabsPanel from "../components/Grouping/TabsPanel";
+import StickyBox from "../components/Page/StickyBox";
 
 const useStyles = createUseStyles({
   home: {
@@ -79,21 +81,19 @@ const temporaryFeatured = [
 const Home = (props) => {
   const classes = useStyles();
   const router = useRouter();
-  const [activities, setActivities] = useState([]);
   const [workshops, setWorkshops] = useState([]);
-  const [communityEvents, setCommunityEvents] = useState([]);
+  const [communityActivities, setCommunityActivities] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const activitiesFromServer = JSON.parse(props.activities);
   const partnersFromServer = JSON.parse(props.partners);
 
   useEffect(() => {
     if (activitiesFromServer.length) {
-      setActivities(activitiesFromServer);
-      setWorkshops([
-        ...shuffle(activitiesFromServer),
-        ...shuffle(activitiesFromServer),
-      ]);
-      setCommunityEvents([...shuffle(activitiesFromServer)]);
+      setWorkshops([...shuffle(activitiesFromServer)]);
+      setCommunityActivities([...shuffle(activitiesFromServer)]);
+      setEvents([...shuffle(activitiesFromServer)]);
     }
   }, []);
 
@@ -107,61 +107,69 @@ const Home = (props) => {
       <div className={classes.home}>
         <Hero />
 
-        <LocationBar />
-        {/* <Featured list={temporaryFeatured} /> */}
-
-        <CardCarouselSection
-          tag="UPCOMING EVENTS"
-          height="100%"
-          header="Don't miss out on these exciting events"
-        >
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tomi Workshop"
-              image={img}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Art Matrix"
-              image={img2}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tomi Workshop"
-              image={img}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Art Matrix"
-              image={img2}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tomi Workshop"
-              image={img}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Art Matrix"
-              image={img2}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-        </CardCarouselSection>
-
-        {workshops.length > 0 && communityEvents.length > 0 ? (
+        {workshops.length > 0 ||
+        communityActivities.length > 0 ||
+        events.length > 0 ? (
           <>
-            {workshops.length > 0 && (
+            <LocationBar />
+            {/* <Featured list={temporaryFeatured} /> */}
+
+            <StickyBox onTopAll>
+              <TabsPanel handleTabChange={setTabIndex} />
+            </StickyBox>
+
+            {(tabIndex == 0 || tabIndex == 1) && events.length > 0 && (
+              <CardCarouselSection
+                tag="UPCOMING EVENTS"
+                height="100%"
+                header="Don't miss out on these exciting events"
+              >
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Tomi Workshop"
+                    image={img}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Art Matrix"
+                    image={img2}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Tomi Workshop"
+                    image={img}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Art Matrix"
+                    image={img2}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Tomi Workshop"
+                    image={img}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+                <SwiperSlide className={classes.swiperSlide}>
+                  <VerticalImageCard
+                    title="Art Matrix"
+                    image={img2}
+                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+                  />
+                </SwiperSlide>
+              </CardCarouselSection>
+            )}
+
+            {(tabIndex == 0 || tabIndex == 2) && workshops.length > 0 && (
               <ActivitiesBucket
                 tag="WORKSHOPS"
                 height="100%"
@@ -175,80 +183,24 @@ const Home = (props) => {
               />
             )}
 
-            {communityEvents.length > 0 && (
-              <ActivitiesBucket
-                tag="COMMUNITY ACTIVITIES"
-                height="100%"
-                header="Volunteer, Bring Positive Change"
-                list={communityEvents}
-                categoryDetails={{
-                  topic: "Have great ideas for community activities?",
-                  image: volunteerImg,
-                  activityType: ACTIVITY_CATEGORY.community,
-                }}
-              />
-            )}
+            {(tabIndex == 0 || tabIndex == 3) &&
+              communityActivities.length > 0 && (
+                <ActivitiesBucket
+                  tag="COMMUNITY ACTIVITIES"
+                  height="100%"
+                  header="Volunteer, Bring Positive Change"
+                  list={communityActivities}
+                  categoryDetails={{
+                    topic: "Have great ideas for community activities?",
+                    image: volunteerImg,
+                    activityType: ACTIVITY_CATEGORY.community,
+                  }}
+                />
+              )}
           </>
         ) : (
           <ActivitiesPlaceholder />
         )}
-
-        {/* <CardCarouselSection
-          tag="FITNESS & HEALTH"
-          height="100%"
-          header="Keep Fit, Stay Active"
-        >
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.popular}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img2}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.limited}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-          <SwiperSlide className={classes.swiperSlide}>
-            <VerticalImageCard
-              title="Tanaka Satomi"
-              image={img}
-              subtitle="UI/UX designer"
-              badgeType={BADGES.new}
-              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              congue bibendum ante, sed imperdiet eros fermentum in."
-            />
-          </SwiperSlide>
-        </CardCarouselSection> */}
 
         <Newsletter />
 

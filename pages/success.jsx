@@ -25,7 +25,7 @@ const SuccessPage = () => {
         title: "Payment success - AfterWork",
         description: "",
       }}
-      alwaysShowNav
+      alwaysVisible
     >
       <Section>
         {data ? (

@@ -26,7 +26,8 @@ const ActivitiesPlaceholder = (props) => {
         gap={3}
         rowGap={7}
       >
-        {list.length > 0 && list.map((x) => <ActivityPlaceholderCard />)}
+        {list.length > 0 &&
+          list.map((x, index) => <ActivityPlaceholderCard key={index} />)}
       </Grid>
     </Section>
   );

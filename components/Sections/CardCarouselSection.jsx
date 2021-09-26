@@ -38,7 +38,7 @@ const CardCarouselSection = (props) => {
         )}
         <Flex justify="space-between" align="center">
           <Heading
-            fontSize={["large", "large", "xx-large"]}
+            fontSize={["large", "large", "x-large"]}
             fontWeight="bold"
             lineHeight="1.3"
           >

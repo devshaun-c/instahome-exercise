@@ -7,6 +7,7 @@ import {
   Stack,
   Divider,
   Progress,
+  Image,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import CustomSelect from "../Controls/CustomSelect";
@@ -20,12 +21,7 @@ import OrderSummary from "./OrderSummary";
 import ParticipantInfoForm from "./ParticipantInfo";
 import Timer from "./Timer";
 import { isMobile, isIOS, isChrome } from "react-device-detect";
-import {
-  BsCreditCard,
-  BsChevronRight,
-  BsChevronLeft,
-  BsPlayFill,
-} from "react-icons/bs";
+import { BsCreditCard } from "react-icons/bs";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

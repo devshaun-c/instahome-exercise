@@ -23,14 +23,14 @@ import locationHero from "../../public/static/images/location-hero.svg";
 const useStyles = createUseStyles({
   locationWrapper: {},
   locationBar: {
-    position: "absolute",
+    // position: "absolute",
     // top: "10%",
     // right: "0",
     background: "transparent",
-    borderRadius: "var(--border-radius)",
+    // borderRadius: "var(--border-radius)",
     // boxShadow: "var(--card-shadow)",
     cursor: "pointer",
-    zIndex: "10",
+    // zIndex: "10",
   },
 });
 
@@ -43,17 +43,11 @@ const LocationBar = (props) => {
 
   return (
     <Container>
-      <Flex pt={8} pb={[0, 4, 4]}>
+      <Flex pt={6} pb={[0, 4, 4]}>
         <Tooltip label="More locations coming soon" bg="brand.500" hasArrow>
-          <Box
-            className={classes.locationBar}
-            onClick={() => console.log("CLICK")}
-          >
+          <Box className={classes.locationBar}>
             <Flex alignItems="center" justify="flex-end">
-              <BsGeoAlt
-                fontSize={["md", "md", "large"]}
-                color={theme.colors.brand[600]}
-              />
+              <BsGeoAlt fontSize="24px" color={theme.colors.brand[600]} />
               <Text
                 display={["none", "block"]}
                 fontSize={["md", "md", "large"]}
@@ -61,7 +55,7 @@ const LocationBar = (props) => {
                 ml={2}
                 color="grey"
               >
-                Things to do near
+                Things to do in
               </Text>
               <Text
                 fontSize={["md", "md", "large"]}
@@ -86,10 +80,14 @@ const LocationBar = (props) => {
             <Text fontSize="lg" textAlign="center" fontWeight="bold">
               More locations coming soon!
             </Text>
-            <Box h="300px">
-              <Image src={locationHero} boxSize="300px" objectFit="cover" />
+            <Box h={["200px", "300px"]}>
+              <Image
+                src={locationHero}
+                boxSize={["200px", "300px"]}
+                objectFit="cover"
+              />
             </Box>
-            <Text textAlign="center" mb={[2, 4, 4]}>
+            <Text textAlign="center" mb={[4, 4, 4]}>
               We will be expanding to other cities in Malaysia and beyond. Sign
               up to our newsletter to get notified.
             </Text>

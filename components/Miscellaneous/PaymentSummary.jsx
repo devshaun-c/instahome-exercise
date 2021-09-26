@@ -11,14 +11,26 @@ import {
   Button,
   ButtonGroup,
   Divider,
+  Image,
+  Stack,
+  Heading,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ConvertEpochToDate } from "../../utils/functions";
 import ReactToPrint from "react-to-print";
 import { useRouter } from "next/router";
+import successImg from "../../public/static/images/highfive.svg";
 
-const useStyles = createUseStyles({});
+const useStyles = createUseStyles({
+  receiptWrapper: {
+    padding: "32px",
+
+    "@media screen and (max-width: 1000px)": {
+      padding: "16px",
+    },
+  },
+});
 
 const PaymentSummary = (props) => {
   const theme = useTheme();
@@ -32,126 +44,124 @@ const PaymentSummary = (props) => {
   const participantList = JSON.parse(participants);
   const payeeInfo = JSON.parse(payee);
 
-  const InfoRow = ({ children }) => {
-    return <Box p="8px 0">{children}</Box>;
+  const InfoRow = ({ title, children }) => {
+    return (
+      <Stack
+        direction={["column", "row"]}
+        size="xs"
+        fontSize="xs"
+        spacing={0}
+        mb={3}
+      >
+        <Text color="gray.400" width="200px">
+          {title}
+        </Text>
+        {children}
+      </Stack>
+    );
   };
 
   return (
     <Flex
       flexDirection="column"
       alignItems="center"
-      w="650px"
+      maxW="650px"
       margin="auto"
-      boxShadow="var(--card-shadow)"
-      p={5}
+      boxShadow={["none", "var(--card-shadow)"]}
+      p={[0, 5]}
     >
-      <Box ref={componentRef} p="32px ">
-        <Flex flexDirection="column" alignItems="center">
-          <Text fontSize="x-large" color="brand.600" fontWeight="bold">
-            Thank you for your purchase!
+      <Box ref={componentRef} className={classes.receiptWrapper}>
+        <Text
+          fontSize="x-large"
+          fontFamily="var(--title-font)"
+          mb={4}
+          textAlign="center"
+          fontWeight="bold"
+        >
+          AfterWork
+        </Text>
+        <Flex flexDirection="column" alignItems="center" mb={6}>
+          <Text
+            fontSize="large"
+            color="brand.600"
+            fontWeight="bold"
+            textAlign="center"
+          >
+            Your booking is complete!
           </Text>
-          <Text mt={2} textAlign="center">
-            You will receive a confirmation receipt via email shortly.
+
+          <Text textAlign="center" fontSize="sm">
+            An email confirmation will be sent to you shortly.
           </Text>
         </Flex>
 
-        <Table mt={8} size="xs" fontSize="xs">
-          <Tbody>
-            <Tr>
-              <Td>Email</Td>
-              <Td>
-                <InfoRow>
-                  <Text>{data.customer_details.email}</Text>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Payment number</Td>
+        <InfoRow title="Email">
+          <Text>{data.customer_details.email}</Text>
+        </InfoRow>
 
-              <Td>
-                <InfoRow>
-                  <Text>{data.payment_intent}</Text>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Payment date</Td>
-              <Td>
-                <InfoRow>
-                  <Text>
-                    {ConvertEpochToDate(data.line_items.data[0].price.created)}
-                  </Text>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Organizer</Td>
-              <Td>
-                <InfoRow>
-                  <Flex flexDirection="column">
-                    <Text>{organizerInfo?.name}</Text>
-                    <Text>{organizerInfo?.contact}</Text>
-                    <Text>{organizerInfo?.email}</Text>
-                  </Flex>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Location</Td>
-              <Td>
-                <InfoRow>
-                  <Text fontWeight="bold">{data.metadata?.location}</Text>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Schedule</Td>
-              <Td>
-                <InfoRow>
-                  <Text fontWeight="bold">{data.metadata?.bookedDate}</Text>
-                  <Text>{data.metadata?.bookedTime}</Text>
-                </InfoRow>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Participants</Td>
-              <Td>
-                <InfoRow>
-                  {participantList.map((participant, index) => (
-                    <Flex key={index} alignItems="center" mb={2}>
-                      <Text mr={6}>{index + 1}</Text>
-                      <Box>
-                        <Text fontWeight="bold">{`${participant.firstName} ${participant.lastName}`}</Text>
-                        <Text>{participant.email}</Text>
-                        <Text>{participant.contact}</Text>
-                      </Box>
-                    </Flex>
-                  ))}
-                </InfoRow>
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
-        <Table mt={8} fontSize="sm">
-          <TableCaption placement="top">Your purchase summary</TableCaption>
-          <Tbody>
-            <Tr>
-              <Td>
-                <Flex flexDirection="column">
-                  <Text fontWeight="bold">
-                    {data.line_items?.data[0].description}
-                  </Text>
-                  <Text>By {organizerInfo?.name}</Text>
-                </Flex>
-              </Td>
-              <Td>
-                <Text>{` X ${data.line_items.data[0].quantity}`}</Text>
-              </Td>
-              <Td>{`RM ${data.line_items?.data[0].amount_total / 100}`}</Td>
-            </Tr>
-          </Tbody>
-        </Table>
+        <InfoRow title="Payment number">
+          <Text>{data.payment_intent}</Text>
+        </InfoRow>
+
+        <InfoRow title="Payment date">
+          <Text>
+            {ConvertEpochToDate(data.line_items.data[0].price.created)}
+          </Text>
+        </InfoRow>
+
+        <InfoRow title="Organizer">
+          <Flex flexDirection="column">
+            <Text>{organizerInfo?.name}</Text>
+            <Text>{organizerInfo?.contact}</Text>
+            <Text>{organizerInfo?.email}</Text>
+          </Flex>
+        </InfoRow>
+
+        <InfoRow title="Location address">
+          <Text>{data.metadata?.location}</Text>
+        </InfoRow>
+
+        <InfoRow title="Booked date">
+          <Flex flexDirection="column">
+            <Text>{data.metadata?.bookedDate}</Text>
+            <Text>{data.metadata?.bookedTime}</Text>
+          </Flex>
+        </InfoRow>
+
+        <InfoRow title="Participants">
+          <Flex flexDirection="column">
+            {participantList.map((participant, index) => (
+              <Flex key={index} alignItems="center" mb={2}>
+                <Text mr={6}>{index + 1}</Text>
+                <Box>
+                  <Text>{`${participant.firstName} ${participant.lastName}`}</Text>
+                  <Text>{participant.email}</Text>
+                  <Text>{participant.contact}</Text>
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
+        </InfoRow>
+
+        <Box mt={8} fontSize="sm">
+          <Text textAlign="center">Your purchase summary</Text>
+          <Flex justifyContent="space-between" alignItems="center" mt={4}>
+            <Box>
+              <Text fontWeight="bold">
+                {data.line_items?.data[0].description}
+              </Text>
+              <Text>By {organizerInfo?.name}</Text>
+            </Box>
+            <Text>{` X ${data.line_items.data[0].quantity}`}</Text>
+            <Text>{`RM ${data.line_items?.data[0].amount_total / 100}`}</Text>
+          </Flex>
+        </Box>
+        <Text fontSize="sm" mt={8} textAlign="center">
+          If you have any questions or concerns on your purchase, please reach
+          out to us at <u>support@afterwork.my</u>
+        </Text>
       </Box>
+
       <ButtonGroup>
         <Button colorScheme="brand" onClick={() => router.push("/")}>
           Home

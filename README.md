@@ -51,13 +51,10 @@
 
 ## TO DO
 
-- [ ] Tab bar for category
-- [x] Show placeholder cards on page load instantly
 - [ ] Mobile issues on iOS
-  - [ ] Payment
-    - [ ] loading icon bug
-    - [ ] Number of participant issue
-    - [ ] Success page mobile
+  - [x] Payment
+    - [x] loading icon bug
+    - [x] Success page mobile
   - [ ] React-responsive-carousel bug on iOS
 - [ ] Get Activities based on Category
   - [ ] Workshops
@@ -77,6 +74,11 @@
   - [ ] Get notified if there's new activities
 
 ## Done
+
+> 26/9/2021
+
+- [x] Tab bar for category
+- [x] Show placeholder cards on page load if no data loaded yet
 
 > 25/9/2021
 

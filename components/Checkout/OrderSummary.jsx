@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Text, Flex, Divider } from "@chakra-ui/react";
+import { Box, Text, Flex, Divider, Image } from "@chakra-ui/react";
+import stripeImg from "../../public/static/images/stripe.svg";
 
 const OrderSummary = (props) => {
   const { unitPrice, quantity, ...others } = props;
@@ -30,6 +31,9 @@ const OrderSummary = (props) => {
       >
         <Text>Total (MYR)</Text>
         <Text>{`RM ${totalPrice}.00`}</Text>
+      </Flex>
+      <Flex justifyContent="center">
+        <Image src={stripeImg} w="180px" h="50px" objectFit="cover" />
       </Flex>
     </Box>
   );
