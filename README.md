@@ -37,10 +37,9 @@
 
 ## PENDING
 
+- [ ] ActivityCard
+  - [ ] Show tags
 - [ ] Partner cards
-  - [ ] Reduce image size
-  - [ ] Remove tag
-  - [ ] Change card design
 - [ ] Timetable (for this week)
 - [ ] Nice to have
   - [ ] Request date and private class
@@ -51,20 +50,13 @@
 
 ## TO DO
 
-- [ ] Mobile issues on iOS
-  - [x] Payment
-    - [x] loading icon bug
-    - [x] Success page mobile
-  - [ ] React-responsive-carousel bug on iOS
 - [ ] Get Activities based on Category
-  - [ ] Workshops
-  - [ ] Community events
-  - [ ] Set limit for each to 7
-  - [ ] Add see all
-- [ ] ActivityCard
-  - [ ] Show tags
+  - [ ] At "ALL", Set limit for each to 7
+  - [ ] If click on a category, show 14 + see more button to load more
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
+- [ ] Revise template database
+  - [ ] Use activity name with "-" for acitivityId + include coded time
 - [ ] Checkout summary page
   - [ ] On register + countdown, set firebase to reserve spot
     - [ ] Field for viewing:TRUE and paid:TRUE
@@ -72,6 +64,7 @@
 - [ ] Loading placeholder on activities for landing page
 - [ ] Newsletter
   - [ ] Get notified if there's new activities
+- [ ] React-responsive-carousel bug on iOS
 
 ## Done
 
@@ -79,6 +72,10 @@
 
 - [x] Tab bar for category
 - [x] Show placeholder cards on page load if no data loaded yet
+- [x] Mobile issues on iOS
+  - [x] Payment
+    - [x] loading icon bug
+    - [x] Success page mobile
 
 > 25/9/2021
 

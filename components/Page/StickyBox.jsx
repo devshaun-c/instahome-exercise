@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { createUseStyles } from "react-jss";
-import Container from "./Container";
 
 const useStyles = createUseStyles({
   stickyDiv: {
@@ -21,7 +20,7 @@ const StickyBox = (props) => {
 
   return (
     <Box
-      zIndex={onTopAll ? 1000 : 500}
+      zIndex={onTopAll ? 900 : 500}
       className={`${classes.stickyDiv} ${
         position === "bottom" ? classes.bottom : ""
       }`}

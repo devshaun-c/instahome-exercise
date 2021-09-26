@@ -18,15 +18,7 @@ import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ChevronDownIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
-const useStyles = createUseStyles({
-  menu: {},
-  menuLinks: {
-    display: "flex",
-    "@media screen and (max-width: 1000px)": {
-      display: "none",
-    },
-  },
-});
+const useStyles = createUseStyles({});
 
 const HoverMenu = (props) => {
   const theme = useTheme();
@@ -42,11 +34,6 @@ const HoverMenu = (props) => {
 
   const handleLeave = () => {
     setShowMenu(false);
-  };
-
-  const handleNav = (url) => {
-    onClose();
-    router.push(url);
   };
 
   return (
@@ -65,7 +52,6 @@ const HoverMenu = (props) => {
           _expanded={{}}
           _focus={{}}
           href={mainUrl}
-          // onClick={() => handleNav(mainUrl)}
           color={showMenu ? "brand.400" : ""}
         >
           {title} {items.length > 0 && <ChevronDownIcon />}

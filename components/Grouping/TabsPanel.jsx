@@ -33,11 +33,11 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
         _focus={{ outline: "none" }}
         p={["16px", "16px 24px"]}
         whiteSpace="nowrap"
+        marginBottom="8px"
         _selected={{
           color: "brand.700",
           borderColor: "brand.700",
           borderBottom: "2px solid ",
-          marginBottom: "8px",
         }}
       >
         {children}

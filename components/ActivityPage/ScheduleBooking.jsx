@@ -26,10 +26,8 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     // border: (props) => `1px solid ${props.colors.brand[600]}`,
-    // padding: "24px",
     width: "100%",
     borderRadius: "var(--border-radius)",
-    // background: (props) => props.colors.brand[50],
   },
   priceBox: {
     flexDirrection: "column",
@@ -38,7 +36,6 @@ const useStyles = createUseStyles({
     width: "100%",
     padding: "16px",
     color: (props) => props.colors.brand[700],
-    // border: (props) => `1px solid ${props.colors.brand[600]}`,
     borderRadius: "var(--border-radius) var(--border-radius) 0 0",
     background: (props) => props.colors.brand[100],
   },
