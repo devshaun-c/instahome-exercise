@@ -178,7 +178,6 @@ export const getServerSideProps = async (context) => {
   );
 
   const partnerData = await GetSpecificDocFromFirebase(partnerId, "partners");
-  // const scheduleData = await GetScheduleFromFirebase(partnerId, scheduleId);
   const schedules = await GetAllPartnerSchedules(partnerId, templateId, 5);
   const allActivities = await GetAllPartnerActivities(partnerId);
 
@@ -186,7 +185,6 @@ export const getServerSideProps = async (context) => {
     props: {
       partnerData: partnerData ? JSON.stringify(partnerData) : null,
       activityData: activityData ? JSON.stringify(activityData) : null,
-      // scheduleData: JSON.stringify(scheduleData),
       schedules: schedules ? JSON.stringify(schedules) : null,
       activities: allActivities ? JSON.stringify(allActivities) : null,
     },
