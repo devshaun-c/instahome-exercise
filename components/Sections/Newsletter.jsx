@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, Input } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Image } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import CustomInput from "../Controls/CustomInput";
 import StandardButton from "../Buttons/StandardButton";
 import { useTheme } from "@emotion/react";
+import calendarHero from "../../public/static/images/calendar-hero.svg";
 
 const useStyles = createUseStyles({
   gridItem: {
@@ -18,6 +19,10 @@ const Newsletter = (props) => {
   const classes = useStyles(props);
   const { bgColor, bgImg, height = "100%" } = props;
 
+  const handleSignUpNewsletter = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Section
       bgColor={bgColor}
@@ -25,43 +30,50 @@ const Newsletter = (props) => {
       h={height}
       position="relative"
     >
-      <Box
-        height="100%"
-        display="flex"
-        flexDir="column"
-        justifyContent="center"
-      >
-        <Box width={["100%", "100%", "60%"]}>
-          <Heading w="90%">Get involved. Stay active.</Heading>
-          <Text mt={[4, 6, 8]} fontSize={["md", "sm", "md"]}>
-            Join our newsletter to stay updated on upcoming workshops, events,
-            and community activities in Kuala Lumpur, Selangor and more to come!
-          </Text>
-        </Box>
-        <Box
-          width={["100%", "100%", "60%"]}
-          display="flex"
-          flexDir={["column", "column", "row"]}
-          alignItems="center"
-          mt={[6, 6, 6]}
-        >
-          <CustomInput
-            size="md"
-            placeholder="Email"
-            mr={[0, 0, 2]}
-            mb={[2, 2, 0]}
-            variant="filled"
-          />
-          <StandardButton
-            pl="32px"
-            pr="32px"
-            colorScheme="teal"
-            w={["100%", "100%", "60%"]}
-          >
-            Join the community!
-          </StandardButton>
-        </Box>
-      </Box>
+      <form onSubmit={handleSignUpNewsletter}>
+        <Flex justifyContent="center" alignItems="center" pt={10} pb={10}>
+          <Flex flexDir="column" justifyContent="center">
+            <Box width={["100%", "100%", "90%"]}>
+              <Heading w="90%">Get involved. Stay active.</Heading>
+              <Text mt={[4, 6, 8]} fontSize={["md", "sm", "md"]}>
+                Join our newsletter to stay updated on upcoming workshops,
+                events, and community activities in Kuala Lumpur, Selangor and
+                more to come!
+              </Text>
+            </Box>
+            <Box
+              width={["100%", "100%", "90%"]}
+              display="flex"
+              flexDir={["column", "column", "row"]}
+              alignItems="center"
+              mt={[6, 6, 6]}
+            >
+              <CustomInput
+                size="md"
+                type="email"
+                placeholder="Email"
+                mr={[0, 0, 2]}
+                mb={[2, 2, 0]}
+                variant="outline"
+                required
+              />
+              <StandardButton
+                pl="32px"
+                pr="32px"
+                colorScheme="teal"
+                w={["100%", "100%", "60%"]}
+                type="submit"
+              >
+                Join the community!
+              </StandardButton>
+            </Box>
+          </Flex>
+
+          <Box h="100%" w="80%" ml={8} display={["none", "none", "block"]}>
+            <Image src={calendarHero} boxSize="100%" objectFit="contain" />
+          </Box>
+        </Flex>
+      </form>
     </Section>
   );
 };

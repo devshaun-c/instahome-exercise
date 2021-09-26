@@ -164,7 +164,7 @@ const ActivityPage = (props) => {
         </CardCarouselSection>
       )}
 
-      <Newsletter height="500px" bgColor="teal.300" />
+      <Newsletter />
     </Page>
   );
 };

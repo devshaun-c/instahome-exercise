@@ -33,12 +33,9 @@ const useStyles = createUseStyles({
   },
   scheduleButton: {
     position: "absolute",
-    top: "124px",
     right: "16px",
     borderRadius: "50%",
     background: "white",
-    width: "48px",
-    height: "48px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -98,7 +95,7 @@ const ActivityCard = (props) => {
       bg="white"
       maxWidth={width}
       position="relative"
-      boxShadow={["var(--card-shadow)"]}
+      boxShadow={["none", "var(--card-shadow)"]}
       _hover={{ boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%);" }}
     >
       <Box
@@ -130,8 +127,6 @@ const ActivityCard = (props) => {
             cursor={url ? "pointer" : "default"}
             _hover={{ outline: "none" }}
             rel="noopener,noreferrer"
-            position="relative"
-            target="_blank"
           >
             <Text
               fontWeight="bold"
@@ -143,14 +138,21 @@ const ActivityCard = (props) => {
             </Text>
           </Link>
 
+          <Box marginTop={3}>
+            <Text fontSize={["md", "xs", "xs"]} noOfLines={[2, 3, 3]}>
+              {shortSummary}
+            </Text>
+          </Box>
+        </Box>
+        <Flex flexDirection="column" mt={8}>
           {type === ACTIVITY_TYPE.inPerson ? (
             <Flex alignItems="center">
-              <BsGeoAlt color="grey" fontSize="16px" />
+              {/* <BsGeoAlt color="grey" fontSize="16px" /> */}
               <Text
                 fontSize={["md", "xs", "xs"]}
                 isTruncated
                 color="grey"
-                ml={2}
+                // ml={2}
               >
                 {locationMaps}
               </Text>
@@ -163,25 +165,20 @@ const ActivityCard = (props) => {
               </Text>
             </Flex>
           )}
-
-          <Box marginTop={3}>
-            <Text fontSize={["md", "xs", "xs"]} noOfLines={[2, 3, 3]}>
-              {shortSummary}
-            </Text>
-          </Box>
-        </Box>
-        <Flex flexDirection="column" mt={8}>
-          <Flex justifyContent="space-between">
+          <Flex justifyContent="space-between" alignItems="center">
             <Text fontSize={["md", "xs", "xs"]} fontWeight="bold">
               By {orgName}
             </Text>
-            {/* <Text>{`RM ${defaultPrice}`}</Text> */}
+            <Text fontSize={["md", "xs", "xs"]}>{`RM ${defaultPrice}`}</Text>
           </Flex>
         </Flex>
       </Flex>
 
       <Box
         className={classes.scheduleButton}
+        width={["64px", "48px"]}
+        height={["64px", "48px"]}
+        top={["112px", "128px"]}
         onClick={() => setScheduleOpen(true)}
       >
         <CalendarIcon />

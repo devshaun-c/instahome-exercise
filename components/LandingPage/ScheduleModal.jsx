@@ -10,6 +10,7 @@ import {
   Box,
   Flex,
   Link,
+  Button,
   Progress,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
@@ -21,17 +22,17 @@ import {
   GetTimeSummary,
 } from "../../utils/functions";
 import { CalendarIcon } from "@chakra-ui/icons";
+import StandardButton from "../Buttons/StandardButton";
 
 const useStyles = createUseStyles({
   cardButton: {
-    background: "white",
-    color: " var(--primary-color)",
-    border: "1px solid var(--primary-color)",
+    background: "var(--primary-color)",
+    color: "white",
     borderRadius: "var(--border-radius)",
     textAlign: "center",
-    padding: "8px 16px",
     fontSize: "14px",
     fontWeight: "bold",
+    marginTop: "32px",
   },
 });
 
@@ -127,16 +128,6 @@ const ScheduleModal = (props) => {
                 Current Schedule
               </Text>
             </Flex>
-            <Link
-              className={classes.cardButton}
-              href={url}
-              cursor={url ? "pointer" : "default"}
-              _hover={{ outline: "none" }}
-              rel="noopener,noreferrer"
-              position="relative"
-            >
-              See Details
-            </Link>
           </Flex>
           {schedules.length > 0 ? (
             <Box mt={4}>
@@ -178,6 +169,18 @@ const ScheduleModal = (props) => {
           ) : (
             <Progress size="xs" isIndeterminate mt={4} colorScheme="brand" />
           )}
+          <Box>
+            <Link
+              href={url}
+              cursor={url ? "pointer" : "default"}
+              _hover={{ outline: "none" }}
+              rel="noopener,noreferrer"
+            >
+              <StandardButton colorScheme="brand" isFullWidth mt={4}>
+                See Details
+              </StandardButton>
+            </Link>
+          </Box>
         </ModalBody>
 
         <ModalFooter>

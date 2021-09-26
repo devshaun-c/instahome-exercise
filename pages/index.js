@@ -110,6 +110,55 @@ const Home = (props) => {
         <LocationBar />
         {/* <Featured list={temporaryFeatured} /> */}
 
+        <CardCarouselSection
+          tag="UPCOMING EVENTS"
+          height="100%"
+          header="Don't miss out on these exciting events"
+        >
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Tomi Workshop"
+              image={img}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Art Matrix"
+              image={img2}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Tomi Workshop"
+              image={img}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Art Matrix"
+              image={img2}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Tomi Workshop"
+              image={img}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+          <SwiperSlide className={classes.swiperSlide}>
+            <VerticalImageCard
+              title="Art Matrix"
+              image={img2}
+              text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
+            />
+          </SwiperSlide>
+        </CardCarouselSection>
+
         {workshops.length > 0 && communityEvents.length > 0 ? (
           <>
             {workshops.length > 0 && (
@@ -119,7 +168,7 @@ const Home = (props) => {
                 header="Develop Your Skills, Discover New Hobbies"
                 list={workshops}
                 categoryDetails={{
-                  topic: "Ideas for workshops?",
+                  topic: "Have new ideas for workshops?",
                   image: workshopImg,
                   activityType: ACTIVITY_CATEGORY.workshop,
                 }}
@@ -128,12 +177,12 @@ const Home = (props) => {
 
             {communityEvents.length > 0 && (
               <ActivitiesBucket
-                tag="COMMUNITY EVENTS"
+                tag="COMMUNITY ACTIVITIES"
                 height="100%"
                 header="Volunteer, Bring Positive Change"
                 list={communityEvents}
                 categoryDetails={{
-                  topic: "Ideas for community events?",
+                  topic: "Have great ideas for community activities?",
                   image: volunteerImg,
                   activityType: ACTIVITY_CATEGORY.community,
                 }}
@@ -201,7 +250,7 @@ const Home = (props) => {
           </SwiperSlide>
         </CardCarouselSection> */}
 
-        <Newsletter height="600px" bgColor="teal.300" />
+        <Newsletter />
 
         <CardCarouselSection
           tag="PARTNERS"
@@ -260,7 +309,8 @@ const Home = (props) => {
 
 export default Home;
 
-export const getServerSideProps = async (context) => {
+//Changed from getServerSideProps 26/09/2021
+export const getStaticProps = async (context) => {
   const partners = await GetAllPartners();
   const activities = await GetAllActiveActivities();
 

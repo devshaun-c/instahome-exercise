@@ -12,6 +12,7 @@ import {
   Collapse,
   Button,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
@@ -52,16 +53,19 @@ const HoverMenu = (props) => {
     <div onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       <Menu isOpen={showMenu} gutter={2}>
         <MenuButton
-          px={4}
-          py={2}
+          as={Link}
+          p={2}
+          ml={3}
           transition="all 0.2s"
           border="none"
           borderRadius="none"
           _hover={{}}
+          cursor="pointer"
           fontSize="sm"
           _expanded={{}}
           _focus={{}}
-          onClick={() => handleNav(mainUrl)}
+          href={mainUrl}
+          // onClick={() => handleNav(mainUrl)}
           color={showMenu ? "brand.400" : ""}
         >
           {title} {items.length > 0 && <ChevronDownIcon />}
@@ -69,12 +73,17 @@ const HoverMenu = (props) => {
         {items.length > 0 && (
           <MenuList borderRadius="none" p={0} fontSize="sm">
             {items.map((item, index) => (
-              <MenuItem
-                key={index}
-                p="16px 24px"
-                onClick={() => handleNav(item.url)}
-              >
-                {item.name}
+              <MenuItem key={index} p="16px 24px">
+                <Link
+                  href={item.url}
+                  cursor="pointer"
+                  _hover={{ outline: "none" }}
+                  rel="noopener,noreferrer"
+                >
+                  <Text flex="1" textAlign="left" fontSize="sm">
+                    {item.name}
+                  </Text>
+                </Link>
               </MenuItem>
             ))}
           </MenuList>

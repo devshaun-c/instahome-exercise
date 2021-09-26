@@ -15,6 +15,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Link,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
@@ -149,13 +150,16 @@ const Navbar = (props) => {
       {showNavbar && (
         <Box position="relative" h="100%">
           <div className={classes.nav}>
-            <Text
+            <Link
+              href="/"
+              cursor="pointer"
+              _hover={{ outline: "none" }}
+              rel="noopener,noreferrer"
               className={classes.title}
-              onClick={() => handleNav("/")}
-              color="brand.600"
             >
-              AfterWork
-            </Text>
+              <Text color="brand.600">AfterWork</Text>
+            </Link>
+
             <div className={classes.menuLinks}>
               <Menu>
                 {navList.map((item, index) => (
@@ -209,13 +213,21 @@ const Navbar = (props) => {
                       _expanded={{ background: "gray.100" }}
                       _focus={{ outline: "none" }}
                       bg="whitesmoke"
-                      onClick={() =>
-                        item.mainUrl ? handleNav(item.mainUrl) : {}
-                      }
+                      // onClick={() =>
+                      //   item.mainUrl ? handleNav(item.mainUrl) : {}
+                      // }
                     >
-                      <Text flex="1" textAlign="left" fontSize="sm">
-                        {item.title}
-                      </Text>
+                      <Link
+                        href={item.mainUrl}
+                        cursor="pointer"
+                        _hover={{ outline: "none" }}
+                        rel="noopener,noreferrer"
+                      >
+                        <Text flex="1" textAlign="left" fontSize="sm">
+                          {item.title}
+                        </Text>
+                      </Link>
+
                       {item.mainUrl ? null : <AccordionIcon />}
                     </AccordionButton>
                     <AccordionPanel p={0} bg="white">

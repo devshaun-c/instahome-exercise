@@ -7,21 +7,18 @@ import {
   Heading,
   Link,
   Text,
+  Image,
   Input,
   Tooltip,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Section from "../Sections/Section";
 import { useTheme } from "@emotion/react";
 import { BsGeoAlt } from "react-icons/bs";
-import AutosizeInput from "react-input-autosize";
-import LocationSelect from "../Controls/LocationSelect";
 import Container from "../Page/Container";
 import NotificationModal from "../LandingPage/NotificationModal";
 import CustomInput from "../Controls/CustomInput";
-import CustomSelect from "../Controls/CustomSelect";
-import { getAreaCollection } from "../../constants/activity";
 import StandardButton from "../Buttons/StandardButton";
+import locationHero from "../../public/static/images/location-hero.svg";
 
 const useStyles = createUseStyles({
   locationWrapper: {},
@@ -85,19 +82,22 @@ const LocationBar = (props) => {
         hasClose={false}
         isOpen={showNotification}
         modalBody={
-          <Box p={["16px 0", 4, 4]}>
-            <Text fontSize="lg" textAlign="center" fontWeight="bold" mb={8}>
+          <Flex flexDirection="column" p={["16px 0", 4, 4]} alignItems="center">
+            <Text fontSize="lg" textAlign="center" fontWeight="bold">
               More locations coming soon!
             </Text>
+            <Box h="300px">
+              <Image src={locationHero} boxSize="300px" objectFit="cover" />
+            </Box>
             <Text textAlign="center" mb={[2, 4, 4]}>
               We will be expanding to other cities in Malaysia and beyond. Sign
               up to our newsletter to get notified.
             </Text>
-            <CustomInput placeholder="Email" mb={2} />
+            <CustomInput placeholder="Email" mb={2} size="md" />
             <StandardButton colorScheme="brand" isFullWidth>
               Join the community!
             </StandardButton>
-          </Box>
+          </Flex>
         }
       />
     </Container>

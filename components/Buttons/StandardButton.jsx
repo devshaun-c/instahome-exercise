@@ -11,15 +11,15 @@ const StandardButton = (props) => {
     colorScheme,
     leftIcon,
     rightIcon,
-    size = "md",
+    size,
     ...others
   } = props;
 
-  // const buttonSize = useBreakpointValue(["md", "md", "md"]);
+  const buttonSize = useBreakpointValue(["md", "md", "md"]);
 
   return (
     <Button
-      size={size}
+      size={size || buttonSize}
       isLoading={isLoading}
       loadingText={loadingText}
       leftIcon={leftIcon}

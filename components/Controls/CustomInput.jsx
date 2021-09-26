@@ -69,7 +69,7 @@ const StandardInput = (props) => {
           placeholder={placeholder}
           size={inputSize}
           fontSize={["md", "xs", "xs"]}
-          _focus={{ background: "white" }}
+          // _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}
           onChange={onChange}

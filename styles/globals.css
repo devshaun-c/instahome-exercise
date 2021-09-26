@@ -53,9 +53,9 @@ a {
 
 @keyframes shimmerBackground {
   0% {
-    background-position: -1000px 0;
+    background-position: -5000px 0;
   }
   100% {
-    background-position: 1000px 0;
+    background-position: 5000px 0;
   }
 }

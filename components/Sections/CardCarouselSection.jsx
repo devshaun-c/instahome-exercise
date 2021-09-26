@@ -30,7 +30,7 @@ const CardCarouselSection = (props) => {
       h={height}
       position="relative"
     >
-      <Box mb={5}>
+      <Box mb={8} mt={8}>
         {tag && (
           <Text fontSize={["md", "md"]} mb={[1, 2, 2]}>
             {tag}

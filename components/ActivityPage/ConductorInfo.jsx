@@ -1,33 +1,32 @@
 import React from "react";
-import { Avatar, Box, Text } from "@chakra-ui/react";
+import { Avatar, Box, Text, Flex } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 
-const useStyles = createUseStyles({
-  organizerInfo: {
-    display: "flex",
-    flexDirection: "row",
-  },
-});
+const useStyles = createUseStyles({});
 
 const ConductorInfo = (props) => {
   const classes = useStyles();
   const { conductorName, conductorImage, conductorSummary, ...others } = props;
 
   return (
-    <Box {...others} className={classes.organizerInfo}>
-      <Avatar mr={6} size="xl" src={conductorImage} />
-      <Box>
-        <Text fontSize="xs" mb={2} color="grey">
+    <Flex
+      {...others}
+      flexDirection={["column", "row", "row"]}
+      alignItems={["center", "start", "start"]}
+    >
+      <Avatar mr={[0, 6, 6]} size="lg" src={conductorImage} />
+      <Box textAlign={["center", "start", "start"]}>
+        <Text fontSize="xs" color="grey" mt={[2, 0, 0]}>
           Your host for this activity
         </Text>
         <Text fontSize="md" fontWeight="bold">
-          {conductorName || "Host not confirmed yet"}
+          {conductorName}
         </Text>
         <Text fontSize="xs" mt={1} mb={2}>
           {conductorSummary || ""}
         </Text>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
