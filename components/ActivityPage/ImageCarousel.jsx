@@ -8,7 +8,7 @@ import {
 import { createUseStyles } from "react-jss";
 import { Carousel } from "react-responsive-carousel";
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
-import img1 from "../../public/static/images/placeholder.png";
+// import img1 from "../../public/static/images/placeholder.png";
 import Image from "next/image";
 
 const useStyles = createUseStyles({
@@ -35,7 +35,7 @@ const ImageCarousel = (props) => {
   const { info, ...others } = props;
   const { coverImage = [], imageList = [] } = info;
   const [isLoading, setIsLoading] = useState(true);
-  const [media, setMedia] = useState([{ url: img1, name: "", type: "" }]);
+  const [media, setMedia] = useState([{ url: "", name: "", type: "" }]);
 
   useEffect(() => {
     var tempMedia = [];

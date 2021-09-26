@@ -52,7 +52,6 @@
 ## TO DO
 
 - [x] Mobile
-  - [x] Hero Title still showing a little
   - [x] Scroll to posY is different for Mobile
 - [ ] If Desktop, open in new tab.
 - [ ] Use Next/Image to load SVGs

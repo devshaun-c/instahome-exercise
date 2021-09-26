@@ -103,6 +103,7 @@ const Home = (props) => {
         title: "AfterWork - Never miss out on life",
         description: "",
       }}
+      alwaysVisible
     >
       <div className={classes.home}>
         <Hero />

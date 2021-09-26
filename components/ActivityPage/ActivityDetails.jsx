@@ -55,11 +55,11 @@ const ActivityDetails = (props) => {
           </Text>
         </Box>
       </Flex>
-      <Flex align="center" mt={4}>
+      <Flex align="center" mt={4} fontSize="sm">
         {type === "inPerson" ? (
           <>
             <BsGeo fontSize="24px" color="lightgrey" />
-            <Box fontSize="xs" ml={4}>
+            <Box ml={4}>
               <Text> {locationDescription || ""}</Text>
 
               <Link
@@ -78,7 +78,7 @@ const ActivityDetails = (props) => {
         ) : (
           <>
             <BsCameraVideo fontSize="24px" color="lightgrey" />
-            <Box fontSize="xs" ml={4}>
+            <Box ml={4}>
               <Text>Online event</Text>
             </Box>
           </>

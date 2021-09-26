@@ -13,7 +13,7 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
 
   const handleChange = (index) => {
     handleTabChange(index);
-    window.scrollTo({ top: isMobile ? 450 : 550, behavior: "smooth" });
+    window.scrollTo({ top: isMobile ? 430 : 550, behavior: "smooth" });
   };
 
   const CustomTab = ({ children }) => {
@@ -22,7 +22,7 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
         fontWeight="bold"
         borderBottom="2px solid transparent"
         color="gray.400"
-        fontSize={["xs", "md"]}
+        fontSize={["sm", "md"]}
         _focus={{ outline: "none" }}
         p={["16px", "16px 24px"]}
         whiteSpace="nowrap"

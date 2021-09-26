@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useTheme } from "@emotion/react";
 import img from "../../public/static/images/hero.jpg";
 import Container from "../Page/Container";
-import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({
   section: {
@@ -38,7 +37,6 @@ const Hero = (props) => {
       height={["400px", "400px", "600px"]}
       position="relative"
       backgroundPosition="top"
-      mt={isMobile ? "60px" : "0px"}
     >
       <Container>
         <Stack
@@ -48,16 +46,6 @@ const Hero = (props) => {
           alignItems="center"
         >
           <Box h="100%" w="100%">
-            {!isMobile && (
-              <Text
-                fontSize="x-large"
-                fontFamily="var(--title-font)"
-                color="whiteAlpha.700"
-                mb={10}
-              >
-                AfterWork
-              </Text>
-            )}
             <Heading
               w={["100%", "100%", "80%"]}
               color="white"
