@@ -38,6 +38,7 @@ const Hero = (props) => {
       height={["400px", "400px", "600px"]}
       position="relative"
       backgroundPosition="top"
+      mt={isMobile ? "60px" : "0px"}
     >
       <Container>
         <Stack
