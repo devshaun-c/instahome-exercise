@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
@@ -47,15 +47,15 @@ const Hero = (props) => {
           alignItems="center"
         >
           <Box h="100%" w="100%">
-            {isMobile && (
-              <Heading
+            {!isMobile && (
+              <Text
                 fontSize="x-large"
                 fontFamily="var(--title-font)"
                 color="whiteAlpha.700"
                 mb={10}
               >
                 AfterWork
-              </Heading>
+              </Text>
             )}
             <Heading
               w={["100%", "100%", "80%"]}
