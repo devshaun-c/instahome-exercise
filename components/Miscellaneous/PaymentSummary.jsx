@@ -1,30 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Flex,
-  Text,
-  Table,
-  Tbody,
-  Tr,
-  Td,
-  TableCaption,
-  Box,
-  Button,
-  ButtonGroup,
-  Divider,
-  Image,
-  Stack,
-  Heading,
-} from "@chakra-ui/react";
+import { Flex, Text, Box, Button, Stack, Link } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import { ConvertEpochToDate } from "../../utils/functions";
 import ReactToPrint from "react-to-print";
 import { useRouter } from "next/router";
-import successImg from "../../public/static/images/highfive.svg";
+import { FiPrinter } from "react-icons/fi";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
   receiptWrapper: {
-    padding: "32px",
+    padding: "16px 32px",
 
     "@media screen and (max-width: 1000px)": {
       padding: "16px",
@@ -70,6 +56,25 @@ const PaymentSummary = (props) => {
       boxShadow={["none", "var(--card-shadow)"]}
       p={[0, 5]}
     >
+      <Flex justifyContent="space-between" w="100%" alignItems="center">
+        <Link
+          href="/"
+          cursor="pointer"
+          _focus={{ outline: "none" }}
+          rel="noopener,noreferrer"
+        >
+          <ChevronLeftIcon fontSize="32px" color="brand.600" />
+        </Link>
+        <ReactToPrint
+          trigger={() => (
+            <Button variant="ghost" colorScheme="brand" size="sm">
+              <FiPrinter fontSize="32px" />
+            </Button>
+          )}
+          content={() => componentRef.current}
+        />
+      </Flex>
+
       <Box ref={componentRef} className={classes.receiptWrapper}>
         <Text
           fontSize="x-large"
@@ -134,9 +139,9 @@ const PaymentSummary = (props) => {
               <Flex key={index} alignItems="center" mb={2}>
                 <Text mr={6}>{index + 1}</Text>
                 <Box>
-                  <Text>{`${participant.firstName} ${participant.lastName}`}</Text>
-                  <Text>{participant.email}</Text>
-                  <Text>{participant.contact}</Text>
+                  <Text>{`${participant.pName} `}</Text>
+                  <Text>{participant.pEmail}</Text>
+                  <Text>{participant.pContact}</Text>
                 </Box>
               </Flex>
             ))}
@@ -156,25 +161,11 @@ const PaymentSummary = (props) => {
             <Text>{`RM ${data.line_items?.data[0].amount_total / 100}`}</Text>
           </Flex>
         </Box>
-        <Text fontSize="sm" mt={8} textAlign="center">
+        <Text fontSize="sm" mt={10} textAlign="center">
           If you have any questions or concerns on your purchase, please reach
           out to us at <u>support@afterwork.my</u>
         </Text>
       </Box>
-
-      <ButtonGroup>
-        <Button colorScheme="brand" onClick={() => router.push("/")}>
-          Home
-        </Button>
-        <ReactToPrint
-          trigger={() => (
-            <Button variant="outline" colorScheme="brand">
-              Print
-            </Button>
-          )}
-          content={() => componentRef.current}
-        />
-      </ButtonGroup>
     </Flex>
   );
 };

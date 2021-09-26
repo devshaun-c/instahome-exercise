@@ -19,6 +19,7 @@ import InterestForm from "./InterestForm";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useTheme } from "@emotion/react";
 import CheckoutSummary from "../Checkout/CheckoutForm";
+import { isMobile, isIOS, isChrome } from "react-device-detect";
 
 const useStyles = createUseStyles({
   scheduleBooking: {},
@@ -301,7 +302,7 @@ const ScheduleBooking = (props) => {
       <Divider mt={8} />
 
       <OverlayModal
-        size={selectedDate ? "lg" : "lg"}
+        size={isMobile ? "full" : "lg"}
         isOpen={isOpen}
         handleToggle={setIsOpen}
         modalHeader={

@@ -44,32 +44,30 @@ const LocationBar = (props) => {
   return (
     <Container>
       <Flex pt={6} pb={[0, 4, 4]}>
-        <Tooltip label="More locations coming soon" bg="brand.500" hasArrow>
-          <Box className={classes.locationBar}>
-            <Flex alignItems="center" justify="flex-end">
-              <BsGeoAlt fontSize="24px" color={theme.colors.brand[600]} />
-              <Text
-                display={["none", "block"]}
-                fontSize={["md", "md", "large"]}
-                fontWeight="bold"
-                ml={2}
-                color="grey"
-              >
-                Things to do in
-              </Text>
-              <Text
-                fontSize={["md", "md", "large"]}
-                color="brand.600"
-                fontWeight="bold"
-                ml={2}
-                textDecoration="underline"
-                onClick={() => setShowNotification(true)}
-              >
-                Selangor
-              </Text>
-            </Flex>
-          </Box>
-        </Tooltip>
+        <Box className={classes.locationBar}>
+          <Flex alignItems="center" justify="flex-end">
+            <BsGeoAlt fontSize="24px" color={theme.colors.brand[600]} />
+            <Text
+              display={["none", "block"]}
+              fontSize={["md", "md", "large"]}
+              fontWeight="bold"
+              ml={2}
+              color="grey"
+            >
+              Things to do in
+            </Text>
+            <Text
+              fontSize={["md", "md", "large"]}
+              color="brand.600"
+              fontWeight="bold"
+              ml={2}
+              textDecoration="underline"
+              onClick={() => setShowNotification(true)}
+            >
+              Selangor
+            </Text>
+          </Flex>
+        </Box>
       </Flex>
       <NotificationModal
         handleToggle={setShowNotification}

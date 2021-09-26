@@ -30,7 +30,7 @@ const useStyles = createUseStyles({
       left: 0,
       width: "100%",
       height: "100%",
-      backgroundColor: "rgba(0,0,0,0.1)",
+      backgroundColor: "rgba(0,0,0,0)",
     },
   },
 });
@@ -50,21 +50,28 @@ const Hero = (props) => {
     >
       <Container>
         <Stack
-          pt={10}
-          direction={["column", "row", "row"]}
-          spacing="80px"
+          // direction={["column", "row", "row"]}
+          // spacing="80px"
           height="100%"
           display="flex"
           justify="center"
           alignItems="center"
         >
-          <Box h="100%" w="100%" mt={[4, 0, 0]}>
+          <Box h="100%" w="100%">
+            <Heading
+              fontSize="x-large"
+              fontFamily="var(--title-font)"
+              color="whiteAlpha.700"
+              mb={10}
+            >
+              AfterWork
+            </Heading>
             <Heading
               w={["100%", "100%", "80%"]}
               color="white"
               fontSize={["50px", "50px", "80px"]}
               maxWidth="800px"
-              lineHeight={[1.1, 1.3, 1.3]}
+              lineHeight={[1.1, 1.2, 1.2]}
             >
               It's a Big World Out There. Go Explore!
             </Heading>
