@@ -40,6 +40,7 @@
 - [ ] ActivityCard
   - [ ] Show tags
 - [ ] Partner cards
+- [ ] Recent activity images
 - [ ] Timetable (for this week)
 - [ ] Nice to have
   - [ ] Request date and private class
@@ -50,6 +51,11 @@
 
 ## TO DO
 
+- [x] Mobile
+  - [x] Hero Title still showing a little
+  - [x] Scroll to posY is different for Mobile
+- [ ] If Desktop, open in new tab.
+- [ ] Use Next/Image to load SVGs
 - [ ] Get Activities based on Category
   - [ ] At "ALL", Set limit for each to 7
   - [ ] If click on a category, show 14 + see more button to load more

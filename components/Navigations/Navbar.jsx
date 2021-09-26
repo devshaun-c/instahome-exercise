@@ -4,7 +4,6 @@ import {
   Box,
   IconButton,
   Menu,
-  MenuButton,
   useDisclosure,
   Collapse,
   Flex,
@@ -19,9 +18,9 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
-import { ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import HoverMenu from "./HoverMenu";
-import { isMobile, isIOS, isChrome } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({
   navbarShow: {
@@ -45,7 +44,11 @@ const useStyles = createUseStyles({
     height: "100%",
     justifyContent: "space-between",
     margin: "auto",
+    width: "90%",
     maxWidth: "var(--max-width)",
+    "@media screen and (max-width: 1000px)": {
+      width: "100%",
+    },
   },
   title: {
     fontFamily: "var(--title-font)",

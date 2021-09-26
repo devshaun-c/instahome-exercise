@@ -35,44 +35,43 @@ const ImageCarousel = (props) => {
   const { info, ...others } = props;
   const { coverImage = [], imageList = [] } = info;
   const [isLoading, setIsLoading] = useState(true);
-  const [images, setImages] = useState([{ url: img1, name: "" }]);
+  const [media, setMedia] = useState([{ url: img1, name: "", type: "" }]);
 
   useEffect(() => {
-    var newImages = [];
+    var tempMedia = [];
+
     if (coverImage.length) {
-      newImages = [...coverImage];
+      tempMedia = [...tempMedia, ...coverImage];
     }
     if (imageList.length) {
-      newImages = [...newImages, ...imageList];
+      tempMedia = [...tempMedia, ...imageList];
     }
-    setImages([...newImages]);
+    setMedia([...tempMedia]);
   }, []);
 
   return (
     <Box className={classes.imageCarousel} {...others}>
       <Carousel {...getConfigurableProps()}>
-        {images.map((img, index) => (
+        {media.map((item, index) => (
           <Box key={index} borderRadius="8px 8px 0 0" overflow="hidden">
             {isLoading && (
-              <Flex height="400px" justifyContent="center" alignItems="center">
+              <Flex height="350px" justifyContent="center" alignItems="center">
                 <CircularProgress
                   isIndeterminate
                   size="120px"
                   thickness="4px"
-                  color="brand.600"
+                  color="brand.400"
                 >
                   <CircularProgressLabel fontSize="14px">
-                    Loading
+                    Loading...
                   </CircularProgressLabel>
                 </CircularProgress>
               </Flex>
             )}
             <img
-              src={img.url}
-              alt={img.name}
-              style={{
-                maxHeight: "400px",
-              }}
+              //Styles are adjusted at css file
+              src={item.url}
+              alt={item.name}
               onLoad={() => setIsLoading(false)}
             />
           </Box>

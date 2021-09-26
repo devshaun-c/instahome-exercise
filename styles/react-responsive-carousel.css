@@ -202,12 +202,28 @@
 }
 .carousel .slide img {
   width: 100%;
-  min-height: 300px;
+  min-height: 400px;
   max-height: 400px;
   object-fit: cover;
   vertical-align: top;
   border: 0;
 }
+.carousel .slide img {
+  width: 100%;
+  min-height: 350px;
+  max-height: 350px;
+  object-fit: cover;
+  vertical-align: top;
+  border: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .carousel .slide img {
+    min-height: 250px;
+    max-height: 250px;
+  }
+}
+
 .carousel .slide iframe {
   display: inline-block;
   width: calc(100% - 80px);

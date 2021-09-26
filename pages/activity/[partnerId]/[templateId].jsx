@@ -146,9 +146,9 @@ const ActivityPage = (props) => {
       )}
       {otherPartnerActivities.length > 0 && (
         <CardCarouselSection
-          tag={getCategory(activityDetails.category)}
+          // tag={getCategory(activityDetails.category)}
           height="100%"
-          header={`Check out more by ${orgName}`}
+          header={`See other activites by ${orgName}`}
           pagination={otherPartnerActivities.length > 4 ? true : false}
           grabCursor={otherPartnerActivities.length > 4 ? true : false}
           enabled={otherPartnerActivities.length > 1 ? true : false}

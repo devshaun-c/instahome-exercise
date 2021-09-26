@@ -1,16 +1,9 @@
 import React from "react";
-import {
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Text,
-  Box,
-} from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { useTheme } from "@emotion/react";
 import Container from "../Page/Container";
+import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({});
 
@@ -20,7 +13,7 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
 
   const handleChange = (index) => {
     handleTabChange(index);
-    window.scrollTo({ top: 550, behavior: "smooth" });
+    window.scrollTo({ top: isMobile ? 450 : 550, behavior: "smooth" });
   };
 
   const CustomTab = ({ children }) => {

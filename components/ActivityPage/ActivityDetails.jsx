@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Flex, Link } from "@chakra-ui/react";
+import { Box, Text, Flex, Link, AspectRatio } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import {
   BsCameraVideo,
@@ -84,6 +84,15 @@ const ActivityDetails = (props) => {
           </>
         )}
       </Flex>
+
+      {type === "inPerson" && (
+        <AspectRatio ratio={16 / 9} mt={4}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.1132286215056!2d101.57979701475716!3d3.064390797768449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4dff4e20a07d%3A0x58aebbbff123c6d3!2sBase%20Studio!5e0!3m2!1sen!2smy!4v1632652908712!5m2!1sen!2smy"
+            loading="lazy"
+          />
+        </AspectRatio>
+      )}
     </Box>
   );
 };

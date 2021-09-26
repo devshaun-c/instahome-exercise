@@ -1,20 +1,11 @@
 import React, { useState } from "react";
-import {
-  Box,
-  ButtonGroup,
-  Grid,
-  GridItem,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Section from "./Section";
-import StandardButton from "../Buttons/StandardButton";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 import img from "../../public/static/images/hero.jpg";
 import Container from "../Page/Container";
+import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({
   section: {
@@ -50,22 +41,22 @@ const Hero = (props) => {
     >
       <Container>
         <Stack
-          // direction={["column", "row", "row"]}
-          // spacing="80px"
           height="100%"
           display="flex"
           justify="center"
           alignItems="center"
         >
           <Box h="100%" w="100%">
-            <Heading
-              fontSize="x-large"
-              fontFamily="var(--title-font)"
-              color="whiteAlpha.700"
-              mb={10}
-            >
-              AfterWork
-            </Heading>
+            {isMobile && (
+              <Heading
+                fontSize="x-large"
+                fontFamily="var(--title-font)"
+                color="whiteAlpha.700"
+                mb={10}
+              >
+                AfterWork
+              </Heading>
+            )}
             <Heading
               w={["100%", "100%", "80%"]}
               color="white"
