@@ -9,7 +9,7 @@ const useStyles = createUseStyles({
     height: "auto",
     fontSize: "12px",
     "&:hover": {
-      // fontWeight: "bold",
+      fontWeight: "bold",
     },
   },
 });
@@ -19,7 +19,7 @@ const TextButton = (props) => {
   const classes = useStyles();
   return (
     <button className={classes.buttonStyle} onClick={onClick}>
-      <Text fontSize="xs" color={color} {...others}>
+      <Text fontSize={["md", "sm"]} color={color} {...others}>
         {children}
       </Text>
     </button>

@@ -51,8 +51,8 @@
 
 ## TO DO
 
-- [x] Mobile
-  - [x] Scroll to posY is different for Mobile
+- [ ] ActivityCard
+  - [ ] Simplify based on Meetup cards for mobile
 - [ ] If Desktop, open in new tab.
 - [ ] Use Next/Image to load SVGs
 - [ ] Get Activities based on Category
@@ -72,6 +72,14 @@
 - [ ] React-responsive-carousel bug on iOS
 
 ## Done
+
+> 27/9/2021
+
+- [x] Mobile
+  - [x] Scroll to posY is different for Mobile
+- [x] "All" tab shows carousel cards
+- [x] Specific category tab shows Grid cards
+- [x] "View all" toggles the tab panel
 
 > 26/9/2021
 

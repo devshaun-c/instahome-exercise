@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import React, { useState, useEffect, useRef } from "react";
+import { Box, TabPanel } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/explore.svg";
@@ -22,6 +22,7 @@ import { ACTIVITY_CATEGORY, ACTIVITY_TYPE } from "../constants/activity";
 import ActivitiesPlaceholder from "../components/Sections/ActivitesPlaceholder";
 import TabsPanel from "../components/Grouping/TabsPanel";
 import StickyBox from "../components/Page/StickyBox";
+import ActivitiesCarousel from "../components/Sections/ActivitiesCarousel";
 
 const useStyles = createUseStyles({
   home: {
@@ -80,6 +81,7 @@ const temporaryFeatured = [
 
 const Home = (props) => {
   const classes = useStyles();
+  const scrollRef = useRef();
   const router = useRouter();
   const [workshops, setWorkshops] = useState([]);
   const [communityActivities, setCommunityActivities] = useState([]);
@@ -97,6 +99,13 @@ const Home = (props) => {
     }
   }, []);
 
+  const handleViewAll = (id) => {
+    setTabIndex(id);
+    scrollToPos();
+  };
+
+  const scrollToPos = () => scrollRef.current.scrollIntoView();
+
   return (
     <Page
       pageMeta={{
@@ -112,65 +121,84 @@ const Home = (props) => {
         communityActivities.length > 0 ||
         events.length > 0 ? (
           <>
+            <div ref={scrollRef}></div>
             <LocationBar />
-            {/* <Featured list={temporaryFeatured} /> */}
 
             <StickyBox onTopAll>
-              <TabsPanel handleTabChange={setTabIndex} />
+              <TabsPanel
+                handleTabChange={setTabIndex}
+                scrollToPos={scrollToPos}
+                tabIndex={tabIndex}
+              ></TabsPanel>
             </StickyBox>
 
-            {(tabIndex == 0 || tabIndex == 1) && events.length > 0 && (
-              <CardCarouselSection
+            {tabIndex == 0 && (
+              <div>
+                {events.length > 0 && (
+                  <ActivitiesCarousel
+                    tag="UPCOMING EVENTS"
+                    height="100%"
+                    header="Don't miss out on these exciting events"
+                    list={workshops}
+                    handleViewAll={handleViewAll}
+                    tabIndex={2}
+                    categoryDetails={{
+                      topic: "Looking for more events to fill up your week?",
+                      image: volunteerImg,
+                      activityType: ACTIVITY_CATEGORY.community,
+                    }}
+                  />
+                )}
+
+                {workshops.length > 0 && (
+                  <ActivitiesCarousel
+                    tag="WORKSHOPS"
+                    height="100%"
+                    header="Develop Your Skills, Discover New Hobbies"
+                    list={workshops}
+                    handleViewAll={handleViewAll}
+                    tabIndex={2}
+                    categoryDetails={{
+                      topic: "Fun-filled and interesting workshops",
+                      image: workshopImg,
+                      activityType: ACTIVITY_CATEGORY.workshop,
+                    }}
+                  />
+                )}
+
+                {communityActivities.length > 0 && (
+                  <ActivitiesCarousel
+                    tag="COMMUNITY ACTIVITIES"
+                    height="100%"
+                    header="Volunteer, Bring Positive Change"
+                    list={communityActivities}
+                    handleViewAll={handleViewAll}
+                    tabIndex={3}
+                    categoryDetails={{
+                      topic: "Have great ideas for community activities?",
+                      image: volunteerImg,
+                      activityType: ACTIVITY_CATEGORY.community,
+                    }}
+                  />
+                )}
+              </div>
+            )}
+
+            {tabIndex == 1 && events.length > 0 && (
+              <ActivitiesBucket
                 tag="UPCOMING EVENTS"
                 height="100%"
                 header="Don't miss out on these exciting events"
-              >
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Tomi Workshop"
-                    image={img}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Art Matrix"
-                    image={img2}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Tomi Workshop"
-                    image={img}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Art Matrix"
-                    image={img2}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Tomi Workshop"
-                    image={img}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-                <SwiperSlide className={classes.swiperSlide}>
-                  <VerticalImageCard
-                    title="Art Matrix"
-                    image={img2}
-                    text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-                  />
-                </SwiperSlide>
-              </CardCarouselSection>
+                list={events}
+                categoryDetails={{
+                  topic: "Have new ideas for workshops?",
+                  image: workshopImg,
+                  activityType: ACTIVITY_CATEGORY.workshop,
+                }}
+              />
             )}
 
-            {(tabIndex == 0 || tabIndex == 2) && workshops.length > 0 && (
+            {tabIndex == 2 && workshops.length > 0 && (
               <ActivitiesBucket
                 tag="WORKSHOPS"
                 height="100%"
@@ -184,20 +212,19 @@ const Home = (props) => {
               />
             )}
 
-            {(tabIndex == 0 || tabIndex == 3) &&
-              communityActivities.length > 0 && (
-                <ActivitiesBucket
-                  tag="COMMUNITY ACTIVITIES"
-                  height="100%"
-                  header="Volunteer, Bring Positive Change"
-                  list={communityActivities}
-                  categoryDetails={{
-                    topic: "Have great ideas for community activities?",
-                    image: volunteerImg,
-                    activityType: ACTIVITY_CATEGORY.community,
-                  }}
-                />
-              )}
+            {tabIndex == 3 && communityActivities.length > 0 && (
+              <ActivitiesBucket
+                tag="COMMUNITY ACTIVITIES"
+                height="100%"
+                header="Volunteer, Bring Positive Change"
+                list={communityActivities}
+                categoryDetails={{
+                  topic: "Have great ideas for community activities?",
+                  image: volunteerImg,
+                  activityType: ACTIVITY_CATEGORY.community,
+                }}
+              />
+            )}
           </>
         ) : (
           <ActivitiesPlaceholder />

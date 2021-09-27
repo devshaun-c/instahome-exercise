@@ -5,7 +5,16 @@ import Section from "./Section";
 import { useTheme } from "@emotion/react";
 import Carousel from "../Grouping/Carousel";
 
-const useStyles = createUseStyles({});
+const useStyles = createUseStyles({
+  swiperSlide: {
+    width: "300px",
+    padding: "8px",
+
+    "@media screen and (max-width: 1000px)": {
+      width: "250px",
+    },
+  },
+});
 
 const CardCarouselSection = (props) => {
   const theme = useTheme();

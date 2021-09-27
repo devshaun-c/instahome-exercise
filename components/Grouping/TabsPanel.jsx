@@ -7,13 +7,19 @@ import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({});
 
-const TabsPanel = ({ children, handleTabChange, ...others }) => {
+const TabsPanel = ({
+  children,
+  tabIndex,
+  handleTabChange,
+  scrollToPos,
+  ...others
+}) => {
   const classes = useStyles();
   const theme = useTheme();
 
   const handleChange = (index) => {
     handleTabChange(index);
-    window.scrollTo({ top: isMobile ? 430 : 550, behavior: "smooth" });
+    scrollToPos();
   };
 
   const CustomTab = ({ children }) => {
@@ -41,6 +47,7 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
   return (
     <Tabs
       defaultIndex={0}
+      index={tabIndex}
       mt={2}
       variant="unstyled"
       onChange={(index) => handleChange(index)}
@@ -51,11 +58,11 @@ const TabsPanel = ({ children, handleTabChange, ...others }) => {
           <CustomTab>All</CustomTab>
           <CustomTab>Events</CustomTab>
           <CustomTab>Workshops</CustomTab>
-          <CustomTab>Community Activities</CustomTab>
+          <CustomTab>Community</CustomTab>
         </TabList>
-      </Container>
 
-      <TabPanels>{children}</TabPanels>
+        <TabPanels>{children}</TabPanels>
+      </Container>
     </Tabs>
   );
 };
