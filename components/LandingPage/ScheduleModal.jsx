@@ -106,7 +106,7 @@ const ScheduleModal = (props) => {
             justifyContent={["center", "space-between"]}
             alignItems="center"
           >
-            <Text>{activityName}</Text>
+            <Text fontSize="md">{activityName}</Text>
             <Avatar src={coverImage[0].url} size="lg" mb={[2, 0]} />
           </Flex>
         </ModalHeader>

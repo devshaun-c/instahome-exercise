@@ -34,7 +34,8 @@ const Newsletter = (props) => {
         <Flex justifyContent="center" alignItems="center" pt={10} pb={10}>
           <Flex flexDir="column" justifyContent="center">
             <Box width={["100%", "100%", "90%"]}>
-              <Heading w="90%">Get involved. Stay active.</Heading>
+              <Heading>Get involved. </Heading>
+              <Heading>Stay active.</Heading>
               <Text mt={[4, 6, 8]} fontSize="md">
                 Join our newsletter to stay updated on upcoming events,
                 workshops, and community activities near you.

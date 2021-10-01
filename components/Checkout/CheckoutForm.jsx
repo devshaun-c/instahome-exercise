@@ -154,7 +154,6 @@ const CheckoutSummary = (props) => {
           left="0"
           bg="white"
           w="100%"
-          p="0 24px 16px 24px"
           borderRadius="0 0 var(--border-radius) var(--border-radius)"
           boxShadow="0 -4px 12px 0 rgb(0 0 0 / 10%)"
         >
@@ -163,7 +162,12 @@ const CheckoutSummary = (props) => {
               <Progress size="xs" isIndeterminate colorScheme="brand" />
             </Box>
           )}
-          <Flex justifyContent="space-between" alignItems="center" mt={4}>
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            mt={4}
+            p="0 24px 16px 24px"
+          >
             <Box fontSize="sm" fontWeight="bold">
               {checkout && (
                 <Stack direction={["column", "row"]} spacing={0}>

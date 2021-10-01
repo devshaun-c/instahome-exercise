@@ -96,7 +96,7 @@ const InterestForm = (props) => {
   };
 
   return (
-    <>
+    <Box p="16px 0">
       {!isSubmitted && (
         <form onSubmit={handleNotify}>
           <Text fontSize="sm" mb={4}>
@@ -210,7 +210,7 @@ const InterestForm = (props) => {
           </Flex>
         </form>
       )}
-    </>
+    </Box>
   );
 };
 

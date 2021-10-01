@@ -3,11 +3,10 @@ import { Box, Text, Badge, Link, Flex, Button } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import placeholderImg from "../../public/static/images/placeholder.png";
 import Image from "next/image";
-import { BADGES } from "../../constants/badges";
 import { CalendarIcon } from "@chakra-ui/icons";
 import ScheduleModal from "../LandingPage/ScheduleModal";
 import { ACTIVITY_TYPE } from "../../constants/activity";
-import { BsCameraVideo, BsGeoAlt } from "react-icons/bs";
+import { BsCameraVideo } from "react-icons/bs";
 
 const useStyles = createUseStyles({
   activityTitle: {
@@ -171,7 +170,7 @@ const ActivityCard = (props) => {
         top={["112px", "128px"]}
         onClick={() => setScheduleOpen(true)}
       >
-        <CalendarIcon />
+        <CalendarIcon fontSize="18px" />
       </Box>
 
       <ScheduleModal

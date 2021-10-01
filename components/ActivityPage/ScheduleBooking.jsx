@@ -158,7 +158,7 @@ const ScheduleBooking = (props) => {
     <Box className={classes.scheduleBooking} {...others}>
       {allSchedules.length > 0 ? (
         <Flex flexDirection="column">
-          <Text fontSize="sm" fontWeight="bold">
+          <Text fontSize="md" fontWeight="bold">
             {`Upcoming Sessions (${allSchedules.length})`}
           </Text>
           <Flex mt={4} flexDir="column" alignItems="flex-start">
@@ -320,7 +320,7 @@ const ScheduleBooking = (props) => {
               </Box>
             </Flex>
           ) : (
-            <Text>"Get notified !"</Text>
+            <Text>Get notified !</Text>
           )
         }
         modalBody={

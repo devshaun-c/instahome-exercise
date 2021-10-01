@@ -38,7 +38,13 @@
 
 ## PENDING
 
+- [ ] Optimization
+  - [ ] Save activities in LocalStorage with Timestamp
+    - [ ] Check if timestamp is within 24 hours. If >24 hours, get new data
+  - [ ] Use Next/Image to load SVGs
+  - [ ] Use AspectRatio to optimize picture sizing
 - [ ] ActivityCard
+  - [ ] Simplify based on Meetup cards for mobile
   - [ ] Show tags
 - [ ] Partner cards
 - [ ] Recent activity images
@@ -52,11 +58,6 @@
 
 ## TO DO
 
-- [ ] ActivityCard
-  - [x] Fix height
-  - [ ] Simplify based on Meetup cards for mobile
-- [ ] If Desktop, open in new tab.
-- [ ] Use Next/Image to load SVGs
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Revise template database

@@ -22,7 +22,6 @@ import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 import ActivityCard from "../../../components/Cards/ActivityCard";
-import { getCategory } from "../../../constants/activity";
 
 const useStyles = createUseStyles({
   participantSection: {
@@ -97,16 +96,21 @@ const ActivityPage = (props) => {
     >
       {activityName !== "Activity Not Found" ? (
         <Section fullView={false} bgColor="#F9F9F9">
-          <Header mb={6} title={activityName} type={activityDetails.category} />
+          <Header
+            mt={6}
+            mb={6}
+            title={activityName}
+            type={activityDetails.category}
+          />
           <Grid
             templateColumns={[
               "repeat(1, 1fr)",
               "repeat(1, 1fr)",
               "repeat(5, 1fr)",
             ]}
-            gap={[0, 0, "56px"]}
+            gap={[0, 0, "24px"]}
           >
-            <GridItem colSpan={[5, 5, 3]}>
+            <GridItem colSpan={[5, 5, 3]} maxW={["100%", "90%"]}>
               <ImageCarousel info={activityDetails} />
               {activityDetails.conductorName && (
                 <Paper mt={4}>

@@ -46,7 +46,7 @@ const ShareBar = ({ url, ...others }) => {
       <Stack direction="row" color="grey">
         <Tooltip label="copy link" hasArrow bg="whitesmoke" color="black">
           <button className={classes.button} onClick={handleCopytoClipboard}>
-            <BsLink />
+            <BsLink fontSize="24px" />
           </button>
         </Tooltip>
         <WhatsappShareButton
@@ -55,10 +55,10 @@ const ShareBar = ({ url, ...others }) => {
           separator=" "
           className={classes.button}
         >
-          <FaWhatsapp />
+          <FaWhatsapp fontSize="24px" />
         </WhatsappShareButton>
         <TelegramShareButton className={classes.button} url={url}>
-          <FaTelegramPlane />
+          <FaTelegramPlane fontSize="24px" />
         </TelegramShareButton>
       </Stack>
     </Flex>
