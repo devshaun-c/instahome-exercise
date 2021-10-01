@@ -74,7 +74,7 @@ const Footer = (props) => {
               fontWeight="bold"
               mb={2}
               fontFamily="var(--title-font)"
-              fontSize="x-large"
+              fontSize="xl"
             >
               AfterWork
             </Text>
@@ -103,11 +103,11 @@ const Footer = (props) => {
                   color="whiteAlpha.800"
                   fontWeight="bold"
                   mb={[2, 2, 4]}
-                  fontSize={["sm", "md"]}
+                  fontSize="sm"
                 >
                   {item.title}
                 </Text>
-                <List spacing={[1, 2, 2]} fontSize={["xs", "sm"]}>
+                <List spacing={[1, 2, 2]} fontSize="sm">
                   {item.links.map((link, index) => (
                     <ListItem
                       key={index}
@@ -127,7 +127,7 @@ const Footer = (props) => {
       </Grid>
       <Divider mb={4} mt={6} />
       <Box display="flex" justifyContent="space-between" pb="48px">
-        <Text fontSize={["xs", "sm"]}>&copy; 2021 Company</Text>
+        <Text fontSize="sm">&copy; 2021 Company</Text>
         <HStack spacing={3}>
           <FaInstagram fontSize="24px" />
           <FaFacebookSquare fontSize="24px" />

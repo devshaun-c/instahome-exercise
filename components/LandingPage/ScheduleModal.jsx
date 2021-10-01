@@ -114,22 +114,22 @@ const ScheduleModal = (props) => {
         <ModalBody>
           <Box mb={8}>
             <Flex mb={1}>
-              <Text fontSize={["md", "xs", "xs"]} width="50%">
+              <Text fontSize="sm" width="50%">
                 Organizer
               </Text>
-              <Text fontSize={["md", "xs", "xs"]}>{orgName}</Text>
+              <Text fontSize="sm">{orgName}</Text>
             </Flex>
             <Flex mb={1}>
-              <Text fontSize={["md", "xs", "xs"]} width="50%">
+              <Text fontSize="sm" width="50%">
                 Price
               </Text>
-              <Text fontSize={["md", "xs", "xs"]}>{`RM ${defaultPrice}`}</Text>
+              <Text fontSize="sm">{`RM ${defaultPrice}`}</Text>
             </Flex>
             <Flex mb={1}>
-              <Text fontSize={["md", "xs", "xs"]} width="50%">
+              <Text fontSize="sm" width="50%">
                 Location
               </Text>
-              <Text fontSize={["md", "xs", "xs"]}>{locationMaps}</Text>
+              <Text fontSize="sm">{locationMaps}</Text>
             </Flex>
           </Box>
 

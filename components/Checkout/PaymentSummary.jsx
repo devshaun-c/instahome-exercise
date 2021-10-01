@@ -77,7 +77,7 @@ const PaymentSummary = (props) => {
 
       <Box ref={componentRef} className={classes.receiptWrapper}>
         <Text
-          fontSize="x-large"
+          fontSize="xl"
           fontFamily="var(--title-font)"
           mb={4}
           textAlign="center"

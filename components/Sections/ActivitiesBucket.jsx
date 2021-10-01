@@ -76,7 +76,7 @@ const ActivitiesBucket = (props) => {
           <Box mt={4}>
             <Button
               size="sm"
-              fontSize="14px"
+              fontSize="sm"
               colorScheme="teal"
               onClick={() => console.log(activityType)}
             >
@@ -107,16 +107,12 @@ const ActivitiesBucket = (props) => {
     >
       <Box mb={8} mt={8}>
         {tag && (
-          <Text fontSize={["md", "md"]} mb={[1, 2, 2]}>
+          <Text fontSize="md" mb={[1, 2, 2]}>
             {tag}
           </Text>
         )}
         <Flex justify="space-between" align="center">
-          <Heading
-            fontSize={["large", "large", "x-large"]}
-            fontWeight="bold"
-            lineHeight="1.3"
-          >
+          <Heading fontSize="xl" fontWeight="bold" lineHeight="1.3">
             {header}
           </Heading>
 
@@ -154,7 +150,6 @@ const ActivitiesBucket = (props) => {
           )}
         </>
       )}
-      {/* {loading && <LoadingOverlay />} */}
     </Section>
   );
 };

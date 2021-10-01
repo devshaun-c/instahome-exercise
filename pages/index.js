@@ -133,8 +133,6 @@ const Home = (props) => {
       <div className={classes.home}>
         <Hero />
 
-        <Text fontSize="md">TEST</Text>
-
         {workshops.length > 0 ||
         communityActivities.length > 0 ||
         events.length > 0 ? (

@@ -6,7 +6,7 @@ import Section from "../components/Sections/Section";
 import Page from "../components/Page/Page";
 import { fetchGetJSON } from "../utils/api-helpers";
 import useSWR from "swr";
-import PaymentSummary from "../components/Miscellaneous/PaymentSummary";
+import PaymentSummary from "../components/Checkout/PaymentSummary";
 
 const useStyles = createUseStyles({});
 

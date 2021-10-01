@@ -35,7 +35,7 @@ const Newsletter = (props) => {
           <Flex flexDir="column" justifyContent="center">
             <Box width={["100%", "100%", "90%"]}>
               <Heading w="90%">Get involved. Stay active.</Heading>
-              <Text mt={[4, 6, 8]} fontSize={["md", "sm", "md"]}>
+              <Text mt={[4, 6, 8]} fontSize="md">
                 Join our newsletter to stay updated on upcoming workshops,
                 events, and community activities in Kuala Lumpur, Selangor and
                 more to come!

@@ -71,7 +71,7 @@ const ActivityCard = (props) => {
 
   return (
     <Box
-      h={["100%", "380px", "420px"]}
+      h={["380px", "420px"]}
       className={classes.card}
       bg="white"
       maxWidth={width}
@@ -123,18 +123,13 @@ const ActivityCard = (props) => {
             _hover={{ outline: "none" }}
             rel="noopener,noreferrer"
           >
-            <Text
-              fontWeight="bold"
-              fontSize={["lg", "md", "md"]}
-              isTruncated
-              mb={1}
-            >
+            <Text fontWeight="bold" fontSize="md" isTruncated mb={1}>
               {activityName}
             </Text>
           </Link>
 
           <Box marginTop={3}>
-            <Text fontSize={["sm", "sm", "sm"]} noOfLines={[2, 3, 3]}>
+            <Text fontSize="sm" noOfLines={[2, 3, 3]}>
               {shortSummary}
             </Text>
           </Box>
@@ -144,7 +139,7 @@ const ActivityCard = (props) => {
             <Flex alignItems="center">
               {/* <BsGeoAlt color="grey" fontSize="16px" /> */}
               <Text
-                fontSize={["md", "xs", "xs"]}
+                fontSize="sm"
                 isTruncated
                 color="grey"
                 // ml={2}
@@ -155,16 +150,16 @@ const ActivityCard = (props) => {
           ) : (
             <Flex alignItems="center">
               <BsCameraVideo color="grey" fontSize="16px" />
-              <Text fontSize={["md", "xs", "xs"]} color="grey" ml={2}>
+              <Text fontSize="sm" color="grey" ml={2}>
                 Online activity
               </Text>
             </Flex>
           )}
           <Flex justifyContent="space-between" alignItems="center">
-            <Text fontSize={["md", "xs", "xs"]} fontWeight="bold">
+            <Text fontSize="sm" fontWeight="bold">
               By {orgName}
             </Text>
-            <Text fontSize={["md", "xs", "xs"]}>{`RM ${defaultPrice}`}</Text>
+            <Text fontSize="sm">{`RM ${defaultPrice}`}</Text>
           </Flex>
         </Flex>
       </Flex>

@@ -54,7 +54,22 @@
 
 - [ ] Adjust font-size calculation at theme
   - [ ] Use px instead of default rem
+  - [ ] Replace all font size updates on mobile to "sm"
+    - [x] Newsletter
+    - [x] ActivityCard
+    - [x] ScheduleModal
+    - [x] ActivitiesBucket
+    - [x] ActivityCarousel
+    - [x] NoActivities
+    - [x] Hero
+    - [x] Footer
+    - [x] Payment Summary
+    - [x] TabsPanel
+    - [x] CustomInput
+    - [x] ParticipantInfo/PayeeInfo/OrderSummary/CheckoutForm
+    - [ ] ActivityPage items
 - [ ] ActivityCard
+  - [x] Fix height
   - [ ] Simplify based on Meetup cards for mobile
 - [ ] If Desktop, open in new tab.
 - [ ] Use Next/Image to load SVGs

@@ -47,18 +47,13 @@ const StandardInput = (props) => {
   return (
     <FormControl isRequired={required} isInvalid={errorText} mb={label ? 4 : 0}>
       {label && (
-        <FormLabel mb={0} fontSize="xs">
+        <FormLabel mb={0} fontSize="sm">
           {label}
         </FormLabel>
       )}
       <InputGroup size={inputSize}>
         {leftAddOn && <InputLeftAddon children={leftAddOn} />}
-        {leftElement && (
-          <InputLeftElement
-            // w="auto"
-            children={leftElement}
-          />
-        )}
+        {leftElement && <InputLeftElement children={leftElement} />}
         <Input
           name={name}
           value={value}
@@ -68,7 +63,7 @@ const StandardInput = (props) => {
           variant={variant}
           placeholder={placeholder}
           size={inputSize}
-          fontSize={["md", "xs", "xs"]}
+          fontSize="md"
           // _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}

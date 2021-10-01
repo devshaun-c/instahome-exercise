@@ -53,6 +53,8 @@ const theme = extendTheme({
     xs: "12px",
     sm: "16px",
     md: "20px",
+    lg: "24px",
+    xl: "30px",
   },
   components: {
     Button: {
