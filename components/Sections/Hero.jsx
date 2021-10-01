@@ -36,7 +36,7 @@ const Hero = (props) => {
       backgroundImage={bgImg || img}
       height={["400px", "400px", "600px"]}
       position="relative"
-      backgroundPosition="top"
+      backgroundPosition={["center", "center", "0 -100px"]}
     >
       <Container>
         <Stack

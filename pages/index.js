@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, TabPanel } from "@chakra-ui/react";
+import { Box, Text, Button, Flex } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import VerticalImageCard from "../components/Cards/VerticalImageCard";
 import img from "../public/static/images/explore.svg";
@@ -12,7 +12,7 @@ import Newsletter from "../components/Sections/Newsletter";
 import Page from "../components/Page/Page";
 import { useRouter } from "next/router";
 import Featured from "../components/LandingPage/Featured";
-import { GetAllActiveActivities, GetAllPartners } from "../utils/firebase";
+import { GetActiveActivities, GetAllPartners } from "../utils/firebase";
 import ActivitiesBucket from "../components/Sections/ActivitiesBucket";
 import { shuffle } from "../utils/functions";
 import LocationBar from "../components/Miscellaneous/LocationBar";
@@ -23,6 +23,8 @@ import ActivitiesPlaceholder from "../components/Sections/ActivitesPlaceholder";
 import TabsPanel from "../components/Grouping/TabsPanel";
 import StickyBox from "../components/Page/StickyBox";
 import ActivitiesCarousel from "../components/Sections/ActivitiesCarousel";
+import { fetchGetJSON } from "../utils/api-helpers";
+import NoActivities from "../components/LandingPage/NoActivities";
 
 const useStyles = createUseStyles({
   home: {
@@ -83,26 +85,40 @@ const Home = (props) => {
   const classes = useStyles();
   const scrollRef = useRef();
   const router = useRouter();
+  const [events, setEvents] = useState([]);
   const [workshops, setWorkshops] = useState([]);
   const [communityActivities, setCommunityActivities] = useState([]);
-  const [events, setEvents] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const activitiesFromServer = JSON.parse(props.activities);
+  const eventsFromServer = JSON.parse(props.events);
+  const workshopsFromServer = JSON.parse(props.workshops);
+  const communityActivitiesFromServer = JSON.parse(props.communityActivities);
   const partnersFromServer = JSON.parse(props.partners);
 
   useEffect(() => {
-    if (activitiesFromServer.length) {
-      setWorkshops([...shuffle(activitiesFromServer)]);
-      setCommunityActivities([...shuffle(activitiesFromServer)]);
-      setEvents([...shuffle(activitiesFromServer)]);
+    if (workshopsFromServer) {
+      setWorkshops([...shuffle(workshopsFromServer)]);
+    }
+    if (communityActivitiesFromServer) {
+      setCommunityActivities([...shuffle(communityActivitiesFromServer)]);
+    }
+    if (eventsFromServer) {
+      setEvents([...shuffle(eventsFromServer)]);
     }
   }, []);
 
-  const handleViewAll = (id) => {
+  const handleTabChange = (id) => {
     setTabIndex(id);
     scrollToPos();
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, [tabIndex]);
 
   const scrollToPos = () => scrollRef.current.scrollIntoView();
 
@@ -117,36 +133,37 @@ const Home = (props) => {
       <div className={classes.home}>
         <Hero />
 
+        <Text fontSize="md">TEST</Text>
+
         {workshops.length > 0 ||
         communityActivities.length > 0 ||
         events.length > 0 ? (
           <>
             <div ref={scrollRef}></div>
             <LocationBar />
-
             <StickyBox onTopAll>
               <TabsPanel
-                handleTabChange={setTabIndex}
-                scrollToPos={scrollToPos}
+                handleTabChange={handleTabChange}
                 tabIndex={tabIndex}
               ></TabsPanel>
             </StickyBox>
 
             {tabIndex == 0 && (
-              <div>
+              <>
                 {events.length > 0 && (
                   <ActivitiesCarousel
                     tag="UPCOMING EVENTS"
                     height="100%"
                     header="Don't miss out on these exciting events"
-                    list={workshops}
-                    handleViewAll={handleViewAll}
-                    tabIndex={2}
+                    list={events}
+                    handleViewAll={handleTabChange}
+                    tabIndex={1}
                     categoryDetails={{
                       topic: "Looking for more events to fill up your week?",
                       image: volunteerImg,
                       activityType: ACTIVITY_CATEGORY.community,
                     }}
+                    isLoading={isLoading}
                   />
                 )}
 
@@ -156,13 +173,14 @@ const Home = (props) => {
                     height="100%"
                     header="Develop Your Skills, Discover New Hobbies"
                     list={workshops}
-                    handleViewAll={handleViewAll}
+                    handleViewAll={handleTabChange}
                     tabIndex={2}
                     categoryDetails={{
                       topic: "Fun-filled and interesting workshops",
                       image: workshopImg,
                       activityType: ACTIVITY_CATEGORY.workshop,
                     }}
+                    isLoading={isLoading}
                   />
                 )}
 
@@ -179,31 +197,30 @@ const Home = (props) => {
                       image: volunteerImg,
                       activityType: ACTIVITY_CATEGORY.community,
                     }}
+                    isLoading={isLoading}
                   />
                 )}
-              </div>
+              </>
             )}
 
-            {tabIndex == 1 && events.length > 0 && (
+            {tabIndex == 1 && (
               <ActivitiesBucket
                 tag="UPCOMING EVENTS"
                 height="100%"
                 header="Don't miss out on these exciting events"
-                list={events}
                 categoryDetails={{
-                  topic: "Have new ideas for workshops?",
+                  topic: "Have new ideas for events?",
                   image: workshopImg,
-                  activityType: ACTIVITY_CATEGORY.workshop,
+                  activityType: ACTIVITY_CATEGORY.event,
                 }}
               />
             )}
 
-            {tabIndex == 2 && workshops.length > 0 && (
+            {tabIndex == 2 && (
               <ActivitiesBucket
                 tag="WORKSHOPS"
                 height="100%"
                 header="Develop Your Skills, Discover New Hobbies"
-                list={workshops}
                 categoryDetails={{
                   topic: "Have new ideas for workshops?",
                   image: workshopImg,
@@ -212,12 +229,11 @@ const Home = (props) => {
               />
             )}
 
-            {tabIndex == 3 && communityActivities.length > 0 && (
+            {tabIndex == 3 && (
               <ActivitiesBucket
                 tag="COMMUNITY ACTIVITIES"
                 height="100%"
                 header="Volunteer, Bring Positive Change"
-                list={communityActivities}
                 categoryDetails={{
                   topic: "Have great ideas for community activities?",
                   image: volunteerImg,
@@ -291,13 +307,20 @@ export default Home;
 
 //Changed from getServerSideProps 26/09/2021
 export const getStaticProps = async (context) => {
+  const maxDataLimit = 8;
   const partners = await GetAllPartners();
-  const activities = await GetAllActiveActivities();
+  const events = await GetActiveActivities("1", maxDataLimit);
+  const workshops = await GetActiveActivities("2", maxDataLimit);
+  const communityActivities = await GetActiveActivities("3", maxDataLimit);
 
   return {
     props: {
       partners: partners ? JSON.stringify(partners) : null,
-      activities: activities ? JSON.stringify(activities) : null,
+      workshops: workshops ? JSON.stringify(workshops) : null,
+      events: events ? JSON.stringify(events) : null,
+      communityActivities: communityActivities
+        ? JSON.stringify(communityActivities)
+        : null,
     },
   };
 };

@@ -49,6 +49,11 @@ const theme = extendTheme({
     heading: "var(--heading-font)",
     title: "var(--title-font)",
   },
+  fontSizes: {
+    xs: "12px",
+    sm: "16px",
+    md: "20px",
+  },
   components: {
     Button: {
       baseStyle: {

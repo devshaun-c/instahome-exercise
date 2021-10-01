@@ -187,10 +187,12 @@ export const GetAllPartners = async () => {
   }
 };
 
-export const GetAllActiveActivities = async () => {
+export const GetActiveActivities = async (category, limit) => {
   const snapshot = await firestore
     .collection("templates")
     .where("isActive", "==", true)
+    .where("category", "==", category)
+    .limit(limit)
     .get();
   if (snapshot.size) {
     return snapshot.docs.map((doc) => doc.data());

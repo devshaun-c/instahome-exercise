@@ -9,6 +9,7 @@ import { BADGES } from "../../constants/badges";
 import { SwiperSlide } from "swiper/react";
 import placeholderImg from "../../public/static/images/explore.svg";
 import Image from "next/image";
+import LoadingOverlay from "../Miscellaneous/LoadingOverlay";
 import TextButton from "../Buttons/TextButton";
 
 const useStyles = createUseStyles({
@@ -31,6 +32,7 @@ const ActivitiesCarousel = (props) => {
     tag,
     header,
     children,
+    isLoading = false,
     pagination = false,
     grabCursor = true,
     enabled = true,
@@ -108,9 +110,11 @@ const ActivitiesCarousel = (props) => {
           >
             {header}
           </Heading>
-          {/* <TextButton onClick={() => handleViewAll(tabIndex)}>
-            View all
-          </TextButton> */}
+          {list.length > 5 && (
+            <TextButton onClick={() => handleViewAll(tabIndex)}>
+              View all
+            </TextButton>
+          )}
         </Flex>
       </Box>
       <Box>
@@ -136,6 +140,8 @@ const ActivitiesCarousel = (props) => {
           </SwiperSlide>
         </Carousel>
       </Box>
+
+      {isLoading && <LoadingOverlay />}
     </Section>
   );
 };

@@ -7,19 +7,12 @@ import { isMobile } from "react-device-detect";
 
 const useStyles = createUseStyles({});
 
-const TabsPanel = ({
-  children,
-  tabIndex,
-  handleTabChange,
-  scrollToPos,
-  ...others
-}) => {
+const TabsPanel = ({ children, tabIndex, handleTabChange, ...others }) => {
   const classes = useStyles();
   const theme = useTheme();
 
   const handleChange = (index) => {
     handleTabChange(index);
-    scrollToPos();
   };
 
   const CustomTab = ({ children }) => {
@@ -54,7 +47,7 @@ const TabsPanel = ({
       isLazy
     >
       <Container>
-        <TabList overflowX={["auto", "hidden"]}>
+        <TabList overflowX={["scroll", "hidden"]}>
           <CustomTab>All</CustomTab>
           <CustomTab>Events</CustomTab>
           <CustomTab>Workshops</CustomTab>

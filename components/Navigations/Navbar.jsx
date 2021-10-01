@@ -125,7 +125,7 @@ const Navbar = (props) => {
   };
 
   const navList = [
-    { title: "Home", mainUrl: "/", items: [] },
+    { title: "Explore", mainUrl: "/", items: [] },
     { title: "About", mainUrl: "/about", items: [] },
     {
       title: "Organize",
@@ -176,17 +176,13 @@ const Navbar = (props) => {
               </Menu>
             </div>
 
-            <Box
-              className={classes.mobileMenu}
-              // bg={isOpen ? "teal.500" : "none"}
-            >
+            <Box className={classes.mobileMenu}>
               <IconButton
                 onClick={onToggle}
                 className={classes.menuButton}
                 size="sm"
                 h="100%"
                 w="100%"
-                // color={isOpen ? "white" : ""}
                 _focus={{ outline: "none", bg: "none" }}
                 _selected={{ outline: "none", bg: "none" }}
                 _active={{ outline: "none", bg: "none" }}

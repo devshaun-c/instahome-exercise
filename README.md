@@ -34,6 +34,7 @@
 - Added npm i react-input-autosize
 - Added npm i react-to-print
 - Added stripeJS
+- ADded npm i --save @iconscout/react-unicons
 
 ## PENDING
 
@@ -51,13 +52,12 @@
 
 ## TO DO
 
+- [ ] Adjust font-size calculation at theme
+  - [ ] Use px instead of default rem
 - [ ] ActivityCard
   - [ ] Simplify based on Meetup cards for mobile
 - [ ] If Desktop, open in new tab.
 - [ ] Use Next/Image to load SVGs
-- [ ] Get Activities based on Category
-  - [ ] At "ALL", Set limit for each to 7
-  - [ ] If click on a category, show 14 + see more button to load more
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Revise template database
@@ -72,6 +72,12 @@
 - [ ] React-responsive-carousel bug on iOS
 
 ## Done
+
+> 30/9/2021
+
+- [x] Get Activities based on Category
+  - [x] SSR Data Fetch limit set to 8 for each category
+  - [x] Fetching specific categories gets ALL RECORDS on client-side API
 
 > 27/9/2021
 

@@ -12,6 +12,7 @@ import {
   Link,
   Button,
   Progress,
+  Avatar,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import moment from "moment";
@@ -23,6 +24,7 @@ import {
 } from "../../utils/functions";
 import { CalendarIcon } from "@chakra-ui/icons";
 import StandardButton from "../Buttons/StandardButton";
+import Image from "next/image";
 
 const useStyles = createUseStyles({
   cardButton: {
@@ -50,7 +52,10 @@ const ScheduleModal = (props) => {
     partnerId,
     defaultPrice,
     locationMaps,
+    coverImage,
   } = activity;
+
+  console.log(activity);
 
   const url = `activity/${partnerId}/${activityId}`;
 
@@ -96,7 +101,14 @@ const ScheduleModal = (props) => {
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
         <ModalHeader>
-          <Text>{activityName}</Text>
+          <Flex
+            flexDirection={["column-reverse", "row"]}
+            justifyContent={["center", "space-between"]}
+            alignItems="center"
+          >
+            <Text>{activityName}</Text>
+            <Avatar src={coverImage[0].url} size="lg" mb={[2, 0]} />
+          </Flex>
         </ModalHeader>
         {showClose && <ModalCloseButton />}
         <ModalBody>

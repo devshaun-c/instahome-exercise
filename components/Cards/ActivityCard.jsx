@@ -53,25 +53,6 @@ const ActivityCard = (props) => {
   const { width, badgeType, activity } = props;
   const [scheduleOpen, setScheduleOpen] = useState(false);
 
-  var badgeObj = null;
-  switch (badgeType) {
-    case BADGES.new:
-      badgeObj = { color: "green", text: "new" };
-      break;
-
-    case BADGES.popular:
-      badgeObj = { color: "purple", text: "Popular" };
-      break;
-
-    case BADGES.featured:
-      badgeObj = { color: "red", text: "Featured" };
-      break;
-
-    default:
-      badgeObj = { color: "gray", text: badgeType };
-      break;
-  }
-
   const {
     activityName,
     activityId,
@@ -112,6 +93,20 @@ const ActivityCard = (props) => {
           placeholder="blur"
           blurDataURL={coverImage[0].url}
         />
+        {type === ACTIVITY_TYPE.online && (
+          <Text
+            position="absolute"
+            top={1}
+            left={1}
+            bg="rgba(100,100,100,0.6)"
+            p="4px 6px"
+            color="white"
+            fontSize="xs"
+            borderRadius="var(--border-radius)"
+          >
+            Online
+          </Text>
+        )}
       </Box>
       <Flex
         h="100%"
@@ -139,7 +134,7 @@ const ActivityCard = (props) => {
           </Link>
 
           <Box marginTop={3}>
-            <Text fontSize={["md", "xs", "xs"]} noOfLines={[2, 3, 3]}>
+            <Text fontSize={["sm", "sm", "sm"]} noOfLines={[2, 3, 3]}>
               {shortSummary}
             </Text>
           </Box>

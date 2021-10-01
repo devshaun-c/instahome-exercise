@@ -7,19 +7,20 @@ const useStyles = createUseStyles({
     display: "block",
     margin: "0",
     height: "auto",
+    color: "gray",
     fontSize: "12px",
     "&:hover": {
-      fontWeight: "bold",
+      color: "black",
     },
   },
 });
 
 const TextButton = (props) => {
-  const { children, onClick, color, ...others } = props;
+  const { children, onClick, ...others } = props;
   const classes = useStyles();
   return (
     <button className={classes.buttonStyle} onClick={onClick}>
-      <Text fontSize={["md", "sm"]} color={color} {...others}>
+      <Text fontSize={["md", "sm"]} {...others}>
         {children}
       </Text>
     </button>

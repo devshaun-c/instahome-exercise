@@ -4,9 +4,9 @@ export const ACTIVITY_TYPE = {
 };
 
 export const ACTIVITY_CATEGORY = {
-  event: "Event",
-  workshop: "Workshop",
-  community: "Community",
+  event: "1",
+  workshop: "2",
+  community: "3",
 };
 
 export const getActivityTypeCollection = () => [

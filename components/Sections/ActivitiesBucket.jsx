@@ -1,12 +1,23 @@
-import React from "react";
-import { Box, Button, Flex, Grid, Heading, Link, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  CircularProgress,
+  Text,
+} from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import { useTheme } from "@emotion/react";
 import ActivityCard from "../Cards/ActivityCard";
 import Image from "next/image";
 import img from "../../public/static/images/explore.svg";
+import LoadingOverlay from "../Miscellaneous/LoadingOverlay";
 import { BADGES } from "../../constants/badges";
+import NoActivities from "../LandingPage/NoActivities";
+import { fetchGetJSON } from "../../utils/api-helpers";
 
 const useStyles = createUseStyles({});
 
@@ -19,15 +30,34 @@ const ActivitiesBucket = (props) => {
     tag,
     header,
     height = "600px",
-    list,
+    // list,
+    // isLoading,
     categoryDetails = {
       topic: "Looking for more activities?",
       image: img,
-      category: "",
+      activityType: "",
     },
   } = props;
+  const { topic, image, activityType } = categoryDetails;
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const { topic, image, category } = categoryDetails;
+  useEffect(async () => {
+    const activities = await GetCategoryActivities(activityType);
+    if (activities) {
+      setList(activities);
+    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
+  const GetCategoryActivities = async (categoryId) => {
+    if (categoryId > 0) {
+      const data = await fetchGetJSON(`/api/templates/${categoryId}`);
+      return data;
+    }
+  };
 
   const LastCard = () => {
     return (
@@ -48,7 +78,7 @@ const ActivitiesBucket = (props) => {
               size="sm"
               fontSize="14px"
               colorScheme="teal"
-              onClick={() => console.log(category)}
+              onClick={() => console.log(activityType)}
             >
               Let us know
             </Button>
@@ -93,26 +123,38 @@ const ActivitiesBucket = (props) => {
           {/* <Link fontSize="md">See all</Link> */}
         </Flex>
       </Box>
-      <Grid
-        templateColumns={[
-          "repeat(1, 1fr)",
-          "repeat(2, 1fr)",
-          "repeat(3, 1fr)",
-          "repeat(4, 1fr)",
-        ]}
-        gap={3}
-        rowGap={7}
-      >
-        {list.length > 0 &&
-          list.map((workshop) => (
-            <ActivityCard
-              key={workshop.activityId}
-              activity={workshop}
-              badgeType={BADGES.new}
-            />
-          ))}
-        <LastCard />
-      </Grid>
+      {loading ? (
+        <Box minH="400px">
+          <LoadingOverlay />
+        </Box>
+      ) : (
+        <>
+          {list.length > 0 ? (
+            <Grid
+              templateColumns={[
+                "repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(3, 1fr)",
+                "repeat(4, 1fr)",
+              ]}
+              gap={3}
+              rowGap={7}
+            >
+              {list.map((activity) => (
+                <ActivityCard
+                  key={activity.activityId}
+                  activity={activity}
+                  badgeType={BADGES.new}
+                />
+              ))}
+              <LastCard />
+            </Grid>
+          ) : (
+            <NoActivities image={image} activityType={activityType} />
+          )}
+        </>
+      )}
+      {/* {loading && <LoadingOverlay />} */}
     </Section>
   );
 };
