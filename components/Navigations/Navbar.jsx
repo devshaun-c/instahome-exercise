@@ -189,9 +189,9 @@ const Navbar = (props) => {
                 _hover={{ bg: "none" }}
               >
                 {isOpen ? (
-                  <CloseIcon fontSize="xs" />
+                  <CloseIcon fontSize="16px" />
                 ) : (
-                  <HamburgerIcon fontSize="md" />
+                  <HamburgerIcon fontSize="24px" />
                 )}
               </IconButton>
             </Box>

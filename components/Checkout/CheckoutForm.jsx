@@ -154,20 +154,19 @@ const CheckoutSummary = (props) => {
           left="0"
           bg="white"
           w="100%"
-          p="16px 32px"
+          p="0 24px 16px 24px"
           borderRadius="0 0 var(--border-radius) var(--border-radius)"
+          boxShadow="0 -4px 12px 0 rgb(0 0 0 / 10%)"
         >
-          {isIOS && isMobile && isLoading ? (
-            <Box w="100%" mb={4}>
+          {isIOS && isMobile && isLoading && (
+            <Box w="100%">
               <Progress size="xs" isIndeterminate colorScheme="brand" />
             </Box>
-          ) : (
-            <Divider color="whitesmoke" mb={4} />
           )}
-          <Flex justifyContent="space-between" alignItems="center">
+          <Flex justifyContent="space-between" alignItems="center" mt={4}>
             <Box fontSize="sm" fontWeight="bold">
               {checkout && (
-                <Stack direction="row">
+                <Stack direction={["column", "row"]} spacing={0}>
                   <Text fontWeight="normal">Time left:</Text>
                   <Timer
                     initialMinute={8}

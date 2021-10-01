@@ -12,7 +12,7 @@ const OrderSummary = (props) => {
     <Box bg="whitesmoke" p={4} borderRadius="var(--border-radius)" {...others}>
       <Text fontWeight="bold">Order summary</Text>
       <Flex justifyContent="space-between" p={2} mt={2}>
-        <Text>{`${quantity} x Online Booking`}</Text>
+        <Text>Online Booking</Text>
         <Text>{`${quantity} x RM ${unitPrice}.00`}</Text>
       </Flex>
 
@@ -32,8 +32,8 @@ const OrderSummary = (props) => {
         <Text>Total (MYR)</Text>
         <Text>{`RM ${totalPrice}.00`}</Text>
       </Flex>
-      <Flex justifyContent="center">
-        <Image src={stripeImg} w="180px" h="50px" objectFit="cover" />
+      <Flex justifyContent="center" mt={2}>
+        <Image src={stripeImg} w="150px" h="40px" objectFit="cover" />
       </Flex>
     </Box>
   );

@@ -52,22 +52,6 @@
 
 ## TO DO
 
-- [ ] Adjust font-size calculation at theme
-  - [ ] Use px instead of default rem
-  - [ ] Replace all font size updates on mobile to "sm"
-    - [x] Newsletter
-    - [x] ActivityCard
-    - [x] ScheduleModal
-    - [x] ActivitiesBucket
-    - [x] ActivityCarousel
-    - [x] NoActivities
-    - [x] Hero
-    - [x] Footer
-    - [x] Payment Summary
-    - [x] TabsPanel
-    - [x] CustomInput
-    - [x] ParticipantInfo/PayeeInfo/OrderSummary/CheckoutForm
-    - [x] ActivityPage items
 - [ ] ActivityCard
   - [x] Fix height
   - [ ] Simplify based on Meetup cards for mobile
@@ -87,6 +71,25 @@
 - [ ] React-responsive-carousel bug on iOS
 
 ## Done
+
+> 1/10/2021
+
+- [x] Adjust font-size calculation at theme
+  - [x] Use px instead of default rem
+  - [x] Replace all font size updates on mobile to "sm"
+    - [x] Newsletter
+    - [x] ActivityCard
+    - [x] ScheduleModal
+    - [x] ActivitiesBucket
+    - [x] ActivityCarousel
+    - [x] NoActivities
+    - [x] Hero
+    - [x] Footer
+    - [x] Payment Summary
+    - [x] TabsPanel
+    - [x] CustomInput
+    - [x] ParticipantInfo/PayeeInfo/OrderSummary/CheckoutForm
+    - [x] ActivityPage items
 
 > 30/9/2021
 
