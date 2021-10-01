@@ -62,7 +62,7 @@ const OrganizerInfo = (props) => {
         <Text fontSize="sm" fontWeight="bold" mt={[2, 0, 0]}>
           {orgName}
         </Text>
-        <Text fontSize="xs" mt={1} mb={2}>
+        <Text fontSize="sm" mt={1} mb={2}>
           {orgDescription}
         </Text>
 

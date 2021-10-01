@@ -308,10 +308,10 @@ const ScheduleBooking = (props) => {
                 <Text fontSize="md" mb={2}>
                   {activityName}
                 </Text>
-                <Text fontSize="xs" fontWeight="normal">
+                <Text fontSize="sm" fontWeight="normal">
                   {selectedDate.date}
                 </Text>
-                <Text fontSize="xs" fontWeight="normal">
+                <Text fontSize="sm" fontWeight="normal">
                   {selectedDate.time}
                 </Text>
               </Box>

@@ -27,7 +27,7 @@ const StandardButton = (props) => {
       colorScheme={colorScheme}
       variant={variant}
       onClick={onClick}
-      fontSize={["xs", "xs", "sm"]}
+      fontSize="sm"
       _focus={{ outline: "0" }}
       {...others}
       // _hover={{

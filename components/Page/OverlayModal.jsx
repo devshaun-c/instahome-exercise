@@ -51,7 +51,7 @@ const OverlayModal = (props) => {
         {hasClose && <ModalCloseButton />}
         <ModalBody className={classes.overlay}>{modalBody}</ModalBody>
 
-        <ModalFooter zIndex="500">{modalFooter}</ModalFooter>
+        {modalFooter && <ModalFooter zIndex="500">{modalFooter}</ModalFooter>}
       </ModalContent>
     </Modal>
   );

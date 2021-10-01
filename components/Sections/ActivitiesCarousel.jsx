@@ -98,12 +98,12 @@ const ActivitiesCarousel = (props) => {
     >
       <Box mb={8} mt={8}>
         {tag && (
-          <Text fontSize="md" mb={[1, 2, 2]}>
+          <Text fontSize={["sm", "md"]} mb={[1, 2, 2]}>
             {tag}
           </Text>
         )}
         <Flex justify="space-between" align="center">
-          <Heading fontSize="xl" fontWeight="bold" lineHeight="1.3">
+          <Heading fontSize={["lg", "xl"]} fontWeight="bold" lineHeight="1.3">
             {header}
           </Heading>
           {list.length > 5 && (

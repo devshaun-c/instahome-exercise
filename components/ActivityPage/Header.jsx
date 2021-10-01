@@ -13,7 +13,7 @@ const Header = (props) => {
 
   return (
     <Box className={classes.pageHeader} {...others}>
-      <Heading fontSize={["x-large", "x-large"]}>{title}</Heading>
+      <Heading fontSize="xl">{title}</Heading>
       <Text>{type ? getCategory(type) : ""}</Text>
     </Box>
   );

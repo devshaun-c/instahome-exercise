@@ -41,10 +41,6 @@ const Headliner = (props) => {
           <Text>
             Hmm... Looks like there's no activities for this category yet.
           </Text>
-          <Text>
-            Join our newsletter and be informed when there's new activities like
-            this in your area.
-          </Text>
         </Box>
       </Flex>
     </Section>

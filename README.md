@@ -67,7 +67,7 @@
     - [x] TabsPanel
     - [x] CustomInput
     - [x] ParticipantInfo/PayeeInfo/OrderSummary/CheckoutForm
-    - [ ] ActivityPage items
+    - [x] ActivityPage items
 - [ ] ActivityCard
   - [x] Fix height
   - [ ] Simplify based on Meetup cards for mobile

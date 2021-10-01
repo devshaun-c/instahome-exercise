@@ -63,7 +63,7 @@ const StandardInput = (props) => {
           variant={variant}
           placeholder={placeholder}
           size={inputSize}
-          fontSize="md"
+          fontSize="sm"
           // _focus={{ background: "white" }}
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}

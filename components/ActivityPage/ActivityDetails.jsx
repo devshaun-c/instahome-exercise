@@ -28,39 +28,33 @@ const ActivityDetails = (props) => {
   } = activityDetails;
 
   return (
-    <Box className={classes.activityDetails} {...others}>
+    <Box className={classes.activityDetails} fontSize="sm" {...others}>
       <Flex align="center" mt={4}>
         <BsClock fontSize="24px" color="lightgrey" />
-        <Box fontSize="xs" ml={4}>
-          <Text>{GetDurationText(durationInSeconds)}</Text>
-        </Box>
+        <Text ml={4}>{GetDurationText(durationInSeconds)}</Text>
       </Flex>
       <Flex align="center" mt={4}>
         <BsPeople fontSize="24px" color="lightgrey" />
-        <Box fontSize="xs" ml={4}>
-          <Text>
-            {participantLimit > 0
-              ? `Max. participants : ${participantLimit}`
-              : "No participant limit"}
-          </Text>
-        </Box>
+        <Text ml={4}>
+          {participantLimit > 0
+            ? `Max. participants : ${participantLimit}`
+            : "No participant limit"}
+        </Text>
       </Flex>
       <Flex align="center" mt={4}>
         <BsPersonCheck fontSize="24px" color="lightgrey" />
-        <Box fontSize="xs" ml={4}>
-          <Text>
-            {ageRestriction > 0
-              ? `Age group : ${ageRestriction} and above`
-              : "For any ages"}
-          </Text>
-        </Box>
+        <Text ml={4}>
+          {ageRestriction > 0
+            ? `Age group : ${ageRestriction} and above`
+            : "For any ages"}
+        </Text>
       </Flex>
       <Flex align="center" mt={4} fontSize="sm">
         {type === "inPerson" ? (
           <>
             <BsGeo fontSize="24px" color="lightgrey" />
             <Box ml={4}>
-              <Text> {locationDescription || ""}</Text>
+              <Text>{locationDescription || ""}</Text>
 
               <Link
                 href={`//google.com/search?q=${locationMaps}`}
@@ -78,9 +72,7 @@ const ActivityDetails = (props) => {
         ) : (
           <>
             <BsCameraVideo fontSize="24px" color="lightgrey" />
-            <Box ml={4}>
-              <Text>Online event</Text>
-            </Box>
+            <Text ml={4}>Online event</Text>
           </>
         )}
       </Flex>

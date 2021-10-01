@@ -21,7 +21,7 @@ const TabsPanel = ({ children, tabIndex, handleTabChange, ...others }) => {
         fontWeight="bold"
         borderBottom="2px solid transparent"
         color="gray.400"
-        fontSize="md"
+        fontSize={["sm", "md"]}
         _focus={{ outline: "none" }}
         p={["16px", "16px 24px"]}
         whiteSpace="nowrap"

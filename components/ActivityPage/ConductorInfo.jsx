@@ -16,13 +16,13 @@ const ConductorInfo = (props) => {
     >
       <Avatar mr={[0, 6, 6]} size="lg" src={conductorImage} />
       <Box textAlign={["center", "start", "start"]}>
-        <Text fontSize="xs" color="grey" mt={[2, 0, 0]}>
+        <Text fontSize="sm" color="grey" mt={[2, 0, 0]}>
           Your host for this activity
         </Text>
-        <Text fontSize="md" fontWeight="bold">
+        <Text fontSize="sm" fontWeight="bold">
           {conductorName}
         </Text>
-        <Text fontSize="xs" mt={1} mb={2}>
+        <Text fontSize="sm" mt={1} mb={2}>
           {conductorSummary || ""}
         </Text>
       </Box>

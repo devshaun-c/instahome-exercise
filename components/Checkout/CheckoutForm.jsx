@@ -104,7 +104,7 @@ const CheckoutSummary = (props) => {
 
   return (
     <form onSubmit={checkout ? handleCheckout : handleRegister}>
-      <Flex flexDirection="column" fontSize="xs" mb="60px" mt={6}>
+      <Flex flexDirection="column" fontSize="sm" mb="100px" mt={6}>
         {!checkout ? (
           <>
             <Flex alignItems="center" justifyContent="space-between" mb={10}>
@@ -122,6 +122,7 @@ const CheckoutSummary = (props) => {
                 />
               </Box>
             </Flex>
+
             <OrderSummary quantity={quantity} unitPrice={defaultPrice} />
           </>
         ) : (
