@@ -73,7 +73,7 @@ const ActivityCard = (props) => {
       h={["380px", "420px"]}
       className={classes.card}
       bg="white"
-      maxWidth={width}
+      maxWidth="280px"
       position="relative"
       boxShadow={["none", "var(--card-shadow)"]}
       _hover={{ boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%);" }}
@@ -122,7 +122,7 @@ const ActivityCard = (props) => {
             _hover={{ outline: "none" }}
             rel="noopener,noreferrer"
           >
-            <Text fontWeight="bold" fontSize="md" isTruncated mb={1}>
+            <Text fontWeight="bold" fontSize="md" noOfLines="2" mb={1}>
               {activityName}
             </Text>
           </Link>
@@ -136,13 +136,7 @@ const ActivityCard = (props) => {
         <Flex flexDirection="column" mt={8}>
           {type === ACTIVITY_TYPE.inPerson ? (
             <Flex alignItems="center">
-              {/* <BsGeoAlt color="grey" fontSize="16px" /> */}
-              <Text
-                fontSize="sm"
-                isTruncated
-                color="grey"
-                // ml={2}
-              >
+              <Text fontSize="sm" isTruncated color="grey">
                 {locationMaps}
               </Text>
             </Flex>
