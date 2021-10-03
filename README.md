@@ -46,18 +46,19 @@
 - [ ] ActivityCard
   - [ ] Simplify based on Meetup cards for mobile
   - [ ] Show tags
-- [ ] Partner cards
 - [ ] Recent activity images
-- [ ] Timetable (for this week)
 - [ ] Nice to have
+  - [ ] Reviews
   - [ ] Request date and private class
   - [ ] Get users interested topics
     - [ ] Reconsider usage of react-select (multi select is important)
 - [ ] Signup
   - [ ] Signup is disabled at InterestForm
+- [ ] Reviews
 
 ## TO DO
 
+- [ ] Update brand colorScheme
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Revise template database
@@ -72,6 +73,11 @@
 - [ ] React-responsive-carousel bug on iOS
 
 ## Done
+
+> 3/10/2021
+
+- [x] ActivityPage optimization--> Schedule and OtherActivities pulled on client-side API to reduce SSR compilation
+- [x] Use Lined Header for Subheaders
 
 > 1/10/2021
 

@@ -65,7 +65,7 @@ const ActivitiesBucket = (props) => {
         borderRadius="var(--border-radius)"
         justifyContent="space-between"
         flexDirection="column"
-        bg="brand.700"
+        bg="secondary"
         boxShadow="var(--card-shadow)"
         h={["380px", "420px"]}
       >
@@ -77,7 +77,7 @@ const ActivitiesBucket = (props) => {
             <Button
               size="sm"
               fontSize="sm"
-              colorScheme="teal"
+              colorScheme="whiteAlpha"
               onClick={() => console.log(activityType)}
             >
               Let us know

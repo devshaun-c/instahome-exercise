@@ -19,7 +19,9 @@ const BackToTop = ({ show, right, left }) => {
     <>
       {visible ? (
         <Button
-          colorScheme="brand"
+          bg="primary"
+          color="white"
+          _hover={{}}
           display={["flex", "flex", "flex"]}
           onClick={toTop}
           position="fixed"

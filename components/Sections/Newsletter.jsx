@@ -60,7 +60,7 @@ const Newsletter = (props) => {
               <StandardButton
                 pl="32px"
                 pr="32px"
-                colorScheme="teal"
+                colorScheme="brand"
                 w={["100%", "100%", "60%"]}
                 type="submit"
               >

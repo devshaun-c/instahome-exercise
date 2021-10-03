@@ -3,7 +3,7 @@ import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
-import img from "../../public/static/images/hero.jpg";
+import img from "../../public/static/images/explore.jpg";
 import Container from "../Page/Container";
 
 const useStyles = createUseStyles({
@@ -34,9 +34,10 @@ const Hero = (props) => {
     <Box
       className={classes.section}
       backgroundImage={bgImg || img}
-      height={["400px", "400px", "600px"]}
+      height={["400px", "400px", "500px"]}
       position="relative"
-      backgroundPosition={["center", "center", "0 -100px"]}
+      // backgroundPosition={["center", "center", "0 -100px"]}
+      backgroundPosition={["center", "center", "center"]}
     >
       <Container>
         <Stack

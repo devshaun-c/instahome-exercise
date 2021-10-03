@@ -25,6 +25,7 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import StandardButton from "../Buttons/StandardButton";
 import Image from "next/image";
+import { getCategory } from "../../constants/activity";
 
 const useStyles = createUseStyles({
   cardButton: {
@@ -53,6 +54,7 @@ const ScheduleModal = (props) => {
     defaultPrice,
     locationMaps,
     coverImage,
+    category,
   } = activity;
 
   console.log(activity);
@@ -106,7 +108,12 @@ const ScheduleModal = (props) => {
             justifyContent={["center", "space-between"]}
             alignItems="center"
           >
-            <Text fontSize="md">{activityName}</Text>
+            <Box>
+              <Text color="primary" fontWeight="bold" fontSize="sm">
+                {category ? getCategory(category) : ""}
+              </Text>
+              <Text fontSize="md">{activityName}</Text>
+            </Box>
             <Avatar src={coverImage[0].url} size="lg" mb={[2, 0]} />
           </Flex>
         </ModalHeader>
@@ -135,8 +142,8 @@ const ScheduleModal = (props) => {
 
           <Flex justifyContent="space-between" alignItems="center">
             <Flex alignItems="center">
-              <CalendarIcon />
-              <Text fontSize="sm" ml={2}>
+              <CalendarIcon color="primary" />
+              <Text fontSize="sm" ml={2} color="primary">
                 Current Schedule
               </Text>
             </Flex>

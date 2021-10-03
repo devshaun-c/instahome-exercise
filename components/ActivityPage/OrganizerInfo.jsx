@@ -12,6 +12,8 @@ import { createUseStyles } from "react-jss";
 import { FaHome, FaWhatsapp } from "react-icons/fa";
 import { BsEnvelope } from "react-icons/bs";
 import { GetClickableLink } from "../../utils/functions";
+import Subheader from "./Subheader";
+import Subsection from "./Subsection";
 
 const useStyles = createUseStyles({});
 
@@ -19,14 +21,7 @@ const OrganizerInfo = (props) => {
   const classes = useStyles();
   const { info, ...others } = props;
 
-  const {
-    orgName,
-    orgContact,
-    orgWebsite,
-    orgDescription,
-    partnerImage,
-    publicEmail,
-  } = info;
+  const { orgName, orgContact, orgWebsite, publicEmail } = info;
 
   const LinkIconButton = ({ url, icon }) => {
     return (
@@ -52,47 +47,29 @@ const OrganizerInfo = (props) => {
   };
 
   return (
-    <Flex
-      {...others}
-      flexDirection={["column", "row", "row"]}
-      alignItems={["center", "start", "start"]}
-    >
-      <Avatar mr={[0, 6, 6]} size="lg" src={partnerImage} />
-      <Box textAlign={["center", "start", "start"]}>
-        <Text fontSize="sm" fontWeight="bold" mt={[2, 0, 0]}>
-          {orgName}
-        </Text>
-        <Text fontSize="sm" mt={1} mb={2}>
-          {orgDescription}
-        </Text>
-
-        <HStack
-          color="lightgrey"
-          spacing={1}
-          justifyContent={["center", "flex-start", "flex-start"]}
-        >
-          {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
-          {orgContact && (
-            <IconButton
-              variant="ghost"
-              fontSize="24px"
-              icon={<FaWhatsapp />}
-              size="sm"
-              onClick={() => window.open(`https://wa.me/${orgContact}`)}
-            />
-          )}
-          {publicEmail && (
-            <IconButton
-              variant="ghost"
-              fontSize="24px"
-              icon={<BsEnvelope />}
-              size="sm"
-              onClick={() => mailTo(publicEmail, `Contact Us - ${orgName}`, "")}
-            />
-          )}
-        </HStack>
-      </Box>
-    </Flex>
+    <Subsection title="Contact information">
+      <HStack color="lightgrey" spacing={1}>
+        {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
+        {orgContact && (
+          <IconButton
+            variant="ghost"
+            fontSize="24px"
+            icon={<FaWhatsapp />}
+            size="sm"
+            onClick={() => window.open(`https://wa.me/${orgContact}`)}
+          />
+        )}
+        {publicEmail && (
+          <IconButton
+            variant="ghost"
+            fontSize="24px"
+            icon={<BsEnvelope />}
+            size="sm"
+            onClick={() => mailTo(publicEmail, `Contact Us - ${orgName}`, "")}
+          />
+        )}
+      </HStack>
+    </Subsection>
   );
 };
 

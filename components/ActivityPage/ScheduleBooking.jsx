@@ -25,7 +25,6 @@ const useStyles = createUseStyles({
   booking: {
     display: "flex",
     flexDirection: "column",
-    // border: (props) => `1px solid ${props.colors.brand[600]}`,
     width: "100%",
     borderRadius: "var(--border-radius)",
   },
@@ -37,7 +36,7 @@ const useStyles = createUseStyles({
     padding: "16px",
     color: (props) => props.colors.brand[700],
     borderRadius: "var(--border-radius) var(--border-radius) 0 0",
-    background: (props) => props.colors.brand[100],
+    background: (props) => props.colors.brand[50],
   },
 });
 
@@ -272,7 +271,7 @@ const ScheduleBooking = (props) => {
                   onChange={handleSelectDate}
                   value={selectedDate?.selectedId}
                   placeholder="Select date"
-                  borderColor="brand.600"
+                  borderColor="brand.200"
                   backgroundColor="white"
                 />
                 {noSelect && (

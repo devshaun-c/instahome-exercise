@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #2c7a7b;
+  /* --primary-color: #2c7a7b; */
+  --primary-color: #ff5722;
   --secondary-color: rgb(255, 166, 52);
   --default-font-color: #414141;
   --title-font: "Kaushan Script", system-ui, sans-serif;

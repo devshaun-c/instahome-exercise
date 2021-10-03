@@ -12,7 +12,7 @@ import {
   GetAllPartnerSchedules,
   GetAllPartnerActivities,
 } from "../../../utils/firebase";
-import Header from "../../../components/ActivityPage/Header";
+import MainHeader from "../../../components/ActivityPage/MainHeader";
 import ImageCarousel from "../../../components/ActivityPage/ImageCarousel";
 import AboutActivity from "../../../components/ActivityPage/AboutActivity";
 import OrganizerInfo from "../../../components/ActivityPage/OrganizerInfo";
@@ -22,6 +22,7 @@ import ScheduleBooking from "../../../components/ActivityPage/ScheduleBooking";
 import ShareBar from "../../../components/Miscellaneous/ShareBar";
 import ConductorInfo from "../../../components/ActivityPage/ConductorInfo";
 import ActivityCard from "../../../components/Cards/ActivityCard";
+import { fetchGetJSON } from "../../../utils/api-helpers";
 
 const useStyles = createUseStyles({
   participantSection: {
@@ -45,6 +46,7 @@ const ActivityPage = (props) => {
   const { partnerId, templateId } = router.query;
   const url = `http://localhost:3000/activity/${partnerId}/${templateId}`;
   const [schedules, setSchedules] = useState([]);
+  const [partnerActivites, setPartnerActivities] = useState([]);
 
   const CheckValidPartnerAndActivity = () => {
     const activityData = JSON.parse(props.activityData);
@@ -64,27 +66,40 @@ const ActivityPage = (props) => {
   const activityDetails = JSON.parse(props.activityData) || {};
   const organizationDetails =
     JSON.parse(props.partnerData).organizationDetails || {};
-  const allSchedules = JSON.parse(props.schedules) || [];
+
   const orgName = organizationDetails.orgName;
 
   const { aboutActivity, activityId, activityName, shortSummary } =
     activityData;
 
   useEffect(async () => {
-    if (allSchedules) {
-      setSchedules(allSchedules);
-    } else {
-      setSchedules([]);
+    if (CheckValidPartnerAndActivity()) {
+      const scheduleData = await GetSchedule(partnerId, templateId);
+      const partnerActivitiesData = await GetPartnerActivities(partnerId);
+
+      if (scheduleData.length) {
+        setSchedules(scheduleData);
+      }
+      if (partnerActivitiesData.length) {
+        const otherPartnerActivities = partnerActivitiesData.filter(
+          (activity) => activity.activityId !== activityId
+        );
+        setPartnerActivities(otherPartnerActivities);
+      }
     }
   }, []);
 
-  var otherPartnerActivities = [];
-  if (props.activities) {
-    const allPartnerActivities = JSON.parse(props.activities);
-    otherPartnerActivities = allPartnerActivities.filter(
-      (activity) => activity.activityId !== activityId
+  const GetSchedule = async (partnerId, templateId) => {
+    const data = await fetchGetJSON(
+      `/api/schedules/${partnerId}/${templateId}`
     );
-  }
+    return data;
+  };
+
+  const GetPartnerActivities = async (partnerId) => {
+    const data = await fetchGetJSON(`/api/partner_activities/${partnerId}`);
+    return data;
+  };
 
   return (
     <Page
@@ -94,14 +109,13 @@ const ActivityPage = (props) => {
       }}
       alwaysVisible
     >
+      <MainHeader
+        title={activityName}
+        orgInfo={organizationDetails}
+        category={activityDetails.category}
+      />
       {activityName !== "Activity Not Found" ? (
         <Section fullView={false} bgColor="#F9F9F9">
-          <Header
-            mt={6}
-            mb={6}
-            title={activityName}
-            type={activityDetails.category}
-          />
           <Grid
             templateColumns={[
               "repeat(1, 1fr)",
@@ -110,18 +124,20 @@ const ActivityPage = (props) => {
             ]}
             gap={[0, 0, "24px"]}
           >
-            <GridItem colSpan={[5, 5, 3]} maxW={["100%", "90%"]}>
+            <GridItem colSpan={[5, 5, 3]} maxW={["100%", "90%"]} mb={10}>
               <ImageCarousel info={activityDetails} />
+
+              <AboutActivity aboutActivity={aboutActivity} />
+
               {activityDetails.conductorName && (
-                <Paper mt={4}>
-                  <ConductorInfo
-                    conductorName={activityDetails.conductorName}
-                    conductorImage={activityDetails.conductorImage}
-                    conductorSummary={activityDetails.conductorSummary}
-                  />
-                </Paper>
+                <ConductorInfo
+                  conductorName={activityDetails.conductorName}
+                  conductorImage={activityDetails.conductorImage}
+                  conductorSummary={activityDetails.conductorSummary}
+                />
               )}
-              <AboutActivity aboutActivity={aboutActivity} mt={4} />
+
+              <OrganizerInfo info={organizationDetails} />
             </GridItem>
 
             <GridItem colSpan={[5, 5, 2]}>
@@ -135,9 +151,6 @@ const ActivityPage = (props) => {
                   handleSchedules={setSchedules}
                 />
               </Paper>
-              <Paper mt={4}>
-                <OrganizerInfo info={organizationDetails} />
-              </Paper>
             </GridItem>
           </Grid>
         </Section>
@@ -148,16 +161,16 @@ const ActivityPage = (props) => {
           </Flex>
         </Section>
       )}
-      {otherPartnerActivities.length > 0 && (
+      {partnerActivites.length > 0 && (
         <CardCarouselSection
           // tag={getCategory(activityDetails.category)}
           height="100%"
           header={`See other activites by ${orgName}`}
-          pagination={otherPartnerActivities.length > 4 ? true : false}
-          grabCursor={otherPartnerActivities.length > 4 ? true : false}
-          enabled={otherPartnerActivities.length > 1 ? true : false}
+          pagination={partnerActivites.length > 4 ? true : false}
+          grabCursor={partnerActivites.length > 4 ? true : false}
+          enabled={partnerActivites.length > 1 ? true : false}
         >
-          {otherPartnerActivities.map((activity) => (
+          {partnerActivites.map((activity) => (
             <SwiperSlide
               key={activity.activityId}
               className={classes.swiperSlide}
@@ -180,17 +193,12 @@ export const getServerSideProps = async (context) => {
     templateId,
     "templates"
   );
-
   const partnerData = await GetSpecificDocFromFirebase(partnerId, "partners");
-  const schedules = await GetAllPartnerSchedules(partnerId, templateId, 5);
-  const allActivities = await GetAllPartnerActivities(partnerId);
 
   return {
     props: {
       partnerData: partnerData ? JSON.stringify(partnerData) : null,
       activityData: activityData ? JSON.stringify(activityData) : null,
-      schedules: schedules ? JSON.stringify(schedules) : null,
-      activities: allActivities ? JSON.stringify(allActivities) : null,
     },
   };
 };
