@@ -19,9 +19,10 @@ const useStyles = createUseStyles({});
 
 const OrganizerInfo = (props) => {
   const classes = useStyles();
-  const { info, ...others } = props;
+  const { orgInfo, activityInfo, ...others } = props;
 
-  const { orgName, orgContact, orgWebsite, publicEmail } = info;
+  const { orgName, orgContact, orgWebsite, publicEmail } = orgInfo;
+  const { hostName, hostContact, hostEmail } = activityInfo;
 
   const LinkIconButton = ({ url, icon }) => {
     return (
@@ -50,7 +51,7 @@ const OrganizerInfo = (props) => {
     <Subsection title="Contact information">
       <HStack color="lightgrey" spacing={1}>
         {orgWebsite && <LinkIconButton icon={<FaHome />} url={orgWebsite} />}
-        {orgContact && (
+        {(hostContact || orgContact) && (
           <IconButton
             variant="ghost"
             fontSize="24px"
@@ -59,7 +60,7 @@ const OrganizerInfo = (props) => {
             onClick={() => window.open(`https://wa.me/${orgContact}`)}
           />
         )}
-        {publicEmail && (
+        {(hostEmail || publicEmail) && (
           <IconButton
             variant="ghost"
             fontSize="24px"

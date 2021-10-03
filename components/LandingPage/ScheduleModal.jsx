@@ -57,8 +57,6 @@ const ScheduleModal = (props) => {
     category,
   } = activity;
 
-  console.log(activity);
-
   const url = `activity/${partnerId}/${activityId}`;
 
   useEffect(() => {
@@ -108,7 +106,7 @@ const ScheduleModal = (props) => {
             justifyContent={["center", "space-between"]}
             alignItems="center"
           >
-            <Box>
+            <Box textAlign={["center", "start"]}>
               <Text color="primary" fontWeight="bold" fontSize="sm">
                 {category ? getCategory(category) : ""}
               </Text>

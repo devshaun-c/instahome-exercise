@@ -60,8 +60,6 @@
 
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
-- [ ] Revise template database
-  - [ ] Use activity name with "-" for acitivityId + include coded time
 - [ ] Checkout summary page
   - [ ] On register + countdown, set firebase to reserve spot
     - [ ] Field for viewing:TRUE and paid:TRUE
@@ -78,6 +76,11 @@
 - [x] ActivityPage optimization--> Schedule and OtherActivities pulled on client-side API to reduce SSR compilation
 - [x] Use Lined Header for Subheaders
 - [x] Update brand colorScheme
+- [x] ActivityPage
+  - [x] Spacing between subsections for mobile need to be increased
+  - [x] ScheduleModal for mobile align center
+  - [x] Default to Host details else, use Org details
+- [x] Activity Page url is now coming from env (updated in Vercel env as well)
 
 > 1/10/2021
 

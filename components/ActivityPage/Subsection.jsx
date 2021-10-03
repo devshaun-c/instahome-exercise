@@ -10,7 +10,7 @@ const Subsection = (props) => {
   const { title, children } = props;
 
   return (
-    <Box alignItems="center" mt={6} mb={4}>
+    <Box alignItems="center" pt={6} pb={6}>
       <Subheader title={title} />
       {children}
     </Box>

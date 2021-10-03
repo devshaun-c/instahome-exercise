@@ -44,7 +44,9 @@ const ActivityPage = (props) => {
   const classes = useStyles();
   const router = useRouter();
   const { partnerId, templateId } = router.query;
-  const url = `http://localhost:3000/activity/${partnerId}/${templateId}`;
+
+  const url = `${process.env.NEXT_PUBLIC_VERCEL_URL}${router.asPath}`;
+
   const [schedules, setSchedules] = useState([]);
   const [partnerActivites, setPartnerActivities] = useState([]);
 
@@ -137,7 +139,10 @@ const ActivityPage = (props) => {
                 />
               )}
 
-              <OrganizerInfo info={organizationDetails} />
+              <OrganizerInfo
+                orgInfo={organizationDetails}
+                activityInfo={activityData}
+              />
             </GridItem>
 
             <GridItem colSpan={[5, 5, 2]}>

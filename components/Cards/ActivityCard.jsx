@@ -14,12 +14,6 @@ const useStyles = createUseStyles({
       color: "var(--primary-color)",
     },
   },
-  card: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    borderRadius: "var(--border-radius)",
-  },
   cardButton: {
     background: "white",
     color: " var(--primary-color)",
@@ -69,15 +63,16 @@ const ActivityCard = (props) => {
   const url = `/activity/${partnerId}/${activityId}`;
 
   return (
-    <Box
-      h={["380px", "420px"]}
-      className={classes.card}
+    <Flex
+      h={["400px", "430px"]}
+      width="100%"
+      flexDirection="column"
+      borderRadius="var(--border-radius)"
       bg="white"
       maxWidth={["100%", "300px"]}
       position="relative"
       boxShadow={["none", "var(--card-shadow)"]}
       _hover={{ boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%);" }}
-      pb={2}
     >
       <Box
         minH={["150px", "150px", "150px"]}
@@ -110,7 +105,7 @@ const ActivityCard = (props) => {
       </Box>
       <Flex
         h="100%"
-        p="16px"
+        p={3}
         paddingTop="24px"
         flexDirection="column"
         justifyContent="space-between"
@@ -174,7 +169,7 @@ const ActivityCard = (props) => {
         handleToggle={setScheduleOpen}
         activity={activity}
       />
-    </Box>
+    </Flex>
   );
 };
 
