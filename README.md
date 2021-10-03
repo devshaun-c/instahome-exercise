@@ -58,7 +58,6 @@
 
 ## TO DO
 
-- [ ] Update brand colorScheme
 - [ ] Revise schedule database
   - [ ] Make schedule as Root (use partnerName as key)
 - [ ] Revise template database
@@ -78,6 +77,7 @@
 
 - [x] ActivityPage optimization--> Schedule and OtherActivities pulled on client-side API to reduce SSR compilation
 - [x] Use Lined Header for Subheaders
+- [x] Update brand colorScheme
 
 > 1/10/2021
 

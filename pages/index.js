@@ -303,8 +303,7 @@ const Home = (props) => {
 
 export default Home;
 
-//Changed from getServerSideProps 26/09/2021
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const maxDataLimit = 8;
   const partners = await GetAllPartners();
   const events = await GetActiveActivities("1", maxDataLimit);
