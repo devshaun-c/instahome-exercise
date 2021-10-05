@@ -71,6 +71,10 @@
 
 ## Done
 
+> 5/10/2021
+
+- [x] AboutActivity text editor paragraph spacing issue solved (needed to add margin on <p>)
+
 > 3/10/2021
 
 - [x] ActivityPage optimization--> Schedule and OtherActivities pulled on client-side API to reduce SSR compilation
