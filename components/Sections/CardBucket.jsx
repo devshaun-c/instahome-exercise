@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Heading,
-  CircularProgress,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "./Section";
 import { useTheme } from "@emotion/react";
@@ -16,12 +8,12 @@ import Image from "next/image";
 import img from "../../public/static/images/explore.svg";
 import LoadingOverlay from "../Miscellaneous/LoadingOverlay";
 import { BADGES } from "../../constants/badges";
-import NoActivities from "../LandingPage/NoActivities";
+import NotFound from "../LandingPage/NotFound";
 import { fetchGetJSON } from "../../utils/api-helpers";
 
 const useStyles = createUseStyles({});
 
-const ActivitiesBucket = (props) => {
+const CardBucket = (props) => {
   const theme = useTheme();
   const classes = useStyles(props);
   const {
@@ -30,33 +22,33 @@ const ActivitiesBucket = (props) => {
     tag,
     header,
     height = "600px",
-    // list,
-    // isLoading,
+    definedList = [],
     categoryDetails = {
-      topic: "Looking for more activities?",
+      topic: "Bucket Title",
       image: img,
       activityType: "",
     },
   } = props;
   const { topic, image, activityType } = categoryDetails;
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(definedList);
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
-    const activities = await GetCategoryActivities(activityType);
-    if (activities) {
-      setList(activities);
+    if (definedList.length > 0) {
+      const activities = await GetBucketData(id);
+      if (activities) {
+        setList(activities);
+      }
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
   }, []);
 
-  const GetCategoryActivities = async (categoryId) => {
-    if (categoryId > 0) {
-      const data = await fetchGetJSON(`/api/templates/${categoryId}`);
-      return data;
-    }
+  const GetBucketData = async (id) => {
+    const data = await fetchGetJSON(`/api/templates/${id}`);
+    return data;
   };
 
   const LastCard = () => {
@@ -115,8 +107,6 @@ const ActivitiesBucket = (props) => {
           <Heading fontSize={["lg", "xl"]} fontWeight="bold" lineHeight="1.3">
             {header}
           </Heading>
-
-          {/* <Link fontSize="md">See all</Link> */}
         </Flex>
       </Box>
       {loading ? (
@@ -146,7 +136,7 @@ const ActivitiesBucket = (props) => {
               <LastCard />
             </Grid>
           ) : (
-            <NoActivities image={image} activityType={activityType} />
+            <NotFound image={image} activityType={activityType} />
           )}
         </>
       )}
@@ -154,4 +144,4 @@ const ActivitiesBucket = (props) => {
   );
 };
 
-export default ActivitiesBucket;
+export default CardBucket;

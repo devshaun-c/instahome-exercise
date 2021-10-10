@@ -22,7 +22,7 @@ const SuccessPage = () => {
   return (
     <Page
       pageMeta={{
-        title: "Payment success - AfterWork",
+        title: "Payment success",
         description: "",
       }}
       alwaysVisible

@@ -23,7 +23,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const ActivitiesCarousel = (props) => {
+const CardCarousel = (props) => {
   const theme = useTheme();
   const classes = useStyles(props);
   const {
@@ -39,9 +39,10 @@ const ActivitiesCarousel = (props) => {
     height = "600px",
     list,
     tabIndex,
-    handleViewAll,
+    hasLastCard = false,
+    handleViewAll = () => {},
     categoryDetails = {
-      topic: "Looking for more activities?",
+      topic: "Carousel Title",
       image: placeholderImg,
       category: "",
     },
@@ -107,9 +108,7 @@ const ActivitiesCarousel = (props) => {
             {header}
           </Heading>
           {list.length > 5 && (
-            <TextButton onClick={() => handleViewAll(tabIndex)}>
-              View all
-            </TextButton>
+            <TextButton onClick={handleViewAll}>View all</TextButton>
           )}
         </Flex>
       </Box>
@@ -132,7 +131,7 @@ const ActivitiesCarousel = (props) => {
               </SwiperSlide>
             ))}
           <SwiperSlide className={classes.swiperSlide}>
-            <LastCard />
+            {hasLastCard && <LastCard />}
           </SwiperSlide>
         </Carousel>
       </Box>
@@ -142,4 +141,4 @@ const ActivitiesCarousel = (props) => {
   );
 };
 
-export default ActivitiesCarousel;
+export default CardCarousel;

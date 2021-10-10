@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Section from "../Sections/Section";
-import StandardButton from "../Buttons/StandardButton";
 import placeholderImg from "../../public/static/images/coding.svg";
 import Image from "next/image";
 import { useTheme } from "@emotion/react";
 
 const useStyles = createUseStyles({});
 
-const Headliner = (props) => {
+const NotFound = (props) => {
   const theme = useTheme();
   const classes = useStyles(props);
   const { bgColor, bgImg, height, image, minHeight = "600px" } = props;
@@ -47,4 +46,4 @@ const Headliner = (props) => {
   );
 };
 
-export default Headliner;
+export default NotFound;

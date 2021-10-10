@@ -118,7 +118,11 @@ const PricingPlans = (props) => {
                   </Text>
                 </Box>
               </Box>
-              <StandardButton colorScheme="teal" onClick={plan.fcn} isFullWidth>
+              <StandardButton
+                colorScheme="brand"
+                onClick={plan.fcn}
+                isFullWidth
+              >
                 Select
               </StandardButton>
               <Box mt={8}>

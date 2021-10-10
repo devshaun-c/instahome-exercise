@@ -128,20 +128,20 @@ const Navbar = (props) => {
     { title: "Explore", mainUrl: "/", items: [] },
     { title: "About", mainUrl: "/about", items: [] },
     {
-      title: "Organize",
+      title: "Others",
       mainUrl: "",
       items: [
-        { name: "Our partners", url: "/" },
-        { name: "Why partner with us?", url: "/" },
+        { name: "Section Page", url: "/sections-page" },
+        { name: "Component Page", url: "/component-page" },
       ],
     },
     {
-      title: "Corporate",
+      title: "Support",
       mainUrl: "",
       items: [
-        { name: "Why join us?", url: "/" },
+        { name: "Contact", url: "/" },
         {
-          name: "Employee benefits program",
+          name: "Help",
           url: "/",
         },
       ],
@@ -160,7 +160,7 @@ const Navbar = (props) => {
               rel="noopener,noreferrer"
               className={classes.title}
             >
-              <Text color="primary">AfterWork</Text>
+              <Text color="primary">Title</Text>
             </Link>
 
             <div className={classes.menuLinks}>
@@ -212,9 +212,6 @@ const Navbar = (props) => {
                       _expanded={{ background: "gray.100" }}
                       _focus={{ outline: "none" }}
                       bg="whitesmoke"
-                      // onClick={() =>
-                      //   item.mainUrl ? handleNav(item.mainUrl) : {}
-                      // }
                     >
                       <Link
                         href={item.mainUrl}

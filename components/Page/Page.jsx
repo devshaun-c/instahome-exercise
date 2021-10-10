@@ -15,7 +15,7 @@ const Page = (props) => {
       <Head>
         <title>{pageMeta.title}</title>
         <meta name="robots" content="follow, index" />
-        <link rel="shortcut icon" href="/static/images/sushi.svg" />
+        <link rel="shortcut icon" href="/static/icons/favicon.svg" />
         <meta content={pageMeta.description} name="description" />
         {/* <meta property="og:url" content={`${pageMeta.webUrl}${router.asPath}`} /> */}
         {/* <meta property="og:type" content={pageMeta.type} /> */}

@@ -29,7 +29,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel=" icon" href="/static/images/sushi.svg"></link>
+          <link rel=" icon" href="/static/icons/favicon.svg"></link>
           <link rel="preconnect" href="https://fonts.gstatic.com"></link>
           <link
             href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"

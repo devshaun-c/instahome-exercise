@@ -36,7 +36,6 @@ const Hero = (props) => {
       backgroundImage={bgImg || img}
       height={["400px", "400px", "500px"]}
       position="relative"
-      // backgroundPosition={["center", "center", "0 -100px"]}
       backgroundPosition={["center", "center", "center"]}
     >
       <Container>
@@ -54,7 +53,7 @@ const Hero = (props) => {
               maxWidth="800px"
               lineHeight={[1.1, 1.2, 1.2]}
             >
-              It's a Big World Out There. Go Explore!
+              BIG CAPTION ABOUT WEBSITE
             </Heading>
           </Box>
 

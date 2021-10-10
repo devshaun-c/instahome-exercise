@@ -47,20 +47,7 @@ const SectionsPage = () => {
       }}
     >
       <div className={classes.pageWrapper}>
-        <Hero
-          height={["100%", "500px", "600px"]}
-          bgColor="whitesmoke"
-          bgImage=""
-          alt=""
-          callToAction={() => {}}
-          secondaryAction={() => {}}
-          primaryButtonText="Get Started Today"
-          secondaryButtonText="See Schedule"
-          header="It's a Big World Out There, Go Explore!"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus congue bibendum ante, sed imperdiet eros fermentum in."
-          hasImage
-          heroImg={img}
-        />
+        <Hero />
 
         <Focus
           height={["100%", "50vh", "600px"]}
@@ -286,7 +273,7 @@ const SectionsPage = () => {
             <StandardButton
               variant="link"
               size="sm"
-              colorScheme="teal"
+              colorScheme="brand"
               onClick={() => {}}
             >
               learn more
@@ -299,7 +286,7 @@ const SectionsPage = () => {
             <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
               Highlights from our recent activities
             </Text>
-            <StandardButton variant="link" size="sm" colorScheme="teal">
+            <StandardButton variant="link" size="sm" colorScheme="brand">
               learn more
             </StandardButton>
           </SquareCard>
@@ -310,7 +297,7 @@ const SectionsPage = () => {
             <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
               Highlights from our recent activities
             </Text>
-            <StandardButton variant="link" size="sm" colorScheme="teal">
+            <StandardButton variant="link" size="sm" colorScheme="brand">
               learn more
             </StandardButton>
           </SquareCard>
@@ -321,7 +308,7 @@ const SectionsPage = () => {
             <Text fontSize="sm" color="grey" textAlign="center" mb={4}>
               Highlights from our recent activities
             </Text>
-            <StandardButton variant="link" size="sm" colorScheme="teal">
+            <StandardButton variant="link" size="sm" colorScheme="brand">
               learn more
             </StandardButton>
           </SquareCard>
@@ -332,7 +319,7 @@ const SectionsPage = () => {
           description="This is used to get attention of a visitor to send a key message about the product, sign-up for newsletters, or redirect to a particular page"
           textColor="white"
           height="100%"
-          bgColor="teal.700"
+          bgColor="brand.700"
           bgImg=""
           buttonLabel="See All"
           handleClick={() => {}}
@@ -459,7 +446,7 @@ const SectionsPage = () => {
           description="Plans that start free and grow with you"
         />
 
-        <Newsletter height="600px" bgColor="teal.300" />
+        <Newsletter height="600px" bgColor="brand.300" />
 
         <StickyBox position="bottom" bg="white">
           <Box

@@ -28,6 +28,7 @@ const VerticalImageCard = (props) => {
     text,
     alt,
     url,
+    action,
     ...others
   } = props;
 
@@ -85,11 +86,11 @@ const VerticalImageCard = (props) => {
         <Text fontWeight="bold" fontSize="md" isTruncated>
           {title}
         </Text>
-        <Text fontSize="xs" isTruncated>
+        <Text fontSize="sm" isTruncated>
           {subtitle}
         </Text>
         <Box marginTop="16px">
-          <Text fontSize="xs" noOfLines={[2, 3, 3]}>
+          <Text fontSize="sm" noOfLines={[2, 3, 3]}>
             {text}
           </Text>
         </Box>
