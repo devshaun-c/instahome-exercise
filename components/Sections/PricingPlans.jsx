@@ -137,9 +137,13 @@ const PricingPlans = (props) => {
                       <Box display="flex" alignItems="center">
                         <ListIcon fontSize="18px" mr={3}>
                           {item.included ? (
-                            <CheckIcon color="green.500" />
+                            <CheckIcon
+                              color={plan.highlight ? "white" : "black"}
+                            />
                           ) : (
-                            <MinusIcon color="gray.500" />
+                            <MinusIcon
+                              color={plan.highlight ? "white" : "black"}
+                            />
                           )}
                         </ListIcon>
                         <Text fontSize="sm" fontWeight="bold">

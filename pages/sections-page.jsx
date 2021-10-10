@@ -45,6 +45,7 @@ const SectionsPage = () => {
         title: "Sections - NextJS Template",
         description: "Section examples built with NextJS components",
       }}
+      alwaysVisible
     >
       <div className={classes.pageWrapper}>
         <Hero />

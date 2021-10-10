@@ -2,7 +2,7 @@
 
 - nextJS (v11)
 - styled-components-babelrc
-- firebase
+- firebase (v8)
 - draft-js (For rich text editor)
 - draft-convert (For rich text editor
 - express
@@ -20,6 +20,10 @@
 - Google Analytics at \_document.js
 - file-loader url-loader --> To handle mp3 files
 - next-compose-plugins --> for multiple plugins in next.config.js
+- react-input-autosize
+- react-to-print
+- stripeJS
+- @iconscout/react-unicons
 
 ## To maintain styling of useStyles during page refresh
 
@@ -27,13 +31,5 @@
 - add \_document.js into Pages
 
 ## Changes to Template
-
-- Reduce margin between sections
-- Upgrade to NextJS v11
-- Updated next.config.js
-- Added npm i react-input-autosize
-- Added npm i react-to-print
-- Added stripeJS
-- ADded npm i --save @iconscout/react-unicons
 
 ## TO DO
