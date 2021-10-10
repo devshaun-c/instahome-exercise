@@ -59,7 +59,7 @@ const Footer = (props) => {
       position="relative"
       className={classes.footer}
     >
-      <Grid
+      {/* <Grid
         templateColumns={[
           "repeat(1, 1fr)",
           "repeat(1, 1fr)",
@@ -125,7 +125,7 @@ const Footer = (props) => {
           </Grid>
         </GridItem>
       </Grid>
-      <Divider mb={4} mt={6} />
+      <Divider mb={4} mt={6} /> */}
       <Box display="flex" justifyContent="space-between" pb="48px">
         <Text fontSize="sm">&copy; 2021 Company</Text>
         <HStack spacing={3}>

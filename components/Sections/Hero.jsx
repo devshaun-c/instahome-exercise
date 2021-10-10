@@ -8,6 +8,7 @@ import Container from "../Page/Container";
 
 const useStyles = createUseStyles({
   section: {
+    width: "100%",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     padding: "40px 0",

@@ -7,6 +7,7 @@ const Page = (props) => {
   const {
     children,
     alwaysVisible = false,
+    showNav = true,
     pageMeta = { title: "", description: "" },
   } = props;
 
@@ -27,7 +28,7 @@ const Page = (props) => {
         <meta name="twitter:description" content={pageMeta.description} />
       </Head>
       <div>
-        <Navbar alwaysVisible={alwaysVisible} />
+        {showNav && <Navbar alwaysVisible={alwaysVisible} />}
 
         <Box pt={alwaysVisible ? "60px" : "0px"}>{children}</Box>
       </div>

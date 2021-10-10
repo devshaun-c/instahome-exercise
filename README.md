@@ -24,6 +24,7 @@
 - react-to-print
 - stripeJS
 - @iconscout/react-unicons
+- react-hook-form
 
 ## To maintain styling of useStyles during page refresh
 
@@ -33,3 +34,8 @@
 ## Changes to Template
 
 ## TO DO
+
+- [ ] Split organization details in a different form
+  - [ ] Create a tab with line and number system
+- [ ] Image darken background overlay
+- [ ] How it works page
