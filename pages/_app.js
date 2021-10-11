@@ -51,8 +51,8 @@ const theme = extendTheme({
   },
   fontSizes: {
     xs: "12px",
-    sm: "16px",
-    md: "20px",
+    sm: "14px",
+    md: "18px",
     lg: "24px",
     xl: "30px",
   },

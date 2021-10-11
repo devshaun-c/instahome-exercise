@@ -127,7 +127,7 @@ const Footer = (props) => {
       </Grid>
       <Divider mb={4} mt={6} /> */}
       <Box display="flex" justifyContent="space-between" pb="48px">
-        <Text fontSize="sm">&copy; 2021 Company</Text>
+        <Text fontSize="sm">&copy; 2021 AfterWork</Text>
         <HStack spacing={3}>
           <FaInstagram fontSize="24px" />
           <FaFacebookSquare fontSize="24px" />

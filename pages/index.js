@@ -17,9 +17,6 @@ import img from "../public/static/images/explore.jpg";
 import { CheckIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({
-  home: {
-    position: "relative",
-  },
   swiperSlide: {
     width: "300px",
     padding: "8px",
@@ -29,7 +26,6 @@ const useStyles = createUseStyles({
     },
   },
   imageSection: {
-    width: "50%",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -65,30 +61,32 @@ const Home = (props) => {
   return (
     <Page
       pageMeta={{
-        title: "Title - Summary",
+        title: "AfterWork - Partner Enquiry",
         description: "",
       }}
       showNav={false}
     >
-      <div className={classes.home}>
-        <Flex w="100%">
-          <Box
-            className={classes.imageSection}
-            backgroundImage={img}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+      <Flex w="100%" flexDirection={["column", "column", "row"]}>
+        <Box
+          w={["100%", "100%", "50%"]}
+          h={["100px", "100px", "auto"]}
+          className={classes.imageSection}
+          backgroundImage={img}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text
+            position="absolute"
+            top="16px"
+            left="5%"
+            color="white"
+            fontFamily="var(--title-font)"
+            fontSize="x-large"
           >
-            <Text
-              position="absolute"
-              top="16px"
-              left="5%"
-              color="white"
-              fontFamily="var(--title-font)"
-              fontSize="x-large"
-            >
-              AfterWork
-            </Text>
+            AfterWork
+          </Text>
+          {false && (
             <Box
               position="absolute"
               w="80%"
@@ -120,10 +118,10 @@ const Home = (props) => {
                 </ListItem>
               </List>
             </Box>
-          </Box>
-          <EnquiryForm />
-        </Flex>
-      </div>
+          )}
+        </Box>
+        <EnquiryForm />
+      </Flex>
     </Page>
   );
 };
