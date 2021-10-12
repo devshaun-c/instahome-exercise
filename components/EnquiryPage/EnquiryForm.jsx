@@ -10,7 +10,7 @@ import {
   Flex,
   Checkbox,
   CheckboxGroup,
-  VStack,
+  Stack,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { UilMessage } from "@iconscout/react-unicons";
@@ -121,10 +121,10 @@ const EnquiryForm = () => {
     <Flex
       className={classes.formWrapper}
       width={["100%", "100%", "50%"]}
-      padding={["20px", "20px", "0 5%"]}
+      padding={["20px", "20px", "24px 5%"]}
       minHeight="100vh"
       flexDirection="column"
-      justifyContent={["flex-start", "flex-start", "center"]}
+      justifyContent={["flex-start", "flex-start", "flex-start"]}
     >
       <Box>
         <Box>
@@ -135,7 +135,7 @@ const EnquiryForm = () => {
             color="brand.600"
             fontSize="x-large"
             fontWeight="bold"
-            margin="4px 0 16px 0"
+            margin="0 0 16px 0"
           >
             Partner with us.
           </Text>
@@ -146,7 +146,11 @@ const EnquiryForm = () => {
           organization and we will be in touch.
         </Text>
 
-        <Flex alignItems="center" justifyContent="space-between" m="16px 0">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          m="16px 0 24px 0"
+        >
           <Flex
             justifyContent="center"
             alignItems="center"
@@ -365,29 +369,48 @@ const EnquiryForm = () => {
           </Box>
           <Box pb="64px">
             <Text fontSize="xs" fontWeight="bold">
-              Which of the following extra services would you be interested in?
+              Which of the following optional services would you be interested
+              in?
             </Text>
-            <Text color="gray.400" fontSize="sm">
+            <Text color="gray.400" fontSize="xs">
               Please select atleast one
             </Text>
             <CheckboxGroup colorScheme="brand">
-              <VStack alignItems="flex-start" mt={2}>
-                <Checkbox name="onlinePayment" onChange={handleCheckboxChange}>
-                  <Text fontSize="xs">Accept online payments</Text>
-                </Checkbox>
-                <Checkbox name="bookingSystem" onChange={handleCheckboxChange}>
-                  <Text fontSize="xs">Integrated booking system</Text>
-                </Checkbox>
-                <Checkbox
-                  name="digitalMarketing"
-                  onChange={handleCheckboxChange}
-                >
-                  <Text fontSize="xs">Digital marketing</Text>
-                </Checkbox>
-                <Checkbox name="promo" onChange={handleCheckboxChange}>
-                  <Text fontSize="xs">Promotions and vouchers</Text>
-                </Checkbox>
-              </VStack>
+              <Stack alignItems="flex-start" mt={2}>
+                <Box>
+                  <Checkbox
+                    name="onlinePayment"
+                    onChange={handleCheckboxChange}
+                  >
+                    <Text fontSize={["sm", "xs"]} w="200px">
+                      Accept online payments
+                    </Text>
+                  </Checkbox>
+                  <Checkbox
+                    name="bookingSystem"
+                    onChange={handleCheckboxChange}
+                  >
+                    <Text fontSize={["sm", "xs"]} w="200px">
+                      Integrated booking system
+                    </Text>
+                  </Checkbox>
+                </Box>
+                <Box>
+                  <Checkbox
+                    name="digitalMarketing"
+                    onChange={handleCheckboxChange}
+                  >
+                    <Text fontSize={["sm", "xs"]} w="200px">
+                      Digital marketing
+                    </Text>
+                  </Checkbox>
+                  <Checkbox name="promo" onChange={handleCheckboxChange}>
+                    <Text fontSize={["sm", "xs"]} w="200px">
+                      Promotions and vouchers
+                    </Text>
+                  </Checkbox>
+                </Box>
+              </Stack>
             </CheckboxGroup>
           </Box>
 
