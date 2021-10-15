@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import { UilMessage } from "@iconscout/react-unicons";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const useStyles = createUseStyles({
   formWrapper: {
@@ -22,20 +23,76 @@ const useStyles = createUseStyles({
   },
 });
 
-const CustomInput = ({ label, name, value, handleInputChange, ...others }) => {
+const CustomInput = ({
+  label,
+  name,
+  value,
+  required,
+  handleInputChange,
+  ...others
+}) => {
   return (
     <Box mb={6}>
-      <Text fontSize="xs" fontWeight="bold">
-        {label}
-      </Text>
+      <Flex>
+        <Text fontSize="xs" fontWeight="bold">
+          {label}
+        </Text>
+        {required && (
+          <Text color="red.400" fontSize="xs" fontWeight="bold" ml={1}>
+            *
+          </Text>
+        )}
+      </Flex>
       <Input
+        borderRadius="var(--border-radius)"
         name={name}
+        _placeholder={{ color: "gray.300", fontSize: "12px" }}
         color="gray.500"
         size="sm"
         onChange={handleInputChange}
         value={value}
+        required={required}
         {...others}
       />
+    </Box>
+  );
+};
+
+const CustomSelect = ({
+  label,
+  name,
+  placeholder,
+  value,
+  handleInputChange,
+  children,
+  required,
+  ...others
+}) => {
+  return (
+    <Box mb={6}>
+      <Flex>
+        <Text fontSize="xs" fontWeight="bold">
+          {label}
+        </Text>
+        {required && (
+          <Text color="red.400" fontSize="xs" fontWeight="bold" ml={1}>
+            *
+          </Text>
+        )}
+      </Flex>
+      <Select
+        borderRadius="var(--border-radius)"
+        size="sm"
+        fontSize="14px"
+        color="gray.500"
+        name={name}
+        placeholder={placeholder}
+        onChange={handleInputChange}
+        value={value}
+        {...others}
+      >
+        {children}
+      </Select>
     </Box>
   );
 };
@@ -57,6 +114,9 @@ const EnquiryForm = () => {
   const classes = useStyles();
   const [step, setStep] = useState(1);
   const [values, setValues] = useState(initialFormValues);
+  const [recaptcha, setRecaptcha] = useState(false);
+
+  console.log(recaptcha);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,6 +155,7 @@ const EnquiryForm = () => {
       if (emailSuccess) {
         setValues(initialFormValues);
         setStep(1);
+        setRecaptcha(false);
       }
     }, 500);
   };
@@ -117,6 +178,11 @@ const EnquiryForm = () => {
     setValues({ ...values, features: currentFeatures });
   };
 
+  const handleBack = (e) => {
+    setRecaptcha(false);
+    setStep(step - 1);
+  };
+
   return (
     <Flex
       className={classes.formWrapper}
@@ -129,7 +195,7 @@ const EnquiryForm = () => {
       <Box>
         <Box>
           <Text fontSize="xs" color="gray.600">
-            START FOR FREE
+            START FREE
           </Text>
           <Text
             color="brand.600"
@@ -211,7 +277,7 @@ const EnquiryForm = () => {
       {step === 1 && (
         <form onSubmit={() => setStep(step + 1)}>
           <CustomInput
-            label="Your name *"
+            label="Your name"
             name="name"
             placeholder="full name"
             value={values?.name}
@@ -219,7 +285,7 @@ const EnquiryForm = () => {
             required
           />
           <CustomInput
-            label="Email *"
+            label="Email"
             name="email"
             placeholder="example@gmail.com"
             value={values?.email}
@@ -228,7 +294,7 @@ const EnquiryForm = () => {
             required
           />
           <CustomInput
-            label="Contact *"
+            label="Contact"
             name="contact"
             placeholder="012-3456789"
             type="number"
@@ -236,47 +302,35 @@ const EnquiryForm = () => {
             handleInputChange={handleInputChange}
             required
           />
-          <Box mb={6}>
-            <Text fontSize="xs" fontWeight="bold">
-              City *
-            </Text>
-            <Select
-              size="sm"
-              color="gray.500"
-              name="city"
-              placeholder="Select city"
-              onChange={handleInputChange}
-              value={values.city}
-              required
-            >
-              <option value="petaling-jaya">Petaling Jaya</option>
-              <option value="subang-jaya">Subang Jaya</option>
-              <option value="kuala-lumpur">Kuala Lumpur</option>
-              <option value="shah-alam">Shah Alam</option>
-              <option value="klang">Klang</option>
-              <option value="putrajaya">Putrajaya</option>
-              <option value="cyberjaya">Cyberjaya</option>
-            </Select>
-          </Box>
-          <ButtonGroup
-            w="100%"
-            justifyContent="flex-end"
-            position={["unset", "unset", "absolute"]}
-            bottom="16px"
-            right="0"
-            p={["0", "0", "0 10%"]}
+
+          <CustomSelect
+            label="City"
+            name="city"
+            placeholder="Select city"
+            handleInputChange={handleInputChange}
+            value={values.city}
+            required
           >
+            <option value="petaling-jaya">Petaling Jaya</option>
+            <option value="subang-jaya">Subang Jaya</option>
+            <option value="kuala-lumpur">Kuala Lumpur</option>
+            <option value="shah-alam">Shah Alam</option>
+            <option value="klang">Klang</option>
+            <option value="putrajaya">Putrajaya</option>
+            <option value="cyberjaya">Cyberjaya</option>
+          </CustomSelect>
+
+          <ButtonGroup w="100%" justifyContent="flex-end">
             <Button colorScheme="brand" type="submit" fontSize="sm">
               Next
             </Button>
           </ButtonGroup>
         </form>
       )}
-
       {step === 2 && (
         <form onSubmit={() => setStep(step + 1)}>
           <CustomInput
-            label="Organization name *"
+            label="Organization name"
             name="orgName"
             value={values?.orgName}
             handleInputChange={handleInputChange}
@@ -302,17 +356,10 @@ const EnquiryForm = () => {
             />
           </Box>
 
-          <ButtonGroup
-            w="100%"
-            justifyContent="space-between"
-            position={["unset", "unset", "absolute"]}
-            bottom="16px"
-            right="0"
-            p={["0", "0", "0 10%"]}
-          >
+          <ButtonGroup w="100%" justifyContent="space-between">
             <Button
               variant="outline"
-              onClick={() => setStep(step - 1)}
+              onClick={handleBack}
               colorScheme="brand"
               fontSize="sm"
             >
@@ -324,49 +371,37 @@ const EnquiryForm = () => {
           </ButtonGroup>
         </form>
       )}
-
       {step === 3 && (
         <form onSubmit={handleSubmit}>
-          <Box mb={6}>
-            <Text fontSize="xs" fontWeight="bold">
-              How often do you organize an activity? *
-            </Text>
-            <Select
-              size="sm"
-              color="gray.500"
-              name="frequency"
-              onChange={handleInputChange}
-              value={values?.frequency}
-              placeholder="Select"
-              required
-            >
-              <option value="1">{`Once per month`}</option>
-              <option value="8">{`Up to 8 sessions per month`}</option>
-              <option value="16">{`Up to 16 sessions per month`}</option>
-              <option value="24">{`Up to 24 sessions per month`}</option>
-              <option value="24+">{`More than 24 sessions per month`}</option>
-            </Select>
-          </Box>
-          <Box mb={6}>
-            <Text fontSize="xs" fontWeight="bold">
-              What is the typical number of participants per session? *
-            </Text>
-            <Select
-              size="sm"
-              color="gray.500"
-              name="participants"
-              onChange={handleInputChange}
-              value={values?.participants}
-              placeholder="Select"
-              required
-            >
-              <option value="private">{`Private sessions only`}</option>
-              <option value="ut5">{`Up to 5 per session`}</option>
-              <option value="ut10">{`Up to 10 per session`}</option>
-              <option value="ut20">{`Up to 20 per session`}</option>
-              <option value="mt20">{`More than 20 per session`}</option>
-            </Select>
-          </Box>
+          <CustomSelect
+            label="How often do you organize an activity?"
+            name="frequency"
+            handleInputChange={handleInputChange}
+            value={values?.frequency}
+            placeholder="Select"
+            required
+          >
+            <option value="1">{`Once per month`}</option>
+            <option value="8">{`Up to 8 sessions per month`}</option>
+            <option value="16">{`Up to 16 sessions per month`}</option>
+            <option value="24">{`Up to 24 sessions per month`}</option>
+            <option value="24+">{`More than 24 sessions per month`}</option>
+          </CustomSelect>
+          <CustomSelect
+            label="What is the typical number of participants per session?"
+            name="participants"
+            handleInputChange={handleInputChange}
+            value={values?.participants}
+            placeholder="Select"
+            required
+          >
+            <option value="private">{`Private sessions only`}</option>
+            <option value="ut5">{`Up to 5 per session`}</option>
+            <option value="ut10">{`Up to 10 per session`}</option>
+            <option value="ut20">{`Up to 20 per session`}</option>
+            <option value="mt20">{`More than 20 per session`}</option>
+          </CustomSelect>
+
           <Box pb="64px">
             <Text fontSize="xs" fontWeight="bold">
               Which of the following optional services would you be interested
@@ -414,23 +449,27 @@ const EnquiryForm = () => {
             </CheckboxGroup>
           </Box>
 
-          <ButtonGroup
-            w="100%"
-            justifyContent="space-between"
-            position={["unset", "unset", "absolute"]}
-            bottom="16px"
-            right="0"
-            p={["0", "0", "0 10%"]}
-          >
+          <ReCAPTCHA
+            sitekey="6Lf3dNAcAAAAAD37USfS1gjeBqxUV__Te2CJsII5"
+            onChange={() => setRecaptcha(true)}
+          />
+
+          <ButtonGroup w="100%" justifyContent="space-between" mt={4}>
             <Button
               variant="outline"
-              onClick={() => setStep(step - 1)}
+              onClick={handleBack}
               colorScheme="brand"
               fontSize="sm"
             >
               Back
             </Button>
-            <Button type="submit" colorScheme="brand" fontSize="sm">
+
+            <Button
+              type="submit"
+              colorScheme="brand"
+              fontSize="sm"
+              isDisabled={!recaptcha}
+            >
               <Text mr={2}>Send enquiry</Text>
               <UilMessage size="16" />
             </Button>
