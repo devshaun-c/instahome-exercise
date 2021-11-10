@@ -7,6 +7,7 @@ const useStyles = createUseStyles({
     width: "90%",
     margin: "auto",
     maxWidth: "var(--max-width)",
+    position: "relative",
   },
 });
 

@@ -9,6 +9,7 @@ const Page = (props) => {
     alwaysVisible = false,
     showNav = true,
     pageMeta = { title: "", description: "" },
+    ...others
   } = props;
 
   return (
@@ -30,7 +31,9 @@ const Page = (props) => {
       <div>
         {showNav && <Navbar alwaysVisible={alwaysVisible} />}
 
-        <Box pt={alwaysVisible ? "60px" : "0px"}>{children}</Box>
+        <Box pt={alwaysVisible ? "60px" : "0px"} {...others}>
+          {children}
+        </Box>
       </div>
     </>
   );

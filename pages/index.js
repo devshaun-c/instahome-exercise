@@ -7,6 +7,7 @@ import {
   List,
   ListItem,
   ListIcon,
+  Link,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Page from "../components/Page/Page";
@@ -66,61 +67,41 @@ const Home = (props) => {
       }}
       showNav={false}
     >
-      <Flex w="100%" flexDirection={["column", "column", "row"]}>
-        <Box
-          w={["100%", "100%", "50%"]}
-          h={["100px", "100px", "auto"]}
-          className={classes.imageSection}
-          backgroundImage={img}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Text
+      <Flex w="100%">
+        <Box>{/* <Link onClick=></Link> */}</Box>
+        {true && (
+          <Box
             position="absolute"
-            top="16px"
-            left="5%"
+            w="80%"
+            margin="auto"
             color="white"
-            fontFamily="var(--title-font)"
-            fontSize="x-large"
+            borderRadius="var(--border-radius)"
+            p={4}
           >
-            AfterWork
-          </Text>
-          {false && (
-            <Box
-              position="absolute"
-              w="80%"
-              margin="auto"
-              color="white"
-              borderRadius="var(--border-radius)"
-              p={4}
-            >
-              <Text fontSize="md" mb={4}>
-                Why be a partner?
-              </Text>
-              <List spacing={3}>
-                <ListItem>
-                  <ListIcon as={CheckIcon} />
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={CheckIcon} />
-                  Assumenda, quia temporibus eveniet a libero incidunt suscipit
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={CheckIcon} />
-                  Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-                </ListItem>
-                {/* You can also use custom icons from react-icons */}
-                <ListItem>
-                  <ListIcon as={CheckIcon} />
-                  Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-                </ListItem>
-              </List>
-            </Box>
-          )}
-        </Box>
-        <EnquiryForm />
+            <Text fontSize="md" mb={4}>
+              Why be a partner?
+            </Text>
+            <List spacing={3}>
+              <ListItem>
+                <ListIcon as={CheckIcon} />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckIcon} />
+                Assumenda, quia temporibus eveniet a libero incidunt suscipit
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckIcon} />
+                Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
+              </ListItem>
+              {/* You can also use custom icons from react-icons */}
+              <ListItem>
+                <ListIcon as={CheckIcon} />
+                Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
+              </ListItem>
+            </List>
+          </Box>
+        )}
       </Flex>
     </Page>
   );
