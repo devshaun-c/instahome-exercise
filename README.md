@@ -40,3 +40,8 @@
   - [x] Create a tab with line and number system
 - [x] Image darken background overlay
 - [ ] How it works page
+- [ ] Update url to /partner/enquiry
+- [ ] Landing page
+  - [ ] Hero for "Coming soon"
+  - [ ] Why partner?
+  - [ ] Register as a partner button redirect to /partner/enquiry
