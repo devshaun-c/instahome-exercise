@@ -107,6 +107,8 @@ const Navbar = (props) => {
     if (position <= 50) setShowNavbar(false);
   };
 
+  console.log(alwaysVisible);
+
   useEffect(() => {
     if (isMobile || alwaysVisible) {
       setShowNavbar(true);
@@ -160,7 +162,7 @@ const Navbar = (props) => {
               rel="noopener,noreferrer"
               className={classes.title}
             >
-              <Text color="primary">Title</Text>
+              <Text color="primary">AfterWork</Text>
             </Link>
 
             <div className={classes.menuLinks}>

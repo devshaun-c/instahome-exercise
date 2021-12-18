@@ -54,6 +54,11 @@ class MyDocument extends Document {
             src="https://www.googletagmanager.com/gtag/js?id=[Tracking ID]"
           />
 
+          <link
+            href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Playfair+Display:wght@800&display=swap"
+            rel="stylesheet"
+          ></link>
+
           {/* <script
             dangerouslySetInnerHTML={{
               __html: `[google analytics tracking code here]`,
