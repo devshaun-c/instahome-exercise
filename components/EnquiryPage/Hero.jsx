@@ -8,7 +8,7 @@ import {
   AspectRatio,
   Flex,
 } from "@chakra-ui/react";
-import placeholderImg from "../../public/static/images/partner-hero.svg";
+import placeholderImg from "../../public/static/images/business-decision.svg";
 import Container from "../Page/Container";
 import { useRouter } from "next/router";
 import StandardButton from "../Buttons/StandardButton";
@@ -17,7 +17,7 @@ const Hero = () => {
   const router = useRouter();
 
   return (
-    <Box position="relative" bg="brand.50">
+    <Box position="relative">
       <Container>
         <Stack
           direction={["column", "row", "row"]}
@@ -34,7 +34,7 @@ const Hero = () => {
                 JOIN FREE TODAY
               </Text>
               <Heading
-                fontSize={["32px", "32px", "40px"]}
+                fontSize={["32px", "32px", "48px"]}
                 fontWeight="bold"
                 lineHeight="1.4"
                 fontFamily="var(--special-font)"
@@ -42,7 +42,7 @@ const Hero = () => {
                 Digitalizing your
               </Heading>
               <Heading
-                fontSize={["32px", "32px", "40px"]}
+                fontSize={["32px", "32px", "48px"]}
                 fontWeight="bold"
                 lineHeight="1.4"
                 fontFamily="var(--special-font)"
@@ -50,7 +50,7 @@ const Hero = () => {
                 <u>business</u>
               </Heading>
               <Heading
-                fontSize={["32px", "32px", "40px"]}
+                fontSize={["32px", "32px", "48px"]}
                 fontWeight="bold"
                 lineHeight="1.4"
                 fontFamily="var(--special-font)"

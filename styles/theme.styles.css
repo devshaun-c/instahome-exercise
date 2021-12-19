@@ -1,7 +1,7 @@
 :root {
   /* --primary-color: #2c7a7b; */
-  --primary-color: #ff5722;
-  --secondary-color: rgb(255, 166, 52);
+  --primary-color: #ec582b;
+  --secondary-color: #591ace;
   --default-font-color: #414141;
   --title-font: "Kaushan Script", system-ui, sans-serif;
   --body-font: Montserrat, Comfortaa, system-ui, sans-serif;
@@ -9,5 +9,5 @@
   --heading-font: Raleway, Montserrat, Comfortaa, serif;
   --max-width: 1100px;
   --border-radius: 8px;
-  --card-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%);
+  --box-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%);
 }

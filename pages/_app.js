@@ -61,26 +61,6 @@ const theme = extendTheme({
       baseStyle: {
         borderRadius: "var(--border-radius)",
       },
-      variants: {
-        base: {
-          // background: "primary",
-          // color: "white",
-        },
-        secondary: {
-          // background: "secondary",
-          // color: "white",
-        },
-        outline: {
-          // background: "white",
-          // borderColor: "primary",
-          // color: "primary",
-          // focus: "none",
-        },
-      },
-      defaultProps: {
-        // Then here we set the base variant as the default
-        // variant: "base",
-      },
     },
   },
 });

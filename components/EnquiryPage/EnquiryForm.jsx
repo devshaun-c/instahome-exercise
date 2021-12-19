@@ -150,7 +150,6 @@ const EnquiryForm = () => {
     setTimeout(() => {
       if (emailSuccess) {
         setValues(initialFormValues);
-        setStep(1);
         setRecaptcha(false);
       }
     }, 500);
@@ -176,7 +175,6 @@ const EnquiryForm = () => {
 
   const handleBack = (e) => {
     setRecaptcha(false);
-    setStep(step - 1);
   };
 
   return (
