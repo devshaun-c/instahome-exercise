@@ -4,26 +4,22 @@ import {
   Box,
   Text,
   Stack,
-  Link,
-  CircularProgress,
   Flex,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  List,
   ListItem,
-  ListIcon,
   OrderedList,
-  UnorderedList,
   Image,
 } from "@chakra-ui/react";
 import { FaWhatsapp, FaRegEnvelope } from "react-icons/fa";
 import Container from "../Page/Container";
 import faqImage from "../../public/static/images/faq.svg";
+import TextButton from "../Buttons/TextButton";
 
-const Faq = () => {
+const Faq = ({ handleEnquire }) => {
   let router = useRouter();
 
   const AccordionTitle = ({ title }) => {
@@ -34,7 +30,14 @@ const Faq = () => {
           _expanded={{ bg: "whitesmoke" }}
           _focus={{ outline: "none" }}
         >
-          <Box flex="1" textAlign="left" fontWeight="normal" p={2} pl={0}>
+          <Box
+            flex="1"
+            fontSize="sm"
+            textAlign="left"
+            fontWeight="normal"
+            p={2}
+            pl={0}
+          >
             {title}
           </Box>
           <AccordionIcon />
@@ -44,15 +47,15 @@ const Faq = () => {
   };
 
   const Paragraph = ({ children }) => {
-    return (
-      <Text mb={3} fontSize="sm">
-        {children}
-      </Text>
-    );
+    return <Text mb={3}>{children}</Text>;
   };
 
   const CustomAccordionPanel = ({ children }) => {
-    return <AccordionPanel pb={8}>{children}</AccordionPanel>;
+    return (
+      <AccordionPanel pb={8} fontSize={["xs", "sm"]}>
+        {children}
+      </AccordionPanel>
+    );
   };
 
   return (
@@ -89,14 +92,14 @@ const Faq = () => {
                 Our customer support will be in touch ASAP.
               </Text>
             </Box>
-            <Flex alignItems="center" mb={4}>
+            <Flex alignItems="center" mb={2}>
               <FaWhatsapp fontSize="18px" />
-              <Box ml={3}>
+              <Flex ml={3} alignItems="center">
                 <Text>+6016-3682519</Text>
-                <Text fontSize="sm" color="gray.400">
+                <Text fontSize="xs" color="gray.400" ml={3}>
                   (9am - 11pm MYT)
                 </Text>
-              </Box>
+              </Flex>
             </Flex>
 
             <Flex alignItems="center">
@@ -107,7 +110,7 @@ const Faq = () => {
             <Image src={faqImage} mt="64px" />
           </Box>
           <Box w={["100%", "100%", "60%"]}>
-            <Text fontWeight="bold" mb={4} fontSize="sm">
+            <Text fontWeight="bold" mb={4} fontSize="md">
               Frequently Asked Questions
             </Text>
             <Accordion allowToggle>
@@ -115,18 +118,22 @@ const Faq = () => {
                 <AccordionTitle title="How can I become a partner?" />
                 <CustomAccordionPanel>
                   <Text>It's simple!</Text>
-                  <Text>
-                    Just complete our{" "}
-                    <Link href="/store/register" textDecoration="underline">
-                      registration
-                    </Link>{" "}
-                    and share a little about your
+                  <Paragraph>
+                    Just{" "}
+                    <TextButton
+                      fontSize={["xs", "sm"]}
+                      textDecoration="underline"
+                      onClick={handleEnquire}
+                    >
+                      enquire
+                    </TextButton>{" "}
+                    with us and share a little about your
                     organization/business/activity.
-                  </Text>
-                  <Text>
+                  </Paragraph>
+                  <Paragraph>
                     We will review your enquiry within 1-2 days and get you
                     started.
-                  </Text>
+                  </Paragraph>
                   <OrderedList mt={2}>
                     <ListItem>
                       At least one of the organizing committee must be a
@@ -167,12 +174,12 @@ const Faq = () => {
                 <AccordionTitle title="How much do I have to pay?" />
                 <CustomAccordionPanel>
                   <Paragraph>
-                    It is FREE to be a partner and start promoting your
+                    It is <b>FREE</b> to be a partner and start promoting your
                     activities with us.
                   </Paragraph>
                   <Paragraph>
-                    We do offer additional on-demand services that may require
-                    additional payments or commissions.
+                    We also offer additional on-demand services that may require
+                    additional payments or commissions as follows:
                   </Paragraph>
                   <OrderedList mt={2}>
                     <ListItem>
@@ -217,9 +224,7 @@ const Faq = () => {
               <AccordionItem>
                 <AccordionTitle title="I already have my own website. Can I still use AfterWork?" />
                 <CustomAccordionPanel>
-                  <Paragraph>
-                    Ofcourse! There are no strings attached.
-                  </Paragraph>
+                  <Paragraph>Ofcourse!</Paragraph>
                   <Paragraph>
                     Our main purpose is simply to share your activities with our
                     community and for them to learn more about you.

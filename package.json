@@ -45,7 +45,8 @@
     "sass": "^1.38.2",
     "stripe": "^8.171.0",
     "swiper": "^6.7.5",
-    "swr": "^0.5.6"
+    "swr": "^0.5.6",
+    "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0",

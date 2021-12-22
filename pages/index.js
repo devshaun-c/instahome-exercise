@@ -1,20 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Box,
-  Text,
-  Button,
-  Flex,
-  List,
-  ListItem,
-  ListIcon,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, List, ListItem, ListIcon } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Page from "../components/Page/Page";
 import { useRouter } from "next/router";
 import { shuffle } from "../utils/functions";
-import EnquiryForm from "../components/EnquiryPage/EnquiryForm";
-import img from "../public/static/images/explore.jpg";
 import { CheckIcon } from "@chakra-ui/icons";
 
 const useStyles = createUseStyles({

@@ -13,9 +13,10 @@ import {
   Stack,
   Link,
   Divider,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import { UilMessage } from "@iconscout/react-unicons";
+import { FaRegEnvelope, FaRegCheckCircle } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const useStyles = createUseStyles({
@@ -69,7 +70,7 @@ const CustomSelect = ({
   ...others
 }) => {
   return (
-    <Box mb={6}>
+    <Box mb={6} width="100%">
       <Flex>
         <Text fontSize="xs">{label}</Text>
         {required && (
@@ -99,6 +100,7 @@ const initialFormValues = {
   name: "",
   email: "",
   contact: "",
+  country: "malaysia",
   city: "",
   orgName: "",
   orgWebsite: "",
@@ -113,6 +115,10 @@ const EnquiryForm = () => {
   const [values, setValues] = useState(initialFormValues);
   const [recaptcha, setRecaptcha] = useState(false);
   const [tnc, setTnc] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
+
+  useEffect(() => {}, [isSending]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,6 +131,7 @@ const EnquiryForm = () => {
     };
 
     var emailSuccess = false;
+    setIsSending(true);
 
     try {
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -144,15 +151,16 @@ const EnquiryForm = () => {
         }
       );
     } catch (err) {
+      setIsSending(false);
       console.log(err);
     }
 
-    setTimeout(() => {
-      if (emailSuccess) {
-        setValues(initialFormValues);
-        setRecaptcha(false);
-      }
-    }, 500);
+    if (emailSuccess) {
+      setValues(initialFormValues);
+      setRecaptcha(false);
+      setIsSending(false);
+      setIsSuccessful(true);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -173,145 +181,158 @@ const EnquiryForm = () => {
     setValues({ ...values, features: currentFeatures });
   };
 
-  const handleBack = (e) => {
-    setRecaptcha(false);
-  };
-
   return (
     <Flex
       className={classes.formWrapper}
       width="100%"
       maxWidth="600px"
-      padding={["20px", "20px", "20px"]}
-      minHeight="100vh"
+      // padding={["20px", "20px", "20px"]}
+      // minHeight="100vh"
       flexDirection="column"
       justifyContent={["flex-start", "flex-start", "flex-start"]}
     >
       <Box mb="48px">
-        <Box>
-          <Text fontSize="xs" color="gray.600">
-            START FREE
-          </Text>
-          <Text
-            color="brand.600"
-            fontSize="x-large"
-            fontWeight="bold"
-            margin="0 0 16px 0"
-          >
-            Partner with us.
-          </Text>
-        </Box>
-
         <Text fontSize="sm">
           It is easy to get started! Just tell us a little about you and your
           organization and we will be in touch.
         </Text>
       </Box>
-
-      <form onSubmit={handleSubmit}>
-        <CustomInput
-          label="Your name"
-          name="name"
-          placeholder="full name"
-          value={values?.name}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <CustomInput
-          label="Email"
-          name="email"
-          placeholder="example@gmail.com"
-          value={values?.email}
-          handleInputChange={handleInputChange}
-          type="email"
-          required
-        />
-        <CustomInput
-          label="Contact"
-          name="contact"
-          placeholder="012-3456789"
-          type="number"
-          value={values?.contact}
-          handleInputChange={handleInputChange}
-          required
-        />
-
-        <CustomSelect
-          label="City"
-          name="city"
-          placeholder="Select city"
-          handleInputChange={handleInputChange}
-          value={values.city}
-          required
-        >
-          <option value="petaling-jaya">Petaling Jaya</option>
-          <option value="subang-jaya">Subang Jaya</option>
-          <option value="kuala-lumpur">Kuala Lumpur</option>
-          <option value="shah-alam">Shah Alam</option>
-          <option value="klang">Klang</option>
-          <option value="putrajaya">Putrajaya</option>
-          <option value="cyberjaya">Cyberjaya</option>
-        </CustomSelect>
-
-        <CustomInput
-          label="Organization name"
-          name="orgName"
-          value={values?.orgName}
-          handleInputChange={handleInputChange}
-          placeholder="What is the name of your business?"
-          required
-        />
-        <CustomInput
-          label="Website / Social Media (optional)"
-          name="orgWebsite"
-          value={values?.orgWebsite}
-          handleInputChange={handleInputChange}
-          placeholder="How do people find out about you?"
-        />
-
-        <Box mb={6}>
-          <Text fontSize="xs">Tell us a little about your business</Text>
-          <Textarea
-            color="gray.500"
-            size="sm"
-            name="orgDescription"
-            value={values?.orgDescription}
-            onChange={handleInputChange}
-            borderRadius="var(--border-radius)"
-            placeholder="Write something about what your business does (up to 300 characters)"
-            _placeholder={{ color: "gray.300", fontSize: "12px" }}
+      {isSending && (
+        <Flex justifyContent="center">
+          <CircularProgress
+            isIndeterminate
+            color="brand.500"
+            thickness="4px"
+            size="64px"
           />
-        </Box>
+        </Flex>
+      )}
 
-        <CustomSelect
-          label="How often do you organize an activity?"
-          name="frequency"
-          handleInputChange={handleInputChange}
-          value={values?.frequency}
-          placeholder="Select"
-          required
-        >
-          <option value="1">{`Once per month`}</option>
-          <option value="2">{`Less than 10 times per week`}</option>
-          <option value="3">{`At least 10 times per week`}</option>
-          <option value="4">{`Varies depending on season`}</option>
-        </CustomSelect>
-        <CustomSelect
-          label="What is the typical number of participants per session?"
-          name="participants"
-          handleInputChange={handleInputChange}
-          value={values?.participants}
-          placeholder="Select"
-          required
-        >
-          <option value="private">{`Private sessions only`}</option>
-          <option value="ut5">{`Up to 5 per session`}</option>
-          <option value="ut10">{`Up to 10 per session`}</option>
-          <option value="ut20">{`Up to 20 per session`}</option>
-          <option value="mt20">{`More than 20 per session`}</option>
-        </CustomSelect>
+      {isSuccessful && (
+        <Flex color="brand.500" flexDirection="column" alignItems="center">
+          <FaRegCheckCircle fontSize="64px" />
+          <Text mt={2}>Enquiry sent!</Text>
+          <Text mt={2}>We will be in touch shortly.</Text>
+        </Flex>
+      )}
 
-        {/* <Box pb="32px">
+      {!isSending && !isSuccessful && (
+        <form onSubmit={handleSubmit}>
+          <CustomInput
+            label="Your name"
+            name="name"
+            placeholder="full name"
+            value={values?.name}
+            handleInputChange={handleInputChange}
+            required
+          />
+          <CustomInput
+            label="Email"
+            name="email"
+            placeholder="example@gmail.com"
+            value={values?.email}
+            handleInputChange={handleInputChange}
+            type="email"
+            required
+          />
+          <CustomInput
+            label="Contact"
+            name="contact"
+            placeholder="012-3456789"
+            type="number"
+            value={values?.contact}
+            handleInputChange={handleInputChange}
+            required
+            onWheel={(e) => e.target.blur()}
+          />
+          <Stack direction="row">
+            <CustomSelect
+              label="Country"
+              name="country"
+              placeholder="Select country"
+              handleInputChange={handleInputChange}
+              value={values.country}
+              required
+              disabled
+            >
+              <option value="malaysia">Malaysia</option>
+            </CustomSelect>
+
+            <CustomSelect
+              label="City"
+              name="city"
+              placeholder="Select city"
+              handleInputChange={handleInputChange}
+              value={values.city}
+              required
+            >
+              <option value="selangor">Selangor</option>
+              <option value="kuala-lumpur">Kuala Lumpur</option>
+              <option value="penang">Penang</option>
+              <option value="melaka">Melaka</option>
+              <option value="other">Others</option>
+            </CustomSelect>
+          </Stack>
+
+          <CustomInput
+            label="Organization name"
+            name="orgName"
+            value={values?.orgName}
+            handleInputChange={handleInputChange}
+            placeholder="What is the name of your business?"
+            required
+          />
+          <CustomInput
+            label="Website / Social Media (optional)"
+            name="orgWebsite"
+            value={values?.orgWebsite}
+            handleInputChange={handleInputChange}
+            placeholder="How do people find out about you?"
+          />
+
+          <Box mb={6}>
+            <Text fontSize="xs">Tell us a little about your business</Text>
+            <Textarea
+              color="gray.500"
+              size="sm"
+              name="orgDescription"
+              value={values?.orgDescription}
+              onChange={handleInputChange}
+              borderRadius="var(--border-radius)"
+              placeholder="Write something about what your business does (up to 300 characters)"
+              _placeholder={{ color: "gray.300", fontSize: "12px" }}
+            />
+          </Box>
+
+          <CustomSelect
+            label="How often do you organize an activity?"
+            name="frequency"
+            handleInputChange={handleInputChange}
+            value={values?.frequency}
+            placeholder="Select"
+            required
+          >
+            <option value="1">{`Once per month`}</option>
+            <option value="2">{`Less than 10 times per week`}</option>
+            <option value="3">{`At least 10 times per week`}</option>
+            <option value="4">{`Varies depending on season`}</option>
+          </CustomSelect>
+          <CustomSelect
+            label="What is the average number of participants per session?"
+            name="participants"
+            handleInputChange={handleInputChange}
+            value={values?.participants}
+            placeholder="Select"
+            required
+          >
+            <option value="private">{`Private sessions only`}</option>
+            <option value="ut5">{`Up to 5 per session`}</option>
+            <option value="ut10">{`Up to 10 per session`}</option>
+            <option value="ut20">{`Up to 20 per session`}</option>
+            <option value="mt20">{`More than 20 per session`}</option>
+          </CustomSelect>
+
+          {/* <Box pb="32px">
           <Text fontSize="xs" fontWeight="bold">
             Which of the following optional services would you be interested in?
           </Text>
@@ -344,45 +365,46 @@ const EnquiryForm = () => {
           </CheckboxGroup>
         </Box> */}
 
-        <Divider mb={4} />
+          <Divider mb={4} />
 
-        <Flex mb={4}>
-          <Checkbox
-            name="tnc"
-            onChange={() => setTnc(!tnc)}
-            colorScheme="brand"
+          <Flex mb={4}>
+            <Checkbox
+              name="tnc"
+              onChange={() => setTnc(!tnc)}
+              colorScheme="brand"
+            />
+            <Text fontSize={["sm", "xs"]} ml={2}>
+              I agree to the{" "}
+              <Link
+                href="/"
+                textDecoration="underline"
+                target="_blank"
+                rel="noopener,noreferrer"
+              >
+                terms and conditions
+              </Link>
+            </Text>
+          </Flex>
+
+          <ReCAPTCHA
+            sitekey="6Lf3dNAcAAAAAD37USfS1gjeBqxUV__Te2CJsII5"
+            onChange={() => setRecaptcha(true)}
+            onExpired={() => setRecaptcha(false)}
           />
-          <Text fontSize={["sm", "xs"]} ml={2}>
-            I agree to the{" "}
-            <Link
-              href="/"
-              textDecoration="underline"
-              target="_blank"
-              rel="noopener,noreferrer"
+
+          <ButtonGroup w="100%" justifyContent="flex-end" mt={6}>
+            <Button
+              type="submit"
+              colorScheme="brand"
+              fontSize="sm"
+              isDisabled={tnc && recaptcha ? false : true}
             >
-              terms and conditions
-            </Link>
-          </Text>
-        </Flex>
-
-        <ReCAPTCHA
-          sitekey="6Lf3dNAcAAAAAD37USfS1gjeBqxUV__Te2CJsII5"
-          onChange={() => setRecaptcha(true)}
-          onExpired={() => setRecaptcha(false)}
-        />
-
-        <ButtonGroup w="100%" justifyContent="flex-end" mt={6}>
-          <Button
-            type="submit"
-            colorScheme="brand"
-            fontSize="sm"
-            isDisabled={tnc && recaptcha ? false : true}
-          >
-            <Text mr={2}>Send enquiry</Text>
-            <UilMessage size="16" />
-          </Button>
-        </ButtonGroup>
-      </form>
+              <Text mr={2}>Send enquiry</Text>
+              <FaRegEnvelope />
+            </Button>
+          </ButtonGroup>
+        </form>
+      )}
     </Flex>
   );
 };

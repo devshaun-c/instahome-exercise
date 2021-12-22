@@ -4,10 +4,9 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   buttonStyle: {
-    display: "block",
+    display: "inline",
     margin: "0",
     height: "auto",
-    color: "gray",
     fontSize: "12px",
     "&:hover": {
       color: "black",

@@ -52,17 +52,12 @@ const HoverMenu = (props) => {
           _expanded={{}}
           _focus={{}}
           href={mainUrl}
-          color={showMenu ? "secondary" : ""}
+          color={showMenu ? "primary" : ""}
         >
           {title} {items.length > 0 && <ChevronDownIcon />}
         </MenuButton>
         {items.length > 0 && (
-          <MenuList
-            borderRadius="none"
-            p={0}
-            fontSize="sm"
-            borderRadius="var(--border-radius)"
-          >
+          <MenuList p={0} fontSize="sm" borderRadius="var(--border-radius)">
             {items.map((item, index) => (
               <MenuItem key={index} p="16px 24px" _hover={{ bg: "whitesmoke" }}>
                 <Link

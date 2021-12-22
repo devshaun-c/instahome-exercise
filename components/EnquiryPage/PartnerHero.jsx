@@ -12,8 +12,9 @@ import placeholderImg from "../../public/static/images/business-decision.svg";
 import Container from "../Page/Container";
 import { useRouter } from "next/router";
 import StandardButton from "../Buttons/StandardButton";
+import Typewriter from "typewriter-effect";
 
-const Hero = () => {
+const PartnerHero = ({ handlePrimary }) => {
   const router = useRouter();
 
   return (
@@ -36,34 +37,61 @@ const Hero = () => {
               <Heading
                 fontSize={["32px", "32px", "48px"]}
                 fontWeight="bold"
-                lineHeight="1.4"
+                lineHeight="1.2"
                 fontFamily="var(--special-font)"
               >
-                Digitalizing your
+                We digitalize
               </Heading>
+              <Flex alignItems="center">
+                <Heading
+                  fontSize={["32px", "32px", "48px"]}
+                  fontWeight="bold"
+                  lineHeight="1.2"
+                  fontFamily="var(--special-font)"
+                >
+                  your
+                </Heading>
+                <Box
+                  ml={2}
+                  fontSize={["32px", "32px", "48px"]}
+                  fontFamily="var(--special-font)"
+                  fontWeight="bold"
+                  lineHeight="1.2"
+                  textDecoration="underline"
+                >
+                  <Typewriter
+                    options={{
+                      strings: ["business", "workshop", "event", "class"],
+                      autoStart: true,
+                      delay: 50,
+                      deleteSpeed: 30,
+                      loop: true,
+                      pauseFor: 1000,
+                    }}
+                  />
+                </Box>
+              </Flex>
+
               <Heading
                 fontSize={["32px", "32px", "48px"]}
                 fontWeight="bold"
-                lineHeight="1.4"
-                fontFamily="var(--special-font)"
-              >
-                <u>business</u>
-              </Heading>
-              <Heading
-                fontSize={["32px", "32px", "48px"]}
-                fontWeight="bold"
-                lineHeight="1.4"
+                lineHeight="1.2"
                 fontFamily="var(--special-font)"
               >
                 for you.
               </Heading>
+              <Box mt={8}>
+                <Text fontSize={["sm", "md"]}>
+                  Looking to promote your next event or activity?
+                </Text>
+              </Box>
               <StandardButton
                 size="lg"
                 colorScheme="brand"
                 mt={8}
-                onClick={() => router.push("/store/register")}
+                onClick={handlePrimary}
               >
-                Get Started now!
+                Get started now!
               </StandardButton>
             </Box>
           </Flex>
@@ -73,7 +101,11 @@ const Hero = () => {
             justifyContent="center"
           >
             <AspectRatio w="600px" maxW="600px" ratio={1}>
-              <Image src={placeholderImg} alt="foodprint" objectFit="cover" />
+              <Image
+                src={placeholderImg}
+                alt="after work partner"
+                objectFit="cover"
+              />
             </AspectRatio>
           </Flex>
         </Stack>
@@ -82,4 +114,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default PartnerHero;

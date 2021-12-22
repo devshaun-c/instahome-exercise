@@ -9,15 +9,21 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import Container from "../Page/Container";
-import { RiMailSendLine } from "react-icons/ri";
-import { BiFoodMenu } from "react-icons/bi";
-import { FaBuilding, FaCreditCard, FaRocket, FaStoreAlt } from "react-icons/fa";
+import {
+  FaBuilding,
+  FaCreditCard,
+  FaBinoculars,
+  FaCameraRetro,
+  FaShareSquare,
+  FaLaptopCode,
+  FaEye,
+} from "react-icons/fa";
 import StandardButton from "../Buttons/StandardButton";
 
-const Offerings = () => {
+const Offerings = ({ handlePrimary }) => {
   const OfferingBox = ({ title, icon, text }) => {
     return (
-      <Flex p="32px" h={["250px", "300px"]}>
+      <Flex p={["16px", "32px"]} h={["250px", "300px"]}>
         <Flex flexDir="column">
           <Box fontSize="48px" mb={4} color="secondary">
             {icon}
@@ -43,14 +49,14 @@ const Offerings = () => {
           <Heading
             fontSize="42px"
             fontWeight="bold"
-            lineHeight="1.4"
+            lineHeight={["1.1", "1.4"]}
             textAlign="center"
             color="secondary"
             fontFamily="var(--special-font)"
           >
-            Grow your business with us
+            Get your business seen
           </Heading>
-          <Text textAlign="center" fontSize="sm">
+          <Text textAlign="center" fontSize="sm" mt={2}>
             All the tools you need in one place.
           </Text>
         </Box>
@@ -67,14 +73,14 @@ const Offerings = () => {
           <GridItem>
             <OfferingBox
               title="Free Professional Website"
-              icon={<FaStoreAlt />}
+              icon={<FaLaptopCode />}
               text="Don't spend money on building your own custom site. Create yours with us at no cost."
             />
           </GridItem>
           <GridItem>
             <OfferingBox
               title="Increase visibility"
-              icon={<FaRocket />}
+              icon={<FaEye />}
               text="Gain more traffic to your business from our community who are looking for new activities to explore."
             />
           </GridItem>
@@ -88,7 +94,7 @@ const Offerings = () => {
           <GridItem>
             <OfferingBox
               title="Easy Sharing"
-              icon={<RiMailSendLine />}
+              icon={<FaShareSquare />}
               text="Share your new site on your own social media platforms or wherever you promote your business."
             />
           </GridItem>
@@ -102,13 +108,13 @@ const Offerings = () => {
           <GridItem>
             <OfferingBox
               title="Digital marketing services"
-              icon={<BiFoodMenu />}
+              icon={<FaCameraRetro />}
               text="(COMING SOON) Strenghten your digital presence on social media platforms with our on-demand professional marketing team."
             />
           </GridItem>
         </Grid>
         <Flex justifyContent="center" mt="64px">
-          <StandardButton size="lg" colorScheme="brand">
+          <StandardButton size="lg" colorScheme="brand" onClick={handlePrimary}>
             Register with us now
           </StandardButton>
         </Flex>

@@ -27,7 +27,7 @@ const OverlayModal = (props) => {
     modalHeader,
     modalBody,
     modalFooter,
-    hasClose = false,
+    onClose = false,
     size = "lg",
   } = props;
 
@@ -39,7 +39,7 @@ const OverlayModal = (props) => {
     <Modal
       blockScrollOnMount={true}
       isOpen={isOpen}
-      onClose={closeModal}
+      onClose={onClose}
       size={size}
       scrollBehavior="inside"
       position="relative"
@@ -48,10 +48,10 @@ const OverlayModal = (props) => {
       <ModalOverlay />
       <ModalContent ml={2} mr={2}>
         <ModalHeader boxShadow="var(--card-shadow)">{modalHeader}</ModalHeader>
-        {hasClose && <ModalCloseButton />}
+        {onClose && <ModalCloseButton />}
         <ModalBody className={classes.overlay}>{modalBody}</ModalBody>
 
-        {modalFooter && <ModalFooter zIndex="500">{modalFooter}</ModalFooter>}
+        <ModalFooter zIndex="500">{modalFooter}</ModalFooter>
       </ModalContent>
     </Modal>
   );
