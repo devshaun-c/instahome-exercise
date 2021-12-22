@@ -4,10 +4,11 @@ import {
   Heading,
   Stack,
   Text,
-  Image,
+  // Image,
   AspectRatio,
   Flex,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import placeholderImg from "../../public/static/images/business-decision.svg";
 import Container from "../Page/Container";
 import { useRouter } from "next/router";
@@ -105,6 +106,8 @@ const PartnerHero = ({ handlePrimary }) => {
                 src={placeholderImg}
                 alt="after work partner"
                 objectFit="cover"
+                layout="fill"
+                blurDataURL={placeholderImg}
               />
             </AspectRatio>
           </Flex>

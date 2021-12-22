@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Text, Flex, List, ListItem, ListIcon } from "@chakra-ui/react";
+import { Box, Text, CircularProgress, Flex } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import Page from "../components/Page/Page";
 import { useRouter } from "next/router";
@@ -43,9 +43,9 @@ const Home = (props) => {
   const dataFromServer = JSON.parse(props.data);
 
   useEffect(() => {
-    if (dataFromServer) {
-      setData([...shuffle(dataFromServer)]);
-    }
+    setTimeout(() => {
+      router.push("/partner");
+    }, 2000);
   }, []);
 
   return (
@@ -54,43 +54,21 @@ const Home = (props) => {
         title: "AfterWork - Partner Enquiry",
         description: "",
       }}
-      showNav={false}
+      showNav={true}
     >
-      <Flex w="100%">
-        <Box>{/* <Link onClick=></Link> */}</Box>
-        {true && (
-          <Box
-            position="absolute"
-            w="80%"
-            margin="auto"
-            color="white"
-            borderRadius="var(--border-radius)"
-            p={4}
-          >
-            <Text fontSize="md" mb={4}>
-              Why be a partner?
-            </Text>
-            <List spacing={3}>
-              <ListItem>
-                <ListIcon as={CheckIcon} />
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckIcon} />
-                Assumenda, quia temporibus eveniet a libero incidunt suscipit
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckIcon} />
-                Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-              </ListItem>
-              {/* You can also use custom icons from react-icons */}
-              <ListItem>
-                <ListIcon as={CheckIcon} />
-                Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-              </ListItem>
-            </List>
-          </Box>
-        )}
+      <Flex
+        height="100vh"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <CircularProgress
+          isIndeterminate
+          color="brand.500"
+          size="120px"
+          thickness="6px"
+        />
+        <Text mt={4}>Loading content...</Text>
       </Flex>
     </Page>
   );
