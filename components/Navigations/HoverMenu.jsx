@@ -21,10 +21,10 @@ import { ChevronDownIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 const useStyles = createUseStyles({});
 
 const HoverMenu = (props) => {
+  const { title, mainUrl = "/", isExternal = false, items = [] } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
   const router = useRouter();
-  const { title, mainUrl = "/", items = [] } = props;
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -52,6 +52,7 @@ const HoverMenu = (props) => {
           _expanded={{}}
           _focus={{}}
           href={mainUrl}
+          isExternal={isExternal}
           color={showMenu ? "primary" : ""}
         >
           {title} {items.length > 0 && <ChevronDownIcon />}

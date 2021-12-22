@@ -121,19 +121,25 @@ const Navbar = (props) => {
   };
 
   const navList = [
-    { title: "Explore", mainUrl: "/", items: [] },
-    { title: "About", mainUrl: "/about", items: [] },
     {
-      title: "Support",
-      mainUrl: "",
-      items: [
-        { name: "Contact", url: "/" },
-        {
-          name: "Help",
-          url: "/",
-        },
-      ],
+      title: "Demo site",
+      mainUrl: "https://afterwork-next.vercel.app/",
+      items: [],
+      isExternal: true,
     },
+    // { title: "About", mainUrl: "/about", items: [], isExternal: false },
+    // {
+    //   title: "Support",
+    //   mainUrl: "",
+    //   isExternal: false,
+    //   items: [
+    //     { name: "Contact", url: "/" },
+    //     {
+    //       name: "Help",
+    //       url: "/",
+    //     },
+    //   ],
+    // },
   ];
 
   return (
@@ -161,6 +167,7 @@ const Navbar = (props) => {
                   title={item.title}
                   mainUrl={item.mainUrl}
                   items={item.items}
+                  isExternal={item.isExternal}
                 />
               ))}
             </Menu>
@@ -208,6 +215,7 @@ const Navbar = (props) => {
                       cursor="pointer"
                       _hover={{ outline: "none" }}
                       rel="noopener,noreferrer"
+                      isExternal={item.isExternal}
                     >
                       <Text flex="1" textAlign="left" fontSize="sm">
                         {item.title}
