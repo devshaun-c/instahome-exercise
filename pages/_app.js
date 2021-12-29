@@ -1,14 +1,7 @@
 import "../styles/globals.css";
 import "../styles/theme.styles.css";
-import "../styles/daypickerstyles.css";
-import "../styles/react-responsive-carousel.css";
 import { ChakraProvider, CSSReset, extendTheme } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import SEO from "../next-seo.config";
-import { DefaultSeo } from "next-seo";
-import Navbar from "../components/Navigations/Navbar";
-import AlwaysOnTop from "../components/Page/AlwaysOnTop";
-import Footer from "../components/Sections/Footer";
 
 const useStyles = createUseStyles({
   root: {
@@ -69,13 +62,10 @@ function MyApp({ Component, pageProps }) {
   const classes = useStyles();
   return (
     <ChakraProvider theme={theme}>
-      <DefaultSeo {...SEO} />
       <div className={classes.root}>
         <main className={classes.main}>
           <Component {...pageProps} />
         </main>
-        <Footer />
-        {/* <AlwaysOnTop text="Hello" left="5%" /> */}
       </div>
       <CSSReset />
     </ChakraProvider>

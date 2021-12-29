@@ -1,76 +1,61 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Text, CircularProgress, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Stack, Grid, GridItem } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
-import Page from "../components/Page/Page";
 import { useRouter } from "next/router";
-import { shuffle } from "../utils/functions";
-import { CheckIcon } from "@chakra-ui/icons";
+import Container from "../components/Page/Container";
+import StandardButton from "../components/Buttons/StandardButton";
+import AdForm from "../components/AdPage/AdForm";
 
-const useStyles = createUseStyles({
-  swiperSlide: {
-    width: "300px",
-    padding: "8px",
-
-    "@media screen and (max-width: 1000px)": {
-      width: "250px",
-    },
-  },
-  imageSection: {
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    padding: "40px 0",
-    position: "relative",
-
-    "&:before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0,0,0,0.3)",
-    },
-  },
-});
+const useStyles = createUseStyles({});
 
 const Home = (props) => {
   const classes = useStyles();
   const scrollRef = useRef();
   const router = useRouter();
-  const [data, setData] = useState([]);
 
-  const dataFromServer = JSON.parse(props.data);
+  useEffect(() => {}, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      router.push("/partner");
-    }, 2000);
-  }, []);
+  const handleCustomerSelect = () => {};
 
   return (
-    <Page
-      pageMeta={{
-        title: "AfterWork - Partner Enquiry",
-        description: "",
-      }}
-      showNav={true}
-    >
-      <Flex
-        height="100vh"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <CircularProgress
-          isIndeterminate
-          color="brand.500"
-          size="120px"
-          thickness="6px"
-        />
-        <Text mt={4}>Loading content...</Text>
-      </Flex>
-    </Page>
+    <Box>
+      <Grid templateColumns="repeat(12, 1fr)" gap="32px">
+        <GridItem colSpan={3}>
+          <Flex
+            flexDirection="column"
+            px="16px"
+            bgColor="brand.50"
+            height="100vh"
+            py="32px"
+          >
+            <Text>Customers</Text>
+            <Stack direction="column" mt={4}>
+              <StandardButton isFullWidth variant="solid" colorScheme="brand">
+                Default
+              </StandardButton>
+              <StandardButton isFullWidth variant="solid" colorScheme="brand">
+                UEM Sunrise
+              </StandardButton>
+              <StandardButton isFullWidth variant="solid" colorScheme="brand">
+                Sime Darby Property Bhd.
+              </StandardButton>
+              <StandardButton isFullWidth variant="solid" colorScheme="brand">
+                IGB Berhad
+              </StandardButton>
+              <StandardButton isFullWidth variant="solid" colorScheme="brand">
+                Mah Sing Group
+              </StandardButton>
+            </Stack>
+          </Flex>
+        </GridItem>
+
+        <GridItem colSpan={9}>
+          <Flex flexDirection="column" px="16px" height="100vh" py="32px">
+            <AdForm />
+          </Flex>
+        </GridItem>
+      </Grid>
+    </Box>
   );
 };
 

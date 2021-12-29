@@ -68,6 +68,7 @@ const StandardInput = (props) => {
           _hover={{ background: "white" }}
           _disabled={{ background: "whitesmoke" }}
           onChange={onChange}
+          disabled={disabled}
           {...others}
         />
         {rightAddOn && <InputRightAddon children={rightAddOn} />}
