@@ -4,18 +4,13 @@ import {
   Text,
   Flex,
   Stack,
-  Grid,
-  GridItem,
   IconButton,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  OrderedList,
-  ListItem,
   Divider,
-  Textarea,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -40,6 +35,7 @@ import {
   PRIVELAGE_CUSTOMERS,
 } from "../../constants/adType";
 import NewAdForm from "./NewAdForm";
+import PaymentSummary from "./PaymentSummary";
 import StandardButton from "../Buttons/StandardButton";
 
 const tempListings = [
@@ -79,10 +75,8 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
     }
   }, [companyId]);
 
-  console.log(listing);
-
   return (
-    <Box fontSize="sm">
+    <Box fontSize="sm" position="relative">
       <Stack width="100%" direction="row" spacing="64px">
         <Box width="50%">
           <CustomInput label="Your company name" disabled value={companyId} />
@@ -99,57 +93,74 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
 
       <Stack direction={["column", "row"]} spacing="64px">
         <Flex flexDirection="column" width="50%">
-          <Flex justifyContent="space-between" alignItems="center" width="50%">
-            <Text fontWeight="bold" fontSize="md" mb={4}>
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
+            mb={4}
+          >
+            <Text fontWeight="bold" fontSize="md">
               Ad Listings
             </Text>
+            <StandardButton
+              colorScheme="red"
+              size="xs"
+              variant="ghost"
+              onClick={() => setListing([])}
+            >
+              Clear all
+            </StandardButton>
           </Flex>
-          <Accordion defaultIndex={[0]} allowMultiple>
-            {listing.map((ad, index) => (
-              <AccordionItem key={ad.adType}>
-                <AccordionButton fontSize="sm">
-                  <Flex
-                    justifyContent="space-between"
-                    alignItems="center"
-                    w="100%"
-                  >
-                    <Flex>
-                      <Flex
-                        justifyContent="center"
-                        alignItems="center"
-                        minW="24px"
-                        minH="24px"
-                        maxW="24px"
-                        maxH="24px"
-                        border="1px solid black"
-                        borderRadius="50%"
-                        mr={4}
-                      >
-                        <Text>{index + 1}</Text>
+          {listing.length ? (
+            <Accordion defaultIndex={[0]} allowMultiple>
+              {listing.map((ad, index) => (
+                <AccordionItem key={index}>
+                  <AccordionButton fontSize="sm">
+                    <Flex
+                      justifyContent="space-between"
+                      alignItems="center"
+                      w="100%"
+                    >
+                      <Flex>
+                        <Flex
+                          justifyContent="center"
+                          alignItems="center"
+                          minW="24px"
+                          minH="24px"
+                          maxW="24px"
+                          maxH="24px"
+                          border="1px solid black"
+                          borderRadius="50%"
+                          mr={4}
+                        >
+                          <Text>{index + 1}</Text>
+                        </Flex>
+                        <Text>{AD_TYPES[ad.adType].label}</Text>
                       </Flex>
-                      <Text>{AD_TYPES[ad.adType].label}</Text>
+                      <AccordionIcon />
                     </Flex>
-                    <AccordionIcon />
-                  </Flex>
-                </AccordionButton>
-                <AccordionPanel pb={4}>
-                  <Stack direction="row" mb={3}>
-                    <IconButton size="sm" colorScheme="blue">
-                      <FaRegEdit />
-                    </IconButton>
-                    <IconButton size="sm" colorScheme="red">
-                      <FaTrashAlt />
-                    </IconButton>
-                  </Stack>
-                  {ad.adText.text ? (
-                    <Text>{ad.adText.text}</Text>
-                  ) : (
-                    <Text>Description not provided</Text>
-                  )}
-                </AccordionPanel>
-              </AccordionItem>
-            ))}
-          </Accordion>
+                  </AccordionButton>
+                  <AccordionPanel pb={4} pl="56px">
+                    {ad.adText ? (
+                      <Text>{ad.adText}</Text>
+                    ) : (
+                      <Text>Description not provided</Text>
+                    )}
+                    <Flex direction="row" justifyContent="flex-end" mt={3}>
+                      <IconButton size="sm" variant="ghost">
+                        <FaRegEdit />
+                      </IconButton>
+                      <IconButton size="sm" variant="ghost" colorScheme="red">
+                        <FaTrashAlt />
+                      </IconButton>
+                    </Flex>
+                  </AccordionPanel>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          ) : (
+            <Text>No listing created yet</Text>
+          )}
 
           <Flex
             alignItems="center"
@@ -176,17 +187,14 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
           </Flex>
         </Flex>
 
-        <Flex flexDirection="column" width="50%">
-          <Text fontWeight="bold" fontSize="md" mb={4}>
-            Order Payment Summary
-          </Text>
-          <Text>Standard Ad x 2</Text>
-          <Text>Premium Ad x 1</Text>
-
-          <Divider />
-          <Text fontWeight="bold">Total</Text>
-
-          <StandardButton colorScheme="brand">Checkout</StandardButton>
+        <Box width="50%">
+          {listing.length > 0 && (
+            <PaymentSummary
+              listing={listing}
+              companyId={companyId}
+              offer={offer}
+            />
+          )}
           {/* <OrderedList spacing={2}>
             <ListItem>
               <Text>
@@ -213,7 +221,7 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
               </Text>
             </ListItem>
           </OrderedList> */}
-        </Flex>
+        </Box>
       </Stack>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -226,6 +234,7 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
               offer={offer}
               setListing={setListing}
               listing={listing}
+              handleClose={onClose}
             />
           </ModalBody>
 

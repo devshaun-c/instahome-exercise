@@ -11,7 +11,7 @@ import CustomSelect from "../Controls/CustomSelect";
 import { AD_SPECS, AD_DEFAULT_PRICING } from "../../constants/adType";
 import StandardButton from "../Buttons/StandardButton";
 
-const NewAdForm = ({ offer, setListing, listing }) => {
+const NewAdForm = ({ offer, setListing, listing, handleClose }) => {
   const [formValues, setFormValues] = useState({ adType: "", adText: "" });
   const [specialPrice, setSpecialPrice] = useState(-1);
 
@@ -21,14 +21,12 @@ const NewAdForm = ({ offer, setListing, listing }) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
 
-    if (!offer) return;
-
-    const key = Object.keys(offer).find((key) => key === value);
-
-    if (key) {
-      setSpecialPrice(offer[key]?.pricePerAd);
-    } else {
+    if (!offer || !(value in offer)) {
       setSpecialPrice(-1);
+    } else {
+      if (Object.keys(offer[value]).includes("pricePerAd")) {
+        setSpecialPrice(offer[value].pricePerAd);
+      }
     }
   };
 
@@ -44,9 +42,8 @@ const NewAdForm = ({ offer, setListing, listing }) => {
     tempListing.push(formValues);
 
     setListing(tempListing);
+    handleClose();
   };
-
-  console.log(formValues);
 
   return (
     <Box fontSize="sm">

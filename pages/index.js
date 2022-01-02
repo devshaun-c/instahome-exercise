@@ -54,7 +54,7 @@ const Home = (props) => {
             isFullWidth
             variant="solid"
             colorScheme="brand"
-            onClick={() => handleCustomerSelect("sime_darby_property_bhd")}
+            onClick={() => handleCustomerSelect("sime_darby")}
           >
             Sime Darby Property Bhd.
           </StandardButton>
@@ -70,7 +70,7 @@ const Home = (props) => {
             isFullWidth
             variant="solid"
             colorScheme="brand"
-            onClick={() => handleCustomerSelect("mah_sing_group")}
+            onClick={() => handleCustomerSelect("mah_sing")}
           >
             Mah Sing Group
           </StandardButton>
