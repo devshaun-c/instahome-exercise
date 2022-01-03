@@ -23,44 +23,33 @@ import {
 import CustomInput from "../Controls/CustomInput";
 import {
   FaCameraRetro,
-  FaInfoCircle,
   FaPlusCircle,
   FaRegEdit,
-  FaTrash,
   FaTrashAlt,
 } from "react-icons/fa";
-import {
-  AD_SPECS,
-  AD_TYPES,
-  PRIVELAGE_CUSTOMERS,
-} from "../../constants/adType";
+import { AD_SPECS, AD_TYPES } from "../../constants/adType";
+import { PRIVELAGE_CUSTOMERS } from "../../constants/privelageCustomers";
 import NewAdForm from "./NewAdForm";
 import PaymentSummary from "./PaymentSummary";
 import StandardButton from "../Buttons/StandardButton";
 
-const tempListings = [
-  {
-    ...AD_SPECS.standard,
-    adText: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      charLimit: 150,
-    },
-  },
-  {
-    ...AD_SPECS.premium,
-    adText: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      charLimit: 150,
-    },
-  },
-];
+const getCompanyName = (companyId) => {
+  var companyName = "Default";
 
-const AdForm = ({ companyId = "uem_sunrise" }) => {
+  const obj = PRIVELAGE_CUSTOMERS.find(
+    (customer) => customer.companyId === companyId
+  );
+  if (obj) {
+    return obj.companyName;
+  }
+
+  return companyName;
+};
+
+const AdListing = ({ companyId = "uem_sunrise" }) => {
   const [offer, setOffer] = useState(null);
   const [listing, setListing] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     //This should be replaced with a REST API to GET customer object
@@ -75,24 +64,41 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
     }
   }, [companyId]);
 
+  const handleEdit = (index, ad) => {
+    console.log(ad);
+  };
+
+  const handleDelete = (index) => {
+    const tempList = [...listing];
+    tempList.splice(index, 1);
+    setListing(tempList);
+  };
+
   return (
     <Box fontSize="sm" position="relative">
-      <Stack width="100%" direction="row" spacing="64px">
-        <Box width="50%">
-          <CustomInput label="Your company name" disabled value={companyId} />
+      <Stack
+        width="100%"
+        direction={["column", "column", "row"]}
+        spacing={[0, 0, "64px"]}
+      >
+        <Box width={["100%", "100%", "50%"]}>
+          <Text fontWeight="bold">Company</Text>
+          <Text fontSize="lg" color="gray.500">
+            {getCompanyName(companyId)}
+          </Text>
         </Box>
-        <Box width="50%">
-          <Text fontSize="sm">Company logo</Text>
+        {/* <Box width="50%">
+          <Text fontSize="sm">Add Company logo</Text>
           <IconButton>
             <FaCameraRetro />
           </IconButton>
-        </Box>
+        </Box> */}
       </Stack>
 
       <Divider my="32px" />
 
-      <Stack direction={["column", "row"]} spacing="64px">
-        <Flex flexDirection="column" width="50%">
+      <Stack direction={["column", "column", "row"]} spacing="64px">
+        <Flex flexDirection="column" width={["100%", "100%", "60%"]}>
           <Flex
             justifyContent="space-between"
             alignItems="center"
@@ -102,14 +108,16 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
             <Text fontWeight="bold" fontSize="md">
               Ad Listings
             </Text>
-            <StandardButton
-              colorScheme="red"
-              size="xs"
-              variant="ghost"
-              onClick={() => setListing([])}
-            >
-              Clear all
-            </StandardButton>
+            {listing.length > 0 && (
+              <StandardButton
+                colorScheme="red"
+                size="xs"
+                variant="ghost"
+                onClick={() => setListing([])}
+              >
+                Clear all
+              </StandardButton>
+            )}
           </Flex>
           {listing.length ? (
             <Accordion defaultIndex={[0]} allowMultiple>
@@ -140,17 +148,26 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
                       <AccordionIcon />
                     </Flex>
                   </AccordionButton>
-                  <AccordionPanel pb={4} pl="56px">
+                  <AccordionPanel pb={4} pl="56px" bg="gray.50">
                     {ad.adText ? (
                       <Text>{ad.adText}</Text>
                     ) : (
                       <Text>Description not provided</Text>
                     )}
-                    <Flex direction="row" justifyContent="flex-end" mt={3}>
-                      <IconButton size="sm" variant="ghost">
+                    <Flex direction="row" justifyContent="flex-end" mt={2}>
+                      {/* <IconButton
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => handleEdit(index, ad)}
+                      >
                         <FaRegEdit />
-                      </IconButton>
-                      <IconButton size="sm" variant="ghost" colorScheme="red">
+                      </IconButton> */}
+                      <IconButton
+                        size="sm"
+                        variant="ghost"
+                        colorScheme="red"
+                        onClick={() => handleDelete(index)}
+                      >
                         <FaTrashAlt />
                       </IconButton>
                     </Flex>
@@ -187,7 +204,7 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
           </Flex>
         </Flex>
 
-        <Box width="50%">
+        <Box width={["100%", "100%", "40%"]}>
           {listing.length > 0 && (
             <PaymentSummary
               listing={listing}
@@ -195,32 +212,6 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
               offer={offer}
             />
           )}
-          {/* <OrderedList spacing={2}>
-            <ListItem>
-              <Text>
-                <b>Standard Ad</b>
-              </Text>
-              <Text>Offers the most basic level of advertisement</Text>
-            </ListItem>
-            <ListItem>
-              <Text>
-                <b>Featured Ad</b>
-              </Text>
-              <Text>
-                Allows advertisers to use a company logo and use a longer
-                presentation text
-              </Text>
-            </ListItem>
-            <ListItem>
-              <Text>
-                <b>Premium Ad</b>
-              </Text>
-              <Text>
-                Same benefits as Featured Ad, but also puts the advertisement at
-                the top of the results, allowing higher visibility
-              </Text>
-            </ListItem>
-          </OrderedList> */}
         </Box>
       </Stack>
 
@@ -245,4 +236,4 @@ const AdForm = ({ companyId = "uem_sunrise" }) => {
   );
 };
 
-export default AdForm;
+export default AdListing;

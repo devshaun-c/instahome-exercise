@@ -9,78 +9,35 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import StandardButton from "../Buttons/StandardButton";
+import { AD_TYPES } from "../../constants/adType";
 import {
-  AD_DEFAULT_PRICING,
-  AD_SPECS,
-  AD_TYPES,
-  PRIVELAGE_CUSTOMERS,
-} from "../../constants/adType";
+  getAdPrice,
+  getTotalPrice,
+  getDealInText,
+} from "../../utils/functions";
 
-//Function used to get price of AdType
-//Assuming the offers do not stack (i.e. each adType only has one offering)
-const getAdPrice = (count, adType, offer) => {
-  var price = 0;
-  if (offer) {
-    console.log(offer);
-    const obj = offer[adType];
+const AdSummaryRow = ({ count, adType, offer }) => {
+  return (
+    <Flex flexDirection="column" mb={3} color="gray.500">
+      <Flex justifyContent="space-between">
+        <Flex fontWeight="bold">
+          <Text textTransform="capitalize">{`${adType} Ad `}</Text>
+          <Text ml={2}>x {count[adType]}</Text>
+        </Flex>
 
-    if (obj) {
-      const keys = Object.keys(obj);
+        <Flex flexDirection="column">
+          <Text>{getAdPrice(count[adType], adType, offer)}</Text>
+        </Flex>
+      </Flex>
 
-      if (keys.includes("pricePerAd")) {
-        price = obj.pricePerAd * count;
-      } else {
-        price = AD_SPECS[adType].pricePerAd * count;
-      }
-
-      if (keys.includes("deal")) {
-        if (count >= obj.deal[0]) {
-          price = AD_SPECS[adType].pricePerAd * obj.deal[1];
-        } else {
-          price = AD_SPECS[adType].pricePerAd * count;
-        }
-      }
-
-      if (keys.includes("bulkDiscount")) {
-        if (count >= obj.bulkDiscount.qty) {
-          price = obj.bulkDiscount.pricePerAd * count;
-        } else {
-          price = AD_SPECS[adType].pricePerAd * count;
-        }
-      }
-    } else {
-      price = AD_SPECS[adType].pricePerAd * count;
-    }
-  } else {
-    price = AD_SPECS[adType].pricePerAd * count;
-  }
-
-  return price;
-};
-
-const getTotalPrice = (totalCount, offer) => {
-  var total = 0;
-  const standardCount = totalCount.standard;
-  const featuredCount = totalCount.featured;
-  const premiumCount = totalCount.premium;
-
-  if (standardCount > 0) {
-    total += getAdPrice(standardCount, AD_TYPES.standard.value, offer);
-  }
-
-  if (featuredCount > 0) {
-    total += getAdPrice(featuredCount, AD_TYPES.featured.value, offer);
-  }
-
-  if (premiumCount > 0) {
-    total += getAdPrice(premiumCount, AD_TYPES.premium.value, offer);
-  }
-
-  return Math.round(total * 100) / 100;
+      <Text>{getDealInText(adType, offer)}</Text>
+    </Flex>
+  );
 };
 
 const PaymentSummary = ({ companyId, listing, offer }) => {
   const [count, setCount] = useState({ standard: 0, featured: 0, premium: 0 });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!listing) return;
@@ -108,65 +65,64 @@ const PaymentSummary = ({ companyId, listing, offer }) => {
       featured: featuredCount,
       premium: premiumCount,
     });
-  }, [companyId, offer, listing]);
+  }, [companyId, listing]);
+
+  const handleCheckout = () => {
+    setIsSubmitting(true);
+
+    //This timeout is jsut for demo purpose (replace with ASYNC function)
+    setTimeout(() => {
+      alert("Checkout complete");
+      setIsSubmitting(false);
+    }, 2000);
+  };
 
   return (
-    <Flex flexDirection="column">
+    <Flex
+      flexDirection="column"
+      bg="brand.50"
+      p="24px"
+      borderRadius="var(--border-radius)"
+    >
       <Text fontWeight="bold" fontSize="md" mb={4}>
         Order Payment Summary (in RM)
       </Text>
       {count.standard > 0 && (
-        <Flex justifyContent="space-between">
-          <Flex>
-            <Text>Standard Ad </Text>
-            <Text ml={2}>x {count.standard}</Text>
-          </Flex>
-
-          <Flex>
-            <Text>
-              {getAdPrice(count.standard, AD_TYPES.standard.value, offer)}
-            </Text>
-          </Flex>
-        </Flex>
+        <AdSummaryRow
+          count={count}
+          adType={AD_TYPES.standard.value}
+          offer={offer}
+        />
       )}
 
       {count.featured > 0 && (
-        <Flex justifyContent="space-between">
-          <Flex>
-            <Text>Featured Ad </Text>
-            <Text ml={2}>x {count.featured}</Text>
-          </Flex>
-
-          <Flex>
-            <Text>
-              {getAdPrice(count.featured, AD_TYPES.featured.value, offer)}
-            </Text>
-          </Flex>
-        </Flex>
+        <AdSummaryRow
+          count={count}
+          adType={AD_TYPES.featured.value}
+          offer={offer}
+        />
       )}
 
       {count.premium > 0 && (
-        <Flex justifyContent="space-between">
-          <Flex>
-            <Text>Premium Ad </Text>
-            <Text ml={2}>x {count.premium}</Text>
-          </Flex>
-
-          <Flex>
-            <Text>
-              {getAdPrice(count.premium, AD_TYPES.premium.value, offer)}
-            </Text>
-          </Flex>
-        </Flex>
+        <AdSummaryRow
+          count={count}
+          adType={AD_TYPES.premium.value}
+          offer={offer}
+        />
       )}
 
-      <Divider />
+      <Divider borderColor="brand.500" />
       <Flex justifyContent="space-between" fontWeight="bold" py={2}>
         <Text>Total</Text>
         <Text>{getTotalPrice(count, offer)}</Text>
       </Flex>
 
-      <StandardButton colorScheme="brand" mt={6}>
+      <StandardButton
+        colorScheme="brand"
+        mt={6}
+        onClick={handleCheckout}
+        isLoading={isSubmitting}
+      >
         Checkout
       </StandardButton>
     </Flex>

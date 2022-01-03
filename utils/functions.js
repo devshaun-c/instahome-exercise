@@ -1,141 +1,91 @@
-import moment from "moment";
+import { AD_SPECS, AD_TYPES } from "../constants/adType";
 
-export const convertFirebaseTimestamp = (timestamp) => {
-  return new Date(timestamp.seconds * 1000);
-};
+//Function used to get price of AdType
+//Assuming the offers do not stack (i.e. each adType only has one offering)
+export const getAdPrice = (count, adType, offer) => {
+  var price = 0;
+  if (offer) {
+    const obj = offer[adType];
 
-export const ConvertEpochToDate = (epochTime) => {
-  var date = new Date(epochTime * 1000);
-  return moment(date).format("lll");
-};
+    if (obj) {
+      const keys = Object.keys(obj);
 
-export const getTimeDifference = (endDate, startDate, convert) => {
-  const diffInSec =
-    (convertFirebaseTimestamp(endDate) - convertFirebaseTimestamp(startDate)) /
-    1000;
+      if (keys.includes("pricePerAd")) {
+        price = obj.pricePerAd * count;
+      } else {
+        price = AD_SPECS[adType].pricePerAd * count;
+      }
 
-  var value = diffInSec;
+      if (keys.includes("deal")) {
+        if (count >= obj.deal[0]) {
+          price = AD_SPECS[adType].pricePerAd * obj.deal[1];
+        } else {
+          price = AD_SPECS[adType].pricePerAd * count;
+        }
+      }
 
-  if (diffInSec < 3600) {
-    value = value / 60;
+      if (keys.includes("bulkDiscount")) {
+        if (count >= obj.bulkDiscount.qty) {
+          price = obj.bulkDiscount.pricePerAd * count;
+        } else {
+          price = AD_SPECS[adType].pricePerAd * count;
+        }
+      }
+    } else {
+      price = AD_SPECS[adType].pricePerAd * count;
+    }
   } else {
-    if (convert === "min") {
-      value = value / 60;
-    }
-    if (convert === "hr") {
-      value = value / 60 / 60;
-    }
+    price = AD_SPECS[adType].pricePerAd * count;
   }
 
-  return value;
+  return price;
 };
 
-export const GetDurationText = (durationInSeconds) => {
-  const { days, hours, minutes } = ConvertToDaysHoursMinutes(durationInSeconds);
+export const getTotalPrice = (totalCount, offer) => {
+  var total = 0;
+  const standardCount = totalCount.standard;
+  const featuredCount = totalCount.featured;
+  const premiumCount = totalCount.premium;
 
-  return ConvertToDurationText(days, hours, minutes);
-};
-
-export const GetTimeSummary = (startDateTime, endDateTime) => {
-  const startTime = moment(convertFirebaseTimestamp(startDateTime)).format(
-    "LT"
-  );
-
-  const endTime = moment(convertFirebaseTimestamp(endDateTime)).format("LT");
-
-  const summary = `${startTime} - ${endTime}`;
-
-  return summary;
-};
-
-export const ConvertToDate = (date) => {
-  return moment(convertFirebaseTimestamp(date)).format("DD MMM, YYYY");
-};
-
-export const ConvertToDayDate = (date) => {
-  return moment(convertFirebaseTimestamp(date)).format("ddd DD MMM, YYYY");
-};
-
-export const ConvertToDurationText = (days = 0, hours = 0, minutes = 0) => {
-  var durationInSeconds = ConvertToSeconds(days, hours, minutes);
-
-  var inDays = Math.floor(durationInSeconds / 86400);
-  durationInSeconds -= inDays * 86400;
-
-  var inHours = Math.floor(durationInSeconds / 3600) % 24;
-  durationInSeconds -= inHours * 3600;
-
-  var inMinutes = Math.floor(durationInSeconds / 60) % 60;
-  durationInSeconds -= inMinutes * 60;
-
-  var summary = "";
-  if (inDays >= 1) {
-    summary += `${inDays} day${inDays === 1 ? "" : "(s) "} `;
-  }
-  if (inHours >= 1) {
-    summary += `${inHours} hr${inHours === 1 ? "" : "(s) "} `;
-  }
-  if (inMinutes >= 1) {
-    summary += `${inMinutes} min(s) `;
-  }
-  return summary;
-};
-
-export const ConvertToDaysHoursMinutes = (durationInSeconds) => {
-  var inDays = Math.floor(durationInSeconds / 86400);
-  durationInSeconds -= inDays * 86400;
-
-  var inHours = Math.floor(durationInSeconds / 3600) % 24;
-  durationInSeconds -= inHours * 3600;
-
-  var inMinutes = Math.floor(durationInSeconds / 60) % 60;
-  durationInSeconds -= inMinutes * 60;
-
-  var result = { days: inDays, hours: inHours, minutes: inMinutes };
-
-  return result;
-};
-
-export const ConvertToSeconds = (days = 0, hours = 0, minutes = 0) => {
-  var durationInSeconds =
-    parseInt(days) * 24 * 60 * 60 +
-    parseInt(hours) * 60 * 60 +
-    parseInt(minutes) * 60;
-
-  return durationInSeconds;
-};
-
-// URL formatting
-export const GetClickableLink = (link) => {
-  return link.startsWith("http://") || link.startsWith("https://")
-    ? link
-    : `http://${link}`;
-};
-
-//Array Sorting
-export const SortByDate = (list) => {
-  const sortedList = list.sort(
-    (a, b) => a.scheduledStartDate.seconds - b.scheduledStartDate.seconds
-  );
-  return sortedList;
-};
-
-export const shuffle = (array) => {
-  var currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+  if (standardCount > 0) {
+    total += getAdPrice(standardCount, AD_TYPES.standard.value, offer);
   }
 
-  return array;
+  if (featuredCount > 0) {
+    total += getAdPrice(featuredCount, AD_TYPES.featured.value, offer);
+  }
+
+  if (premiumCount > 0) {
+    total += getAdPrice(premiumCount, AD_TYPES.premium.value, offer);
+  }
+
+  return Math.round(total * 100) / 100;
+};
+
+export const getDealInText = (adType, offer) => {
+  var text = "";
+
+  if (!offer || !(adType in offer)) return;
+
+  const keys = Object.keys(offer[adType]);
+
+  if (keys.includes("pricePerAd")) {
+    text = `Offer: Discounted price`;
+  }
+
+  if (keys.includes("deal")) {
+    const buyAmount = offer[adType].deal[0];
+    const givenAmount = offer[adType].deal[1];
+
+    text = `Offer: Get ${buyAmount} for ${givenAmount}`;
+  }
+
+  if (keys.includes("bulkDiscount")) {
+    const qtyForOffer = offer[adType].bulkDiscount.qty;
+    const bulkPrice = offer[adType].bulkDiscount.pricePerAd;
+
+    text = `Offer: Buy ${qtyForOffer} or more and get RM ${bulkPrice} / ad`;
+  }
+
+  return text;
 };

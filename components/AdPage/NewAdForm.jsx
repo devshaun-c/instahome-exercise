@@ -79,6 +79,7 @@ const NewAdForm = ({ offer, setListing, listing, handleClose }) => {
               fontSize="sm"
               required
               onChange={handleAdTextChange}
+              maxLength={AD_SPECS[formValues.adType]?.adText.charLimit}
             />
 
             <Box mt={4}>
