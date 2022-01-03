@@ -3,7 +3,7 @@ import { Box, Text, Flex, Stack, IconButton } from "@chakra-ui/react";
 import { createUseStyles } from "react-jss";
 import StandardButton from "../components/Buttons/StandardButton";
 import AdListing from "../components/AdPage/AdListing";
-import { FaAngleLeft, FaAngleRight, FaExpand } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const useStyles = createUseStyles({});
 

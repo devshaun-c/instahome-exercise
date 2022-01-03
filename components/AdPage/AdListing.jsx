@@ -46,7 +46,7 @@ const getCompanyName = (companyId) => {
   return companyName;
 };
 
-const AdListing = ({ companyId = "uem_sunrise" }) => {
+const AdListing = ({ companyId = "default" }) => {
   const [offer, setOffer] = useState(null);
   const [listing, setListing] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
